@@ -134,4 +134,10 @@ Do not expose:
 
 ## Publishing
 
-GitHub Pages should publish only the contents of [`public/`](public), either by using that folder as the publishing source or by uploading it as the Pages artifact in a workflow.
+GitHub Pages is configured in-repo via [`/.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
+
+That workflow uploads only the contents of [`public/`](public) as the Pages artifact, so repository-root maintainer files are never part of the published site.
+
+Repository setting required:
+
+- GitHub Pages -> Build and deployment -> Source -> `GitHub Actions`
