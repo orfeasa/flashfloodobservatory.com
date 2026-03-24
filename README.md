@@ -15,7 +15,6 @@ Everything at the repository root is for maintenance only and should not be trea
 - [`public/app.js`](public/app.js) reads the payload and renders the dashboard
 - [`public/data/site_payload.json`](public/data/site_payload.json) is the single public data contract
 - [`public/assets/brand`](public/assets/brand) contains static branding and partner imagery
-- [`public/assets/mock`](public/assets/mock) contains temporary static imagery for layout/context panels
 - [`public/404.html`](public/404.html) is the public not-found page
 - [`public/CNAME`](public/CNAME) keeps the custom domain with the site artifact
 
@@ -25,7 +24,7 @@ The public site is driven by one file only:
 
 - [`public/data/site_payload.json`](public/data/site_payload.json)
 
-All summary cards, charts, context imagery, notes, and footer partner entries should be inferred from that payload.
+All summary cards, charts, notes, and footer partner entries should be inferred from that payload.
 
 ## Payload shape
 
@@ -77,29 +76,6 @@ Array of cards, each with:
 Point shape:
 
 - `{ "timestamp": "2026-03-24T12:00:00Z", "value": 0.0 }`
-
-### `panels.time_to_peak`
-
-- `eyebrow`
-- `title`
-- `description`
-- `y_axis_label`
-- `points`
-- `empty_message`
-
-Point shape:
-
-- `{ "label": "Event 01", "value": 1.5 }`
-
-### `panels.context`
-
-- `eyebrow`
-- `title`
-- `description`
-- `image`
-- `alt`
-- `caption`
-- `empty_message`
 
 ### `notes`
 

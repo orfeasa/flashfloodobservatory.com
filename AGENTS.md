@@ -13,7 +13,7 @@ Rules for future changes:
 - Prefer adding new public values to the payload rather than hard-coding content in HTML
 - If the payload schema changes, update [`public/app.js`](public/app.js), [`public/index.html`](public/index.html), and [`README.md`](README.md) together
 - Keep partner logos on a light backing so the dark University of Greenwich mark remains visible
-- Treat [`public/assets/mock`](public/assets/mock) as temporary until replaced with final public graphics
+- Keep the public dashboard limited to defined panels only. Do not add placeholder panels that the data pipeline cannot support.
 
 Operational intent:
 

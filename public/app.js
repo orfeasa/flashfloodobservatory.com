@@ -3,8 +3,6 @@ const payloadPath = "data/site_payload.json";
 const chartPalette = {
   cyan: "#77e8ff",
   cyanFill: "rgba(119, 232, 255, 0.12)",
-  gold: "#f7de5e",
-  goldFill: "rgba(247, 222, 94, 0.18)",
   blue: "#46a7ff",
   blueFill: "rgba(70, 167, 255, 0.18)",
   grid: "rgba(119, 232, 255, 0.08)",
@@ -14,7 +12,6 @@ const chartPalette = {
 
 let rainfallChart;
 let depthChart;
-let timeToPeakChart;
 
 async function main() {
   try {
@@ -28,12 +25,8 @@ async function main() {
     renderSummaryMetrics(payload.summary_metrics || []);
     renderPanelCopy("rainfall", payload.panels?.rainfall || {});
     renderPanelCopy("depth", payload.panels?.depth || {});
-    renderPanelCopy("context", payload.panels?.context || {});
-    renderPanelCopy("timeToPeak", payload.panels?.time_to_peak || {});
     renderRainfallChart(payload.panels?.rainfall || {});
     renderDepthChart(payload.panels?.depth || {});
-    renderTimeToPeakChart(payload.panels?.time_to_peak || {});
-    renderContextPanel(payload.panels?.context || {});
     renderNotes(payload.notes || []);
     renderFooter(payload.footer || {});
   } catch (error) {
@@ -213,60 +206,6 @@ function renderDepthChart(panel) {
     },
     options: chartOptions(panel.y_axis_label || "Depth"),
   });
-}
-
-function renderTimeToPeakChart(panel) {
-  const points = panel.points || [];
-  if (!points.length) {
-    showEmptyChart(
-      "timeToPeak",
-      panel.empty_message || "No time-to-peak summaries have been published yet."
-    );
-    timeToPeakChart?.destroy();
-    return;
-  }
-
-  hideEmptyChart("timeToPeak");
-  timeToPeakChart?.destroy();
-  timeToPeakChart = new Chart(document.getElementById("timeToPeakChart"), {
-    type: "line",
-    data: {
-      labels: points.map((point) => point.label),
-      datasets: [
-        {
-          label: panel.y_axis_label || "Time to peak",
-          data: points.map((point) => point.value),
-          borderColor: chartPalette.gold,
-          backgroundColor: chartPalette.goldFill,
-          borderWidth: 2.5,
-          fill: true,
-          tension: 0.24,
-          pointRadius: 3.5,
-          pointHoverRadius: 5,
-        },
-      ],
-    },
-    options: chartOptions(panel.y_axis_label || "Time to peak"),
-  });
-}
-
-function renderContextPanel(panel) {
-  const image = document.getElementById("contextImage");
-  const empty = document.getElementById("contextEmpty");
-  const caption = document.getElementById("contextCaption");
-
-  if (panel.image) {
-    image.src = panel.image;
-    image.alt = panel.alt || "";
-    image.hidden = false;
-    empty.hidden = true;
-    caption.textContent = panel.caption || "";
-  } else {
-    image.hidden = true;
-    empty.hidden = false;
-    empty.textContent = panel.empty_message || "No published context graphic is available yet.";
-    caption.textContent = "";
-  }
 }
 
 function renderNotes(notes) {

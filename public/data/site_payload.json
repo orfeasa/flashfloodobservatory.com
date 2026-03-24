@@ -39,11 +39,11 @@
       "note": "Difference between the latest depth and the published depth 24 hours earlier."
     },
     {
-      "label": "Median time to peak",
-      "value": 1.8,
-      "unit": "h",
-      "decimals": 1,
-      "note": "Typical lag between rainfall pulses and peak channel response in recent events."
+      "label": "Window maximum",
+      "value": 0.48,
+      "unit": "m",
+      "decimals": 2,
+      "note": "Highest published water depth across the current reporting window."
     }
   ],
   "panels": {
@@ -88,30 +88,6 @@
         { "timestamp": "2026-03-24T18:00:00Z", "value": 0.46 }
       ],
       "empty_message": "Depth data will appear here once the first public payload is published."
-    },
-    "context": {
-      "eyebrow": "Historic context",
-      "title": "Historic Depth Context",
-      "description": "Published annual context graphic highlighting how water depth varied through the year relative to the local baseline.",
-      "image": "assets/mock/depth-difference-2023.png",
-      "alt": "Difference from average water depth in 2023",
-      "caption": "Depth difference from the annual baseline across 2023.",
-      "empty_message": "No published context graphic is available yet."
-    },
-    "time_to_peak": {
-      "eyebrow": "Event response",
-      "title": "Time to Peak",
-      "description": "Recent event summaries showing the elapsed time between rainfall onset and peak observed response.",
-      "y_axis_label": "Time to peak (hours)",
-      "points": [
-        { "label": "Event 01", "value": 1.4 },
-        { "label": "Event 02", "value": 1.7 },
-        { "label": "Event 03", "value": 2.1 },
-        { "label": "Event 04", "value": 1.8 },
-        { "label": "Event 05", "value": 1.6 },
-        { "label": "Event 06", "value": 2.0 }
-      ],
-      "empty_message": "Time-to-peak event summaries will appear here once they are published."
     }
   },
   "notes": [

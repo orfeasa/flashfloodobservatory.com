@@ -129,8 +129,7 @@ h2 {
 .panel-copy,
 .summary-note,
 .note-panel p,
-.footer-copy p,
-#contextCaption {
+.footer-copy p {
   color: var(--muted);
   line-height: 1.65;
 }
@@ -271,31 +270,6 @@ canvas {
 
 .panel-empty[hidden] {
   display: none;
-}
-
-.context-figure {
-  margin: 1rem 0 0;
-}
-
-.context-image {
-  width: 100%;
-  border-radius: 1rem;
-  border: 1px solid rgba(119, 232, 255, 0.12);
-  background: #ffffff;
-}
-
-.panel-empty-image {
-  min-height: 280px;
-  border: 1px solid rgba(119, 232, 255, 0.12);
-  border-radius: 1rem;
-  background:
-    radial-gradient(circle at top, rgba(119, 232, 255, 0.08), transparent 38%),
-    linear-gradient(180deg, rgba(6, 12, 18, 0.98), rgba(3, 7, 11, 1));
-}
-
-#contextCaption {
-  margin: 0.75rem 0 0;
-  font-size: 0.92rem;
 }
 
 .notes-grid {
