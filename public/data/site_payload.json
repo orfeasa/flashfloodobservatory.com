@@ -1,0 +1,157 @@
+{
+  "site": {
+    "eyebrow": "Flash Flood Observatory",
+    "name": "Flash Flood Observatory",
+    "location": "Boscastle, UK",
+    "strapline": "Real-time monitoring of extreme floods.",
+    "timezone": "Europe/London",
+    "logo": {
+      "src": "assets/brand/site-mark.png",
+      "alt": "Flash Flood Observatory site mark"
+    }
+  },
+  "status": {
+    "state": "Public data feed online",
+    "message": "Latest public summary from the Boscastle flash flood observatory.",
+    "published_at": "2026-03-24T18:45:00Z"
+  },
+  "summary_metrics": [
+    {
+      "label": "Latest depth",
+      "value": 0.46,
+      "unit": "m",
+      "decimals": 2,
+      "note": "Latest published water depth at the observatory reporting point."
+    },
+    {
+      "label": "Rainfall, last 24h",
+      "value": 18.7,
+      "unit": "mm",
+      "decimals": 1,
+      "note": "Total rainfall accumulated across the latest 24-hour reporting window."
+    },
+    {
+      "label": "Depth change, last 24h",
+      "value": 0.14,
+      "unit": "m",
+      "decimals": 2,
+      "signed": true,
+      "note": "Difference between the latest depth and the published depth 24 hours earlier."
+    },
+    {
+      "label": "Median time to peak",
+      "value": 1.8,
+      "unit": "h",
+      "decimals": 1,
+      "note": "Typical lag between rainfall pulses and peak channel response in recent events."
+    }
+  ],
+  "panels": {
+    "rainfall": {
+      "eyebrow": "Hydrometeorology",
+      "title": "Rainfall Over The Last 24 Hours",
+      "description": "Public rainfall totals across the latest reporting window, showing the build-up to the most recent channel response.",
+      "y_axis_label": "Rainfall (mm)",
+      "points": [
+        { "timestamp": "2026-03-23T20:00:00Z", "value": 0.0 },
+        { "timestamp": "2026-03-23T22:00:00Z", "value": 0.0 },
+        { "timestamp": "2026-03-24T00:00:00Z", "value": 0.3 },
+        { "timestamp": "2026-03-24T02:00:00Z", "value": 1.1 },
+        { "timestamp": "2026-03-24T04:00:00Z", "value": 2.8 },
+        { "timestamp": "2026-03-24T06:00:00Z", "value": 4.2 },
+        { "timestamp": "2026-03-24T08:00:00Z", "value": 3.9 },
+        { "timestamp": "2026-03-24T10:00:00Z", "value": 2.5 },
+        { "timestamp": "2026-03-24T12:00:00Z", "value": 1.6 },
+        { "timestamp": "2026-03-24T14:00:00Z", "value": 1.0 },
+        { "timestamp": "2026-03-24T16:00:00Z", "value": 0.8 },
+        { "timestamp": "2026-03-24T18:00:00Z", "value": 0.5 }
+      ],
+      "empty_message": "Rainfall data will appear here once the first public payload is published."
+    },
+    "depth": {
+      "eyebrow": "Channel response",
+      "title": "Observed Water Depth",
+      "description": "Public water-depth series for the same period, showing how quickly the channel reacts during unsettled conditions.",
+      "y_axis_label": "Depth (m)",
+      "points": [
+        { "timestamp": "2026-03-23T20:00:00Z", "value": 0.32 },
+        { "timestamp": "2026-03-23T22:00:00Z", "value": 0.31 },
+        { "timestamp": "2026-03-24T00:00:00Z", "value": 0.32 },
+        { "timestamp": "2026-03-24T02:00:00Z", "value": 0.34 },
+        { "timestamp": "2026-03-24T04:00:00Z", "value": 0.37 },
+        { "timestamp": "2026-03-24T06:00:00Z", "value": 0.41 },
+        { "timestamp": "2026-03-24T08:00:00Z", "value": 0.45 },
+        { "timestamp": "2026-03-24T10:00:00Z", "value": 0.47 },
+        { "timestamp": "2026-03-24T12:00:00Z", "value": 0.48 },
+        { "timestamp": "2026-03-24T14:00:00Z", "value": 0.47 },
+        { "timestamp": "2026-03-24T16:00:00Z", "value": 0.45 },
+        { "timestamp": "2026-03-24T18:00:00Z", "value": 0.46 }
+      ],
+      "empty_message": "Depth data will appear here once the first public payload is published."
+    },
+    "context": {
+      "eyebrow": "Historic context",
+      "title": "Historic Depth Context",
+      "description": "Published annual context graphic highlighting how water depth varied through the year relative to the local baseline.",
+      "image": "assets/mock/depth-difference-2023.png",
+      "alt": "Difference from average water depth in 2023",
+      "caption": "Depth difference from the annual baseline across 2023.",
+      "empty_message": "No published context graphic is available yet."
+    },
+    "time_to_peak": {
+      "eyebrow": "Event response",
+      "title": "Time to Peak",
+      "description": "Recent event summaries showing the elapsed time between rainfall onset and peak observed response.",
+      "y_axis_label": "Time to peak (hours)",
+      "points": [
+        { "label": "Event 01", "value": 1.4 },
+        { "label": "Event 02", "value": 1.7 },
+        { "label": "Event 03", "value": 2.1 },
+        { "label": "Event 04", "value": 1.8 },
+        { "label": "Event 05", "value": 1.6 },
+        { "label": "Event 06", "value": 2.0 }
+      ],
+      "empty_message": "Time-to-peak event summaries will appear here once they are published."
+    }
+  },
+  "notes": [
+    {
+      "label": "Why Boscastle",
+      "text": "Boscastle is a flashy catchment. Steep slopes and slow-draining geology can produce rapid river response during short, localised rainfall bursts."
+    },
+    {
+      "label": "How it is observed",
+      "text": "The observatory combines LiDAR, an ultrasonic altimeter, and camera observations to capture how rainfall translates into channel response."
+    },
+    {
+      "label": "Why it matters",
+      "text": "The aim is to improve flood understanding, early warning, and mitigation strategies for communities exposed to fast-rising flood events."
+    }
+  ],
+  "footer": {
+    "title": "Observatory partners",
+    "text": "Researchers from the University of Greenwich, the University of Bath, and TU Delft, supported by the Royal Society.",
+    "partners": [
+      {
+        "name": "University of Greenwich",
+        "logo": "assets/brand/university-1.png",
+        "href": null
+      },
+      {
+        "name": "University of Bath",
+        "logo": "assets/brand/university-2.png",
+        "href": null
+      },
+      {
+        "name": "TU Delft",
+        "logo": "assets/brand/university-3.svg",
+        "href": null
+      },
+      {
+        "name": "Royal Society",
+        "logo": "assets/brand/royal-society.png",
+        "href": null
+      }
+    ]
+  }
+}

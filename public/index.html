@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Public dashboard for the Flash Flood Observatory."
+    >
+    <title>Flash Flood Observatory</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow" id="heroEyebrow">Flash Flood Observatory</p>
+          <h1 class="hero-title">
+            <span id="siteNameLine">Flash Flood Observatory</span>
+            <span id="siteLocationLine">Boscastle, UK</span>
+          </h1>
+          <p class="lede" id="heroStrapline">
+            Real-time monitoring of extreme floods.
+          </p>
+          <div class="hero-meta" id="heroMeta"></div>
+        </div>
+        <div class="hero-mark">
+          <div class="mark-frame">
+            <img
+              id="siteMark"
+              src="assets/brand/site-mark.png"
+              alt="Flash Flood Observatory site mark"
+              class="site-mark"
+            >
+          </div>
+        </div>
+      </header>
+
+      <section class="summary-strip" aria-label="Key figures" id="summaryStrip"></section>
+
+      <main class="dashboard-grid">
+        <section class="panel panel-chart">
+          <div class="panel-head">
+            <p class="panel-label" id="rainfallEyebrow">Hydrometeorology</p>
+            <h2 id="rainfallTitle">Rainfall Over The Last 24 Hours</h2>
+            <p class="panel-copy" id="rainfallDescription"></p>
+          </div>
+          <div class="chart-frame">
+            <canvas id="rainfallChart" aria-label="Rainfall hydrograph"></canvas>
+            <div class="panel-empty" id="rainfallEmpty" hidden></div>
+          </div>
+        </section>
+
+        <section class="panel panel-chart">
+          <div class="panel-head">
+            <p class="panel-label" id="depthEyebrow">Channel response</p>
+            <h2 id="depthTitle">Observed Water Depth</h2>
+            <p class="panel-copy" id="depthDescription"></p>
+          </div>
+          <div class="chart-frame">
+            <canvas id="depthChart" aria-label="Hydrograph depth"></canvas>
+            <div class="panel-empty" id="depthEmpty" hidden></div>
+          </div>
+        </section>
+
+        <section class="panel panel-image">
+          <div class="panel-head">
+            <p class="panel-label" id="contextEyebrow">Historic context</p>
+            <h2 id="contextTitle">Historic Depth Context</h2>
+            <p class="panel-copy" id="contextDescription"></p>
+          </div>
+          <figure class="context-figure">
+            <img
+              id="contextImage"
+              class="context-image"
+              src=""
+              alt=""
+              hidden
+            >
+            <div class="panel-empty panel-empty-image" id="contextEmpty"></div>
+            <figcaption id="contextCaption"></figcaption>
+          </figure>
+        </section>
+
+        <section class="panel panel-chart">
+          <div class="panel-head">
+            <p class="panel-label" id="timeToPeakEyebrow">Event response</p>
+            <h2 id="timeToPeakTitle">Time to Peak</h2>
+            <p class="panel-copy" id="timeToPeakDescription"></p>
+          </div>
+          <div class="chart-frame">
+            <canvas id="timeToPeakChart" aria-label="Time to peak chart"></canvas>
+            <div class="panel-empty" id="timeToPeakEmpty" hidden></div>
+          </div>
+        </section>
+      </main>
+
+      <section class="notes-grid" aria-label="Dashboard notes" id="notesGrid"></section>
+
+      <footer class="footer">
+        <div class="footer-copy">
+          <p class="footer-title" id="footerTitle">Observatory partners</p>
+          <p id="footerText"></p>
+        </div>
+        <div class="partner-strip" aria-label="Partner logos" id="partnerStrip"></div>
+      </footer>
+    </div>
+  </body>
+</html>
