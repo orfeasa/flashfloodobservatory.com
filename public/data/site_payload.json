@@ -41,14 +41,10 @@
   ],
   "panels": {
     "depth": {
-      "description": "Published water-depth observations derived from the latest 23.7 hours of completed legacy files.",
+      "description": "Published water-depth observations derived from the latest 24.0 hours of completed legacy files.",
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "Channel response",
       "points": [
-        {
-          "timestamp": "2026-03-24T00:45:00Z",
-          "value": 0.135
-        },
         {
           "timestamp": "2026-03-24T01:00:00Z",
           "value": 0.134
@@ -427,7 +423,15 @@
         },
         {
           "timestamp": "2026-03-25T00:30:00Z",
-          "value": 0.121
+          "value": 0.122
+        },
+        {
+          "timestamp": "2026-03-25T00:45:00Z",
+          "value": 0.12
+        },
+        {
+          "timestamp": "2026-03-25T01:00:00Z",
+          "value": 0.12
         }
       ],
       "title": "Observed Water Depth",
@@ -455,7 +459,7 @@
   },
   "status": {
     "message": "Latest public summary from legacy ultrasonic depth observations.",
-    "published_at": "2026-03-25T00:48:35.509183Z",
+    "published_at": "2026-03-25T01:03:35.508887Z",
     "state": "Depth feed online"
   },
   "summary_metrics": [
@@ -464,7 +468,7 @@
       "label": "Latest depth",
       "note": "Latest published water depth at the observatory reporting point.",
       "unit": "m",
-      "value": 0.124
+      "value": 0.126
     },
     {
       "decimals": 3,
