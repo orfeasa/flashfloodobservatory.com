@@ -42,10 +42,6 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-03-24T16:45:00Z",
-          "value": 0.139
-        },
-        {
           "timestamp": "2026-03-24T17:00:00Z",
           "value": 0.138
         },
@@ -424,6 +420,14 @@
         {
           "timestamp": "2026-03-25T16:30:00Z",
           "value": 0.114
+        },
+        {
+          "timestamp": "2026-03-25T16:45:00Z",
+          "value": 0.114
+        },
+        {
+          "timestamp": "2026-03-25T17:00:00Z",
+          "value": 0.114
         }
       ],
       "title": "Observed Water Depth",
@@ -450,9 +454,9 @@
     "timezone": "Europe/London"
   },
   "status": {
-    "message": "Latest public summary from legacy ultrasonic depth observations.",
-    "published_at": "2026-03-25T16:48:48.630488Z",
-    "state": "Depth feed online"
+    "message": "Public dashboard feed online.",
+    "published_at": "2026-03-25T17:18:49.211078Z",
+    "state": "Online"
   },
   "summary_metrics": [
     {
@@ -460,7 +464,7 @@
       "label": "Current River Depth",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.113
+      "value": 0.11
     },
     {
       "decimals": 3,
