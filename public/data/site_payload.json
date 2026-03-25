@@ -48,7 +48,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-03-25T20:18:50.973802Z"
+    "updated_at": "2026-03-25T20:33:57.913638Z"
   },
   "panels": {
     "depth": {
@@ -56,14 +56,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-03-24T20:00:00Z",
-          "value": 0.136
-        },
-        {
-          "timestamp": "2026-03-24T20:15:00Z",
-          "value": 0.137
-        },
         {
           "timestamp": "2026-03-24T20:30:00Z",
           "value": 0.138
@@ -443,6 +435,14 @@
         {
           "timestamp": "2026-03-25T20:00:00Z",
           "value": 0.119
+        },
+        {
+          "timestamp": "2026-03-25T20:15:00Z",
+          "value": 0.12
+        },
+        {
+          "timestamp": "2026-03-25T20:30:00Z",
+          "value": 0.124
         }
       ],
       "title": "Observed Water Depth",
@@ -455,14 +455,6 @@
       "eyebrow": "Hydrometeorology",
       "last_updated": "2026-03-25T16:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-24T20:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-03-24T20:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-24T20:45:00Z",
           "value": 0.0
@@ -800,7 +792,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-25T20:18:50.984515Z",
+    "published_at": "2026-03-25T20:33:57.925034Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -809,7 +801,7 @@
       "label": "Current River Depth",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.119
+      "value": 0.124
     },
     {
       "decimals": 3,
