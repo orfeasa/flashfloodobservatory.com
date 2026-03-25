@@ -35,6 +35,7 @@ The current site shell assumes:
 - the public dashboard currently renders 4 summary cards
 - the public dashboard currently renders 2 note cards
 - the depth panel is live from the operational sidecar
+- the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series
 - the rainfall panel stays hidden when `panels.rainfall.points` is empty
 
 ## Payload shape

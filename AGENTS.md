@@ -17,6 +17,7 @@ Rules for future changes:
 - The rainfall panel exists in the schema but is currently waiting on real data from station `49149`; treat that as an active maintenance gap.
 - If `panels.rainfall.points` is empty, keep the rainfall panel hidden rather than rendering an empty chart panel.
 - The current public site shape is 4 summary cards, 2 notes, and a live depth panel.
+- Keep the 24-hour river-level summary cards aligned with the visible chart by treating the cleaned depth series as the source of truth for both.
 
 Operational intent:
 
