@@ -58,10 +58,6 @@ function applyHero(site, status) {
 
   const badges = [
     {
-      label: "Status",
-      value: status.state || "Awaiting publication",
-    },
-    {
       label: "Last updated",
       value: status.published_at ? formatDate(status.published_at) : "Not yet published",
     },
@@ -70,13 +66,6 @@ function applyHero(site, status) {
       value: site.timezone || "UTC",
     },
   ];
-
-  if (status.message) {
-    badges.push({
-      label: "Summary",
-      value: status.message,
-    });
-  }
 
   const heroMeta = document.getElementById("heroMeta");
   heroMeta.replaceChildren(...badges.map(renderMetaChip));
@@ -104,6 +93,7 @@ function renderSummaryMetrics(metrics) {
     value: null,
     note: "No published metrics are available yet."
   })];
+  strip.style.setProperty("--summary-columns", String(Math.min(cards.length || 1, 5)));
   strip.replaceChildren(...cards);
 }
 
@@ -185,7 +175,7 @@ function renderRainfallChart(panel) {
         },
       ],
     },
-    options: chartOptions(panel.y_axis_label || "Rainfall"),
+    options: chartOptions("Date & Time", panel.y_axis_label || "Rainfall"),
   });
 }
 
@@ -216,7 +206,7 @@ function renderDepthChart(panel) {
         },
       ],
     },
-    options: chartOptions(panel.y_axis_label || "Depth"),
+    options: chartOptions("Date & Time", panel.y_axis_label || "Depth"),
   });
 }
 
@@ -291,7 +281,7 @@ function hideEmptyChart(prefix) {
   empty.hidden = true;
 }
 
-function chartOptions(yTitle) {
+function chartOptions(xTitle, yTitle) {
   return {
     maintainAspectRatio: false,
     plugins: {
@@ -318,6 +308,11 @@ function chartOptions(yTitle) {
           maxRotation: 0,
           autoSkip: true,
           maxTicksLimit: 8,
+        },
+        title: {
+          display: true,
+          text: xTitle,
+          color: chartPalette.text,
         },
       },
       y: {
@@ -347,7 +342,7 @@ function applyErrorState(error) {
 
   const heroMeta = document.getElementById("heroMeta");
   heroMeta.replaceChildren(
-    renderMetaChip({ label: "Status", value: "Unavailable" }),
+    renderMetaChip({ label: "Last updated", value: "Unavailable" }),
     renderMetaChip({ label: "Detail", value: error.message })
   );
 
