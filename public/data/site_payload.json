@@ -28,22 +28,18 @@
   "notes": [
     {
       "label": "Why Boscastle",
-      "text": "Boscastle is a flashy catchment. Steep slopes and slow-draining geology can produce rapid river response during short, localised rainfall bursts."
+      "text": "Flash floods are increasing with climate change. Boscastle is a flashy catchment. Steep slopes and slow draining geology cause rapid response, even from small, localised events"
     },
     {
       "label": "How it is observed",
-      "text": "The observatory combines LiDAR, an ultrasonic altimeter, and camera observations to capture how rainfall translates into channel response."
-    },
-    {
-      "label": "Next public additions",
-      "text": "Rainfall from station 49149 will be added once that feed is integrated into the public export."
+      "text": "We use innovative remote-sensing techniques (LiDAR, ultrasonic altimeter, camera) to monitor flash floods in real time, capturing accurate data on their speed and intensity."
     }
   ],
   "panels": {
     "depth": {
-      "description": "Published water-depth observations derived from the latest 23.7 hours of completed legacy files.",
+      "description": "24 h time series of river water depths at the Flash Flood Observatory.",
       "empty_message": "Depth data will appear here once the public payload is published.",
-      "eyebrow": "Channel response",
+      "eyebrow": "River Levels",
       "points": [
         {
           "timestamp": "2026-03-24T16:45:00Z",
@@ -431,7 +427,7 @@
         }
       ],
       "title": "Observed Water Depth",
-      "y_axis_label": "Depth (m)"
+      "y_axis_label": "Water Depth (m)"
     },
     "rainfall": {
       "description": "Rainfall will be added to the public dashboard when the external rainfall feed is integrated.",
@@ -450,7 +446,7 @@
       "src": "assets/brand/site-mark.png"
     },
     "name": "Flash Flood Observatory",
-    "strapline": "Real-time monitoring of extreme floods.",
+    "strapline": "This dashboard monitors flash floods in real time, capturing data on their speed and intensity. Developed by researchers from the Universities of Greenwich, Bath, and TU Delft and funded by the Royal Society, it aims to improve early warning systems and flood mitigation.",
     "timezone": "Europe/London"
   },
   "status": {
@@ -461,29 +457,29 @@
   "summary_metrics": [
     {
       "decimals": 3,
-      "label": "Latest depth",
-      "note": "Latest published water depth at the observatory reporting point.",
+      "label": "Current River Depth",
+      "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
       "value": 0.113
     },
     {
       "decimals": 3,
-      "label": "Window maximum",
-      "note": "Maximum published depth across the current public reporting window.",
+      "label": "Maximum 24h River Level",
+      "note": "Maximum 24h water depth at the Flash Flood Observatory",
       "unit": "m",
       "value": 1.215
     },
     {
       "decimals": 3,
-      "label": "Window minimum",
-      "note": "Minimum published depth across the current public reporting window.",
+      "label": "Minimum 24h River Level",
+      "note": "Minimum 24h water depth at the Flash Flood Observatory",
       "unit": "m",
       "value": 0.086
     },
     {
       "decimals": 3,
-      "label": "Depth range",
-      "note": "Difference between the maximum and minimum published depth in the window.",
+      "label": "River Level 24h Range",
+      "note": "24h water depth range at the Flash Flood Observatory",
       "unit": "m",
       "value": 1.129
     }
