@@ -77,6 +77,20 @@ Point shape:
 
 - `{ "timestamp": "2026-03-24T12:00:00Z", "value": 0.0 }`
 
+## Current known gap
+
+The rainfall panel is part of the public payload contract, but it is not live
+yet.
+
+Current state:
+
+- `panels.depth.points` is populated from the operational sidecar
+- `panels.rainfall.points` is still empty
+- the next data integration task is to populate rainfall for station `49149`
+  from the operational exporter
+- when `panels.rainfall.points` is empty, the website hides the rainfall panel
+  instead of showing an empty placeholder chart
+
 ### `notes`
 
 Array of note cards:

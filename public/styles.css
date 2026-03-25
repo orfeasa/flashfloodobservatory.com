@@ -228,6 +228,10 @@ h2 {
   margin-top: 1rem;
 }
 
+.dashboard-grid--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .panel {
   padding: 1.25rem;
 }

@@ -23,6 +23,7 @@ async function main() {
     const payload = await response.json();
     applyHero(payload.site || {}, payload.status || {});
     renderSummaryMetrics(payload.summary_metrics || []);
+    applyPanelVisibility(payload.panels || {});
     renderPanelCopy("rainfall", payload.panels?.rainfall || {});
     renderPanelCopy("depth", payload.panels?.depth || {});
     renderRainfallChart(payload.panels?.rainfall || {});
@@ -148,10 +149,21 @@ function renderPanelCopy(prefix, panel) {
   text(`${prefix}Description`, panel.description || "");
 }
 
+function applyPanelVisibility(panels) {
+  const rainfallPoints = panels.rainfall?.points || [];
+  const depthPoints = panels.depth?.points || [];
+
+  togglePanel("rainfallPanel", rainfallPoints.length > 0);
+  togglePanel("depthPanel", depthPoints.length > 0);
+
+  const visiblePanelCount = [rainfallPoints, depthPoints].filter((points) => points.length > 0).length;
+  const dashboardGrid = document.getElementById("dashboardGrid");
+  dashboardGrid.classList.toggle("dashboard-grid--single", visiblePanelCount <= 1);
+}
+
 function renderRainfallChart(panel) {
   const points = panel.points || [];
   if (!points.length) {
-    showEmptyChart("rainfall", panel.empty_message || "No rainfall data has been published yet.");
     rainfallChart?.destroy();
     return;
   }
@@ -257,6 +269,11 @@ function renderPartner(partner) {
 
   wrapper.append(image);
   return wrapper;
+}
+
+function togglePanel(panelId, isVisible) {
+  const panel = document.getElementById(panelId);
+  panel.hidden = !isVisible;
 }
 
 function showEmptyChart(prefix, message) {

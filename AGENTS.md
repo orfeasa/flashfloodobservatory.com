@@ -14,6 +14,10 @@ Rules for future changes:
 - If the payload schema changes, update [`public/app.js`](public/app.js), [`public/index.html`](public/index.html), and [`README.md`](README.md) together
 - Keep partner logos on a light backing so the dark University of Greenwich mark remains visible
 - Keep the public dashboard limited to defined panels only. Do not add placeholder panels that the data pipeline cannot support.
+- The rainfall panel exists in the UI but is currently waiting on real data from
+  station `49149`; treat that as an active maintenance gap.
+- If `panels.rainfall.points` is empty, keep the rainfall panel hidden rather
+  than rendering an empty chart panel.
 
 Operational intent:
 
