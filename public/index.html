@@ -15,6 +15,18 @@
   </head>
   <body>
     <div class="site-shell">
+      <section class="official-alert official-alert--none" id="officialAlert" hidden>
+        <div class="official-alert-copy">
+          <p class="panel-label" id="officialAlertEyebrow">Official EA Flood Status</p>
+          <p class="official-alert-title" id="officialAlertTitle">No current EA flood warning or alert</p>
+          <p class="panel-copy official-alert-message" id="officialAlertMessage"></p>
+        </div>
+        <div class="official-alert-meta">
+          <p id="officialAlertUpdated"></p>
+          <a id="officialAlertSource" href="#" target="_blank" rel="noreferrer"></a>
+        </div>
+      </section>
+
       <header class="hero">
         <div class="hero-copy">
           <p class="eyebrow" id="heroEyebrow">Flash Flood Observatory</p>
@@ -56,7 +68,7 @@
 
         <section class="panel panel-chart" id="depthPanel">
           <div class="panel-head">
-            <p class="panel-label" id="depthEyebrow">Channel response</p>
+            <p class="panel-label" id="depthEyebrow">River Levels</p>
             <h2 id="depthTitle">Observed Water Depth</h2>
             <p class="panel-copy" id="depthDescription"></p>
           </div>

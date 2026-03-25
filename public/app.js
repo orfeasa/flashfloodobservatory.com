@@ -5,6 +5,9 @@ const chartPalette = {
   cyanFill: "rgba(119, 232, 255, 0.12)",
   blue: "#46a7ff",
   blueFill: "rgba(70, 167, 255, 0.18)",
+  green: "#57d18b",
+  amber: "#f7de5e",
+  red: "#ff7b79",
   grid: "rgba(119, 232, 255, 0.08)",
   text: "#f4f8fb",
   muted: "#9db0be",
@@ -12,6 +15,7 @@ const chartPalette = {
 
 let rainfallChart;
 let depthChart;
+let displayTimeZone = "UTC";
 
 async function main() {
   try {
@@ -22,6 +26,7 @@ async function main() {
 
     const payload = await response.json();
     applyHero(payload.site || {}, payload.status || {});
+    renderOfficialAlert(payload.official_alert || {});
     renderSummaryMetrics(payload.summary_metrics || []);
     applyPanelVisibility(payload.panels || {});
     renderPanelCopy("rainfall", payload.panels?.rainfall || {});
@@ -56,6 +61,8 @@ function applyHero(site, status) {
     siteMark.alt = site.logo.alt;
   }
 
+  displayTimeZone = site.timezone || "UTC";
+
   const badges = [
     {
       label: "Last updated",
@@ -69,6 +76,38 @@ function applyHero(site, status) {
 
   const heroMeta = document.getElementById("heroMeta");
   heroMeta.replaceChildren(...badges.map(renderMetaChip));
+}
+
+function renderOfficialAlert(alert) {
+  const banner = document.getElementById("officialAlert");
+  if (!alert || (!alert.state && !alert.label)) {
+    banner.hidden = true;
+    banner.className = "official-alert";
+    return;
+  }
+
+  const state = typeof alert.state === "string" ? alert.state : "unavailable";
+  banner.hidden = false;
+  banner.className = `official-alert official-alert--${state.replaceAll("_", "-")}`;
+
+  text("officialAlertEyebrow", alert.eyebrow || "Official EA Flood Status");
+  text("officialAlertTitle", alert.label || "Official flood status unavailable");
+  text("officialAlertMessage", alert.message || alert.disclaimer || "");
+  text(
+    "officialAlertUpdated",
+    alert.updated_at ? `Updated ${formatDate(alert.updated_at)}` : ""
+  );
+
+  const sourceLink = document.getElementById("officialAlertSource");
+  if (alert.source_url) {
+    sourceLink.hidden = false;
+    sourceLink.href = alert.source_url;
+    sourceLink.textContent = alert.source_name || "View official flood status";
+  } else {
+    sourceLink.hidden = true;
+    sourceLink.removeAttribute("href");
+    sourceLink.textContent = "";
+  }
 }
 
 function renderMetaChip(item) {
@@ -128,9 +167,9 @@ function formatMetricValue(metric) {
     return String(metric.value);
   }
 
-  const prefix = metric.signed && numeric > 0 ? "+" : "";
   const unit = metric.unit ? ` ${metric.unit}` : "";
-  return `${prefix}${numeric.toFixed(decimals)}${unit}`;
+  const sign = metric.signed && numeric > 0 ? "+" : "";
+  return `${sign}${numeric.toFixed(decimals)}${unit}`;
 }
 
 function renderPanelCopy(prefix, panel) {
@@ -339,6 +378,7 @@ function applyErrorState(error) {
   text("siteLocationLine", "");
   document.getElementById("siteLocationLine").hidden = true;
   text("heroStrapline", "The public payload could not be loaded.");
+  document.getElementById("officialAlert").hidden = true;
 
   const heroMeta = document.getElementById("heroMeta");
   heroMeta.replaceChildren(
@@ -365,7 +405,7 @@ function formatAxisTime(timestamp) {
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
-    timeZone: "UTC",
+    timeZone: displayTimeZone,
   }).format(date);
 }
 
@@ -377,7 +417,7 @@ function formatDate(timestamp) {
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
-    timeZone: "UTC",
+    timeZone: displayTimeZone,
     timeZoneName: "short",
   }).format(date);
 }

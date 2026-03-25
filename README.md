@@ -24,7 +24,7 @@ The public site is driven by one file only:
 
 - [`public/data/site_payload.json`](public/data/site_payload.json)
 
-All summary cards, charts, notes, and footer partner entries should be inferred from that payload.
+All summary cards, charts, banner content, notes, and footer partner entries should be inferred from that payload.
 
 ## Current public behaviour
 
@@ -32,8 +32,11 @@ The current site shell assumes:
 
 - the observatory logo is used as the browser tab icon
 - only `Last updated` and `Timezone` appear in the hero metadata
+- published timestamps and chart axes are rendered in `site.timezone`
 - the public dashboard currently renders 4 summary cards
 - the public dashboard currently renders 2 note cards
+- a top banner renders official Environment Agency flood-warning context when `official_alert` is present
+- the rainfall panel renders 15-minute rainfall totals across the last 24 hours when `panels.rainfall.points` is populated
 - the depth panel is live from the operational sidecar
 - the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series
 - the rainfall panel stays hidden when `panels.rainfall.points` is empty
@@ -44,6 +47,7 @@ Top-level keys:
 
 - `site`
 - `status`
+- `official_alert`
 - `summary_metrics`
 - `panels`
 - `notes`
@@ -64,6 +68,24 @@ Top-level keys:
 - `state`
 - `message`
 - `published_at`
+
+### `official_alert`
+
+- `eyebrow`
+- `state`
+- `label`
+- `message`
+- `severity_level`
+- `severity`
+- `updated_at`
+- `source_name`
+- `source_url`
+- `api_url`
+- `disclaimer`
+- `count`
+- optional `area_label`
+
+This banner is supplementary official Environment Agency flood-warning context. It should not be presented as a bespoke flash-flood warning produced by the observatory.
 
 ### `summary_metrics`
 
@@ -92,6 +114,14 @@ Current live meaning:
 - `points`
 - `empty_message`
 
+Rainfall also currently carries:
+
+- `source_name`
+- `source_url`
+- `data_url`
+- `station_id`
+- `last_updated`
+
 Point shape:
 
 - `{ "timestamp": "2026-03-24T12:00:00Z", "value": 0.0 }`
@@ -114,17 +144,6 @@ Partner shape:
 - `name`
 - `logo`
 - `href`
-
-## Current known gap
-
-The rainfall panel is part of the public payload contract, but it is not live yet.
-
-Current state:
-
-- `panels.depth.points` is populated from the operational sidecar
-- `panels.rainfall.points` is still empty
-- the next data integration task is to populate rainfall for station `49149` from the operational exporter
-- when `panels.rainfall.points` is empty, the website hides the rainfall panel instead of showing an empty placeholder chart
 
 ## Operational boundary
 

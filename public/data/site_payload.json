@@ -35,6 +35,21 @@
       "text": "We use innovative remote-sensing techniques (LiDAR, ultrasonic altimeter, camera) to monitor flash floods in real time, capturing accurate data on their speed and intensity."
     }
   ],
+  "official_alert": {
+    "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=3",
+    "count": 0,
+    "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
+    "eyebrow": "Official EA Flood Status",
+    "label": "No current EA flood warning or alert",
+    "message": "No Environment Agency flood warnings or alerts are currently active near Boscastle.",
+    "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
+    "severity": null,
+    "severity_level": null,
+    "source_name": "Environment Agency / GOV.UK Check for flooding",
+    "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
+    "state": "none",
+    "updated_at": "2026-03-25T17:58:12.896179Z"
+  },
   "panels": {
     "depth": {
       "description": "24 h time series of river water depths at the Flash Flood Observatory.",
@@ -42,39 +57,55 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-03-24T17:30:00Z",
+          "timestamp": "2026-03-24T19:32:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T19:33:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T19:34:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T19:35:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T19:36:00Z",
           "value": 0.137
         },
         {
-          "timestamp": "2026-03-24T17:45:00Z",
+          "timestamp": "2026-03-24T19:37:00Z",
           "value": 0.138
         },
         {
-          "timestamp": "2026-03-24T18:00:00Z",
-          "value": 0.139
-        },
-        {
-          "timestamp": "2026-03-24T18:15:00Z",
+          "timestamp": "2026-03-24T19:38:00Z",
           "value": 0.138
         },
         {
-          "timestamp": "2026-03-24T18:30:00Z",
+          "timestamp": "2026-03-24T19:39:00Z",
           "value": 0.138
         },
         {
-          "timestamp": "2026-03-24T18:45:00Z",
+          "timestamp": "2026-03-24T19:40:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T19:41:00Z",
           "value": 0.138
         },
         {
-          "timestamp": "2026-03-24T19:00:00Z",
+          "timestamp": "2026-03-24T19:42:00Z",
           "value": 0.138
         },
         {
-          "timestamp": "2026-03-24T19:15:00Z",
-          "value": 0.138
+          "timestamp": "2026-03-24T19:43:00Z",
+          "value": 0.137
         },
         {
-          "timestamp": "2026-03-24T19:30:00Z",
+          "timestamp": "2026-03-24T19:44:00Z",
           "value": 0.138
         },
         {
@@ -82,362 +113,224 @@
           "value": 0.137
         },
         {
+          "timestamp": "2026-03-24T19:46:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T19:47:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T19:48:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T19:49:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T19:50:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T19:51:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T19:52:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T19:53:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T19:54:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T19:55:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T19:56:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T19:57:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T19:58:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T19:59:00Z",
+          "value": 0.137
+        },
+        {
           "timestamp": "2026-03-24T20:00:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T20:01:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:02:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:03:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:04:00Z",
+          "value": 0.135
+        },
+        {
+          "timestamp": "2026-03-24T20:05:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:06:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T20:07:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:08:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:09:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:10:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T20:11:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T20:12:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T20:13:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:14:00Z",
           "value": 0.136
         },
         {
           "timestamp": "2026-03-24T20:15:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:16:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:17:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T20:18:00Z",
+          "value": 0.135
+        },
+        {
+          "timestamp": "2026-03-24T20:19:00Z",
+          "value": 0.136
+        },
+        {
+          "timestamp": "2026-03-24T20:20:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T20:21:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T20:22:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T20:23:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T20:24:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T20:25:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T20:26:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T20:27:00Z",
+          "value": 0.138
+        },
+        {
+          "timestamp": "2026-03-24T20:28:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T20:29:00Z",
           "value": 0.137
         },
         {
           "timestamp": "2026-03-24T20:30:00Z",
+          "value": 0.137
+        },
+        {
+          "timestamp": "2026-03-24T20:31:00Z",
           "value": 0.138
         },
         {
-          "timestamp": "2026-03-24T20:45:00Z",
-          "value": 0.138
-        },
-        {
-          "timestamp": "2026-03-24T21:00:00Z",
-          "value": 0.139
-        },
-        {
-          "timestamp": "2026-03-24T21:15:00Z",
-          "value": 0.141
-        },
-        {
-          "timestamp": "2026-03-24T21:30:00Z",
-          "value": 0.139
-        },
-        {
-          "timestamp": "2026-03-24T21:45:00Z",
-          "value": 0.138
-        },
-        {
-          "timestamp": "2026-03-24T22:00:00Z",
-          "value": 0.135
-        },
-        {
-          "timestamp": "2026-03-24T22:15:00Z",
-          "value": 0.134
-        },
-        {
-          "timestamp": "2026-03-24T22:30:00Z",
-          "value": 0.127
-        },
-        {
-          "timestamp": "2026-03-24T22:45:00Z",
-          "value": 0.129
-        },
-        {
-          "timestamp": "2026-03-24T23:00:00Z",
-          "value": 0.129
-        },
-        {
-          "timestamp": "2026-03-24T23:15:00Z",
-          "value": 0.127
-        },
-        {
-          "timestamp": "2026-03-24T23:30:00Z",
-          "value": 0.127
-        },
-        {
-          "timestamp": "2026-03-24T23:45:00Z",
-          "value": 0.119
-        },
-        {
-          "timestamp": "2026-03-25T00:00:00Z",
-          "value": 0.122
-        },
-        {
-          "timestamp": "2026-03-25T00:15:00Z",
-          "value": 0.12
-        },
-        {
-          "timestamp": "2026-03-25T00:30:00Z",
-          "value": 0.122
-        },
-        {
-          "timestamp": "2026-03-25T00:45:00Z",
-          "value": 0.12
-        },
-        {
-          "timestamp": "2026-03-25T01:00:00Z",
-          "value": 0.12
-        },
-        {
-          "timestamp": "2026-03-25T01:15:00Z",
-          "value": 0.121
-        },
-        {
-          "timestamp": "2026-03-25T01:30:00Z",
-          "value": 0.121
-        },
-        {
-          "timestamp": "2026-03-25T01:45:00Z",
-          "value": 0.118
-        },
-        {
-          "timestamp": "2026-03-25T02:00:00Z",
-          "value": 0.118
-        },
-        {
-          "timestamp": "2026-03-25T02:15:00Z",
-          "value": 0.118
-        },
-        {
-          "timestamp": "2026-03-25T02:30:00Z",
-          "value": 0.118
-        },
-        {
-          "timestamp": "2026-03-25T02:45:00Z",
-          "value": 0.116
-        },
-        {
-          "timestamp": "2026-03-25T03:00:00Z",
-          "value": 0.116
-        },
-        {
-          "timestamp": "2026-03-25T03:15:00Z",
-          "value": 0.116
-        },
-        {
-          "timestamp": "2026-03-25T03:30:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T03:45:00Z",
-          "value": 0.115
-        },
-        {
-          "timestamp": "2026-03-25T04:00:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T04:15:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T04:30:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T04:45:00Z",
-          "value": 0.112
-        },
-        {
-          "timestamp": "2026-03-25T05:00:00Z",
-          "value": 0.112
-        },
-        {
-          "timestamp": "2026-03-25T05:15:00Z",
-          "value": 0.111
-        },
-        {
-          "timestamp": "2026-03-25T05:30:00Z",
-          "value": 0.111
-        },
-        {
-          "timestamp": "2026-03-25T05:45:00Z",
-          "value": 0.111
-        },
-        {
-          "timestamp": "2026-03-25T06:00:00Z",
-          "value": 0.111
-        },
-        {
-          "timestamp": "2026-03-25T06:15:00Z",
-          "value": 0.11
-        },
-        {
-          "timestamp": "2026-03-25T06:30:00Z",
-          "value": 0.11
-        },
-        {
-          "timestamp": "2026-03-25T06:45:00Z",
-          "value": 0.11
-        },
-        {
-          "timestamp": "2026-03-25T07:00:00Z",
-          "value": 0.11
-        },
-        {
-          "timestamp": "2026-03-25T07:15:00Z",
-          "value": 0.11
-        },
-        {
-          "timestamp": "2026-03-25T07:30:00Z",
-          "value": 0.11
-        },
-        {
-          "timestamp": "2026-03-25T07:45:00Z",
-          "value": 0.111
-        },
-        {
-          "timestamp": "2026-03-25T08:00:00Z",
-          "value": 0.111
-        },
-        {
-          "timestamp": "2026-03-25T08:15:00Z",
-          "value": 0.111
-        },
-        {
-          "timestamp": "2026-03-25T08:30:00Z",
-          "value": 0.112
-        },
-        {
-          "timestamp": "2026-03-25T08:45:00Z",
-          "value": 0.112
-        },
-        {
-          "timestamp": "2026-03-25T09:00:00Z",
-          "value": 0.112
-        },
-        {
-          "timestamp": "2026-03-25T09:15:00Z",
-          "value": 0.112
-        },
-        {
-          "timestamp": "2026-03-25T09:30:00Z",
-          "value": 0.111
-        },
-        {
-          "timestamp": "2026-03-25T09:45:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T10:00:00Z",
-          "value": 0.112
-        },
-        {
-          "timestamp": "2026-03-25T10:15:00Z",
-          "value": 0.112
-        },
-        {
-          "timestamp": "2026-03-25T10:30:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T10:45:00Z",
-          "value": 0.116
-        },
-        {
-          "timestamp": "2026-03-25T11:00:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T11:15:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T11:30:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T11:45:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T12:00:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T12:15:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T12:30:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T12:45:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T13:00:00Z",
-          "value": 0.115
-        },
-        {
-          "timestamp": "2026-03-25T13:15:00Z",
-          "value": 0.115
-        },
-        {
-          "timestamp": "2026-03-25T13:30:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T13:45:00Z",
-          "value": 0.115
-        },
-        {
-          "timestamp": "2026-03-25T14:00:00Z",
-          "value": 0.115
-        },
-        {
-          "timestamp": "2026-03-25T14:15:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T14:30:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T14:45:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T15:00:00Z",
-          "value": 0.115
-        },
-        {
-          "timestamp": "2026-03-25T15:15:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T15:30:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T15:45:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T16:00:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T16:15:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T16:30:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T16:45:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T17:00:00Z",
-          "value": 0.114
-        },
-        {
-          "timestamp": "2026-03-25T17:15:00Z",
-          "value": 0.113
-        },
-        {
-          "timestamp": "2026-03-25T17:30:00Z",
-          "value": 0.113
+          "timestamp": "2026-03-24T20:32:00Z",
+          "value": 0.137
         }
       ],
       "title": "Observed Water Depth",
       "y_axis_label": "Water Depth (m)"
     },
     "rainfall": {
-      "description": "Rainfall will be added to the public dashboard when the external rainfall feed is integrated.",
-      "empty_message": "Rainfall data is not published yet. The public rainfall feed for station 49149 will be added in a later step.",
+      "data_url": "https://environment.data.gov.uk/flood-monitoring/data/readings?parameter=rainfall&stationReference=49149&startdate=2026-03-24&enddate=2026-03-24&_sorted=",
+      "description": "15-minute rainfall totals across the last 24 h from Environment Agency station 49149.",
+      "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Hydrometeorology",
-      "points": [],
+      "last_updated": "2026-03-24T20:30:00Z",
+      "points": [
+        {
+          "timestamp": "2026-03-24T19:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-24T20:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-24T20:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-24T20:30:00Z",
+          "value": 0.0
+        }
+      ],
+      "source_name": "Environment Agency real-time rainfall data API",
+      "source_url": "https://environment.data.gov.uk/flood-monitoring/doc/rainfall",
+      "station_id": "49149",
       "title": "Rainfall Over The Last 24 Hours",
       "y_axis_label": "Rainfall (mm)"
     }
@@ -455,7 +348,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-25T17:48:48.493134Z",
+    "published_at": "2026-03-25T17:58:12.904123Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -464,28 +357,28 @@
       "label": "Current River Depth",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.112
+      "value": 0.137
     },
     {
       "decimals": 3,
       "label": "Maximum 24h River Level",
       "note": "Maximum 24h water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.142
+      "value": 0.138
     },
     {
       "decimals": 3,
       "label": "Minimum 24h River Level",
       "note": "Minimum 24h water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.108
+      "value": 0.135
     },
     {
       "decimals": 3,
       "label": "River Level 24h Range",
       "note": "24h water depth range at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.034
+      "value": 0.003
     }
   ]
 }

@@ -6,6 +6,9 @@
   --cyan: #77e8ff;
   --gold: #f7de5e;
   --blue: #46a7ff;
+  --green: #57d18b;
+  --amber: #f7de5e;
+  --red: #ff7b79;
   --panel-bg: rgba(10, 18, 28, 0.93);
   --panel-strong: rgba(7, 12, 20, 0.96);
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
@@ -63,9 +66,76 @@ a {
 .panel,
 .summary-card,
 .note-panel,
-.footer {
+.footer,
+.official-alert {
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
+}
+
+.official-alert {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(240px, 0.9fr);
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(180deg, rgba(8, 16, 24, 0.96), rgba(6, 12, 18, 0.95));
+}
+
+.official-alert--none {
+  border-color: rgba(87, 209, 139, 0.32);
+  background: linear-gradient(180deg, rgba(12, 28, 20, 0.94), rgba(8, 18, 14, 0.96));
+}
+
+.official-alert--flood-alert {
+  border-color: rgba(247, 222, 94, 0.36);
+  background: linear-gradient(180deg, rgba(42, 34, 10, 0.94), rgba(24, 18, 6, 0.96));
+}
+
+.official-alert--flood-warning,
+.official-alert--warning {
+  border-color: rgba(255, 170, 84, 0.42);
+  background: linear-gradient(180deg, rgba(54, 28, 8, 0.94), rgba(26, 14, 4, 0.96));
+}
+
+.official-alert--severe-flood-warning {
+  border-color: rgba(255, 123, 121, 0.46);
+  background: linear-gradient(180deg, rgba(60, 16, 16, 0.94), rgba(28, 8, 8, 0.96));
+}
+
+.official-alert--unavailable {
+  border-color: rgba(121, 221, 255, 0.22);
+}
+
+.official-alert-title {
+  margin: 0.35rem 0 0;
+  font-family: "Iowan Old Style", Baskerville, "Palatino Linotype", serif;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  line-height: 1.1;
+}
+
+.official-alert-message {
+  margin: 0.35rem 0 0;
+}
+
+.official-alert-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+#officialAlertUpdated,
+#officialAlertSource {
+  margin: 0;
+}
+
+#officialAlertSource {
+  color: var(--text);
+  text-decoration-color: rgba(244, 248, 251, 0.35);
 }
 
 .hero {
@@ -334,9 +404,14 @@ canvas {
 }
 
 @media (max-width: 1080px) {
+  .official-alert,
   .hero,
   .footer {
     grid-template-columns: 1fr;
+  }
+
+  .official-alert-meta {
+    align-items: flex-start;
   }
 
   .summary-strip,
@@ -356,6 +431,7 @@ canvas {
     padding-top: 0.5rem;
   }
 
+  .official-alert,
   .hero,
   .summary-card,
   .panel,
