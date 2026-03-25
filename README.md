@@ -26,6 +26,17 @@ The public site is driven by one file only:
 
 All summary cards, charts, notes, and footer partner entries should be inferred from that payload.
 
+## Current public behaviour
+
+The current site shell assumes:
+
+- the observatory logo is used as the browser tab icon
+- only `Last updated` and `Timezone` appear in the hero metadata
+- the public dashboard currently renders 4 summary cards
+- the public dashboard currently renders 2 note cards
+- the depth panel is live from the operational sidecar
+- the rainfall panel stays hidden when `panels.rainfall.points` is empty
+
 ## Payload shape
 
 Top-level keys:
@@ -64,6 +75,13 @@ Array of cards, each with:
 - `signed`
 - `note`
 
+Current live meaning:
+
+- current river depth
+- maximum 24h river level
+- minimum 24h river level
+- river level 24h range
+
 ### `panels.rainfall` and `panels.depth`
 
 - `eyebrow`
@@ -76,20 +94,6 @@ Array of cards, each with:
 Point shape:
 
 - `{ "timestamp": "2026-03-24T12:00:00Z", "value": 0.0 }`
-
-## Current known gap
-
-The rainfall panel is part of the public payload contract, but it is not live
-yet.
-
-Current state:
-
-- `panels.depth.points` is populated from the operational sidecar
-- `panels.rainfall.points` is still empty
-- the next data integration task is to populate rainfall for station `49149`
-  from the operational exporter
-- when `panels.rainfall.points` is empty, the website hides the rainfall panel
-  instead of showing an empty placeholder chart
 
 ### `notes`
 
@@ -110,6 +114,17 @@ Partner shape:
 - `logo`
 - `href`
 
+## Current known gap
+
+The rainfall panel is part of the public payload contract, but it is not live yet.
+
+Current state:
+
+- `panels.depth.points` is populated from the operational sidecar
+- `panels.rainfall.points` is still empty
+- the next data integration task is to populate rainfall for station `49149` from the operational exporter
+- when `panels.rainfall.points` is empty, the website hides the rainfall panel instead of showing an empty placeholder chart
+
 ## Operational boundary
 
 This repository is for curated public outputs only.
@@ -127,6 +142,8 @@ Do not expose:
 GitHub Pages is configured in-repo via [`/.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
 
 That workflow uploads only the contents of [`public/`](public) as the Pages artifact, so repository-root maintainer files are never part of the published site.
+
+Operationally, the Wales PC sidecar updates this repository by syncing the local website clone, replacing `public/data/site_payload.json`, committing the payload change, and pushing it back to `main`.
 
 Repository setting required:
 
