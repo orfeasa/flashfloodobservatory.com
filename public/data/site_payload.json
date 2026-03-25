@@ -42,20 +42,12 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-03-24T17:00:00Z",
-          "value": 0.138
-        },
-        {
-          "timestamp": "2026-03-24T17:15:00Z",
-          "value": 0.137
-        },
-        {
           "timestamp": "2026-03-24T17:30:00Z",
           "value": 0.137
         },
         {
           "timestamp": "2026-03-24T17:45:00Z",
-          "value": 0.139
+          "value": 0.138
         },
         {
           "timestamp": "2026-03-24T18:00:00Z",
@@ -119,7 +111,7 @@
         },
         {
           "timestamp": "2026-03-24T21:45:00Z",
-          "value": 0.137
+          "value": 0.138
         },
         {
           "timestamp": "2026-03-24T22:00:00Z",
@@ -127,7 +119,7 @@
         },
         {
           "timestamp": "2026-03-24T22:15:00Z",
-          "value": 0.133
+          "value": 0.134
         },
         {
           "timestamp": "2026-03-24T22:30:00Z",
@@ -139,7 +131,7 @@
         },
         {
           "timestamp": "2026-03-24T23:00:00Z",
-          "value": 0.128
+          "value": 0.129
         },
         {
           "timestamp": "2026-03-24T23:15:00Z",
@@ -151,7 +143,7 @@
         },
         {
           "timestamp": "2026-03-24T23:45:00Z",
-          "value": 0.12
+          "value": 0.119
         },
         {
           "timestamp": "2026-03-25T00:00:00Z",
@@ -179,7 +171,7 @@
         },
         {
           "timestamp": "2026-03-25T01:30:00Z",
-          "value": 0.12
+          "value": 0.121
         },
         {
           "timestamp": "2026-03-25T01:45:00Z",
@@ -231,7 +223,7 @@
         },
         {
           "timestamp": "2026-03-25T04:45:00Z",
-          "value": 0.113
+          "value": 0.112
         },
         {
           "timestamp": "2026-03-25T05:00:00Z",
@@ -247,7 +239,7 @@
         },
         {
           "timestamp": "2026-03-25T05:45:00Z",
-          "value": 0.11
+          "value": 0.111
         },
         {
           "timestamp": "2026-03-25T06:00:00Z",
@@ -283,7 +275,7 @@
         },
         {
           "timestamp": "2026-03-25T08:00:00Z",
-          "value": 0.112
+          "value": 0.111
         },
         {
           "timestamp": "2026-03-25T08:15:00Z",
@@ -307,7 +299,7 @@
         },
         {
           "timestamp": "2026-03-25T09:30:00Z",
-          "value": 0.112
+          "value": 0.111
         },
         {
           "timestamp": "2026-03-25T09:45:00Z",
@@ -327,7 +319,7 @@
         },
         {
           "timestamp": "2026-03-25T10:45:00Z",
-          "value": 0.117
+          "value": 0.116
         },
         {
           "timestamp": "2026-03-25T11:00:00Z",
@@ -428,6 +420,14 @@
         {
           "timestamp": "2026-03-25T17:00:00Z",
           "value": 0.114
+        },
+        {
+          "timestamp": "2026-03-25T17:15:00Z",
+          "value": 0.113
+        },
+        {
+          "timestamp": "2026-03-25T17:30:00Z",
+          "value": 0.113
         }
       ],
       "title": "Observed Water Depth",
@@ -455,7 +455,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-25T17:18:49.211078Z",
+    "published_at": "2026-03-25T17:34:00.302590Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -464,28 +464,28 @@
       "label": "Current River Depth",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.11
+      "value": 0.112
     },
     {
       "decimals": 3,
       "label": "Maximum 24h River Level",
       "note": "Maximum 24h water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 1.215
+      "value": 0.142
     },
     {
       "decimals": 3,
       "label": "Minimum 24h River Level",
       "note": "Minimum 24h water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.086
+      "value": 0.108
     },
     {
       "decimals": 3,
       "label": "River Level 24h Range",
       "note": "24h water depth range at the Flash Flood Observatory",
       "unit": "m",
-      "value": 1.129
+      "value": 0.034
     }
   ]
 }
