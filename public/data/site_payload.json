@@ -48,7 +48,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-03-25T22:48:53.227514Z"
+    "updated_at": "2026-03-25T23:03:56.404968Z"
   },
   "panels": {
     "depth": {
@@ -57,16 +57,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-03-24T22:30:00Z",
-          "value": 0.127
-        },
-        {
-          "timestamp": "2026-03-24T22:45:00Z",
-          "value": 0.129
-        },
-        {
           "timestamp": "2026-03-24T23:00:00Z",
-          "value": 0.129
+          "value": 0.128
         },
         {
           "timestamp": "2026-03-24T23:15:00Z",
@@ -443,6 +435,14 @@
         {
           "timestamp": "2026-03-25T22:30:00Z",
           "value": 0.116
+        },
+        {
+          "timestamp": "2026-03-25T22:45:00Z",
+          "value": 0.116
+        },
+        {
+          "timestamp": "2026-03-25T23:00:00Z",
+          "value": 0.116
         }
       ],
       "title": "Observed Water Depth",
@@ -455,14 +455,6 @@
       "eyebrow": "Hydrometeorology",
       "last_updated": "2026-03-25T16:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-24T22:45:00Z",
-          "value": 0.2
-        },
-        {
-          "timestamp": "2026-03-24T23:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-24T23:15:00Z",
           "value": 0.0
@@ -760,7 +752,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-25T22:48:53.237823Z",
+    "published_at": "2026-03-25T23:03:56.416178Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -769,14 +761,14 @@
       "label": "Current River Depth",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.116
+      "value": 0.114
     },
     {
       "decimals": 3,
       "label": "Maximum 24h River Level",
       "note": "Maximum 24h water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.131
+      "value": 0.13
     },
     {
       "decimals": 3,
