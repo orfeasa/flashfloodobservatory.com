@@ -48,7 +48,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-03-25T18:48:59.260188Z"
+    "updated_at": "2026-03-25T19:03:50.803865Z"
   },
   "panels": {
     "depth": {
@@ -56,14 +56,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-03-24T18:30:00Z",
-          "value": 0.138
-        },
-        {
-          "timestamp": "2026-03-24T18:45:00Z",
-          "value": 0.138
-        },
         {
           "timestamp": "2026-03-24T19:00:00Z",
           "value": 0.138
@@ -442,7 +434,15 @@
         },
         {
           "timestamp": "2026-03-25T18:30:00Z",
-          "value": 0.108
+          "value": 0.109
+        },
+        {
+          "timestamp": "2026-03-25T18:45:00Z",
+          "value": 0.111
+        },
+        {
+          "timestamp": "2026-03-25T19:00:00Z",
+          "value": 0.112
         }
       ],
       "title": "Observed Water Depth",
@@ -455,14 +455,6 @@
       "eyebrow": "Hydrometeorology",
       "last_updated": "2026-03-25T16:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-24T18:45:00Z",
-          "value": 0.4
-        },
-        {
-          "timestamp": "2026-03-24T19:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-24T19:15:00Z",
           "value": 0.0
@@ -824,7 +816,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-25T18:48:59.270964Z",
+    "published_at": "2026-03-25T19:03:50.814627Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -833,7 +825,7 @@
       "label": "Current River Depth",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.109
+      "value": 0.112
     },
     {
       "decimals": 3,
