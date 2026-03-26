@@ -633,12 +633,10 @@ function selectHeatmapLegendLabelValues(edges) {
   if (!Array.isArray(edges) || !edges.length) {
     return [];
   }
-  if (edges.length <= 10) {
-    return edges;
-  }
 
-  const stride = Math.max(1, Math.ceil(edges.length / 8));
-  return edges.filter((value, index) => index === 0 || index === edges.length - 1 || index % stride === 0);
+  const preferred = [30, 90, 150, 210, 270, 330, 390, 410];
+  const selected = preferred.filter((value) => edges.includes(value));
+  return selected.length ? selected : edges;
 }
 
 
