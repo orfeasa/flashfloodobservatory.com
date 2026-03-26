@@ -539,8 +539,8 @@
           "date_label": "16/12/2025",
           "difference_from_average_m": 0.229,
           "max_level_m": 0.499,
-          "percent_difference_from_average": 84.6,
-          "percent_of_average": 184.6,
+          "percent_difference_from_average": 84.7,
+          "percent_of_average": 184.7,
           "week_index": 6,
           "weekday_index": 1
         },
@@ -949,8 +949,8 @@
           "date_label": "26/01/2026",
           "difference_from_average_m": 0.223,
           "max_level_m": 0.493,
-          "percent_difference_from_average": 82.5,
-          "percent_of_average": 182.5,
+          "percent_difference_from_average": 82.6,
+          "percent_of_average": 182.6,
           "week_index": 12,
           "weekday_index": 0
         },
@@ -1487,10 +1487,10 @@
         {
           "date": "2026-03-21",
           "date_label": "21/03/2026",
-          "difference_from_average_m": -0.135,
-          "max_level_m": 0.135,
-          "percent_difference_from_average": -50.0,
-          "percent_of_average": 50.0,
+          "difference_from_average_m": -0.147,
+          "max_level_m": 0.124,
+          "percent_difference_from_average": -54.3,
+          "percent_of_average": 45.7,
           "week_index": 19,
           "weekday_index": 5
         },
@@ -1701,7 +1701,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-03-26T19:48:53.515301Z"
+    "updated_at": "2026-03-26T20:03:51.706283Z"
   },
   "panels": {
     "depth": {
@@ -1714,16 +1714,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-03-21T19:30:00Z",
-          "value": 0.135
-        },
-        {
-          "timestamp": "2026-03-21T19:45:00Z",
-          "value": 0.132
-        },
-        {
           "timestamp": "2026-03-21T20:00:00Z",
-          "value": 0.129
+          "value": 0.124
         },
         {
           "timestamp": "2026-03-21T20:15:00Z",
@@ -3635,7 +3627,15 @@
         },
         {
           "timestamp": "2026-03-26T19:30:00Z",
-          "value": 0.112
+          "value": 0.111
+        },
+        {
+          "timestamp": "2026-03-26T19:45:00Z",
+          "value": 0.111
+        },
+        {
+          "timestamp": "2026-03-26T20:00:00Z",
+          "value": 0.111
         }
       ],
       "title": "Observed Water Depth",
@@ -3652,14 +3652,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-03-26T16:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-21T19:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-03-21T20:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-21T20:15:00Z",
           "value": 0.0
@@ -5529,17 +5521,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-03-26T19:32:00Z",
-    "start_timestamp": "2026-03-25T19:33:00Z"
+    "end_timestamp": "2026-03-26T20:02:00Z",
+    "start_timestamp": "2026-03-25T20:03:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-03-26T19:32:00Z",
-      "start_timestamp": "2026-03-25T19:33:00Z"
+      "end_timestamp": "2026-03-26T20:02:00Z",
+      "start_timestamp": "2026-03-25T20:03:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-03-26T19:32:00Z",
-      "start_timestamp": "2026-03-21T19:33:00Z"
+      "end_timestamp": "2026-03-26T20:02:00Z",
+      "start_timestamp": "2026-03-21T20:03:00Z"
     }
   },
   "site": {
@@ -5555,7 +5547,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-26T19:48:53.649250Z",
+    "published_at": "2026-03-26T20:03:51.851960Z",
     "state": "Online"
   },
   "summary_metrics": [
