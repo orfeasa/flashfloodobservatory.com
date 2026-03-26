@@ -90,8 +90,8 @@ function renderOfficialAlert(alert) {
   banner.hidden = false;
   banner.className = `official-alert official-alert--${state.replaceAll("_", "-")}`;
 
-  text("officialAlertEyebrow", alert.eyebrow || "Official EA Flood Status");
-  text("officialAlertTitle", alert.label || "Official flood status unavailable");
+  text("officialAlertEyebrow", alert.eyebrow || "Official EA Flood Alerts and Warnings");
+  text("officialAlertTitle", alert.label || "Official EA flood alerts and warnings unavailable");
   text("officialAlertMessage", alert.message || alert.disclaimer || "");
   text(
     "officialAlertUpdated",
@@ -274,8 +274,10 @@ function renderNoteCard(note) {
 }
 
 function renderFooter(footer) {
-  text("footerTitle", footer.title || "Observatory partners");
-  text("footerText", footer.text || "");
+  text("footerTitle", footer.title || "Observatory Partners");
+  const footerText = document.getElementById("footerText");
+  footerText.textContent = footer.text || "";
+  footerText.hidden = !footer.text;
 
   const strip = document.getElementById("partnerStrip");
   strip.replaceChildren(...(footer.partners || []).map(renderPartner));

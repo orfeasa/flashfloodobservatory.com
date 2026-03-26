@@ -15,18 +15,6 @@
   </head>
   <body>
     <div class="site-shell">
-      <section class="official-alert official-alert--none" id="officialAlert" hidden>
-        <div class="official-alert-copy">
-          <p class="panel-label" id="officialAlertEyebrow">Official EA Flood Status</p>
-          <p class="official-alert-title" id="officialAlertTitle">No current EA flood warning or alert</p>
-          <p class="panel-copy official-alert-message" id="officialAlertMessage"></p>
-        </div>
-        <div class="official-alert-meta">
-          <p id="officialAlertUpdated"></p>
-          <a id="officialAlertSource" href="#" target="_blank" rel="noreferrer"></a>
-        </div>
-      </section>
-
       <header class="hero">
         <div class="hero-copy">
           <p class="eyebrow" id="heroEyebrow">Flash Flood Observatory</p>
@@ -56,8 +44,8 @@
       <main class="dashboard-grid" id="dashboardGrid">
         <section class="panel panel-chart" id="rainfallPanel">
           <div class="panel-head">
-            <p class="panel-label" id="rainfallEyebrow">Hydrometeorology</p>
-            <h2 id="rainfallTitle">Rainfall Over The Last 24 Hours</h2>
+            <p class="panel-label" id="rainfallEyebrow">Rainfall</p>
+            <h2 id="rainfallTitle">Observed Rainfall</h2>
             <p class="panel-copy" id="rainfallDescription"></p>
           </div>
           <div class="chart-frame">
@@ -81,9 +69,21 @@
 
       <section class="notes-grid" aria-label="Dashboard notes" id="notesGrid"></section>
 
+      <section class="official-alert official-alert--none" id="officialAlert" hidden>
+        <div class="official-alert-copy">
+          <p class="panel-label" id="officialAlertEyebrow">Official EA Flood Alerts and Warnings</p>
+          <p class="official-alert-title" id="officialAlertTitle">There are no flood warnings or alerts in this area.</p>
+          <p class="panel-copy official-alert-message" id="officialAlertMessage"></p>
+        </div>
+        <div class="official-alert-meta">
+          <p id="officialAlertUpdated"></p>
+          <a id="officialAlertSource" href="#" target="_blank" rel="noreferrer"></a>
+        </div>
+      </section>
+
       <footer class="footer">
         <div class="footer-copy">
-          <p class="footer-title" id="footerTitle">Observatory partners</p>
+          <p class="footer-title" id="footerTitle">Observatory Partners</p>
           <p id="footerText"></p>
         </div>
         <div class="partner-strip" aria-label="Partner logos" id="partnerStrip"></div>

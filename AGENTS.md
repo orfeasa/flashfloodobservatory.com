@@ -13,11 +13,12 @@ Rules for future changes:
 - Prefer adding new public values to the payload rather than hard-coding content in HTML
 - If the payload schema changes, update [`public/app.js`](public/app.js), [`public/index.html`](public/index.html), and [`README.md`](README.md) together
 - Keep partner logos on a light backing so the dark University of Greenwich mark remains visible
+- Keep the partner logos as individual white cards without wrapping them in an extra boxed footer panel
 - Keep the public dashboard limited to defined panels only. Do not add placeholder panels that the data pipeline cannot support.
 - Treat `official_alert` as supplementary official Environment Agency warning context, not as an observatory-generated flash-flood alert.
 - `panels.rainfall` should reflect Environment Agency station `49149` when the sidecar has data.
 - If `panels.rainfall.points` is empty, keep the rainfall panel hidden rather than rendering an empty chart panel.
-- The current public site shape is 4 summary cards, 2 notes, 1 official alert banner, and live rainfall plus depth panels when data is available.
+- The current public site shape is 4 summary cards, 2 notes, 1 official alert section below the notes, a plain single-row partner logo strip, and live rainfall plus depth panels when data is available.
 - Keep the 24-hour river-level summary cards aligned with the visible chart by treating the cleaned depth series as the source of truth for both.
 
 Operational intent:

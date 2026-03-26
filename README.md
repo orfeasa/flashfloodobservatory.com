@@ -24,7 +24,7 @@ The public site is driven by one file only:
 
 - [`public/data/site_payload.json`](public/data/site_payload.json)
 
-All summary cards, charts, banner content, notes, and footer partner entries should be inferred from that payload.
+All summary cards, charts, official alert content, notes, and footer partner entries should be inferred from that payload.
 
 ## Current public behaviour
 
@@ -35,11 +35,12 @@ The current site shell assumes:
 - published timestamps and chart axes are rendered in `site.timezone`
 - the public dashboard currently renders 4 summary cards
 - the public dashboard currently renders 2 note cards
-- a top banner renders official Environment Agency flood-warning context when `official_alert` is present
+- an official alert section below the notes renders Environment Agency flood-warning context when `official_alert` is present
 - the rainfall panel renders 15-minute rainfall totals across the last 24 hours when `panels.rainfall.points` is populated
 - the depth panel is live from the operational sidecar
 - the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series
 - the rainfall panel stays hidden when `panels.rainfall.points` is empty
+- partner logos render as individual white cards in a single row rather than inside a boxed footer panel
 
 ## Payload shape
 
