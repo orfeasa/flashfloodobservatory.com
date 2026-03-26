@@ -27,7 +27,7 @@ Rules for future changes:
 - Keep `analysis_panels.response` as a payload-driven placeholder until the flow-rate analysis exists. Do not relabel the current depth overlay as flow.
 - Treat `analysis_panels.historical_range.points` as the only source for the historical range chart.
 - Treat `analysis_panels.level_heatmap` as the only source for the historical river-level heatmap, including its average label, calendar cells, and legend values.
-- Heatmap colours should reflect each day's smoothed maximum river level as a stepped percent difference from the observatory-wide average carried in that same payload.
+- Heatmap colours should reflect each day's smoothed maximum river level as a stepped percent difference from the observatory-wide average carried in that same payload, with 20-point legend bands.
 - The fifth summary card should reflect the all-time max 24h range record from the payload, not a client-side recomputation.
 
 Operational intent:
