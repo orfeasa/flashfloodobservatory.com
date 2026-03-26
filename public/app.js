@@ -279,6 +279,7 @@ function filterPointsForWindow(points, reportingWindow) {
 function renderPanelCopy(prefix, panel) {
   text(`${prefix}Eyebrow`, panel.eyebrow || "");
   text(`${prefix}Title`, panel.title || "");
+  text(`${prefix}Subtitle`, panel.subtitle || "");
   text(`${prefix}Description`, panel.description || "");
 }
 
@@ -295,7 +296,10 @@ function applyPanelVisibility(rainfallPanel, depthPanel) {
 }
 
 function applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel, depthPanel) {
-  const responseVisible = (rainfallPanel.points || []).length > 0 && (depthPanel.points || []).length > 0;
+  const responsePlaceholder = responsePanel.mode === "placeholder";
+  const responseVisible = responsePlaceholder
+    ? Boolean(responsePanel.title || responsePanel.subtitle || responsePanel.description || responsePanel.empty_message || responsePanel.eyebrow)
+    : (rainfallPanel.points || []).length > 0 && (depthPanel.points || []).length > 0;
   const historicalVisible = (historicalRangePanel.points || []).length > 0;
 
   togglePanel("responsePanel", responseVisible);
@@ -306,8 +310,8 @@ function applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPa
   analysisGrid.hidden = visiblePanelCount === 0;
   analysisGrid.classList.toggle("analysis-grid--single", visiblePanelCount <= 1);
 
-  if (!responseVisible) {
-    showEmptyChart("response", responsePanel.empty_message || "Rainfall and river-level response will appear here when both feeds are available.");
+  if (!responseVisible || responsePlaceholder) {
+    showEmptyChart("response", responsePanel.empty_message || "River flow-rate event analysis will appear here once the rating-curve workflow is in place.");
   }
   if (!historicalVisible) {
     showEmptyChart("historicalRange", historicalRangePanel.empty_message || "Historical range data is not available yet.");
@@ -376,6 +380,12 @@ function renderDepthChart(panel, reportingWindow) {
 }
 
 function renderResponseChart(panel, rainfallPanel, depthPanel, reportingWindow) {
+  if (panel.mode === "placeholder") {
+    responseChart?.destroy();
+    showEmptyChart("response", panel.empty_message || "River flow-rate event analysis will appear here once the rating-curve workflow is in place.");
+    return;
+  }
+
   const rainfallPoints = rainfallPanel.points || [];
   const depthPoints = depthPanel.points || [];
   if (!rainfallPoints.length || !depthPoints.length) {

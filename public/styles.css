@@ -372,6 +372,18 @@ h2 {
   gap: 0.35rem;
 }
 
+.panel-subtitle {
+  margin: 0.12rem 0 0;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.panel-subtitle:empty {
+  display: none;
+}
+
 .panel-copy {
   margin: 0.15rem 0 0;
   font-size: 0.95rem;

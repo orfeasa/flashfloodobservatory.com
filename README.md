@@ -38,7 +38,7 @@ The current site shell assumes:
 - an official alert section below the notes renders Environment Agency flood-warning context when `official_alert` is present
 - the rainfall and river-level charts share a single `24 hours` / `5 days` toggle above the dashboard grid
 - a second analysis row sits beneath the operational charts
-- the first analysis panel combines rainfall and river response over the selected reporting window
+- the first analysis panel is currently a placeholder for future flow-rate event analysis and stays visible with window-specific copy even while it is empty
 - the second analysis panel shows the daily maximum rolling 24h river-level range over the last 30 days
 - a full-width historical heatmap sits below the analysis row and shows daily mean river level as a percentage of the observatory-wide average since deployment
 - only the third description line under each chart changes with the selected window
@@ -202,7 +202,7 @@ Point shape:
 - `level_heatmap.legend`
 - `level_heatmap.empty_message`
 
-The website derives the combined response chart from the already-published rainfall and depth series, while `historical_range.points` and `level_heatmap` both come directly from the sidecar payload.
+The website currently treats `analysis_panels.response` as a placeholder panel for future flow-rate work, while `historical_range.points` and `level_heatmap` both come directly from the sidecar payload.
 
 ### `notes`
 
