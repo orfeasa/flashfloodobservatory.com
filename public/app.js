@@ -334,7 +334,7 @@ function renderRainfallChart(panel, reportingWindow) {
           borderColor: chartPalette.blue,
           borderWidth: 1.4,
           barThickness: "flex",
-          maxBarThickness: 18,
+          maxBarThickness: 24,
         },
       ],
     },
@@ -397,7 +397,7 @@ function renderResponseChart(panel, rainfallPanel, depthPanel, reportingWindow) 
           borderColor: chartPalette.blue,
           borderWidth: 1.2,
           barThickness: "flex",
-          maxBarThickness: 16,
+          maxBarThickness: 20,
         },
         {
           type: "line",

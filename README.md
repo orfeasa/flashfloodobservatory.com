@@ -34,7 +34,7 @@ The current site shell assumes:
 - only `Last updated` and `Timezone` appear in the hero metadata
 - published timestamps and chart axes are rendered in `site.timezone`
 - the public dashboard currently renders 5 summary cards
-- the public dashboard currently renders 2 note cards
+- the public dashboard currently renders 3 note cards
 - an official alert section below the notes renders Environment Agency flood-warning context when `official_alert` is present
 - the rainfall and river-level charts share a single `24 hours` / `5 days` toggle above the dashboard grid
 - a second analysis row sits beneath the operational charts
