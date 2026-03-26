@@ -40,6 +40,7 @@ The current site shell assumes:
 - a second analysis row sits beneath the operational charts
 - the first analysis panel combines rainfall and river response over the selected reporting window
 - the second analysis panel shows the daily maximum rolling 24h river-level range over the last 30 days
+- a full-width historical heatmap sits below the analysis row and shows daily mean river level as a percentage of the observatory-wide average since deployment
 - only the third description line under each chart changes with the selected window
 - the rainfall panel renders 15-minute rainfall totals across the last 5 days when `panels.rainfall.points` is populated
 - rainfall and depth charts use the selected exported window from `reporting_windows`, so their x-axes and tick spacing stay aligned in both modes
@@ -147,7 +148,7 @@ Current live meaning:
 - maximum 24h river level
 - minimum 24h river level
 - current 24h river level range
-- maximum ever 24h river level range
+- maximum recorded 24h river level range
 
 ### `panels.rainfall` and `panels.depth`
 
@@ -187,8 +188,21 @@ Point shape:
 - `historical_range.points`
 - `historical_range.empty_message`
 - `historical_range.window_days`
+- `level_heatmap.eyebrow`
+- `level_heatmap.title`
+- `level_heatmap.description`
+- `level_heatmap.average_label`
+- `level_heatmap.average_level_m`
+- `level_heatmap.deployment_label`
+- `level_heatmap.x_axis_label`
+- `level_heatmap.y_axis_label`
+- `level_heatmap.weekday_labels`
+- `level_heatmap.month_ticks[]`
+- `level_heatmap.cells[]`
+- `level_heatmap.legend`
+- `level_heatmap.empty_message`
 
-The website derives the combined response chart from the already-published rainfall and depth series, while `historical_range.points` comes directly from the sidecar payload.
+The website derives the combined response chart from the already-published rainfall and depth series, while `historical_range.points` and `level_heatmap` both come directly from the sidecar payload.
 
 ### `notes`
 

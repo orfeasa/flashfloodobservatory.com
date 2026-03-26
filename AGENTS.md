@@ -19,13 +19,14 @@ Rules for future changes:
 - Supported `official_alert.state` values are `none`, `flood_alert`, `flood_warning`, `severe_flood_warning`, `warning_no_longer_in_force`, and `unavailable`.
 - `panels.rainfall` should reflect Environment Agency station `49149` when the sidecar has data.
 - If `panels.rainfall.points` is empty, keep the rainfall panel hidden rather than rendering an empty chart panel.
-- The current public site shape is 5 summary cards, 3 notes, 1 official alert section below the notes, a plain single-row partner logo strip, a top operational chart row, and a second analysis row.
+- The current public site shape is 5 summary cards, 3 notes, 1 official alert section below the notes, a plain single-row partner logo strip, a top operational chart row, a second analysis row, and a full-width historical heatmap panel beneath it.
 - Keep the shared `24 hours` / `5 days` chart toggle above the two graphs, not duplicated inside individual panels.
 - Only the third description line under each chart should change with the selected window.
 - Keep the 24-hour river-level summary cards aligned with the visible chart by treating the cleaned depth series as the source of truth for both.
 - Keep rainfall and depth charts locked to the same exported window from `reporting_windows` so their x-axes match exactly in both modes.
 - Keep the response chart driven by those same exported rainfall and depth points, filtered by the shared window toggle.
 - Treat `analysis_panels.historical_range.points` as the only source for the historical range chart.
+- Treat `analysis_panels.level_heatmap` as the only source for the historical river-level heatmap, including its average label, calendar cells, and legend values.
 - The fifth summary card should reflect the all-time max 24h range record from the payload, not a client-side recomputation.
 
 Operational intent:

@@ -247,12 +247,14 @@ function renderAnalysisPanels() {
   const depthPanel = buildPanelForWindow(panels.depth || {}, selectedTimeWindowId, reportingWindow);
   const responsePanel = analysisPanels.response || {};
   const historicalRangePanel = analysisPanels.historical_range || {};
+  const levelHeatmapPanel = analysisPanels.level_heatmap || {};
 
   renderPanelCopy("response", responsePanel);
   renderPanelCopy("historicalRange", historicalRangePanel);
   applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel, depthPanel);
   renderResponseChart(responsePanel, rainfallPanel, depthPanel, reportingWindow);
   renderHistoricalRangeChart(historicalRangePanel);
+  renderLevelHeatmap(levelHeatmapPanel);
 }
 
 function buildPanelForWindow(panel, windowId, reportingWindow) {
@@ -452,6 +454,232 @@ function renderHistoricalRangeChart(panel) {
     },
     options: historicalChartOptions(points, panel.y_axis_label || "24h Range (m)"),
   });
+}
+
+function renderLevelHeatmap(panel) {
+  const wrapper = document.getElementById("levelHeatmapPanel");
+  const description = document.getElementById("levelHeatmapDescription");
+  const average = document.getElementById("levelHeatmapAverage");
+  const mount = document.getElementById("levelHeatmapMount");
+  const empty = document.getElementById("levelHeatmapEmpty");
+  const cells = Array.isArray(panel?.cells) ? panel.cells : [];
+  const hasPanel = Boolean(panel?.title || panel?.eyebrow || panel?.empty_message || cells.length);
+
+  wrapper.hidden = !hasPanel;
+  if (!hasPanel) {
+    mount.innerHTML = "";
+    mount.hidden = true;
+    empty.hidden = true;
+    return;
+  }
+
+  text("levelHeatmapEyebrow", panel.eyebrow || "River Levels");
+  text("levelHeatmapTitle", panel.title || "% of Flash Flood Observatory Average");
+  description.textContent = panel.description || "";
+  average.textContent = panel.average_label || "";
+  average.hidden = !panel.average_label;
+
+  if (!cells.length) {
+    mount.innerHTML = "";
+    mount.hidden = true;
+    empty.hidden = false;
+    empty.textContent = panel.empty_message || "Daily mean river-level heatmap data will appear here after the historical record is built.";
+    return;
+  }
+
+  mount.hidden = false;
+  empty.hidden = true;
+  mount.setAttribute("aria-label", panel.average_label || panel.title || "River-level average heatmap");
+  mount.innerHTML = buildLevelHeatmapSvg(panel);
+}
+
+function buildLevelHeatmapSvg(panel) {
+  const cells = (panel.cells || []).filter(
+    (cell) => Number.isFinite(Number(cell.week_index)) && Number.isFinite(Number(cell.weekday_index))
+  );
+  if (!cells.length) {
+    return "";
+  }
+
+  const weekdayLabels = Array.isArray(panel.weekday_labels) && panel.weekday_labels.length
+    ? panel.weekday_labels
+    : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const monthTicks = Array.isArray(panel.month_ticks) ? panel.month_ticks : [];
+  const legend = panel.legend || {};
+  const legendTickValues = Array.isArray(legend.tick_values) && legend.tick_values.length
+    ? legend.tick_values.map((value) => Number(value)).filter((value) => Number.isFinite(value))
+    : [30, 50, 70, 90, 110, 130, 150, 170];
+  const legendMin = Number.isFinite(Number(legend.min_percent)) ? Number(legend.min_percent) : Math.min(...legendTickValues);
+  const legendMax = Number.isFinite(Number(legend.max_percent)) ? Number(legend.max_percent) : Math.max(...legendTickValues);
+  const maxWeekIndex = Math.max(...cells.map((cell) => Number(cell.week_index)));
+  const cellSize = 18;
+  const cellGap = 2;
+  const step = cellSize + cellGap;
+  const gridWidth = (maxWeekIndex + 1) * step - cellGap;
+  const gridHeight = 7 * step - cellGap;
+  const gridX = 98;
+  const gridY = 14;
+  const legendWidth = 30;
+  const legendX = gridX + gridWidth + 44;
+  const legendY = gridY;
+  const legendHeight = gridHeight;
+  const monthLabelY = gridY + gridHeight + 26;
+  const axisLabelY = monthLabelY + 26;
+  const svgWidth = legendX + legendWidth + 130;
+  const svgHeight = axisLabelY + 24;
+  const legendGradientId = "levelHeatmapLegendGradient";
+  const legendTitleX = legendX + legendWidth + 56;
+  const legendTitleY = legendY + legendHeight / 2;
+  const xAxisLabel = panel.x_axis_label || "Week of Year";
+
+  const gridOutline = `<rect class="level-heatmap-grid-outline" x="${gridX - 1}" y="${gridY - 1}" width="${gridWidth + 2}" height="${gridHeight + 2}" rx="10" fill="none"></rect>`;
+
+  const rects = cells.map((cell) => {
+    const x = gridX + Number(cell.week_index) * step;
+    const y = gridY + Number(cell.weekday_index) * step;
+    const percent = Number(cell.percent_of_average);
+    const meanLevel = Number(cell.mean_level_m);
+    const difference = Number(cell.difference_from_average_m);
+    const fill = Number.isFinite(percent)
+      ? heatmapColor(percent, { min: legendMin, max: legendMax })
+      : "rgba(157, 176, 190, 0.08)";
+    const extraClass = Number.isFinite(percent) ? "" : " level-heatmap-cell--missing";
+    const tooltip = [
+      cell.date_label || cell.date || "",
+      Number.isFinite(meanLevel) ? `Mean level: ${meanLevel.toFixed(3)} m` : "No daily mean available",
+      Number.isFinite(percent) ? `${percent.toFixed(1)}% of observatory average` : "",
+      Number.isFinite(difference) ? `Difference from average: ${formatSignedValue(difference, 3)} m` : "",
+    ].filter(Boolean).join("\n");
+    return `<rect class="level-heatmap-cell${extraClass}" x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="3" fill="${fill}"><title>${escapeHtml(tooltip)}</title></rect>`;
+  }).join("");
+
+  const yLabels = weekdayLabels.map((label, index) => {
+    const y = gridY + index * step + cellSize / 2 + 4;
+    return `<text class="level-heatmap-axis" x="${gridX - 14}" y="${y}" text-anchor="end">${escapeHtml(label)}</text>`;
+  }).join("");
+
+  const monthLabels = monthTicks.map((tick) => {
+    const weekIndex = Number(tick.week_index);
+    if (!Number.isFinite(weekIndex)) {
+      return "";
+    }
+    const x = gridX + weekIndex * step + cellSize / 2;
+    return `<text class="level-heatmap-month" x="${x}" y="${monthLabelY}" text-anchor="middle">${escapeHtml(tick.label || "")}</text>`;
+  }).join("");
+
+  const legendTicks = legendTickValues.map((value) => {
+    const offset = ((legendMax - value) / (legendMax - legendMin)) * legendHeight;
+    const y = legendY + offset;
+    return `<g><line class="level-heatmap-grid-outline" x1="${legendX + legendWidth + 6}" y1="${y}" x2="${legendX + legendWidth + 14}" y2="${y}"></line><text class="level-heatmap-tick" x="${legendX + legendWidth + 20}" y="${y + 4}">${escapeHtml(String(Math.round(value)))}</text></g>`;
+  }).join("");
+
+  const legendTip = 10;
+  const legendPoints = [
+    `${legendX},${legendY + legendTip}`,
+    `${legendX + legendWidth / 2},${legendY}`,
+    `${legendX + legendWidth},${legendY + legendTip}`,
+    `${legendX + legendWidth},${legendY + legendHeight - legendTip}`,
+    `${legendX + legendWidth / 2},${legendY + legendHeight}`,
+    `${legendX},${legendY + legendHeight - legendTip}`,
+  ].join(" " );
+
+  return `
+    <svg class="level-heatmap-svg" viewBox="0 0 ${svgWidth} ${svgHeight}" preserveAspectRatio="xMinYMin meet" style="min-width:${svgWidth}px" role="img" aria-label="${escapeHtml(panel.title || "River-level average heatmap")}">
+      <defs>
+        <linearGradient id="${legendGradientId}" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#5b2f05"></stop>
+          <stop offset="18%" stop-color="#946028"></stop>
+          <stop offset="36%" stop-color="#d2b48f"></stop>
+          <stop offset="50%" stop-color="#f4f5f1"></stop>
+          <stop offset="68%" stop-color="#c8d6ff"></stop>
+          <stop offset="84%" stop-color="#6f8cff"></stop>
+          <stop offset="100%" stop-color="#1f4aa8"></stop>
+        </linearGradient>
+      </defs>
+      ${gridOutline}
+      ${rects}
+      ${yLabels}
+      ${monthLabels}
+      <text class="level-heatmap-axis-label" x="${gridX + gridWidth / 2}" y="${axisLabelY}" text-anchor="middle">${escapeHtml(xAxisLabel)}</text>
+      <polygon class="level-heatmap-legend-shape" points="${legendPoints}" fill="url(#${legendGradientId})"></polygon>
+      ${legendTicks}
+      <text class="level-heatmap-legend-title" x="${legendTitleX}" y="${legendTitleY}" text-anchor="middle" transform="rotate(90 ${legendTitleX} ${legendTitleY})">${escapeHtml(legend.label || "% of Average")}</text>
+    </svg>`;
+}
+
+function heatmapColor(percentValue, legendRange) {
+  const min = Number.isFinite(legendRange?.min) ? legendRange.min : 30;
+  const max = Number.isFinite(legendRange?.max) ? legendRange.max : 170;
+  const value = clamp(percentValue, min, max);
+  const stops = [
+    { value: min, color: "#5b2f05" },
+    { value: 50, color: "#946028" },
+    { value: 70, color: "#d2b48f" },
+    { value: 90, color: "#ece6da" },
+    { value: 100, color: "#f4f5f1" },
+    { value: 110, color: "#dde6ff" },
+    { value: 130, color: "#a7bcff" },
+    { value: 150, color: "#6281f0" },
+    { value: max, color: "#1f4aa8" },
+  ];
+
+  for (let index = 1; index < stops.length; index += 1) {
+    const lower = stops[index - 1];
+    const upper = stops[index];
+    if (value <= upper.value) {
+      const span = upper.value - lower.value || 1;
+      const ratio = (value - lower.value) / span;
+      return interpolateHeatmapColor(lower.color, upper.color, ratio);
+    }
+  }
+
+  return stops[stops.length - 1].color;
+}
+
+function interpolateHeatmapColor(startHex, endHex, ratio) {
+  const start = hexToRgb(startHex);
+  const end = hexToRgb(endHex);
+  const mix = {
+    r: Math.round(start.r + (end.r - start.r) * ratio),
+    g: Math.round(start.g + (end.g - start.g) * ratio),
+    b: Math.round(start.b + (end.b - start.b) * ratio),
+  };
+  return rgbToHex(mix);
+}
+
+function hexToRgb(hex) {
+  const normalized = hex.replace("#", "");
+  return {
+    r: Number.parseInt(normalized.slice(0, 2), 16),
+    g: Number.parseInt(normalized.slice(2, 4), 16),
+    b: Number.parseInt(normalized.slice(4, 6), 16),
+  };
+}
+
+function rgbToHex(rgb) {
+  return `#${[rgb.r, rgb.g, rgb.b].map((value) => value.toString(16).padStart(2, "0")).join("")}`;
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function formatSignedValue(value, decimals = 0) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) {
+    return "";
+  }
+  const sign = numeric > 0 ? "+" : "";
+  return `${sign}${numeric.toFixed(decimals)}`;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
 function renderNotes(notes) {
@@ -754,6 +982,7 @@ function applyErrorState(error) {
   document.getElementById("officialAlert").hidden = true;
   document.getElementById("windowSwitcher").hidden = true;
   document.getElementById("analysisGrid").hidden = true;
+  document.getElementById("levelHeatmapPanel").hidden = true;
 
   const heroMeta = document.getElementById("heroMeta");
   heroMeta.replaceChildren(

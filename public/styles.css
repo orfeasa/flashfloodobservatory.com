@@ -377,6 +377,10 @@ h2 {
   font-size: 0.95rem;
 }
 
+.panel-copy:empty {
+  display: none;
+}
+
 .chart-frame {
   margin-top: 1rem;
   padding: 0.75rem;
@@ -404,6 +408,80 @@ canvas {
 
 .panel-empty[hidden] {
   display: none;
+}
+
+.panel-heatmap {
+  margin-top: 1rem;
+}
+
+.heatmap-average {
+  margin: 0.15rem 0 0;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.heatmap-average[hidden] {
+  display: none;
+}
+
+.heatmap-frame {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem 1rem;
+  border: 1px solid rgba(119, 232, 255, 0.1);
+  border-radius: 1.1rem;
+  background:
+    linear-gradient(180deg, rgba(7, 12, 18, 0.98), rgba(3, 7, 11, 1)),
+    linear-gradient(180deg, rgba(119, 232, 255, 0.05), transparent);
+}
+
+.heatmap-mount {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.heatmap-mount[hidden] {
+  display: none;
+}
+
+.level-heatmap-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.level-heatmap-svg text {
+  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.level-heatmap-axis,
+.level-heatmap-tick,
+.level-heatmap-legend-title,
+.level-heatmap-axis-label {
+  fill: var(--muted);
+  font-size: 12px;
+}
+
+.level-heatmap-month {
+  fill: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.level-heatmap-legend-title {
+  font-size: 12px;
+}
+
+.level-heatmap-cell,
+.level-heatmap-grid-outline,
+.level-heatmap-legend-shape {
+  stroke: rgba(255, 255, 255, 0.09);
+  stroke-width: 1;
+}
+
+.level-heatmap-cell--missing {
+  fill: rgba(157, 176, 190, 0.08);
 }
 
 .notes-grid {
