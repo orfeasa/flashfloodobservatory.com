@@ -610,8 +610,9 @@ function buildLevelHeatmapSvg(panel) {
     return `<rect class="level-heatmap-legend-band" x="${legendX}" y="${y}" width="${legendWidth}" height="${bandHeight}" fill="${color}"></rect>`;
   }).join("");
 
-  const legendTicks = [...legendEdges].reverse().map((value, index) => {
-    const y = legendY + index * bandHeight;
+  const legendTicks = selectHeatmapLegendLabelValues(legendEdges).reverse().map((value) => {
+    const edgeIndex = legendEdges.indexOf(value);
+    const y = legendY + (legendEdges.length - edgeIndex - 1) * bandHeight;
     return `<g><line class="level-heatmap-grid-outline" x1="${legendX + legendWidth + 6}" y1="${y}" x2="${legendX + legendWidth + 14}" y2="${y}"></line><text class="level-heatmap-tick" x="${legendX + legendWidth + 20}" y="${y + 4}">${escapeHtml(String(Math.round(value)))}</text></g>`;
   }).join("");
 
@@ -627,6 +628,19 @@ function buildLevelHeatmapSvg(panel) {
       <text class="level-heatmap-legend-title" x="${legendTitleX}" y="${legendTitleY}" text-anchor="middle" transform="rotate(90 ${legendTitleX} ${legendTitleY})">${escapeHtml(legend.label || "% of Average")}</text>
     </svg>`;
 }
+
+function selectHeatmapLegendLabelValues(edges) {
+  if (!Array.isArray(edges) || !edges.length) {
+    return [];
+  }
+  if (edges.length <= 10) {
+    return edges;
+  }
+
+  const stride = Math.max(1, Math.ceil(edges.length / 8));
+  return edges.filter((value, index) => index === 0 || index === edges.length - 1 || index % stride === 0);
+}
+
 
 function heatmapColor(percentValue, legendScale) {
   const edges = Array.isArray(legendScale?.edges) ? legendScale.edges : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410];
