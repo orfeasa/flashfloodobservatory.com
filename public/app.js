@@ -16,6 +16,8 @@ const chartPalette = {
 
 let rainfallChart;
 let depthChart;
+let responseChart;
+let historicalRangeChart;
 let displayTimeZone = "UTC";
 let dashboardPayload;
 let timeWindowState;
@@ -38,6 +40,7 @@ async function main() {
     renderSummaryMetrics(payload.summary_metrics || []);
     renderTimeWindowSwitcher(timeWindowState);
     renderDashboardPanels();
+    renderAnalysisPanels();
     renderNotes(payload.notes || []);
     renderFooter(payload.footer || {});
   } catch (error) {
@@ -209,6 +212,7 @@ function renderTimeWindowButton(option) {
     selectedTimeWindowId = option.id;
     updateTimeWindowButtons();
     renderDashboardPanels();
+    renderAnalysisPanels();
   });
   return button;
 }
@@ -233,6 +237,22 @@ function renderDashboardPanels() {
   renderPanelCopy("depth", depthPanel);
   renderRainfallChart(rainfallPanel, reportingWindow);
   renderDepthChart(depthPanel, reportingWindow);
+}
+
+function renderAnalysisPanels() {
+  const panels = dashboardPayload?.panels || {};
+  const analysisPanels = dashboardPayload?.analysis_panels || {};
+  const reportingWindow = timeWindowState.windows[selectedTimeWindowId];
+  const rainfallPanel = buildPanelForWindow(panels.rainfall || {}, selectedTimeWindowId, reportingWindow);
+  const depthPanel = buildPanelForWindow(panels.depth || {}, selectedTimeWindowId, reportingWindow);
+  const responsePanel = analysisPanels.response || {};
+  const historicalRangePanel = analysisPanels.historical_range || {};
+
+  renderPanelCopy("response", responsePanel);
+  renderPanelCopy("historicalRange", historicalRangePanel);
+  applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel, depthPanel);
+  renderResponseChart(responsePanel, rainfallPanel, depthPanel, reportingWindow);
+  renderHistoricalRangeChart(historicalRangePanel);
 }
 
 function buildPanelForWindow(panel, windowId, reportingWindow) {
@@ -270,6 +290,26 @@ function applyPanelVisibility(rainfallPanel, depthPanel) {
   const visiblePanelCount = [rainfallPoints, depthPoints].filter((points) => points.length > 0).length;
   const dashboardGrid = document.getElementById("dashboardGrid");
   dashboardGrid.classList.toggle("dashboard-grid--single", visiblePanelCount <= 1);
+}
+
+function applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel, depthPanel) {
+  const responseVisible = (rainfallPanel.points || []).length > 0 && (depthPanel.points || []).length > 0;
+  const historicalVisible = (historicalRangePanel.points || []).length > 0;
+
+  togglePanel("responsePanel", responseVisible);
+  togglePanel("historicalRangePanel", historicalVisible);
+
+  const visiblePanelCount = [responseVisible, historicalVisible].filter(Boolean).length;
+  const analysisGrid = document.getElementById("analysisGrid");
+  analysisGrid.hidden = visiblePanelCount === 0;
+  analysisGrid.classList.toggle("analysis-grid--single", visiblePanelCount <= 1);
+
+  if (!responseVisible) {
+    showEmptyChart("response", responsePanel.empty_message || "Rainfall and river-level response will appear here when both feeds are available.");
+  }
+  if (!historicalVisible) {
+    showEmptyChart("historicalRange", historicalRangePanel.empty_message || "Historical range data is not available yet.");
+  }
 }
 
 function renderRainfallChart(panel, reportingWindow) {
@@ -330,6 +370,87 @@ function renderDepthChart(panel, reportingWindow) {
       ],
     },
     options: chartOptions(reportingWindow, panel.y_axis_label || "Depth"),
+  });
+}
+
+function renderResponseChart(panel, rainfallPanel, depthPanel, reportingWindow) {
+  const rainfallPoints = rainfallPanel.points || [];
+  const depthPoints = depthPanel.points || [];
+  if (!rainfallPoints.length || !depthPoints.length) {
+    responseChart?.destroy();
+    return;
+  }
+
+  hideEmptyChart("response");
+  responseChart?.destroy();
+  responseChart = new Chart(document.getElementById("responseChart"), {
+    data: {
+      datasets: [
+        {
+          type: "bar",
+          label: panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
+          data: rainfallPoints.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
+          parsing: false,
+          yAxisID: "yRain",
+          borderRadius: 6,
+          backgroundColor: chartPalette.blueFill,
+          borderColor: chartPalette.blue,
+          borderWidth: 1.2,
+          barThickness: "flex",
+          maxBarThickness: 16,
+        },
+        {
+          type: "line",
+          label: panel.depth_y_axis_label || depthPanel.y_axis_label || "Water Depth (m)",
+          data: depthPoints.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
+          parsing: false,
+          yAxisID: "yDepth",
+          borderColor: chartPalette.cyan,
+          backgroundColor: chartPalette.cyanFill,
+          borderWidth: 2.2,
+          tension: 0.28,
+          pointRadius: 0,
+          fill: false,
+        },
+      ],
+    },
+    options: responseChartOptions(
+      reportingWindow,
+      panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
+      panel.depth_y_axis_label || depthPanel.y_axis_label || "Water Depth (m)"
+    ),
+  });
+}
+
+function renderHistoricalRangeChart(panel) {
+  const points = panel.points || [];
+  if (!points.length) {
+    showEmptyChart("historicalRange", panel.empty_message || "Historical range data is not available yet.");
+    historicalRangeChart?.destroy();
+    return;
+  }
+
+  hideEmptyChart("historicalRange");
+  historicalRangeChart?.destroy();
+  historicalRangeChart = new Chart(document.getElementById("historicalRangeChart"), {
+    type: "line",
+    data: {
+      datasets: [
+        {
+          label: panel.y_axis_label || "24h Range (m)",
+          data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
+          parsing: false,
+          borderColor: chartPalette.green,
+          backgroundColor: "rgba(87, 209, 139, 0.12)",
+          borderWidth: 2.2,
+          fill: true,
+          tension: 0.25,
+          pointRadius: 2.5,
+          pointHoverRadius: 4,
+        },
+      ],
+    },
+    options: historicalChartOptions(points, panel.y_axis_label || "24h Range (m)"),
   });
 }
 
@@ -472,6 +593,158 @@ function chartOptions(reportingWindow, yTitle) {
   };
 }
 
+function responseChartOptions(reportingWindow, rainfallTitle, depthTitle) {
+  const durationHours = (reportingWindow.end - reportingWindow.start) / (60 * 60 * 1000);
+  const maxTicksLimit = durationHours > 30 ? 8 : 6;
+
+  return {
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: {
+          color: chartPalette.text,
+        },
+      },
+      tooltip: {
+        backgroundColor: "rgba(5, 10, 16, 0.96)",
+        borderColor: "rgba(119, 232, 255, 0.22)",
+        borderWidth: 1,
+        titleColor: chartPalette.text,
+        bodyColor: chartPalette.muted,
+        callbacks: {
+          title(items) {
+            const xValue = items?.[0]?.parsed?.x;
+            return Number.isFinite(xValue) ? formatTooltipTime(xValue) : "";
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        type: "linear",
+        min: reportingWindow.start,
+        max: reportingWindow.end,
+        grid: {
+          color: chartPalette.grid,
+        },
+        ticks: {
+          color: chartPalette.muted,
+          autoSkip: true,
+          maxTicksLimit,
+          callback(value) {
+            return formatAxisTick(Number(value));
+          },
+        },
+        title: {
+          display: true,
+          text: "Date & Time",
+          color: chartPalette.text,
+        },
+      },
+      yRain: {
+        type: "linear",
+        position: "left",
+        beginAtZero: true,
+        grid: {
+          color: chartPalette.grid,
+        },
+        ticks: {
+          color: chartPalette.muted,
+        },
+        title: {
+          display: true,
+          text: rainfallTitle,
+          color: chartPalette.text,
+        },
+      },
+      yDepth: {
+        type: "linear",
+        position: "right",
+        beginAtZero: true,
+        grid: {
+          drawOnChartArea: false,
+        },
+        ticks: {
+          color: chartPalette.muted,
+        },
+        title: {
+          display: true,
+          text: depthTitle,
+          color: chartPalette.text,
+        },
+      },
+    },
+  };
+}
+
+function historicalChartOptions(points, yTitle) {
+  const timestamps = points.map((point) => toEpochMs(point.timestamp)).filter((value) => Number.isFinite(value));
+  const fallbackEnd = Date.now();
+  const min = timestamps.length ? Math.min(...timestamps) : fallbackEnd - 30 * 24 * 60 * 60 * 1000;
+  const max = timestamps.length ? Math.max(...timestamps) : fallbackEnd;
+
+  return {
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: {
+          color: chartPalette.text,
+        },
+      },
+      tooltip: {
+        backgroundColor: "rgba(5, 10, 16, 0.96)",
+        borderColor: "rgba(119, 232, 255, 0.22)",
+        borderWidth: 1,
+        titleColor: chartPalette.text,
+        bodyColor: chartPalette.muted,
+        callbacks: {
+          title(items) {
+            const xValue = items?.[0]?.parsed?.x;
+            return Number.isFinite(xValue) ? formatTooltipDate(xValue) : "";
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        type: "linear",
+        min,
+        max,
+        grid: {
+          color: chartPalette.grid,
+        },
+        ticks: {
+          color: chartPalette.muted,
+          autoSkip: true,
+          maxTicksLimit: 8,
+          callback(value) {
+            return formatAxisDateTick(Number(value));
+          },
+        },
+        title: {
+          display: true,
+          text: "Date",
+          color: chartPalette.text,
+        },
+      },
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: chartPalette.grid,
+        },
+        ticks: {
+          color: chartPalette.muted,
+        },
+        title: {
+          display: true,
+          text: yTitle,
+          color: chartPalette.text,
+        },
+      },
+    },
+  };
+}
+
 function applyErrorState(error) {
   text("heroEyebrow", "Flash Flood Observatory");
   text("siteNameLine", "Public dashboard");
@@ -480,6 +753,7 @@ function applyErrorState(error) {
   text("heroStrapline", "The public payload could not be loaded.");
   document.getElementById("officialAlert").hidden = true;
   document.getElementById("windowSwitcher").hidden = true;
+  document.getElementById("analysisGrid").hidden = true;
 
   const heroMeta = document.getElementById("heroMeta");
   heroMeta.replaceChildren(
@@ -600,6 +874,18 @@ function formatAxisTick(timestampMs) {
   ];
 }
 
+function formatAxisDateTick(timestampMs) {
+  if (!Number.isFinite(timestampMs)) {
+    return "";
+  }
+
+  return new Intl.DateTimeFormat("en-GB", {
+    month: "short",
+    day: "numeric",
+    timeZone: displayTimeZone,
+  }).format(new Date(timestampMs));
+}
+
 function formatTooltipTime(timestampMs) {
   const date = new Date(timestampMs);
   return new Intl.DateTimeFormat("en-GB", {
@@ -610,6 +896,16 @@ function formatTooltipTime(timestampMs) {
     minute: "2-digit",
     timeZone: displayTimeZone,
     timeZoneName: "short",
+  }).format(date);
+}
+
+function formatTooltipDate(timestampMs) {
+  const date = new Date(timestampMs);
+  return new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: displayTimeZone,
   }).format(date);
 }
 

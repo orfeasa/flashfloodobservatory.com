@@ -75,6 +75,32 @@
         </section>
       </main>
 
+      <section class="analysis-grid" id="analysisGrid" aria-label="Analysis charts">
+        <section class="panel panel-chart" id="responsePanel">
+          <div class="panel-head">
+            <p class="panel-label" id="responseEyebrow">Event Analysis</p>
+            <h2 id="responseTitle">Rainfall and River Response</h2>
+            <p class="panel-copy" id="responseDescription"></p>
+          </div>
+          <div class="chart-frame">
+            <canvas id="responseChart" aria-label="Rainfall and river response"></canvas>
+            <div class="panel-empty" id="responseEmpty" hidden></div>
+          </div>
+        </section>
+
+        <section class="panel panel-chart" id="historicalRangePanel">
+          <div class="panel-head">
+            <p class="panel-label" id="historicalRangeEyebrow">Historical Context</p>
+            <h2 id="historicalRangeTitle">Historical 24h River Level Range</h2>
+            <p class="panel-copy" id="historicalRangeDescription"></p>
+          </div>
+          <div class="chart-frame">
+            <canvas id="historicalRangeChart" aria-label="Historical 24h river level range"></canvas>
+            <div class="panel-empty" id="historicalRangeEmpty" hidden></div>
+          </div>
+        </section>
+      </section>
+
       <section class="notes-grid" aria-label="Dashboard notes" id="notesGrid"></section>
 
       <section class="official-alert official-alert--none" id="officialAlert" hidden>

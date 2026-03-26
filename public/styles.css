@@ -349,14 +349,16 @@ h2 {
   font-size: 0.95rem;
 }
 
-.dashboard-grid {
+.dashboard-grid,
+.analysis-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   margin-top: 1rem;
 }
 
-.dashboard-grid--single {
+.dashboard-grid--single,
+.analysis-grid--single {
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -478,6 +480,7 @@ canvas {
 
   .summary-strip,
   .dashboard-grid,
+  .analysis-grid,
   .notes-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -519,6 +522,7 @@ canvas {
 
   .summary-strip,
   .dashboard-grid,
+  .analysis-grid,
   .notes-grid {
     grid-template-columns: 1fr;
   }

@@ -33,10 +33,13 @@ The current site shell assumes:
 - the observatory logo is used as the browser tab icon
 - only `Last updated` and `Timezone` appear in the hero metadata
 - published timestamps and chart axes are rendered in `site.timezone`
-- the public dashboard currently renders 4 summary cards
+- the public dashboard currently renders 5 summary cards
 - the public dashboard currently renders 2 note cards
 - an official alert section below the notes renders Environment Agency flood-warning context when `official_alert` is present
 - the rainfall and river-level charts share a single `24 hours` / `5 days` toggle above the dashboard grid
+- a second analysis row sits beneath the operational charts
+- the first analysis panel combines rainfall and river response over the selected reporting window
+- the second analysis panel shows the daily maximum rolling 24h river-level range over the last 30 days
 - only the third description line under each chart changes with the selected window
 - the rainfall panel renders 15-minute rainfall totals across the last 5 days when `panels.rainfall.points` is populated
 - rainfall and depth charts use the selected exported window from `reporting_windows`, so their x-axes and tick spacing stay aligned in both modes
@@ -58,6 +61,7 @@ Top-level keys:
 - `reporting_windows`
 - `summary_metrics`
 - `panels`
+- `analysis_panels`
 - `notes`
 - `footer`
 
@@ -142,7 +146,8 @@ Current live meaning:
 - current river level
 - maximum 24h river level
 - minimum 24h river level
-- river level 24h range
+- current 24h river level range
+- maximum ever 24h river level range
 
 ### `panels.rainfall` and `panels.depth`
 
@@ -166,6 +171,24 @@ Rainfall also currently carries:
 Point shape:
 
 - `{ "timestamp": "2026-03-24T12:00:00Z", "value": 0.0 }`
+
+### `analysis_panels`
+
+- `response.eyebrow`
+- `response.title`
+- `response.description`
+- `response.rainfall_y_axis_label`
+- `response.depth_y_axis_label`
+- `response.empty_message`
+- `historical_range.eyebrow`
+- `historical_range.title`
+- `historical_range.description`
+- `historical_range.y_axis_label`
+- `historical_range.points`
+- `historical_range.empty_message`
+- `historical_range.window_days`
+
+The website derives the combined response chart from the already-published rainfall and depth series, while `historical_range.points` comes directly from the sidecar payload.
 
 ### `notes`
 
