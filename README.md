@@ -37,6 +37,7 @@ The current site shell assumes:
 - the public dashboard currently renders 2 note cards
 - an official alert section below the notes renders Environment Agency flood-warning context when `official_alert` is present
 - the rainfall panel renders 15-minute rainfall totals across the last 24 hours when `panels.rainfall.points` is populated
+- rainfall and depth charts share the same exported start and end timestamps via `reporting_window`, so their x-axes and tick spacing stay aligned
 - the depth panel is live from the operational sidecar
 - the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series
 - the rainfall panel stays hidden when `panels.rainfall.points` is empty
@@ -49,6 +50,7 @@ Top-level keys:
 - `site`
 - `status`
 - `official_alert`
+- `reporting_window`
 - `summary_metrics`
 - `panels`
 - `notes`
@@ -88,6 +90,13 @@ Top-level keys:
 
 This banner is supplementary official Environment Agency flood-warning context. It should not be presented as a bespoke flash-flood warning produced by the observatory.
 
+### `reporting_window`
+
+- `start_timestamp`
+- `end_timestamp`
+
+This aligns the rainfall and depth charts to the same x-axis window.
+
 ### `summary_metrics`
 
 Array of cards, each with:
@@ -101,7 +110,7 @@ Array of cards, each with:
 
 Current live meaning:
 
-- current river depth
+- current river level
 - maximum 24h river level
 - minimum 24h river level
 - river level 24h range

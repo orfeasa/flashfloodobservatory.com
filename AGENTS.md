@@ -20,6 +20,7 @@ Rules for future changes:
 - If `panels.rainfall.points` is empty, keep the rainfall panel hidden rather than rendering an empty chart panel.
 - The current public site shape is 4 summary cards, 2 notes, 1 official alert section below the notes, a plain single-row partner logo strip, and live rainfall plus depth panels when data is available.
 - Keep the 24-hour river-level summary cards aligned with the visible chart by treating the cleaned depth series as the source of truth for both.
+- Keep rainfall and depth charts locked to the same exported reporting window so their x-axes match exactly.
 
 Operational intent:
 

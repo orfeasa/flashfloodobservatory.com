@@ -25,14 +25,19 @@ async function main() {
     }
 
     const payload = await response.json();
+    const reportingWindow = buildReportingWindow(
+      payload.reporting_window || {},
+      payload.panels || {}
+    );
+
     applyHero(payload.site || {}, payload.status || {});
     renderOfficialAlert(payload.official_alert || {});
     renderSummaryMetrics(payload.summary_metrics || []);
     applyPanelVisibility(payload.panels || {});
     renderPanelCopy("rainfall", payload.panels?.rainfall || {});
     renderPanelCopy("depth", payload.panels?.depth || {});
-    renderRainfallChart(payload.panels?.rainfall || {});
-    renderDepthChart(payload.panels?.depth || {});
+    renderRainfallChart(payload.panels?.rainfall || {}, reportingWindow);
+    renderDepthChart(payload.panels?.depth || {}, reportingWindow);
     renderNotes(payload.notes || []);
     renderFooter(payload.footer || {});
   } catch (error) {
@@ -190,7 +195,7 @@ function applyPanelVisibility(panels) {
   dashboardGrid.classList.toggle("dashboard-grid--single", visiblePanelCount <= 1);
 }
 
-function renderRainfallChart(panel) {
+function renderRainfallChart(panel, reportingWindow) {
   const points = panel.points || [];
   if (!points.length) {
     rainfallChart?.destroy();
@@ -202,23 +207,25 @@ function renderRainfallChart(panel) {
   rainfallChart = new Chart(document.getElementById("rainfallChart"), {
     type: "bar",
     data: {
-      labels: points.map((point) => formatAxisTime(point.timestamp)),
       datasets: [
         {
           label: panel.y_axis_label || "Rainfall",
-          data: points.map((point) => point.value),
+          data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
+          parsing: false,
           borderRadius: 6,
           backgroundColor: chartPalette.blueFill,
           borderColor: chartPalette.blue,
           borderWidth: 1.4,
+          barThickness: 18,
+          maxBarThickness: 22,
         },
       ],
     },
-    options: chartOptions("Date & Time", panel.y_axis_label || "Rainfall"),
+    options: chartOptions(reportingWindow, panel.y_axis_label || "Rainfall"),
   });
 }
 
-function renderDepthChart(panel) {
+function renderDepthChart(panel, reportingWindow) {
   const points = panel.points || [];
   if (!points.length) {
     showEmptyChart("depth", panel.empty_message || "No depth data has been published yet.");
@@ -231,11 +238,11 @@ function renderDepthChart(panel) {
   depthChart = new Chart(document.getElementById("depthChart"), {
     type: "line",
     data: {
-      labels: points.map((point) => formatAxisTime(point.timestamp)),
       datasets: [
         {
           label: panel.y_axis_label || "Depth",
-          data: points.map((point) => point.value),
+          data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
+          parsing: false,
           borderColor: chartPalette.cyan,
           backgroundColor: chartPalette.cyanFill,
           borderWidth: 2.5,
@@ -245,7 +252,7 @@ function renderDepthChart(panel) {
         },
       ],
     },
-    options: chartOptions("Date & Time", panel.y_axis_label || "Depth"),
+    options: chartOptions(reportingWindow, panel.y_axis_label || "Depth"),
   });
 }
 
@@ -322,7 +329,7 @@ function hideEmptyChart(prefix) {
   empty.hidden = true;
 }
 
-function chartOptions(xTitle, yTitle) {
+function chartOptions(reportingWindow, yTitle) {
   return {
     maintainAspectRatio: false,
     plugins: {
@@ -337,22 +344,33 @@ function chartOptions(xTitle, yTitle) {
         borderWidth: 1,
         titleColor: chartPalette.text,
         bodyColor: chartPalette.muted,
+        callbacks: {
+          title(items) {
+            const xValue = items?.[0]?.parsed?.x;
+            return Number.isFinite(xValue) ? formatTooltipTime(xValue) : "";
+          },
+        },
       },
     },
     scales: {
       x: {
+        type: "linear",
+        min: reportingWindow.start,
+        max: reportingWindow.end,
         grid: {
           color: chartPalette.grid,
         },
         ticks: {
           color: chartPalette.muted,
-          maxRotation: 0,
           autoSkip: true,
-          maxTicksLimit: 8,
+          maxTicksLimit: 6,
+          callback(value) {
+            return formatAxisTick(Number(value));
+          },
         },
         title: {
           display: true,
-          text: xTitle,
+          text: "Date & Time",
           color: chartPalette.text,
         },
       },
@@ -393,6 +411,34 @@ function applyErrorState(error) {
   renderFooter({});
 }
 
+function buildReportingWindow(reportingWindow, panels) {
+  const explicitStart = toEpochMs(reportingWindow.start_timestamp);
+  const explicitEnd = toEpochMs(reportingWindow.end_timestamp);
+  if (Number.isFinite(explicitStart) && Number.isFinite(explicitEnd) && explicitStart < explicitEnd) {
+    return { start: explicitStart, end: explicitEnd };
+  }
+
+  const timestamps = [
+    ...(panels.rainfall?.points || []).map((point) => toEpochMs(point.timestamp)),
+    ...(panels.depth?.points || []).map((point) => toEpochMs(point.timestamp)),
+  ].filter((value) => Number.isFinite(value));
+
+  if (!timestamps.length) {
+    const now = Date.now();
+    return { start: now - 24 * 60 * 60 * 1000, end: now };
+  }
+
+  return {
+    start: Math.min(...timestamps),
+    end: Math.max(...timestamps),
+  };
+}
+
+function toEpochMs(timestamp) {
+  const value = new Date(timestamp).getTime();
+  return Number.isFinite(value) ? value : NaN;
+}
+
 function text(id, value) {
   const node = document.getElementById(id);
   if (node) {
@@ -400,14 +446,37 @@ function text(id, value) {
   }
 }
 
-function formatAxisTime(timestamp) {
-  const date = new Date(timestamp);
+function formatAxisTick(timestampMs) {
+  if (!Number.isFinite(timestampMs)) {
+    return "";
+  }
+
+  const date = new Date(timestampMs);
+  return [
+    new Intl.DateTimeFormat("en-GB", {
+      month: "short",
+      day: "numeric",
+      timeZone: displayTimeZone,
+    }).format(date),
+    new Intl.DateTimeFormat("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: displayTimeZone,
+    }).format(date),
+  ];
+}
+
+function formatTooltipTime(timestampMs) {
+  const date = new Date(timestampMs);
   return new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
     month: "short",
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
     timeZone: displayTimeZone,
+    timeZoneName: "short",
   }).format(date);
 }
 
