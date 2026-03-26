@@ -49,7 +49,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-03-26T13:18:55.900690Z"
+    "updated_at": "2026-03-26T13:33:55.035435Z"
   },
   "panels": {
     "depth": {
@@ -62,16 +62,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-03-21T13:00:00Z",
-          "value": 0.158
-        },
-        {
-          "timestamp": "2026-03-21T13:15:00Z",
-          "value": 0.159
-        },
-        {
           "timestamp": "2026-03-21T13:30:00Z",
-          "value": 0.162
+          "value": 0.163
         },
         {
           "timestamp": "2026-03-21T13:45:00Z",
@@ -1984,6 +1976,14 @@
         {
           "timestamp": "2026-03-26T13:00:00Z",
           "value": 0.114
+        },
+        {
+          "timestamp": "2026-03-26T13:15:00Z",
+          "value": 0.115
+        },
+        {
+          "timestamp": "2026-03-26T13:30:00Z",
+          "value": 0.114
         }
       ],
       "title": "Observed Water Depth",
@@ -2000,14 +2000,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-03-26T09:00:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-21T13:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-03-21T13:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-21T13:45:00Z",
           "value": 0.0
@@ -3865,17 +3857,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-03-26T13:02:00Z",
-    "start_timestamp": "2026-03-25T13:03:00Z"
+    "end_timestamp": "2026-03-26T13:32:00Z",
+    "start_timestamp": "2026-03-25T13:33:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-03-26T13:02:00Z",
-      "start_timestamp": "2026-03-25T13:03:00Z"
+      "end_timestamp": "2026-03-26T13:32:00Z",
+      "start_timestamp": "2026-03-25T13:33:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-03-26T13:02:00Z",
-      "start_timestamp": "2026-03-21T13:03:00Z"
+      "end_timestamp": "2026-03-26T13:32:00Z",
+      "start_timestamp": "2026-03-21T13:33:00Z"
     }
   },
   "site": {
@@ -3891,7 +3883,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-26T13:18:55.945914Z",
+    "published_at": "2026-03-26T13:33:55.078874Z",
     "state": "Online"
   },
   "summary_metrics": [
