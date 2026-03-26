@@ -1555,20 +1555,25 @@
           "#7A4710",
           "#A36B2B",
           "#F4F5F1",
+          "#EEF3FF",
           "#E3EBFF",
+          "#D7E2FF",
           "#CAD8FF",
+          "#BCD0FF",
           "#A7BCFF",
+          "#91AAFF",
           "#7C98F8",
           "#6281F0",
+          "#4B71E4",
           "#3D66D6",
+          "#2B56BF",
           "#1F4AA8",
-          "#12367F",
           "#081F63",
           "#020813"
         ],
         "center_percent": 100.0,
         "label": "% of Average",
-        "max_percent": 310.0,
+        "max_percent": 410.0,
         "min_percent": 30.0,
         "tick_values": [
           30,
@@ -1585,7 +1590,12 @@
           250,
           270,
           290,
-          310
+          310,
+          330,
+          350,
+          370,
+          390,
+          410
         ]
       },
       "month_ticks": [
@@ -1691,7 +1701,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-03-26T18:03:55.504759Z"
+    "updated_at": "2026-03-26T18:15:56.098564Z"
   },
   "panels": {
     "depth": {
@@ -5569,7 +5579,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-26T18:03:55.647134Z",
+    "published_at": "2026-03-26T18:15:56.203550Z",
     "state": "Online"
   },
   "summary_metrics": [
