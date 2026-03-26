@@ -487,7 +487,8 @@ canvas {
 
 .level-heatmap-cell,
 .level-heatmap-grid-outline,
-.level-heatmap-legend-shape {
+.level-heatmap-legend-shape,
+.level-heatmap-legend-band {
   stroke: rgba(255, 255, 255, 0.09);
   stroke-width: 1;
 }

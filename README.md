@@ -40,7 +40,7 @@ The current site shell assumes:
 - a second analysis row sits beneath the operational charts
 - the first analysis panel is currently a placeholder for future flow-rate event analysis and stays visible with window-specific copy even while it is empty
 - the second analysis panel shows the daily maximum rolling 24h river-level range over the last 30 days
-- a full-width historical heatmap sits below the analysis row and shows daily maximum river level as a percentage of the observatory-wide average since deployment
+- a full-width historical heatmap sits below the analysis row and shows each day's smoothed maximum river level as a percentage difference from the observatory-wide average since deployment
 - only the third description line under each chart changes with the selected window
 - the rainfall panel renders 15-minute rainfall totals across the last 5 days when `panels.rainfall.points` is populated
 - rainfall and depth charts use the selected exported window from `reporting_windows`, so their x-axes and tick spacing stay aligned in both modes
@@ -202,7 +202,7 @@ Point shape:
 - `level_heatmap.legend`
 - `level_heatmap.empty_message`
 
-The website currently treats `analysis_panels.response` as a placeholder panel for future flow-rate work, while `historical_range.points` and `level_heatmap` both come directly from the sidecar payload. The heatmap colours represent each day's maximum river level relative to the observatory-wide average carried in the same payload.
+The website currently treats `analysis_panels.response` as a placeholder panel for future flow-rate work, while `historical_range.points` and `level_heatmap` both come directly from the sidecar payload. The heatmap colours represent each day's smoothed maximum river level as a stepped percent difference from the observatory-wide average carried in the same payload.
 
 ### `notes`
 
