@@ -1,4 +1,5 @@
 const payloadPath = "data/site_payload.json";
+const fallbackWindowOption = { id: "24h", label: "24 hours" };
 
 const chartPalette = {
   cyan: "#77e8ff",
@@ -16,6 +17,9 @@ const chartPalette = {
 let rainfallChart;
 let depthChart;
 let displayTimeZone = "UTC";
+let dashboardPayload;
+let timeWindowState;
+let selectedTimeWindowId = fallbackWindowOption.id;
 
 async function main() {
   try {
@@ -25,19 +29,15 @@ async function main() {
     }
 
     const payload = await response.json();
-    const reportingWindow = buildReportingWindow(
-      payload.reporting_window || {},
-      payload.panels || {}
-    );
+    dashboardPayload = payload;
+    timeWindowState = buildTimeWindowState(payload, payload.panels || {});
+    selectedTimeWindowId = timeWindowState.defaultId;
 
     applyHero(payload.site || {}, payload.status || {});
     renderOfficialAlert(payload.official_alert || {});
     renderSummaryMetrics(payload.summary_metrics || []);
-    applyPanelVisibility(payload.panels || {});
-    renderPanelCopy("rainfall", payload.panels?.rainfall || {});
-    renderPanelCopy("depth", payload.panels?.depth || {});
-    renderRainfallChart(payload.panels?.rainfall || {}, reportingWindow);
-    renderDepthChart(payload.panels?.depth || {}, reportingWindow);
+    renderTimeWindowSwitcher(timeWindowState);
+    renderDashboardPanels();
     renderNotes(payload.notes || []);
     renderFooter(payload.footer || {});
   } catch (error) {
@@ -177,15 +177,92 @@ function formatMetricValue(metric) {
   return `${sign}${numeric.toFixed(decimals)}${unit}`;
 }
 
+function renderTimeWindowSwitcher(state) {
+  const switcher = document.getElementById("windowSwitcher");
+  const controls = document.getElementById("windowSwitcherControls");
+
+  if (!switcher || !controls) {
+    return;
+  }
+
+  if (!state.options.length || state.options.length === 1) {
+    switcher.hidden = true;
+    controls.replaceChildren();
+    return;
+  }
+
+  switcher.hidden = false;
+  controls.replaceChildren(...state.options.map(renderTimeWindowButton));
+  updateTimeWindowButtons();
+}
+
+function renderTimeWindowButton(option) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "window-button";
+  button.dataset.windowId = option.id;
+  button.textContent = option.label;
+  button.addEventListener("click", () => {
+    if (selectedTimeWindowId === option.id) {
+      return;
+    }
+    selectedTimeWindowId = option.id;
+    updateTimeWindowButtons();
+    renderDashboardPanels();
+  });
+  return button;
+}
+
+function updateTimeWindowButtons() {
+  const buttons = document.querySelectorAll(".window-button");
+  buttons.forEach((button) => {
+    const isActive = button.dataset.windowId === selectedTimeWindowId;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+}
+
+function renderDashboardPanels() {
+  const panels = dashboardPayload?.panels || {};
+  const reportingWindow = timeWindowState.windows[selectedTimeWindowId];
+  const rainfallPanel = buildPanelForWindow(panels.rainfall || {}, selectedTimeWindowId, reportingWindow);
+  const depthPanel = buildPanelForWindow(panels.depth || {}, selectedTimeWindowId, reportingWindow);
+
+  applyPanelVisibility(rainfallPanel, depthPanel);
+  renderPanelCopy("rainfall", rainfallPanel);
+  renderPanelCopy("depth", depthPanel);
+  renderRainfallChart(rainfallPanel, reportingWindow);
+  renderDepthChart(depthPanel, reportingWindow);
+}
+
+function buildPanelForWindow(panel, windowId, reportingWindow) {
+  return {
+    ...panel,
+    description: panel.descriptions?.[windowId] || panel.description || "",
+    points: filterPointsForWindow(panel.points || [], reportingWindow),
+  };
+}
+
+function filterPointsForWindow(points, reportingWindow) {
+  if (!reportingWindow) {
+    return points;
+  }
+
+  return points.filter((point) => {
+    const timestamp = toEpochMs(point.timestamp);
+    return Number.isFinite(timestamp) && timestamp >= reportingWindow.start && timestamp <= reportingWindow.end;
+  });
+}
+
 function renderPanelCopy(prefix, panel) {
   text(`${prefix}Eyebrow`, panel.eyebrow || "");
   text(`${prefix}Title`, panel.title || "");
   text(`${prefix}Description`, panel.description || "");
 }
 
-function applyPanelVisibility(panels) {
-  const rainfallPoints = panels.rainfall?.points || [];
-  const depthPoints = panels.depth?.points || [];
+function applyPanelVisibility(rainfallPanel, depthPanel) {
+  const rainfallPoints = rainfallPanel.points || [];
+  const depthPoints = depthPanel.points || [];
 
   togglePanel("rainfallPanel", rainfallPoints.length > 0);
   togglePanel("depthPanel", depthPoints.length > 0);
@@ -216,8 +293,8 @@ function renderRainfallChart(panel, reportingWindow) {
           backgroundColor: chartPalette.blueFill,
           borderColor: chartPalette.blue,
           borderWidth: 1.4,
-          barThickness: 18,
-          maxBarThickness: 22,
+          barThickness: "flex",
+          maxBarThickness: 18,
         },
       ],
     },
@@ -330,6 +407,9 @@ function hideEmptyChart(prefix) {
 }
 
 function chartOptions(reportingWindow, yTitle) {
+  const durationHours = (reportingWindow.end - reportingWindow.start) / (60 * 60 * 1000);
+  const maxTicksLimit = durationHours > 30 ? 8 : 6;
+
   return {
     maintainAspectRatio: false,
     plugins: {
@@ -363,7 +443,7 @@ function chartOptions(reportingWindow, yTitle) {
         ticks: {
           color: chartPalette.muted,
           autoSkip: true,
-          maxTicksLimit: 6,
+          maxTicksLimit,
           callback(value) {
             return formatAxisTick(Number(value));
           },
@@ -399,6 +479,7 @@ function applyErrorState(error) {
   document.getElementById("siteLocationLine").hidden = true;
   text("heroStrapline", "The public payload could not be loaded.");
   document.getElementById("officialAlert").hidden = true;
+  document.getElementById("windowSwitcher").hidden = true;
 
   const heroMeta = document.getElementById("heroMeta");
   heroMeta.replaceChildren(
@@ -411,13 +492,65 @@ function applyErrorState(error) {
   renderFooter({});
 }
 
-function buildReportingWindow(reportingWindow, panels) {
+function buildTimeWindowState(payload, panels) {
+  const windows = buildReportingWindows(payload.reporting_windows || {}, payload.reporting_window || {}, panels);
+  const requestedOptions = Array.isArray(payload.time_windows) && payload.time_windows.length
+    ? payload.time_windows
+    : [fallbackWindowOption];
+  const options = requestedOptions.filter((option) => windows[option.id]);
+  const fallbackWindow = buildFallbackReportingWindow(panels);
+
+  if (!options.length) {
+    windows[fallbackWindowOption.id] = fallbackWindow;
+    return {
+      options: [fallbackWindowOption],
+      windows,
+      defaultId: fallbackWindowOption.id,
+    };
+  }
+
+  const requestedDefault = payload.default_time_window;
+  const defaultId = options.some((option) => option.id === requestedDefault)
+    ? requestedDefault
+    : options[0].id;
+
+  return {
+    options,
+    windows,
+    defaultId,
+  };
+}
+
+function buildReportingWindows(explicitWindows, legacyWindow, panels) {
+  const windows = {};
+
+  Object.entries(explicitWindows || {}).forEach(([id, window]) => {
+    const parsed = parseReportingWindow(window);
+    if (parsed) {
+      windows[id] = parsed;
+    }
+  });
+
+  if (!windows[fallbackWindowOption.id]) {
+    const parsedLegacy = parseReportingWindow(legacyWindow);
+    if (parsedLegacy) {
+      windows[fallbackWindowOption.id] = parsedLegacy;
+    }
+  }
+
+  return windows;
+}
+
+function parseReportingWindow(reportingWindow) {
   const explicitStart = toEpochMs(reportingWindow.start_timestamp);
   const explicitEnd = toEpochMs(reportingWindow.end_timestamp);
   if (Number.isFinite(explicitStart) && Number.isFinite(explicitEnd) && explicitStart < explicitEnd) {
     return { start: explicitStart, end: explicitEnd };
   }
+  return null;
+}
 
+function buildFallbackReportingWindow(panels) {
   const timestamps = [
     ...(panels.rainfall?.points || []).map((point) => toEpochMs(point.timestamp)),
     ...(panels.depth?.points || []).map((point) => toEpochMs(point.timestamp)),

@@ -36,8 +36,10 @@ The current site shell assumes:
 - the public dashboard currently renders 4 summary cards
 - the public dashboard currently renders 2 note cards
 - an official alert section below the notes renders Environment Agency flood-warning context when `official_alert` is present
-- the rainfall panel renders 15-minute rainfall totals across the last 24 hours when `panels.rainfall.points` is populated
-- rainfall and depth charts share the same exported start and end timestamps via `reporting_window`, so their x-axes and tick spacing stay aligned
+- the rainfall and river-level charts share a single `24 hours` / `5 days` toggle above the dashboard grid
+- only the third description line under each chart changes with the selected window
+- the rainfall panel renders 15-minute rainfall totals across the last 5 days when `panels.rainfall.points` is populated
+- rainfall and depth charts use the selected exported window from `reporting_windows`, so their x-axes and tick spacing stay aligned in both modes
 - the depth panel is live from the operational sidecar
 - the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series
 - the rainfall panel stays hidden when `panels.rainfall.points` is empty
@@ -50,7 +52,10 @@ Top-level keys:
 - `site`
 - `status`
 - `official_alert`
+- `default_time_window`
+- `time_windows`
 - `reporting_window`
+- `reporting_windows`
 - `summary_metrics`
 - `panels`
 - `notes`
@@ -92,12 +97,34 @@ This banner is supplementary official Environment Agency flood-warning context. 
 
 Supported `official_alert.state` values are `none`, `flood_alert`, `flood_warning`, `severe_flood_warning`, `warning_no_longer_in_force`, and `unavailable`.
 
+### `default_time_window`
+
+- string id for the default chart mode, currently `24h`
+
+### `time_windows`
+
+Array of chart toggle options, each with:
+
+- `id`
+- `label`
+
 ### `reporting_window`
 
 - `start_timestamp`
 - `end_timestamp`
 
-This aligns the rainfall and depth charts to the same x-axis window.
+This remains the default 24-hour compatibility window.
+
+### `reporting_windows`
+
+Object keyed by window id, currently:
+
+- `24h.start_timestamp`
+- `24h.end_timestamp`
+- `5d.start_timestamp`
+- `5d.end_timestamp`
+
+The website uses these values to keep the rainfall and depth charts on the same x-axis window while switching between 24 hours and 5 days.
 
 ### `summary_metrics`
 
@@ -122,6 +149,8 @@ Current live meaning:
 - `eyebrow`
 - `title`
 - `description`
+- `descriptions.24h`
+- `descriptions.5d`
 - `y_axis_label`
 - `points`
 - `empty_message`
