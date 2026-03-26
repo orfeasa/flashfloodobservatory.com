@@ -181,7 +181,7 @@
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official EA Flood Alerts and Warnings",
-    "label": "There are no flood warnings or alerts in this area.",
+    "label": "There are no flood warnings or alerts.",
     "message": "No Environment Agency flood warnings or alerts are currently active in Boscastle, Cornwall.",
     "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
     "severity": null,
