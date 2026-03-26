@@ -229,7 +229,7 @@
           "date_label": "16/11/2025",
           "difference_from_average_m": 0.062,
           "mean_level_m": 0.332,
-          "percent_of_average": 122.9,
+          "percent_of_average": 123.0,
           "week_index": 1,
           "weekday_index": 6
         },
@@ -868,7 +868,7 @@
           "date_label": "26/01/2026",
           "difference_from_average_m": 0.141,
           "mean_level_m": 0.411,
-          "percent_of_average": 152.1,
+          "percent_of_average": 152.2,
           "week_index": 12,
           "weekday_index": 0
         },
@@ -994,7 +994,7 @@
           "date_label": "09/02/2026",
           "difference_from_average_m": 0.037,
           "mean_level_m": 0.307,
-          "percent_of_average": 113.7,
+          "percent_of_average": 113.8,
           "week_index": 14,
           "weekday_index": 0
         },
@@ -1352,9 +1352,9 @@
         {
           "date": "2026-03-21",
           "date_label": "21/03/2026",
-          "difference_from_average_m": -0.139,
-          "mean_level_m": 0.131,
-          "percent_of_average": 48.6,
+          "difference_from_average_m": -0.141,
+          "mean_level_m": 0.13,
+          "percent_of_average": 48.0,
           "week_index": 19,
           "weekday_index": 5
         },
@@ -1526,7 +1526,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-03-26T16:21:02.725461Z"
+    "updated_at": "2026-03-26T16:33:54.808146Z"
   },
   "panels": {
     "depth": {
@@ -1538,14 +1538,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-03-21T16:00:00Z",
-          "value": 0.155
-        },
-        {
-          "timestamp": "2026-03-21T16:15:00Z",
-          "value": 0.155
-        },
         {
           "timestamp": "2026-03-21T16:30:00Z",
           "value": 0.154
@@ -3460,7 +3452,15 @@
         },
         {
           "timestamp": "2026-03-26T16:00:00Z",
-          "value": 0.115
+          "value": 0.114
+        },
+        {
+          "timestamp": "2026-03-26T16:15:00Z",
+          "value": 0.114
+        },
+        {
+          "timestamp": "2026-03-26T16:30:00Z",
+          "value": 0.114
         }
       ],
       "title": "Observed Water Depth",
@@ -3475,16 +3475,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-03-26T09:00:00Z",
+      "last_updated": "2026-03-26T16:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-21T16:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-03-21T16:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-21T16:45:00Z",
           "value": 0.0
@@ -5284,6 +5276,122 @@
         {
           "timestamp": "2026-03-26T09:00:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T09:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T09:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T09:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T10:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T10:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T10:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T10:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T11:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T11:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T11:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T11:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T12:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T12:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T12:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T12:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T13:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T13:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T13:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T13:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T14:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T14:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T14:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T14:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T15:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T15:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T15:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T15:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T16:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-03-26T16:15:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -5294,17 +5402,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-03-26T16:02:00Z",
-    "start_timestamp": "2026-03-25T16:03:00Z"
+    "end_timestamp": "2026-03-26T16:32:00Z",
+    "start_timestamp": "2026-03-25T16:33:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-03-26T16:02:00Z",
-      "start_timestamp": "2026-03-25T16:03:00Z"
+      "end_timestamp": "2026-03-26T16:32:00Z",
+      "start_timestamp": "2026-03-25T16:33:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-03-26T16:02:00Z",
-      "start_timestamp": "2026-03-21T16:03:00Z"
+      "end_timestamp": "2026-03-26T16:32:00Z",
+      "start_timestamp": "2026-03-21T16:33:00Z"
     }
   },
   "site": {
@@ -5320,7 +5428,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-26T16:21:02.855028Z",
+    "published_at": "2026-03-26T16:33:54.946696Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -5329,7 +5437,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.115
+      "value": 0.113
     },
     {
       "decimals": 3,
