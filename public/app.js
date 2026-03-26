@@ -548,7 +548,11 @@ function buildLevelHeatmapSvg(panel) {
     const x = gridX + Number(cell.week_index) * step;
     const y = gridY + Number(cell.weekday_index) * step;
     const percent = Number(cell.percent_of_average);
-    const meanLevel = Number(cell.mean_level_m);
+    const maxLevel = Number(cell.max_level_m);
+    const fallbackMeanLevel = Number(cell.mean_level_m);
+    const plottedLevel = Number.isFinite(maxLevel) ? maxLevel : fallbackMeanLevel;
+    const plottedLabel = Number.isFinite(maxLevel) ? "Maximum level" : "Mean level";
+    const missingLabel = Number.isFinite(maxLevel) ? "No daily maximum available" : "No daily mean available";
     const difference = Number(cell.difference_from_average_m);
     const fill = Number.isFinite(percent)
       ? heatmapColor(percent, { min: legendMin, max: legendMax })
@@ -556,7 +560,7 @@ function buildLevelHeatmapSvg(panel) {
     const extraClass = Number.isFinite(percent) ? "" : " level-heatmap-cell--missing";
     const tooltip = [
       cell.date_label || cell.date || "",
-      Number.isFinite(meanLevel) ? `Mean level: ${meanLevel.toFixed(3)} m` : "No daily mean available",
+      Number.isFinite(plottedLevel) ? `${plottedLabel}: ${plottedLevel.toFixed(3)} m` : missingLabel,
       Number.isFinite(percent) ? `${percent.toFixed(1)}% of observatory average` : "",
       Number.isFinite(difference) ? `Difference from average: ${formatSignedValue(difference, 3)} m` : "",
     ].filter(Boolean).join("\n");
