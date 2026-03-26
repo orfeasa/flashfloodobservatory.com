@@ -484,7 +484,7 @@ function renderLevelHeatmap(panel) {
   }
 
   text("levelHeatmapEyebrow", panel.eyebrow || "River Levels");
-  text("levelHeatmapTitle", panel.title || "% Difference from Flash Flood Observatory Average");
+  text("levelHeatmapTitle", panel.title || "% of Flash Flood Observatory Average");
   description.textContent = panel.description || "";
   average.textContent = panel.average_label || "";
   average.hidden = !panel.average_label;
@@ -518,20 +518,22 @@ function buildLevelHeatmapSvg(panel) {
   const legend = panel.legend || {};
   const legendEdges = Array.isArray(legend.tick_values) && legend.tick_values.length
     ? legend.tick_values.map((value) => Number(value)).filter((value) => Number.isFinite(value))
-    : [-70, -50, -30, -10, 10, 30, 50, 70, 90, 110, 130, 150, 170];
+    : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310];
   const defaultBandColors = [
     "#5B2F05",
     "#7A4710",
     "#A36B2B",
-    "#D2B48F",
     "#F4F5F1",
     "#E3EBFF",
     "#CAD8FF",
     "#A7BCFF",
     "#7C98F8",
     "#6281F0",
+    "#3D66D6",
     "#1F4AA8",
+    "#12367F",
     "#081F63",
+    "#020813",
   ];
   const legendBandColors = Array.isArray(legend.band_colors) && legend.band_colors.length === Math.max(legendEdges.length - 1, 0)
     ? legend.band_colors
@@ -562,23 +564,23 @@ function buildLevelHeatmapSvg(panel) {
   const rects = cells.map((cell) => {
     const x = gridX + Number(cell.week_index) * step;
     const y = gridY + Number(cell.weekday_index) * step;
-    const percentDifference = Number.isFinite(Number(cell.percent_difference_from_average))
-      ? Number(cell.percent_difference_from_average)
-      : (Number.isFinite(Number(cell.percent_of_average)) ? Number(cell.percent_of_average) - 100 : NaN);
+    const percentOfAverage = Number.isFinite(Number(cell.percent_of_average))
+      ? Number(cell.percent_of_average)
+      : (Number.isFinite(Number(cell.percent_difference_from_average)) ? Number(cell.percent_difference_from_average) + 100 : NaN);
     const maxLevel = Number(cell.max_level_m);
     const fallbackMeanLevel = Number(cell.mean_level_m);
     const plottedLevel = Number.isFinite(maxLevel) ? maxLevel : fallbackMeanLevel;
     const plottedLabel = Number.isFinite(maxLevel) ? "Maximum level" : "Mean level";
     const missingLabel = Number.isFinite(maxLevel) ? "No daily maximum available" : "No daily mean available";
     const difference = Number(cell.difference_from_average_m);
-    const fill = Number.isFinite(percentDifference)
-      ? heatmapColor(percentDifference, { edges: legendEdges, colors: legendBandColors })
+    const fill = Number.isFinite(percentOfAverage)
+      ? heatmapColor(percentOfAverage, { edges: legendEdges, colors: legendBandColors })
       : "rgba(157, 176, 190, 0.08)";
-    const extraClass = Number.isFinite(percentDifference) ? "" : " level-heatmap-cell--missing";
+    const extraClass = Number.isFinite(percentOfAverage) ? "" : " level-heatmap-cell--missing";
     const tooltip = [
       cell.date_label || cell.date || "",
       Number.isFinite(plottedLevel) ? `${plottedLabel}: ${plottedLevel.toFixed(3)} m` : missingLabel,
-      Number.isFinite(percentDifference) ? `${formatSignedValue(percentDifference, 1)}% difference from observatory average` : "",
+      Number.isFinite(percentOfAverage) ? `${percentOfAverage.toFixed(1)}% of observatory average` : "",
       Number.isFinite(difference) ? `Difference from average: ${formatSignedValue(difference, 3)} m` : "",
     ].filter(Boolean).join("\n");
     return `<rect class="level-heatmap-cell${extraClass}" x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="3" fill="${fill}"><title>${escapeHtml(tooltip)}</title></rect>`;
@@ -617,25 +619,27 @@ function buildLevelHeatmapSvg(panel) {
       <text class="level-heatmap-axis-label" x="${gridX + gridWidth / 2}" y="${axisLabelY}" text-anchor="middle">${escapeHtml(xAxisLabel)}</text>
       ${legendBands}
       ${legendTicks}
-      <text class="level-heatmap-legend-title" x="${legendTitleX}" y="${legendTitleY}" text-anchor="middle" transform="rotate(90 ${legendTitleX} ${legendTitleY})">${escapeHtml(legend.label || "% Difference")}</text>
+      <text class="level-heatmap-legend-title" x="${legendTitleX}" y="${legendTitleY}" text-anchor="middle" transform="rotate(90 ${legendTitleX} ${legendTitleY})">${escapeHtml(legend.label || "% of Average")}</text>
     </svg>`;
 }
 
 function heatmapColor(percentValue, legendScale) {
-  const edges = Array.isArray(legendScale?.edges) ? legendScale.edges : [-70, -50, -30, -10, 10, 30, 50, 70, 90, 110, 130, 150, 170];
+  const edges = Array.isArray(legendScale?.edges) ? legendScale.edges : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310];
   const colors = Array.isArray(legendScale?.colors) ? legendScale.colors : [
     "#5B2F05",
     "#7A4710",
     "#A36B2B",
-    "#D2B48F",
     "#F4F5F1",
     "#E3EBFF",
     "#CAD8FF",
     "#A7BCFF",
     "#7C98F8",
     "#6281F0",
+    "#3D66D6",
     "#1F4AA8",
+    "#12367F",
     "#081F63",
+    "#020813",
   ];
   if (!edges.length || !colors.length) {
     return "#F4F5F1";
