@@ -90,6 +90,8 @@ Top-level keys:
 
 This banner is supplementary official Environment Agency flood-warning context. It should not be presented as a bespoke flash-flood warning produced by the observatory.
 
+Supported `official_alert.state` values are `none`, `flood_alert`, `flood_warning`, `severe_flood_warning`, `warning_no_longer_in_force`, and `unavailable`.
+
 ### `reporting_window`
 
 - `start_timestamp`

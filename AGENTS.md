@@ -16,6 +16,7 @@ Rules for future changes:
 - Keep the partner logos as individual white cards without wrapping them in an extra boxed footer panel
 - Keep the public dashboard limited to defined panels only. Do not add placeholder panels that the data pipeline cannot support.
 - Treat `official_alert` as supplementary official Environment Agency warning context, not as an observatory-generated flash-flood alert.
+- Supported `official_alert.state` values are `none`, `flood_alert`, `flood_warning`, `severe_flood_warning`, `warning_no_longer_in_force`, and `unavailable`.
 - `panels.rainfall` should reflect Environment Agency station `49149` when the sidecar has data.
 - If `panels.rainfall.points` is empty, keep the rainfall panel hidden rather than rendering an empty chart panel.
 - The current public site shape is 4 summary cards, 2 notes, 1 official alert section below the notes, a plain single-row partner logo strip, and live rainfall plus depth panels when data is available.
