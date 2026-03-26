@@ -202,7 +202,7 @@ Point shape:
 - `level_heatmap.legend`
 - `level_heatmap.empty_message`
 
-The website currently treats `analysis_panels.response` as a placeholder panel for future flow-rate work, while `historical_range.points` and `level_heatmap` both come directly from the sidecar payload. The heatmap colours represent each day's smoothed maximum river level as a stepped percent of the observatory-wide average carried in the same payload, with 20-point legend bands up to 310%.
+The website currently treats `analysis_panels.response` as a placeholder panel for future flow-rate work, while `historical_range.points` and `level_heatmap` both come directly from the sidecar payload. The heatmap colours represent each day's smoothed maximum river level as a stepped percent of the observatory-wide average carried in the same payload, with 20-point legend bands up to 410%.
 
 ### `notes`
 
