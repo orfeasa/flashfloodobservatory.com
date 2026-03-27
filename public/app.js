@@ -251,6 +251,15 @@ function renderAnalysisPanels() {
 
   renderPanelCopy("response", responsePanel);
   renderPanelCopy("historicalRange", historicalRangePanel);
+  renderContextChip("responseContextChip", currentWindowLabel());
+  renderContextChip(
+    "historicalRangeContextChip",
+    historicalRangePanel.window_days ? `${historicalRangePanel.window_days}-day context` : "Historical context"
+  );
+  renderContextChip(
+    "levelHeatmapContextChip",
+    levelHeatmapPanel.deployment_label ? "Full record" : "Historical context"
+  );
   applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel);
   renderResponseChart(responsePanel, rainfallPanel, reportingWindow);
   renderHistoricalRangeChart(historicalRangePanel);
@@ -281,6 +290,21 @@ function renderPanelCopy(prefix, panel) {
   text(`${prefix}Title`, panel.title || "");
   text(`${prefix}Subtitle`, panel.subtitle || "");
   text(`${prefix}Description`, panel.description || "");
+}
+
+function renderContextChip(elementId, value) {
+  const element = document.getElementById(elementId);
+  if (!element) {
+    return;
+  }
+
+  element.textContent = value || "";
+  element.hidden = !value;
+}
+
+function currentWindowLabel() {
+  const option = timeWindowState?.options?.find((item) => item.id === selectedTimeWindowId);
+  return option?.label || fallbackWindowOption.label;
 }
 
 function applyPanelVisibility(rainfallPanel, depthPanel) {

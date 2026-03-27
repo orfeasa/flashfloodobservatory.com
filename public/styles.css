@@ -208,6 +208,22 @@ h2 {
   line-height: 1.65;
 }
 
+.panel-context-chip {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0.9rem 0 0;
+  padding: 0.38rem 0.72rem;
+  border: 1px solid rgba(119, 232, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(9, 16, 24, 0.72);
+  color: var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .lede {
   max-width: 60ch;
   margin: 1.2rem 0 0;
