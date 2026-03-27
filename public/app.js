@@ -574,7 +574,7 @@ function buildLevelHeatmapSvg(panel) {
   const legend = panel.legend || {};
   const legendEdges = Array.isArray(legend.tick_values) && legend.tick_values.length
     ? legend.tick_values.map((value) => Number(value)).filter((value) => Number.isFinite(value))
-    : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410];
+    : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410, 430, 450];
   const defaultBandColors = [
     "#5B2F05",
     "#7A4710",
@@ -690,14 +690,14 @@ function selectHeatmapLegendLabelValues(edges) {
     return [];
   }
 
-  const preferred = [30, 90, 150, 210, 270, 330, 410];
+  const preferred = [30, 90, 150, 210, 270, 330, 390, 450];
   const selected = preferred.filter((value) => edges.includes(value));
   return selected.length ? selected : edges;
 }
 
 
 function heatmapColor(percentValue, legendScale) {
-  const edges = Array.isArray(legendScale?.edges) ? legendScale.edges : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410];
+  const edges = Array.isArray(legendScale?.edges) ? legendScale.edges : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410, 430, 450];
   const colors = Array.isArray(legendScale?.colors) ? legendScale.colors : [
     "#5B2F05",
     "#7A4710",
@@ -718,6 +718,8 @@ function heatmapColor(percentValue, legendScale) {
     "#1F4AA8",
     "#081F63",
     "#020813",
+    "#01040B",
+    "#000000",
   ];
   if (!edges.length || !colors.length) {
     return "#F4F5F1";
