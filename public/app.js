@@ -279,11 +279,22 @@ function filterPointsForWindow(points, reportingWindow) {
   });
 }
 
+function setOptionalText(elementId, value) {
+  const element = document.getElementById(elementId);
+  if (!element) {
+    return;
+  }
+
+  const content = value || "";
+  element.textContent = content;
+  element.hidden = !content;
+}
+
 function renderPanelCopy(prefix, panel) {
-  text(`${prefix}Eyebrow`, panel.eyebrow || "");
-  text(`${prefix}Title`, panel.title || "");
-  text(`${prefix}Subtitle`, panel.subtitle || "");
-  text(`${prefix}Description`, panel.description || "");
+  setOptionalText(`${prefix}Eyebrow`, panel.eyebrow || "");
+  setOptionalText(`${prefix}Title`, panel.title || "");
+  setOptionalText(`${prefix}Subtitle`, panel.subtitle || "");
+  setOptionalText(`${prefix}Description`, panel.description || "");
 }
 
 function renderContextChip(elementId, value) {
@@ -336,6 +347,23 @@ function applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPa
   }
 }
 
+function buildRainfallDataset(points, label, yAxisID = "y") {
+  return {
+    type: "bar",
+    label,
+    data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
+    parsing: false,
+    yAxisID,
+    borderRadius: 6,
+    backgroundColor: chartPalette.blueFill,
+    borderColor: chartPalette.blue,
+    borderWidth: 1.4,
+    barThickness: "flex",
+    maxBarThickness: 34,
+    inflateAmount: 0,
+  };
+}
+
 function renderRainfallChart(panel, reportingWindow) {
   const points = panel.points || [];
   if (!points.length) {
@@ -348,19 +376,7 @@ function renderRainfallChart(panel, reportingWindow) {
   rainfallChart = new Chart(document.getElementById("rainfallChart"), {
     type: "bar",
     data: {
-      datasets: [
-        {
-          label: panel.y_axis_label || "Rainfall",
-          data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
-          parsing: false,
-          borderRadius: 6,
-          backgroundColor: chartPalette.blueFill,
-          borderColor: chartPalette.blue,
-          borderWidth: 1.4,
-          barThickness: "flex",
-          maxBarThickness: 30,
-        },
-      ],
+      datasets: [buildRainfallDataset(points, panel.y_axis_label || "Rainfall")],
     },
     options: chartOptions(reportingWindow, panel.y_axis_label || "Rainfall"),
   });
@@ -417,22 +433,14 @@ function renderResponseChart(panel, rainfallPanel, reportingWindow) {
   responseChart = new Chart(document.getElementById("responseChart"), {
     data: {
       datasets: [
-        {
-          type: "bar",
-          label: panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
-          data: rainfallPoints.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
-          parsing: false,
-          yAxisID: "yRain",
-          borderRadius: 6,
-          backgroundColor: chartPalette.blueFill,
-          borderColor: chartPalette.blue,
-          borderWidth: 1.2,
-          barThickness: "flex",
-          maxBarThickness: 28,
-        },
+        buildRainfallDataset(
+          rainfallPoints,
+          panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
+          "yRain"
+        ),
         {
           type: "line",
-          label: panel.y_axis_label || "River Flow Rate (m³/s)",
+          label: panel.y_axis_label || "Flow Rate",
           data: flowPoints.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
           parsing: false,
           yAxisID: "yFlow",
@@ -448,7 +456,7 @@ function renderResponseChart(panel, rainfallPanel, reportingWindow) {
     options: responseChartOptions(
       reportingWindow,
       panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
-      panel.y_axis_label || "River Flow Rate (m³/s)"
+      panel.y_axis_label || "Flow Rate"
     ),
   });
 }
@@ -461,28 +469,57 @@ function renderHistoricalRangeChart(panel) {
     return;
   }
 
+  const scatterMode = points.some((point) => Number.isFinite(Number(point.x)) && Number.isFinite(Number(point.y)));
+
   hideEmptyChart("historicalRange");
   historicalRangeChart?.destroy();
-  historicalRangeChart = new Chart(document.getElementById("historicalRangeChart"), {
-    type: "line",
-    data: {
-      datasets: [
-        {
-          label: panel.y_axis_label || "24h Range (m)",
-          data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
-          parsing: false,
-          borderColor: chartPalette.green,
-          backgroundColor: "rgba(87, 209, 139, 0.12)",
-          borderWidth: 2.2,
-          fill: true,
-          tension: 0.25,
-          pointRadius: 2.5,
-          pointHoverRadius: 4,
+  historicalRangeChart = new Chart(document.getElementById("historicalRangeChart"), scatterMode
+    ? {
+        type: "scatter",
+        data: {
+          datasets: [
+            {
+              label: panel.subtitle || panel.y_axis_label || "Daily Range and Peak Levels",
+              data: points.map((point) => ({
+                x: point.x,
+                y: point.y,
+                date: point.date,
+                timestamp: toEpochMs(point.timestamp),
+              })),
+              parsing: false,
+              pointBackgroundColor: chartPalette.green,
+              pointBorderColor: "rgba(9, 19, 31, 0.92)",
+              pointBorderWidth: 1,
+              pointRadius: 4,
+              pointHoverRadius: 5,
+            },
+          ],
         },
-      ],
-    },
-    options: historicalChartOptions(points, panel.y_axis_label || "24h Range (m)"),
-  });
+        options: historicalScatterOptions(
+          panel.x_axis_label || "Maximum 24h Water Depth (m)",
+          panel.y_axis_label || "24h Range (m)"
+        ),
+      }
+    : {
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: panel.y_axis_label || "24h Range (m)",
+              data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
+              parsing: false,
+              borderColor: chartPalette.green,
+              backgroundColor: "rgba(87, 209, 139, 0.12)",
+              borderWidth: 2.2,
+              fill: true,
+              tension: 0.25,
+              pointRadius: 2.5,
+              pointHoverRadius: 4,
+            },
+          ],
+        },
+        options: historicalTimeSeriesOptions(points, panel.y_axis_label || "24h Range (m)"),
+      });
 }
 
 function renderLevelHeatmap(panel) {
@@ -653,7 +690,7 @@ function selectHeatmapLegendLabelValues(edges) {
     return [];
   }
 
-  const preferred = [30, 90, 150, 210, 270, 330, 390, 410];
+  const preferred = [30, 90, 150, 210, 270, 330, 410];
   const selected = preferred.filter((value) => edges.includes(value));
   return selected.length ? selected : edges;
 }
@@ -850,6 +887,7 @@ function chartOptions(reportingWindow, yTitle) {
         type: "linear",
         min: reportingWindow.start,
         max: reportingWindow.end,
+        offset: false,
         grid: {
           color: chartPalette.grid,
         },
@@ -885,6 +923,14 @@ function chartOptions(reportingWindow, yTitle) {
   };
 }
 
+function formatIsoDateLabel(value) {
+  if (!value) {
+    return "";
+  }
+  const [year, month, day] = String(value).split("-");
+  return year && month && day ? `${day}/${month}/${year}` : String(value);
+}
+
 function responseChartOptions(reportingWindow, rainfallTitle, flowTitle) {
   const durationHours = (reportingWindow.end - reportingWindow.start) / (60 * 60 * 1000);
   const maxTicksLimit = durationHours > 30 ? 8 : 6;
@@ -916,6 +962,7 @@ function responseChartOptions(reportingWindow, rainfallTitle, flowTitle) {
         type: "linear",
         min: reportingWindow.start,
         max: reportingWindow.end,
+        offset: false,
         grid: {
           color: chartPalette.grid,
         },
@@ -969,7 +1016,7 @@ function responseChartOptions(reportingWindow, rainfallTitle, flowTitle) {
   };
 }
 
-function historicalChartOptions(points, yTitle) {
+function historicalTimeSeriesOptions(points, yTitle) {
   const timestamps = points.map((point) => toEpochMs(point.timestamp)).filter((value) => Number.isFinite(value));
   const fallbackEnd = Date.now();
   const min = timestamps.length ? Math.min(...timestamps) : fallbackEnd - 30 * 24 * 60 * 60 * 1000;
@@ -1016,6 +1063,69 @@ function historicalChartOptions(points, yTitle) {
         title: {
           display: true,
           text: "Date",
+          color: chartPalette.text,
+        },
+      },
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: chartPalette.grid,
+        },
+        ticks: {
+          color: chartPalette.muted,
+        },
+        title: {
+          display: true,
+          text: yTitle,
+          color: chartPalette.text,
+        },
+      },
+    },
+  };
+}
+
+function historicalScatterOptions(xTitle, yTitle) {
+  return {
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: {
+          color: chartPalette.text,
+        },
+      },
+      tooltip: {
+        backgroundColor: "rgba(5, 10, 16, 0.96)",
+        borderColor: "rgba(119, 232, 255, 0.22)",
+        borderWidth: 1,
+        titleColor: chartPalette.text,
+        bodyColor: chartPalette.muted,
+        callbacks: {
+          title(items) {
+            return formatIsoDateLabel(items?.[0]?.raw?.date);
+          },
+          label(context) {
+            const raw = context.raw || {};
+            return [
+              `Maximum 24h water depth: ${Number(raw.x).toFixed(3)} m`,
+              `24h range: ${Number(raw.y).toFixed(3)} m`,
+            ];
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        type: "linear",
+        beginAtZero: true,
+        grid: {
+          color: chartPalette.grid,
+        },
+        ticks: {
+          color: chartPalette.muted,
+        },
+        title: {
+          display: true,
+          text: xTitle,
           color: chartPalette.text,
         },
       },

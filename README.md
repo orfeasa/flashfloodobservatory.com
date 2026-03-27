@@ -38,9 +38,9 @@ The current site shell assumes:
 - an official alert section below the notes renders Environment Agency flood-warning context when `official_alert` is present
 - the rainfall and river-level charts share a single `24 hours` / `5 days` toggle above the dashboard grid
 - a second analysis row sits beneath the operational charts
-- the first analysis panel becomes a real flow-plus-rainfall Event Analysis chart when the sidecar includes flow points, and otherwise falls back to a placeholder message
-- the second analysis panel shows the daily maximum rolling 24h river-level range over the last 30 days
-- a full-width historical heatmap sits below the analysis row and shows each day's smoothed maximum river level as a percentage of the observatory-wide average since deployment
+- the first analysis panel becomes a real flow-plus-rainfall Event Analysis chart when the sidecar includes flow points, and otherwise falls back to a placeholder message; its white duplicate title is intentionally hidden so only the yellow heading remains
+- the second analysis panel is a 30-day scatter showing each completed day's maximum water depth against its corresponding 24h range
+- a full-width historical heatmap sits below the analysis row and shows each completed day's smoothed maximum river level as a percentage of the observatory-wide average since deployment
 - only the third description line under each chart changes with the selected window
 - the rainfall panel renders 15-minute rainfall totals across the last 5 days when `panels.rainfall.points` is populated
 - rainfall and depth charts use the selected exported window from `reporting_windows`, so their x-axes and tick spacing stay aligned in both modes
