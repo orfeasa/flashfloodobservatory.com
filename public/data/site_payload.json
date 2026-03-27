@@ -1548,9 +1548,9 @@
           "date": "2026-03-27",
           "date_label": "27/03/2026",
           "difference_from_average_m": -0.154,
-          "max_level_m": 0.116,
-          "percent_difference_from_average": -56.9,
-          "percent_of_average": 43.1,
+          "max_level_m": 0.117,
+          "percent_difference_from_average": -56.8,
+          "percent_of_average": 43.2,
           "week_index": 20,
           "weekday_index": 4
         }
@@ -1653,19 +1653,7 @@
       "empty_message": "River flow event analysis is temporarily unavailable.",
       "eyebrow": "Event Analysis",
       "mode": "flow_overlay",
-      "subtitle": "River Hydrograph and Precipitation Hyetograph",
-      "title": "Event Analysis",
-      "rainfall_y_axis_label": "Rainfall (mm)",
-      "y_axis_label": "River Flow Rate (m\u00b3/s)",
       "points": [
-        {
-          "timestamp": "2026-03-22T00:00:00Z",
-          "value": 0.014
-        },
-        {
-          "timestamp": "2026-03-22T00:15:00Z",
-          "value": 0.014
-        },
         {
           "timestamp": "2026-03-22T00:30:00Z",
           "value": 0.013
@@ -1712,7 +1700,7 @@
         },
         {
           "timestamp": "2026-03-22T03:15:00Z",
-          "value": 0.012
+          "value": 0.011
         },
         {
           "timestamp": "2026-03-22T03:30:00Z",
@@ -1740,7 +1728,7 @@
         },
         {
           "timestamp": "2026-03-22T05:00:00Z",
-          "value": 0.012
+          "value": 0.011
         },
         {
           "timestamp": "2026-03-22T05:15:00Z",
@@ -1808,7 +1796,7 @@
         },
         {
           "timestamp": "2026-03-22T09:15:00Z",
-          "value": 0.026
+          "value": 0.025
         },
         {
           "timestamp": "2026-03-22T09:30:00Z",
@@ -1820,7 +1808,7 @@
         },
         {
           "timestamp": "2026-03-22T10:00:00Z",
-          "value": 0.027
+          "value": 0.026
         },
         {
           "timestamp": "2026-03-22T10:15:00Z",
@@ -1848,7 +1836,7 @@
         },
         {
           "timestamp": "2026-03-22T11:45:00Z",
-          "value": 0.028
+          "value": 0.027
         },
         {
           "timestamp": "2026-03-22T12:00:00Z",
@@ -1864,7 +1852,7 @@
         },
         {
           "timestamp": "2026-03-22T12:45:00Z",
-          "value": 0.028
+          "value": 0.027
         },
         {
           "timestamp": "2026-03-22T13:00:00Z",
@@ -1924,7 +1912,7 @@
         },
         {
           "timestamp": "2026-03-22T16:30:00Z",
-          "value": 0.027
+          "value": 0.026
         },
         {
           "timestamp": "2026-03-22T16:45:00Z",
@@ -1952,7 +1940,7 @@
         },
         {
           "timestamp": "2026-03-22T18:15:00Z",
-          "value": 0.025
+          "value": 0.024
         },
         {
           "timestamp": "2026-03-22T18:30:00Z",
@@ -1976,7 +1964,7 @@
         },
         {
           "timestamp": "2026-03-22T19:45:00Z",
-          "value": 0.021
+          "value": 0.02
         },
         {
           "timestamp": "2026-03-22T20:00:00Z",
@@ -1996,7 +1984,7 @@
         },
         {
           "timestamp": "2026-03-22T21:00:00Z",
-          "value": 0.017
+          "value": 0.018
         },
         {
           "timestamp": "2026-03-22T21:15:00Z",
@@ -2100,7 +2088,7 @@
         },
         {
           "timestamp": "2026-03-23T03:30:00Z",
-          "value": 0.017
+          "value": 0.018
         },
         {
           "timestamp": "2026-03-23T03:45:00Z",
@@ -2160,11 +2148,11 @@
         },
         {
           "timestamp": "2026-03-23T07:15:00Z",
-          "value": 0.012
+          "value": 0.011
         },
         {
           "timestamp": "2026-03-23T07:30:00Z",
-          "value": 0.012
+          "value": 0.013
         },
         {
           "timestamp": "2026-03-23T07:45:00Z",
@@ -2180,7 +2168,7 @@
         },
         {
           "timestamp": "2026-03-23T08:30:00Z",
-          "value": 0.019
+          "value": 0.02
         },
         {
           "timestamp": "2026-03-23T08:45:00Z",
@@ -2192,11 +2180,11 @@
         },
         {
           "timestamp": "2026-03-23T09:15:00Z",
-          "value": 0.021
+          "value": 0.022
         },
         {
           "timestamp": "2026-03-23T09:30:00Z",
-          "value": 0.021
+          "value": 0.022
         },
         {
           "timestamp": "2026-03-23T09:45:00Z",
@@ -2240,7 +2228,7 @@
         },
         {
           "timestamp": "2026-03-23T12:15:00Z",
-          "value": 0.028
+          "value": 0.027
         },
         {
           "timestamp": "2026-03-23T12:30:00Z",
@@ -2272,7 +2260,7 @@
         },
         {
           "timestamp": "2026-03-23T14:15:00Z",
-          "value": 0.026
+          "value": 0.025
         },
         {
           "timestamp": "2026-03-23T14:30:00Z",
@@ -2316,7 +2304,7 @@
         },
         {
           "timestamp": "2026-03-23T17:00:00Z",
-          "value": 0.025
+          "value": 0.024
         },
         {
           "timestamp": "2026-03-23T17:15:00Z",
@@ -2352,7 +2340,7 @@
         },
         {
           "timestamp": "2026-03-23T19:15:00Z",
-          "value": 0.021
+          "value": 0.02
         },
         {
           "timestamp": "2026-03-23T19:30:00Z",
@@ -2388,7 +2376,7 @@
         },
         {
           "timestamp": "2026-03-23T21:30:00Z",
-          "value": 0.021
+          "value": 0.022
         },
         {
           "timestamp": "2026-03-23T21:45:00Z",
@@ -2396,7 +2384,7 @@
         },
         {
           "timestamp": "2026-03-23T22:00:00Z",
-          "value": 0.021
+          "value": 0.022
         },
         {
           "timestamp": "2026-03-23T22:15:00Z",
@@ -2456,7 +2444,7 @@
         },
         {
           "timestamp": "2026-03-24T01:45:00Z",
-          "value": 0.021
+          "value": 0.022
         },
         {
           "timestamp": "2026-03-24T02:00:00Z",
@@ -2476,7 +2464,7 @@
         },
         {
           "timestamp": "2026-03-24T03:00:00Z",
-          "value": 0.022
+          "value": 0.023
         },
         {
           "timestamp": "2026-03-24T03:15:00Z",
@@ -2496,7 +2484,7 @@
         },
         {
           "timestamp": "2026-03-24T04:15:00Z",
-          "value": 0.021
+          "value": 0.022
         },
         {
           "timestamp": "2026-03-24T04:30:00Z",
@@ -2596,7 +2584,7 @@
         },
         {
           "timestamp": "2026-03-24T10:30:00Z",
-          "value": 0.026
+          "value": 0.025
         },
         {
           "timestamp": "2026-03-24T10:45:00Z",
@@ -2608,11 +2596,11 @@
         },
         {
           "timestamp": "2026-03-24T11:15:00Z",
-          "value": 0.026
+          "value": 0.025
         },
         {
           "timestamp": "2026-03-24T11:30:00Z",
-          "value": 0.026
+          "value": 0.025
         },
         {
           "timestamp": "2026-03-24T11:45:00Z",
@@ -2636,7 +2624,7 @@
         },
         {
           "timestamp": "2026-03-24T13:00:00Z",
-          "value": 0.027
+          "value": 0.026
         },
         {
           "timestamp": "2026-03-24T13:15:00Z",
@@ -2648,7 +2636,7 @@
         },
         {
           "timestamp": "2026-03-24T13:45:00Z",
-          "value": 0.027
+          "value": 0.026
         },
         {
           "timestamp": "2026-03-24T14:00:00Z",
@@ -2764,11 +2752,11 @@
         },
         {
           "timestamp": "2026-03-24T21:00:00Z",
-          "value": 0.025
+          "value": 0.024
         },
         {
           "timestamp": "2026-03-24T21:15:00Z",
-          "value": 0.026
+          "value": 0.025
         },
         {
           "timestamp": "2026-03-24T21:30:00Z",
@@ -2820,7 +2808,7 @@
         },
         {
           "timestamp": "2026-03-25T00:30:00Z",
-          "value": 0.017
+          "value": 0.018
         },
         {
           "timestamp": "2026-03-25T00:45:00Z",
@@ -2908,7 +2896,7 @@
         },
         {
           "timestamp": "2026-03-25T06:00:00Z",
-          "value": 0.014
+          "value": 0.013
         },
         {
           "timestamp": "2026-03-25T06:15:00Z",
@@ -3576,17 +3564,44 @@
         },
         {
           "timestamp": "2026-03-26T23:45:00Z",
-          "value": 0.015
+          "value": 0.016
         },
         {
           "timestamp": "2026-03-27T00:00:00Z",
+          "value": 0.016
+        },
+        {
+          "timestamp": "2026-03-27T00:15:00Z",
+          "value": 0.016
+        },
+        {
+          "timestamp": "2026-03-27T00:30:00Z",
           "value": 0.015
         }
-      ]
+      ],
+      "rainfall_y_axis_label": "Rainfall (mm)",
+      "subtitle": "River Hydrograph and Precipitation Hyetograph",
+      "title": "Event Analysis",
+      "y_axis_label": "River Flow Rate (m\u00b3/s)"
     }
   },
   "default_time_window": "24h",
   "footer": {
+    "contact": {
+      "items": [
+        {
+          "href": "mailto:flashfloodobservatory@gmail.com",
+          "label": "Email",
+          "value": "flashfloodobservatory@gmail.com"
+        },
+        {
+          "href": "https://www.linkedin.com/company/flash-flood-observatory/",
+          "label": "LinkedIn",
+          "value": "Flash Flood Observatory"
+        }
+      ],
+      "title": "Contact"
+    },
     "partners": [
       {
         "href": "https://www.gre.ac.uk/",
@@ -3610,22 +3625,7 @@
       }
     ],
     "text": "",
-    "title": "Observatory Partners",
-    "contact": {
-      "title": "Contact",
-      "items": [
-        {
-          "label": "Email",
-          "value": "flashfloodobservatory@gmail.com",
-          "href": "mailto:flashfloodobservatory@gmail.com"
-        },
-        {
-          "label": "LinkedIn",
-          "value": "Flash Flood Observatory",
-          "href": "https://www.linkedin.com/company/flash-flood-observatory/"
-        }
-      ]
-    }
+    "title": "Observatory Partners"
   },
   "notes": [
     {
@@ -3654,7 +3654,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-03-27T00:19:00.563392Z"
+    "updated_at": "2026-03-27T00:34:13.804937Z"
   },
   "panels": {
     "depth": {
@@ -3666,14 +3666,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-03-22T00:00:00Z",
-          "value": 0.112
-        },
-        {
-          "timestamp": "2026-03-22T00:15:00Z",
-          "value": 0.111
-        },
         {
           "timestamp": "2026-03-22T00:30:00Z",
           "value": 0.11
@@ -5588,6 +5580,14 @@
         },
         {
           "timestamp": "2026-03-27T00:00:00Z",
+          "value": 0.117
+        },
+        {
+          "timestamp": "2026-03-27T00:15:00Z",
+          "value": 0.117
+        },
+        {
+          "timestamp": "2026-03-27T00:30:00Z",
           "value": 0.116
         }
       ],
@@ -5605,14 +5605,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-03-26T16:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-22T00:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-03-22T00:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-22T00:45:00Z",
           "value": 0.0
@@ -7410,17 +7402,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-03-27T00:02:00Z",
-    "start_timestamp": "2026-03-26T00:03:00Z"
+    "end_timestamp": "2026-03-27T00:32:00Z",
+    "start_timestamp": "2026-03-26T00:33:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-03-27T00:02:00Z",
-      "start_timestamp": "2026-03-26T00:03:00Z"
+      "end_timestamp": "2026-03-27T00:32:00Z",
+      "start_timestamp": "2026-03-26T00:33:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-03-27T00:02:00Z",
-      "start_timestamp": "2026-03-22T00:03:00Z"
+      "end_timestamp": "2026-03-27T00:32:00Z",
+      "start_timestamp": "2026-03-22T00:33:00Z"
     }
   },
   "site": {
@@ -7436,7 +7428,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-27T00:19:00.889937Z",
+    "published_at": "2026-03-27T00:34:13.939585Z",
     "state": "Online"
   },
   "summary_metrics": [
