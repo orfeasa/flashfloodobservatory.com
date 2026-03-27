@@ -24,7 +24,7 @@ Rules for future changes:
 - Only the third description line under each chart should change with the selected window.
 - Keep the 24-hour river-level summary cards aligned with the visible chart by treating the cleaned depth series as the source of truth for both.
 - Keep rainfall and depth charts locked to the same exported window from `reporting_windows` so their x-axes match exactly in both modes.
-- Keep `analysis_panels.response` as a payload-driven placeholder until the flow-rate analysis exists. Do not relabel the current depth overlay as flow.
+- Keep `analysis_panels.response` payload-driven. When `response.points` are present, render a real river-flow line against rainfall bars; otherwise show the payload-provided placeholder message.
 - Treat `analysis_panels.historical_range.points` as the only source for the historical range chart.
 - Treat `analysis_panels.level_heatmap` as the only source for the historical river-level heatmap, including its average label, calendar cells, and legend values.
 - Heatmap colours should reflect each day's smoothed maximum river level as a stepped percent of the observatory-wide average carried in that same payload, with 20-point legend bands up to 410%.

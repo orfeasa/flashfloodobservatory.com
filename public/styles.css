@@ -510,6 +510,18 @@ canvas {
 
 .footer {
   margin-top: 1rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1.35rem;
+  background: linear-gradient(180deg, var(--panel-bg), rgba(5, 10, 16, 0.95));
+  box-shadow: var(--shadow);
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+  gap: 1.2rem;
+  align-items: start;
 }
 
 .footer-title {
@@ -523,6 +535,33 @@ canvas {
 
 .footer-copy p[hidden] {
   display: none;
+}
+
+.footer-contact {
+  justify-self: end;
+}
+
+.footer-contact-list {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.55rem;
+}
+
+.footer-contact-item {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.footer-contact-label {
+  margin-right: 0.45rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.footer-contact-value {
+  color: var(--muted);
+  text-decoration-color: rgba(119, 232, 255, 0.24);
 }
 
 .partner-strip {
@@ -550,6 +589,11 @@ canvas {
   object-fit: contain;
 }
 
+.partner-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(4, 10, 18, 0.12);
+}
+
 @media (max-width: 1080px) {
   .official-alert,
   .hero {
@@ -574,6 +618,14 @@ canvas {
   .analysis-grid,
   .notes-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-contact {
+    justify-self: start;
   }
 
   .partner-strip {

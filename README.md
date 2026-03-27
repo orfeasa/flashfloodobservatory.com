@@ -38,7 +38,7 @@ The current site shell assumes:
 - an official alert section below the notes renders Environment Agency flood-warning context when `official_alert` is present
 - the rainfall and river-level charts share a single `24 hours` / `5 days` toggle above the dashboard grid
 - a second analysis row sits beneath the operational charts
-- the first analysis panel is currently a placeholder for future flow-rate event analysis and stays visible with window-specific copy even while it is empty
+- the first analysis panel becomes a real flow-plus-rainfall Event Analysis chart when the sidecar includes flow points, and otherwise falls back to a placeholder message
 - the second analysis panel shows the daily maximum rolling 24h river-level range over the last 30 days
 - a full-width historical heatmap sits below the analysis row and shows each day's smoothed maximum river level as a percentage of the observatory-wide average since deployment
 - only the third description line under each chart changes with the selected window
@@ -48,6 +48,7 @@ The current site shell assumes:
 - the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series
 - the rainfall panel stays hidden when `panels.rainfall.points` is empty
 - partner logos render as individual white cards in a single row rather than inside a boxed footer panel
+- the footer also renders payload-driven contact links for the public observatory email and LinkedIn page
 
 ## Payload shape
 
@@ -178,8 +179,14 @@ Point shape:
 - `response.eyebrow`
 - `response.title`
 - `response.description`
+- `response.subtitle`
+- `response.description`
+- `response.descriptions.24h`
+- `response.descriptions.5d`
+- `response.mode`
+- `response.points`
 - `response.rainfall_y_axis_label`
-- `response.depth_y_axis_label`
+- `response.y_axis_label`
 - `response.empty_message`
 - `historical_range.eyebrow`
 - `historical_range.title`
@@ -202,7 +209,7 @@ Point shape:
 - `level_heatmap.legend`
 - `level_heatmap.empty_message`
 
-The website currently treats `analysis_panels.response` as a placeholder panel for future flow-rate work, while `historical_range.points` and `level_heatmap` both come directly from the sidecar payload. The heatmap colours represent each day's smoothed maximum river level as a stepped percent of the observatory-wide average carried in the same payload, with 20-point legend bands up to 410%.
+The website now treats `analysis_panels.response` as a payload-driven Event Analysis chart when `response.points` are present, while `historical_range.points` and `level_heatmap` both come directly from the sidecar payload. The heatmap colours represent each day's smoothed maximum river level as a stepped percent of the observatory-wide average carried in the same payload, with 20-point legend bands up to 410%.
 
 ### `notes`
 
@@ -215,7 +222,15 @@ Array of note cards:
 
 - `title`
 - `text`
+- `contact.title`
+- `contact.items[]`
 - `partners`
+
+Contact item shape:
+
+- `label`
+- `value`
+- `href`
 
 Partner shape:
 

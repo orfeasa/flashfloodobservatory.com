@@ -83,7 +83,7 @@
             <p class="panel-copy" id="responseDescription"></p>
           </div>
           <div class="chart-frame">
-            <canvas id="responseChart" aria-label="Rainfall and river response"></canvas>
+            <canvas id="responseChart" aria-label="River flow and rainfall event analysis"></canvas>
             <div class="panel-empty" id="responseEmpty" hidden></div>
           </div>
         </section>
@@ -129,9 +129,15 @@
       </section>
 
       <footer class="footer">
-        <div class="footer-copy">
-          <p class="footer-title" id="footerTitle">Observatory Partners</p>
-          <p id="footerText"></p>
+        <div class="footer-main">
+          <div class="footer-copy">
+            <p class="footer-title" id="footerTitle">Observatory Partners</p>
+            <p id="footerText"></p>
+          </div>
+          <div class="footer-contact" id="footerContact" hidden>
+            <p class="footer-title" id="footerContactTitle">Contact</p>
+            <div class="footer-contact-list" id="footerContactList"></div>
+          </div>
         </div>
         <div class="partner-strip" aria-label="Partner logos" id="partnerStrip"></div>
       </footer>

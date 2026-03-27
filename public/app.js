@@ -245,14 +245,14 @@ function renderAnalysisPanels() {
   const reportingWindow = timeWindowState.windows[selectedTimeWindowId];
   const rainfallPanel = buildPanelForWindow(panels.rainfall || {}, selectedTimeWindowId, reportingWindow);
   const depthPanel = buildPanelForWindow(panels.depth || {}, selectedTimeWindowId, reportingWindow);
-  const responsePanel = analysisPanels.response || {};
+  const responsePanel = buildPanelForWindow(analysisPanels.response || {}, selectedTimeWindowId, reportingWindow);
   const historicalRangePanel = analysisPanels.historical_range || {};
   const levelHeatmapPanel = analysisPanels.level_heatmap || {};
 
   renderPanelCopy("response", responsePanel);
   renderPanelCopy("historicalRange", historicalRangePanel);
-  applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel, depthPanel);
-  renderResponseChart(responsePanel, rainfallPanel, depthPanel, reportingWindow);
+  applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel);
+  renderResponseChart(responsePanel, rainfallPanel, reportingWindow);
   renderHistoricalRangeChart(historicalRangePanel);
   renderLevelHeatmap(levelHeatmapPanel);
 }
@@ -295,11 +295,11 @@ function applyPanelVisibility(rainfallPanel, depthPanel) {
   dashboardGrid.classList.toggle("dashboard-grid--single", visiblePanelCount <= 1);
 }
 
-function applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel, depthPanel) {
+function applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel) {
   const responsePlaceholder = responsePanel.mode === "placeholder";
   const responseVisible = responsePlaceholder
     ? Boolean(responsePanel.title || responsePanel.subtitle || responsePanel.description || responsePanel.empty_message || responsePanel.eyebrow)
-    : (rainfallPanel.points || []).length > 0 && (depthPanel.points || []).length > 0;
+    : (rainfallPanel.points || []).length > 0 && (responsePanel.points || []).length > 0;
   const historicalVisible = (historicalRangePanel.points || []).length > 0;
 
   togglePanel("responsePanel", responseVisible);
@@ -311,7 +311,7 @@ function applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPa
   analysisGrid.classList.toggle("analysis-grid--single", visiblePanelCount <= 1);
 
   if (!responseVisible || responsePlaceholder) {
-    showEmptyChart("response", responsePanel.empty_message || "River flow-rate event analysis will appear here once the rating-curve workflow is in place.");
+    showEmptyChart("response", responsePanel.empty_message || "River flow event analysis will appear here once the rating curve has been generated.");
   }
   if (!historicalVisible) {
     showEmptyChart("historicalRange", historicalRangePanel.empty_message || "Historical range data is not available yet.");
@@ -340,7 +340,7 @@ function renderRainfallChart(panel, reportingWindow) {
           borderColor: chartPalette.blue,
           borderWidth: 1.4,
           barThickness: "flex",
-          maxBarThickness: 24,
+          maxBarThickness: 30,
         },
       ],
     },
@@ -379,17 +379,18 @@ function renderDepthChart(panel, reportingWindow) {
   });
 }
 
-function renderResponseChart(panel, rainfallPanel, depthPanel, reportingWindow) {
+function renderResponseChart(panel, rainfallPanel, reportingWindow) {
   if (panel.mode === "placeholder") {
     responseChart?.destroy();
-    showEmptyChart("response", panel.empty_message || "River flow-rate event analysis will appear here once the rating-curve workflow is in place.");
+    showEmptyChart("response", panel.empty_message || "River flow event analysis will appear here once the rating curve has been generated.");
     return;
   }
 
   const rainfallPoints = rainfallPanel.points || [];
-  const depthPoints = depthPanel.points || [];
-  if (!rainfallPoints.length || !depthPoints.length) {
+  const flowPoints = panel.points || [];
+  if (!rainfallPoints.length || !flowPoints.length) {
     responseChart?.destroy();
+    showEmptyChart("response", panel.empty_message || "River flow event analysis is temporarily unavailable.");
     return;
   }
 
@@ -409,14 +410,14 @@ function renderResponseChart(panel, rainfallPanel, depthPanel, reportingWindow) 
           borderColor: chartPalette.blue,
           borderWidth: 1.2,
           barThickness: "flex",
-          maxBarThickness: 20,
+          maxBarThickness: 28,
         },
         {
           type: "line",
-          label: panel.depth_y_axis_label || depthPanel.y_axis_label || "Water Depth (m)",
-          data: depthPoints.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
+          label: panel.y_axis_label || "River Flow Rate (m³/s)",
+          data: flowPoints.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
           parsing: false,
-          yAxisID: "yDepth",
+          yAxisID: "yFlow",
           borderColor: chartPalette.cyan,
           backgroundColor: chartPalette.cyanFill,
           borderWidth: 2.2,
@@ -429,7 +430,7 @@ function renderResponseChart(panel, rainfallPanel, depthPanel, reportingWindow) 
     options: responseChartOptions(
       reportingWindow,
       panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
-      panel.depth_y_axis_label || depthPanel.y_axis_label || "Water Depth (m)"
+      panel.y_axis_label || "River Flow Rate (m³/s)"
     ),
   });
 }
@@ -726,8 +727,39 @@ function renderFooter(footer) {
   footerText.textContent = footer.text || "";
   footerText.hidden = !footer.text;
 
+  const contact = footer.contact || {};
+  const contactSection = document.getElementById("footerContact");
+  const contactItems = Array.isArray(contact.items) ? contact.items : [];
+  contactSection.hidden = !contact.title && !contactItems.length;
+  text("footerContactTitle", contact.title || "Contact");
+  const contactList = document.getElementById("footerContactList");
+  contactList.replaceChildren(...contactItems.map(renderContactItem));
+
   const strip = document.getElementById("partnerStrip");
   strip.replaceChildren(...(footer.partners || []).map(renderPartner));
+}
+
+function renderContactItem(item) {
+  const row = document.createElement("p");
+  row.className = "footer-contact-item";
+
+  const label = document.createElement("span");
+  label.className = "footer-contact-label";
+  label.textContent = `${item.label}:`;
+
+  const value = item.href ? document.createElement("a") : document.createElement("span");
+  value.className = "footer-contact-value";
+  value.textContent = item.value || "";
+  if (item.href) {
+    value.href = item.href;
+    value.rel = "noreferrer";
+    if (!item.href.startsWith("mailto:")) {
+      value.target = "_blank";
+    }
+  }
+
+  row.append(label, value);
+  return row;
 }
 
 function renderPartner(partner) {
@@ -835,7 +867,7 @@ function chartOptions(reportingWindow, yTitle) {
   };
 }
 
-function responseChartOptions(reportingWindow, rainfallTitle, depthTitle) {
+function responseChartOptions(reportingWindow, rainfallTitle, flowTitle) {
   const durationHours = (reportingWindow.end - reportingWindow.start) / (60 * 60 * 1000);
   const maxTicksLimit = durationHours > 30 ? 8 : 6;
 
@@ -899,7 +931,7 @@ function responseChartOptions(reportingWindow, rainfallTitle, depthTitle) {
           color: chartPalette.text,
         },
       },
-      yDepth: {
+      yFlow: {
         type: "linear",
         position: "right",
         beginAtZero: true,
@@ -911,7 +943,7 @@ function responseChartOptions(reportingWindow, rainfallTitle, depthTitle) {
         },
         title: {
           display: true,
-          text: depthTitle,
+          text: flowTitle,
           color: chartPalette.text,
         },
       },
