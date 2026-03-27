@@ -235,6 +235,8 @@ function renderDashboardPanels() {
   applyPanelVisibility(rainfallPanel, depthPanel);
   renderPanelCopy("rainfall", rainfallPanel);
   renderPanelCopy("depth", depthPanel);
+  renderContextChip("rainfallContextChip", currentWindowLabel());
+  renderContextChip("depthContextChip", currentWindowLabel());
   renderRainfallChart(rainfallPanel, reportingWindow);
   renderDepthChart(depthPanel, reportingWindow);
 }
@@ -252,14 +254,6 @@ function renderAnalysisPanels() {
   renderPanelCopy("response", responsePanel);
   renderPanelCopy("historicalRange", historicalRangePanel);
   renderContextChip("responseContextChip", currentWindowLabel());
-  renderContextChip(
-    "historicalRangeContextChip",
-    historicalRangePanel.window_days ? `${historicalRangePanel.window_days}-day context` : "Historical context"
-  );
-  renderContextChip(
-    "levelHeatmapContextChip",
-    levelHeatmapPanel.deployment_label ? "Full record" : "Historical context"
-  );
   applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel);
   renderResponseChart(responsePanel, rainfallPanel, reportingWindow);
   renderHistoricalRangeChart(historicalRangePanel);
