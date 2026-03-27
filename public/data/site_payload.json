@@ -509,8 +509,8 @@
           "date_label": "13/12/2025",
           "difference_from_average_m": 0.067,
           "max_level_m": 0.336,
-          "percent_difference_from_average": 24.9,
-          "percent_of_average": 124.9,
+          "percent_difference_from_average": 24.8,
+          "percent_of_average": 124.8,
           "week_index": 5,
           "weekday_index": 5
         },
@@ -687,7 +687,7 @@
         {
           "date": "2025-12-31",
           "date_label": "31/12/2025",
-          "difference_from_average_m": -0.145,
+          "difference_from_average_m": -0.146,
           "max_level_m": 0.124,
           "percent_difference_from_average": -54.1,
           "percent_of_average": 45.9,
@@ -979,8 +979,8 @@
           "date_label": "29/01/2026",
           "difference_from_average_m": 0.153,
           "max_level_m": 0.422,
-          "percent_difference_from_average": 56.8,
-          "percent_of_average": 156.8,
+          "percent_difference_from_average": 56.7,
+          "percent_of_average": 156.7,
           "week_index": 12,
           "weekday_index": 3
         },
@@ -1654,14 +1654,6 @@
       "eyebrow": "Event Analysis",
       "mode": "flow_overlay",
       "points": [
-        {
-          "timestamp": "2026-03-22T05:00:00Z",
-          "value": 0.011
-        },
-        {
-          "timestamp": "2026-03-22T05:15:00Z",
-          "value": 0.011
-        },
         {
           "timestamp": "2026-03-22T05:30:00Z",
           "value": 0.011
@@ -3577,6 +3569,14 @@
         {
           "timestamp": "2026-03-27T05:00:00Z",
           "value": 0.016
+        },
+        {
+          "timestamp": "2026-03-27T05:15:00Z",
+          "value": 0.016
+        },
+        {
+          "timestamp": "2026-03-27T05:30:00Z",
+          "value": 0.016
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -3649,7 +3649,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-03-27T05:18:51.999831Z"
+    "updated_at": "2026-03-27T05:33:51.202367Z"
   },
   "panels": {
     "depth": {
@@ -3662,16 +3662,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-03-22T05:00:00Z",
-          "value": 0.104
-        },
-        {
-          "timestamp": "2026-03-22T05:15:00Z",
-          "value": 0.103
-        },
-        {
           "timestamp": "2026-03-22T05:30:00Z",
-          "value": 0.103
+          "value": 0.102
         },
         {
           "timestamp": "2026-03-22T05:45:00Z",
@@ -5583,7 +5575,15 @@
         },
         {
           "timestamp": "2026-03-27T05:00:00Z",
+          "value": 0.116
+        },
+        {
+          "timestamp": "2026-03-27T05:15:00Z",
           "value": 0.117
+        },
+        {
+          "timestamp": "2026-03-27T05:30:00Z",
+          "value": 0.116
         }
       ],
       "title": "Observed Water Depth",
@@ -5600,14 +5600,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-03-27T04:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-22T05:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-03-22T05:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-22T05:45:00Z",
           "value": 0.0
@@ -7517,17 +7509,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-03-27T05:02:00Z",
-    "start_timestamp": "2026-03-26T05:03:00Z"
+    "end_timestamp": "2026-03-27T05:32:00Z",
+    "start_timestamp": "2026-03-26T05:33:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-03-27T05:02:00Z",
-      "start_timestamp": "2026-03-26T05:03:00Z"
+      "end_timestamp": "2026-03-27T05:32:00Z",
+      "start_timestamp": "2026-03-26T05:33:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-03-27T05:02:00Z",
-      "start_timestamp": "2026-03-22T05:03:00Z"
+      "end_timestamp": "2026-03-27T05:32:00Z",
+      "start_timestamp": "2026-03-22T05:33:00Z"
     }
   },
   "site": {
@@ -7543,7 +7535,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-27T05:18:52.194811Z",
+    "published_at": "2026-03-27T05:33:51.367794Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -7552,7 +7544,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.117
+      "value": 0.116
     },
     {
       "decimals": 3,
