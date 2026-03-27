@@ -293,6 +293,10 @@ h2 {
   margin-top: 0.35rem;
 }
 
+.window-switcher-note {
+  max-width: 34ch;
+}
+
 .window-switcher-controls {
   display: inline-flex;
   flex-wrap: wrap;

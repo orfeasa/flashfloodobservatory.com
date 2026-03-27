@@ -3590,11 +3590,6 @@
     "contact": {
       "items": [
         {
-          "href": "mailto:flashfloodobservatory@gmail.com",
-          "label": "Email",
-          "value": "flashfloodobservatory@gmail.com"
-        },
-        {
           "href": "https://www.linkedin.com/company/flash-flood-observatory/",
           "label": "LinkedIn",
           "value": "Flash Flood Observatory"
@@ -3626,7 +3621,7 @@
     ],
     "text": "",
     "title": "Observatory Partners"
-  },
+  }
   "notes": [
     {
       "label": "Why Boscastle",

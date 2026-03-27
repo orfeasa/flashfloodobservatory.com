@@ -48,7 +48,7 @@ The current site shell assumes:
 - the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series
 - the rainfall panel stays hidden when `panels.rainfall.points` is empty
 - partner logos render as individual white cards in a single row rather than inside a boxed footer panel
-- the footer also renders payload-driven contact links for the public observatory email and LinkedIn page
+- the footer also renders payload-driven public contact links such as LinkedIn
 
 ## Payload shape
 
