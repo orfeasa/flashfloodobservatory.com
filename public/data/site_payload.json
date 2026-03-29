@@ -471,8 +471,8 @@
           "date_label": "03/12/2025",
           "difference_from_average_m": 0.102,
           "max_level_m": 0.371,
-          "percent_difference_from_average": 37.8,
-          "percent_of_average": 137.8,
+          "percent_difference_from_average": 37.7,
+          "percent_of_average": 137.7,
           "week_index": 4,
           "weekday_index": 2
         },
@@ -631,8 +631,8 @@
           "date_label": "19/12/2025",
           "difference_from_average_m": 0.116,
           "max_level_m": 0.385,
-          "percent_difference_from_average": 43.0,
-          "percent_of_average": 143.0,
+          "percent_difference_from_average": 42.9,
+          "percent_of_average": 142.9,
           "week_index": 6,
           "weekday_index": 4
         },
@@ -679,7 +679,7 @@
         {
           "date": "2025-12-24",
           "date_label": "24/12/2025",
-          "difference_from_average_m": -0.017,
+          "difference_from_average_m": -0.018,
           "max_level_m": 0.252,
           "percent_difference_from_average": -6.5,
           "percent_of_average": 93.5,
@@ -809,7 +809,7 @@
         {
           "date": "2026-01-06",
           "date_label": "06/01/2026",
-          "difference_from_average_m": -0.124,
+          "difference_from_average_m": -0.125,
           "max_level_m": 0.145,
           "percent_difference_from_average": -46.2,
           "percent_of_average": 53.8,
@@ -829,7 +829,7 @@
         {
           "date": "2026-01-08",
           "date_label": "08/01/2026",
-          "difference_from_average_m": 0.27,
+          "difference_from_average_m": 0.269,
           "max_level_m": 0.539,
           "percent_difference_from_average": 100.1,
           "percent_of_average": 200.1,
@@ -1021,8 +1021,8 @@
           "date_label": "27/01/2026",
           "difference_from_average_m": 0.49,
           "max_level_m": 0.759,
-          "percent_difference_from_average": 182.0,
-          "percent_of_average": 282.0,
+          "percent_difference_from_average": 181.9,
+          "percent_of_average": 281.9,
           "week_index": 12,
           "weekday_index": 1
         },
@@ -1071,8 +1071,8 @@
           "date_label": "01/02/2026",
           "difference_from_average_m": 0.148,
           "max_level_m": 0.417,
-          "percent_difference_from_average": 55.0,
-          "percent_of_average": 155.0,
+          "percent_difference_from_average": 54.9,
+          "percent_of_average": 154.9,
           "week_index": 12,
           "weekday_index": 6
         },
@@ -1091,8 +1091,8 @@
           "date_label": "03/02/2026",
           "difference_from_average_m": 0.065,
           "max_level_m": 0.334,
-          "percent_difference_from_average": 24.2,
-          "percent_of_average": 124.2,
+          "percent_difference_from_average": 24.1,
+          "percent_of_average": 124.1,
           "week_index": 13,
           "weekday_index": 1
         },
@@ -1349,7 +1349,7 @@
         {
           "date": "2026-03-01",
           "date_label": "01/03/2026",
-          "difference_from_average_m": 0.133,
+          "difference_from_average_m": 0.132,
           "max_level_m": 0.402,
           "percent_difference_from_average": 49.2,
           "percent_of_average": 149.2,
@@ -1461,8 +1461,8 @@
           "date_label": "12/03/2026",
           "difference_from_average_m": 0.046,
           "max_level_m": 0.316,
-          "percent_difference_from_average": 17.3,
-          "percent_of_average": 117.3,
+          "percent_difference_from_average": 17.2,
+          "percent_of_average": 117.2,
           "week_index": 18,
           "weekday_index": 3
         },
@@ -1571,8 +1571,8 @@
           "date_label": "23/03/2026",
           "difference_from_average_m": -0.134,
           "max_level_m": 0.135,
-          "percent_difference_from_average": -49.8,
-          "percent_of_average": 50.2,
+          "percent_difference_from_average": -49.9,
+          "percent_of_average": 50.1,
           "week_index": 20,
           "weekday_index": 0
         },
@@ -1730,30 +1730,6 @@
       "eyebrow": "Event Analysis",
       "mode": "flow_overlay",
       "points": [
-        {
-          "timestamp": "2026-03-24T05:00:00Z",
-          "value": 0.022
-        },
-        {
-          "timestamp": "2026-03-24T05:05:00Z",
-          "value": 0.022
-        },
-        {
-          "timestamp": "2026-03-24T05:10:00Z",
-          "value": 0.022
-        },
-        {
-          "timestamp": "2026-03-24T05:15:00Z",
-          "value": 0.022
-        },
-        {
-          "timestamp": "2026-03-24T05:20:00Z",
-          "value": 0.022
-        },
-        {
-          "timestamp": "2026-03-24T05:25:00Z",
-          "value": 0.022
-        },
         {
           "timestamp": "2026-03-24T05:30:00Z",
           "value": 0.022
@@ -7493,6 +7469,30 @@
         {
           "timestamp": "2026-03-29T05:00:00Z",
           "value": 0.012
+        },
+        {
+          "timestamp": "2026-03-29T05:05:00Z",
+          "value": 0.012
+        },
+        {
+          "timestamp": "2026-03-29T05:10:00Z",
+          "value": 0.012
+        },
+        {
+          "timestamp": "2026-03-29T05:15:00Z",
+          "value": 0.012
+        },
+        {
+          "timestamp": "2026-03-29T05:20:00Z",
+          "value": 0.012
+        },
+        {
+          "timestamp": "2026-03-29T05:25:00Z",
+          "value": 0.011
+        },
+        {
+          "timestamp": "2026-03-29T05:30:00Z",
+          "value": 0.011
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -7565,7 +7565,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-03-29T05:18:52.382441Z"
+    "updated_at": "2026-03-29T05:33:57.336346Z"
   },
   "panels": {
     "depth": {
@@ -7577,14 +7577,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-03-24T05:00:00Z",
-          "value": 0.133
-        },
-        {
-          "timestamp": "2026-03-24T05:15:00Z",
-          "value": 0.133
-        },
         {
           "timestamp": "2026-03-24T05:30:00Z",
           "value": 0.133
@@ -9500,6 +9492,14 @@
         {
           "timestamp": "2026-03-29T05:00:00Z",
           "value": 0.105
+        },
+        {
+          "timestamp": "2026-03-29T05:15:00Z",
+          "value": 0.104
+        },
+        {
+          "timestamp": "2026-03-29T05:30:00Z",
+          "value": 0.104
         }
       ],
       "title": "Observed Water Depth",
@@ -9516,14 +9516,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-03-29T04:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-24T05:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-03-24T05:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-24T05:45:00Z",
           "value": 0.0
@@ -11433,17 +11425,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-03-29T05:02:00Z",
-    "start_timestamp": "2026-03-28T05:03:00Z"
+    "end_timestamp": "2026-03-29T05:32:00Z",
+    "start_timestamp": "2026-03-28T05:33:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-03-29T05:02:00Z",
-      "start_timestamp": "2026-03-28T05:03:00Z"
+      "end_timestamp": "2026-03-29T05:32:00Z",
+      "start_timestamp": "2026-03-28T05:33:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-03-29T05:02:00Z",
-      "start_timestamp": "2026-03-24T05:03:00Z"
+      "end_timestamp": "2026-03-29T05:32:00Z",
+      "start_timestamp": "2026-03-24T05:33:00Z"
     }
   },
   "site": {
@@ -11459,7 +11451,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-03-29T05:18:52.568941Z",
+    "published_at": "2026-03-29T05:33:57.478743Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -11468,7 +11460,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.105
+      "value": 0.104
     },
     {
       "decimals": 3,
@@ -11482,7 +11474,7 @@
       "label": "Minimum 24h River Level",
       "note": "Minimum 24h water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.104
+      "value": 0.103
     },
     {
       "decimals": 3,
