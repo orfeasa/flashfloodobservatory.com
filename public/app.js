@@ -98,8 +98,8 @@ function renderOfficialAlert(alert) {
   banner.hidden = false;
   banner.className = `official-alert official-alert--${state.replaceAll("_", "-")}`;
 
-  text("officialAlertEyebrow", alert.eyebrow || "Official EA Flood Alerts and Warnings");
-  text("officialAlertTitle", alert.label || "Official EA flood alerts and warnings unavailable");
+  text("officialAlertEyebrow", alert.eyebrow || "Official Environment Agency Flood Alerts and Warnings");
+  text("officialAlertTitle", alert.label || "Official Environment Agency flood alerts and warnings unavailable");
   text("officialAlertMessage", alert.message || alert.disclaimer || "");
   text(
     "officialAlertUpdated",
@@ -576,25 +576,27 @@ function buildLevelHeatmapSvg(panel) {
     ? legend.tick_values.map((value) => Number(value)).filter((value) => Number.isFinite(value))
     : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410, 430, 450];
   const defaultBandColors = [
-    "#5B2F05",
-    "#7A4710",
-    "#A36B2B",
+    "#6B3A09",
+    "#8B5618",
+    "#B9823A",
     "#F4F5F1",
     "#EEF3FF",
-    "#E3EBFF",
-    "#D7E2FF",
-    "#CAD8FF",
-    "#BCD0FF",
-    "#A7BCFF",
-    "#91AAFF",
-    "#7C98F8",
-    "#6281F0",
-    "#4B71E4",
-    "#3D66D6",
-    "#2B56BF",
-    "#1F4AA8",
-    "#081F63",
-    "#020813",
+    "#E4ECFF",
+    "#D9E4FF",
+    "#CDD9FF",
+    "#BFCFFF",
+    "#B0C3FF",
+    "#A0B6FF",
+    "#8FA6FF",
+    "#7A92F5",
+    "#647BEA",
+    "#4C65DE",
+    "#3550D2",
+    "#5147C8",
+    "#6C4DCD",
+    "#8757D8",
+    "#A26BE6",
+    "#BC82F2",
   ];
   const legendBandColors = Array.isArray(legend.band_colors) && legend.band_colors.length === Math.max(legendEdges.length - 1, 0)
     ? legend.band_colors
@@ -699,27 +701,27 @@ function selectHeatmapLegendLabelValues(edges) {
 function heatmapColor(percentValue, legendScale) {
   const edges = Array.isArray(legendScale?.edges) ? legendScale.edges : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410, 430, 450];
   const colors = Array.isArray(legendScale?.colors) ? legendScale.colors : [
-    "#5B2F05",
-    "#7A4710",
-    "#A36B2B",
+    "#6B3A09",
+    "#8B5618",
+    "#B9823A",
     "#F4F5F1",
     "#EEF3FF",
-    "#E3EBFF",
-    "#D7E2FF",
-    "#CAD8FF",
-    "#BCD0FF",
-    "#A7BCFF",
-    "#91AAFF",
-    "#7C98F8",
-    "#6281F0",
-    "#4B71E4",
-    "#3D66D6",
-    "#2B56BF",
-    "#1F4AA8",
-    "#081F63",
-    "#020813",
-    "#01040B",
-    "#000000",
+    "#E4ECFF",
+    "#D9E4FF",
+    "#CDD9FF",
+    "#BFCFFF",
+    "#B0C3FF",
+    "#A0B6FF",
+    "#8FA6FF",
+    "#7A92F5",
+    "#647BEA",
+    "#4C65DE",
+    "#3550D2",
+    "#5147C8",
+    "#6C4DCD",
+    "#8757D8",
+    "#A26BE6",
+    "#BC82F2",
   ];
   if (!edges.length || !colors.length) {
     return "#F4F5F1";
