@@ -39,13 +39,14 @@ The current site shell assumes:
 - the rainfall and river-level charts share a single `24 hours` / `5 days` toggle above the dashboard grid
 - a second analysis row sits beneath the operational charts
 - the first analysis panel becomes a real flow-plus-rainfall Event Analysis chart when the sidecar includes flow points, and otherwise falls back to a placeholder message; its white duplicate title is intentionally hidden so only the yellow heading remains
-- the second analysis panel is a 30-day scatter showing each completed day's maximum water depth against its corresponding 24h range
-- a full-width historical heatmap sits below the analysis row and shows each completed day's smoothed maximum river level as a percentage of the observatory-wide average since deployment
-- only the third description line under each chart changes with the selected window
+- the second analysis panel is a deployment-to-date scatter showing each completed day's 24h water depth range on the x-axis against its corresponding maximum 24h water depth on the y-axis
+- a full-width historical heatmap sits below the analysis row and shows each completed day's maximum river level as a percentage of the observatory-wide average since deployment, using a blue-to-purple high-end palette that avoids black for extreme values
+- chart copy is payload-driven: rainfall, river-level, and Event Analysis panels can swap description text by window, and Event Analysis plus the historical scatter and heatmap can also render payload-provided footer text below the chart
 - the rainfall panel renders 15-minute rainfall totals across the last 5 days when `panels.rainfall.points` is populated
 - rainfall and depth charts use the selected exported window from `reporting_windows`, so their x-axes and tick spacing stay aligned in both modes
 - the depth panel is live from the operational sidecar
-- the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series
+- the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series using a trailing 24-hour window ending at the latest observation
+- the fifth summary card is the all-time maximum recorded trailing 24-hour range from the payload, not a client-side recomputation
 - the rainfall panel stays hidden when `panels.rainfall.points` is empty
 - partner logos render as individual white cards in a single row rather than inside a boxed footer panel
 - the footer also renders payload-driven public contact links such as LinkedIn
@@ -146,10 +147,12 @@ Array of cards, each with:
 Current live meaning:
 
 - current river level
-- maximum 24h river level
-- minimum 24h river level
-- current 24h river level range
-- maximum recorded 24h river level range
+- maximum water depth over the trailing last 24 hours
+- minimum water depth over the trailing last 24 hours
+- water depth range over the trailing last 24 hours
+- maximum recorded trailing 24-hour water-depth range since deployment, with its record date
+
+These trailing 24-hour cards can legitimately differ from completed-day CSV summaries, because the dashboard metrics are rolling windows rather than midnight-to-midnight calendar days.
 
 ### `panels.rainfall` and `panels.depth`
 
@@ -180,9 +183,11 @@ Point shape:
 - `response.title`
 - `response.description`
 - `response.subtitle`
-- `response.description`
 - `response.descriptions.24h`
 - `response.descriptions.5d`
+- `response.footer_description`
+- `response.footer_descriptions.24h`
+- `response.footer_descriptions.5d`
 - `response.mode`
 - `response.points`
 - `response.rainfall_y_axis_label`
@@ -190,14 +195,17 @@ Point shape:
 - `response.empty_message`
 - `historical_range.eyebrow`
 - `historical_range.title`
+- `historical_range.subtitle`
 - `historical_range.description`
+- `historical_range.footer_description`
+- `historical_range.x_axis_label`
 - `historical_range.y_axis_label`
 - `historical_range.points`
 - `historical_range.empty_message`
-- `historical_range.window_days`
 - `level_heatmap.eyebrow`
 - `level_heatmap.title`
 - `level_heatmap.description`
+- `level_heatmap.footer_description`
 - `level_heatmap.average_label`
 - `level_heatmap.average_level_m`
 - `level_heatmap.deployment_label`
@@ -207,9 +215,10 @@ Point shape:
 - `level_heatmap.month_ticks[]`
 - `level_heatmap.cells[]`
 - `level_heatmap.legend`
+- `level_heatmap.value_label`
 - `level_heatmap.empty_message`
 
-The website now treats `analysis_panels.response` as a payload-driven Event Analysis chart when `response.points` are present, while `historical_range.points` and `level_heatmap` both come directly from the sidecar payload. The heatmap colours represent each day's smoothed maximum river level as a stepped percent of the observatory-wide average carried in the same payload, with 20-point legend bands up to 450%.
+The website now treats `analysis_panels.response` as a payload-driven Event Analysis chart when `response.points` are present, while `historical_range` and `level_heatmap` both come directly from the sidecar payload. The historical scatter is deployment-to-date with `x = 24h Water Depth Range (m)` and `y = Maximum 24h Water Depth (m)`. The heatmap colours represent each day's maximum river level as a stepped percent of the observatory-wide average carried in the same payload, with 20-point legend bands up to 450% and a blue-to-purple high-end palette chosen to avoid confusion with missing black cells on the dark dashboard.
 
 ### `notes`
 
