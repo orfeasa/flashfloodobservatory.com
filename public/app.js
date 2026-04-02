@@ -498,8 +498,8 @@ function renderHistoricalRangeChart(panel) {
           ],
         },
         options: historicalScatterOptions(
-          panel.x_axis_label || "24h Water Depth Range (m)",
-          panel.y_axis_label || "Maximum 24h Water Depth (m)"
+          panel.x_axis_label || "Daily Water Depth Range (m)",
+          panel.y_axis_label || "Maximum Daily Water Depth (m)"
         ),
       }
     : {
@@ -507,7 +507,7 @@ function renderHistoricalRangeChart(panel) {
         data: {
           datasets: [
             {
-              label: panel.y_axis_label || "Maximum 24h Water Depth (m)",
+              label: panel.y_axis_label || "Maximum Daily Water Depth (m)",
               data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
               parsing: false,
               borderColor: chartPalette.green,
@@ -520,7 +520,7 @@ function renderHistoricalRangeChart(panel) {
             },
           ],
         },
-        options: historicalTimeSeriesOptions(points, panel.y_axis_label || "Maximum 24h Water Depth (m)"),
+        options: historicalTimeSeriesOptions(points, panel.y_axis_label || "Maximum Daily Water Depth (m)"),
       });
 }
 
@@ -1115,8 +1115,8 @@ function historicalScatterOptions(xTitle, yTitle) {
           label(context) {
             const raw = context.raw || {};
             return [
-              `24h water depth range: ${Number(raw.x).toFixed(3)} m`,
-              `Maximum 24h water depth: ${Number(raw.y).toFixed(3)} m`,
+              `Daily water depth range: ${Number(raw.x).toFixed(3)} m`,
+              `Maximum daily water depth: ${Number(raw.y).toFixed(3)} m`,
             ];
           },
         },
