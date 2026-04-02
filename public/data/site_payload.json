@@ -2356,27 +2356,27 @@
       "eyebrow": "River Levels",
       "legend": {
         "band_colors": [
-          "#5B2F05",
-          "#7A4710",
-          "#A36B2B",
+          "#6B3A09",
+          "#8B5618",
+          "#B9823A",
           "#F4F5F1",
           "#EEF3FF",
-          "#E3EBFF",
-          "#D7E2FF",
-          "#CAD8FF",
-          "#BCD0FF",
-          "#A7BCFF",
-          "#91AAFF",
-          "#7C98F8",
-          "#6281F0",
-          "#4B71E4",
-          "#3D66D6",
-          "#2B56BF",
-          "#1F4AA8",
-          "#081F63",
-          "#020813",
-          "#01040B",
-          "#000000"
+          "#E4ECFF",
+          "#D9E4FF",
+          "#CDD9FF",
+          "#BFCFFF",
+          "#B0C3FF",
+          "#A0B6FF",
+          "#8FA6FF",
+          "#7A92F5",
+          "#647BEA",
+          "#4C65DE",
+          "#3550D2",
+          "#5147C8",
+          "#6C4DCD",
+          "#8757D8",
+          "#A26BE6",
+          "#BC82F2"
         ],
         "center_percent": 100.0,
         "label": "% of Average",
@@ -4443,7 +4443,7 @@
     "api_url": "https://environment.data.gov.uk/flood-monitoring/id/floods?lat=50.6869&long=-4.6928&dist=5.0&min-severity=4",
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
-    "eyebrow": "Official EA Flood Alerts and Warnings",
+    "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
     "label": "There are no flood warnings or alerts.",
     "message": "No Environment Agency flood warnings or alerts are currently active in Boscastle, Cornwall.",
     "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
@@ -4452,7 +4452,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-04-02T13:04:16.841419Z"
+    "updated_at": "2026-04-02T13:19:08.140944Z"
   },
   "panels": {
     "depth": {
@@ -8294,7 +8294,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-04-02T13:04:17.052870Z",
+    "published_at": "2026-04-02T13:19:08.450988Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -8308,28 +8308,28 @@
     {
       "decimals": 3,
       "label": "Maximum 24h River Level",
-      "note": "Maximum 24h water depth at the Flash Flood Observatory",
+      "note": "Maximum water depth in the trailing 24-hour window at the Flash Flood Observatory",
       "unit": "m",
       "value": 0.114
     },
     {
       "decimals": 3,
       "label": "Minimum 24h River Level",
-      "note": "Minimum 24h water depth at the Flash Flood Observatory",
+      "note": "Minimum water depth in the trailing 24-hour window at the Flash Flood Observatory",
       "unit": "m",
       "value": 0.092
     },
     {
       "decimals": 3,
       "label": "Current 24h River Level Range",
-      "note": "Current 24h water depth range at the Flash Flood Observatory",
+      "note": "Current range across the trailing 24-hour window at the Flash Flood Observatory",
       "unit": "m",
       "value": 0.021
     },
     {
       "decimals": 3,
       "label": "Maximum Recorded 24h River Level Range",
-      "note": "Recorded at the Flash Flood Observatory on 24/01/2026",
+      "note": "Maximum trailing 24-hour range recorded at the Flash Flood Observatory, ending on 24/01/2026",
       "unit": "m",
       "value": 0.827
     }
