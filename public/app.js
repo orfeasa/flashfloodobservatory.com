@@ -264,6 +264,7 @@ function buildPanelForWindow(panel, windowId, reportingWindow) {
   return {
     ...panel,
     description: panel.descriptions?.[windowId] || panel.description || "",
+    footer_description: panel.footer_descriptions?.[windowId] || panel.footer_description || "",
     points: filterPointsForWindow(panel.points || [], reportingWindow),
   };
 }
@@ -295,6 +296,7 @@ function renderPanelCopy(prefix, panel) {
   setOptionalText(`${prefix}Title`, panel.title || "");
   setOptionalText(`${prefix}Subtitle`, panel.subtitle || "");
   setOptionalText(`${prefix}Description`, panel.description || "");
+  setOptionalText(`${prefix}FooterDescription`, panel.footer_description || "");
 }
 
 function renderContextChip(elementId, value) {
