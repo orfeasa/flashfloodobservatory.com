@@ -418,6 +418,10 @@ h2 {
   max-width: 72ch;
 }
 
+.panel-heatmap .panel-footer-copy {
+  max-width: none;
+}
+
 .chart-frame {
   margin-top: 1rem;
   padding: 0.75rem;
