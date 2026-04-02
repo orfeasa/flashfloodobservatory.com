@@ -527,6 +527,7 @@ function renderHistoricalRangeChart(panel) {
 function renderLevelHeatmap(panel) {
   const wrapper = document.getElementById("levelHeatmapPanel");
   const description = document.getElementById("levelHeatmapDescription");
+  const footerDescription = document.getElementById("levelHeatmapFooterDescription");
   const average = document.getElementById("levelHeatmapAverage");
   const mount = document.getElementById("levelHeatmapMount");
   const empty = document.getElementById("levelHeatmapEmpty");
@@ -544,6 +545,8 @@ function renderLevelHeatmap(panel) {
   text("levelHeatmapEyebrow", panel.eyebrow || "River Levels");
   text("levelHeatmapTitle", panel.title || "% of Flash Flood Observatory Average");
   description.textContent = panel.description || "";
+  footerDescription.textContent = panel.footer_description || "";
+  footerDescription.hidden = !panel.footer_description;
   average.textContent = panel.average_label || "";
   average.hidden = !panel.average_label;
 
