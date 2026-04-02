@@ -40,6 +40,7 @@ The current site shell assumes:
 - a second analysis row sits beneath the operational charts
 - the first analysis panel becomes a real flow-plus-rainfall Event Analysis chart when the sidecar includes flow points, and otherwise falls back to a placeholder message; its white duplicate title is intentionally hidden so only the yellow heading remains
 - the second analysis panel is a deployment-to-date scatter showing each completed day's daily water depth range on the x-axis against its corresponding maximum daily water depth on the y-axis
+- that historical scatter should render the full deployment-to-date payload point set, with numeric x/y coercion and axis extents derived from the plotted points so high-event outliers remain visible
 - a full-width historical heatmap sits below the analysis row and shows each completed day's maximum daily water depth as a percentage of the observatory-wide average since deployment, using a blue-to-purple high-end palette that avoids black for extreme values
 - chart copy is payload-driven: rainfall, river-level, and Event Analysis panels can swap description text by window, and Event Analysis plus the historical scatter and heatmap can also render payload-provided footer text below the chart
 - the rainfall panel renders 15-minute rainfall totals across the last 5 days when `panels.rainfall.points` is populated
@@ -218,7 +219,7 @@ Point shape:
 - `level_heatmap.value_label`
 - `level_heatmap.empty_message`
 
-The website now treats `analysis_panels.response` as a payload-driven Event Analysis chart when `response.points` are present, while `historical_range` and `level_heatmap` both come directly from the sidecar payload. The historical scatter is deployment-to-date with `x = Daily Water Depth Range (m)` and `y = Maximum Daily Water Depth (m)`. The heatmap colours represent each day's maximum daily water depth as a stepped percent of the observatory-wide average carried in the same payload, with 20-point legend bands up to 450% and a blue-to-purple high-end palette chosen to avoid confusion with missing black cells on the dark dashboard.
+The website now treats `analysis_panels.response` as a payload-driven Event Analysis chart when `response.points` are present, while `historical_range` and `level_heatmap` both come directly from the sidecar payload. The historical scatter is deployment-to-date with `x = Daily Water Depth Range (m)` and `y = Maximum Daily Water Depth (m)`, and the frontend should coerce those values to numbers before plotting and derive the linear axis extents from the plotted point set so the largest events remain visible. The heatmap colours represent each day's maximum daily water depth as a stepped percent of the observatory-wide average carried in the same payload, with 20-point legend bands up to 450% and a blue-to-purple high-end palette chosen to avoid confusion with missing black cells on the dark dashboard.
 
 ### `notes`
 

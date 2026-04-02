@@ -26,6 +26,7 @@ Rules for future changes:
 - Keep rainfall and depth charts locked to the same exported window from `reporting_windows` so their x-axes match exactly in both modes.
 - Keep `analysis_panels.response` payload-driven. When `response.points` are present, render a real river-flow line against rainfall bars, keep only the yellow panel heading visible, and label the right axis as `Flow Rate`; otherwise show the payload-provided placeholder message.
 - Treat `analysis_panels.historical_range` as the only source for the deployment-to-date peak-vs-range scatter chart, with completed-day daily water depth range on the x-axis and completed-day maximum daily water depth on the y-axis.
+- Coerce historical scatter `x` and `y` values to numbers before plotting and derive the linear axis extents from the plotted point set so high-event outliers remain visible.
 - Treat `analysis_panels.level_heatmap` as the only source for the historical river-level heatmap, including its average label, calendar cells, and legend values.
 - Heatmap colours should reflect each completed day's maximum daily water depth as a stepped percent of the observatory-wide average carried in that same payload, with 20-point legend bands up to 450% and a blue-to-purple high-end palette that avoids black.
 - The fifth summary card should reflect the all-time max 24h range record from the payload, not a client-side recomputation.
