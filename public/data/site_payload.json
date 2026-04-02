@@ -311,8 +311,8 @@
           "date_label": "17/11/2025",
           "difference_from_average_m": 0.032,
           "max_level_m": 0.302,
-          "percent_difference_from_average": 12.1,
-          "percent_of_average": 112.1,
+          "percent_difference_from_average": 12.0,
+          "percent_of_average": 112.0,
           "week_index": 2,
           "weekday_index": 0
         },
@@ -411,8 +411,8 @@
           "date_label": "27/11/2025",
           "difference_from_average_m": 0.006,
           "max_level_m": 0.275,
-          "percent_difference_from_average": 2.3,
-          "percent_of_average": 102.3,
+          "percent_difference_from_average": 2.2,
+          "percent_of_average": 102.2,
           "week_index": 3,
           "weekday_index": 3
         },
@@ -601,8 +601,8 @@
           "date_label": "16/12/2025",
           "difference_from_average_m": 0.23,
           "max_level_m": 0.499,
-          "percent_difference_from_average": 85.4,
-          "percent_of_average": 185.4,
+          "percent_difference_from_average": 85.3,
+          "percent_of_average": 185.3,
           "week_index": 6,
           "weekday_index": 1
         },
@@ -621,8 +621,8 @@
           "date_label": "18/12/2025",
           "difference_from_average_m": 0.229,
           "max_level_m": 0.498,
-          "percent_difference_from_average": 85.2,
-          "percent_of_average": 185.2,
+          "percent_difference_from_average": 85.1,
+          "percent_of_average": 185.1,
           "week_index": 6,
           "weekday_index": 3
         },
@@ -751,8 +751,8 @@
           "date_label": "31/12/2025",
           "difference_from_average_m": -0.145,
           "max_level_m": 0.124,
-          "percent_difference_from_average": -54.0,
-          "percent_of_average": 46.0,
+          "percent_difference_from_average": -54.1,
+          "percent_of_average": 45.9,
           "week_index": 8,
           "weekday_index": 2
         },
@@ -931,8 +931,8 @@
           "date_label": "18/01/2026",
           "difference_from_average_m": -0.104,
           "max_level_m": 0.165,
-          "percent_difference_from_average": -38.7,
-          "percent_of_average": 61.3,
+          "percent_difference_from_average": -38.8,
+          "percent_of_average": 61.2,
           "week_index": 10,
           "weekday_index": 6
         },
@@ -991,8 +991,8 @@
           "date_label": "24/01/2026",
           "difference_from_average_m": 0.806,
           "max_level_m": 1.075,
-          "percent_difference_from_average": 299.6,
-          "percent_of_average": 399.6,
+          "percent_difference_from_average": 299.5,
+          "percent_of_average": 399.5,
           "week_index": 11,
           "weekday_index": 5
         },
@@ -1021,8 +1021,8 @@
           "date_label": "27/01/2026",
           "difference_from_average_m": 0.49,
           "max_level_m": 0.759,
-          "percent_difference_from_average": 182.1,
-          "percent_of_average": 282.1,
+          "percent_difference_from_average": 182.0,
+          "percent_of_average": 282.0,
           "week_index": 12,
           "weekday_index": 1
         },
@@ -1631,8 +1631,8 @@
           "date_label": "29/03/2026",
           "difference_from_average_m": -0.07,
           "max_level_m": 0.2,
-          "percent_difference_from_average": -25.8,
-          "percent_of_average": 74.2,
+          "percent_difference_from_average": -25.9,
+          "percent_of_average": 74.1,
           "week_index": 20,
           "weekday_index": 6
         },
@@ -1659,7 +1659,7 @@
         {
           "date": "2026-04-01",
           "date_label": "01/04/2026",
-          "difference_from_average_m": -0.151,
+          "difference_from_average_m": -0.152,
           "max_level_m": 0.118,
           "percent_difference_from_average": -56.3,
           "percent_of_average": 43.7,
@@ -1774,30 +1774,6 @@
       "eyebrow": "Event Analysis",
       "mode": "flow_overlay",
       "points": [
-        {
-          "timestamp": "2026-03-28T07:00:00Z",
-          "value": 0.012
-        },
-        {
-          "timestamp": "2026-03-28T07:05:00Z",
-          "value": 0.012
-        },
-        {
-          "timestamp": "2026-03-28T07:10:00Z",
-          "value": 0.012
-        },
-        {
-          "timestamp": "2026-03-28T07:15:00Z",
-          "value": 0.012
-        },
-        {
-          "timestamp": "2026-03-28T07:20:00Z",
-          "value": 0.012
-        },
-        {
-          "timestamp": "2026-03-28T07:25:00Z",
-          "value": 0.012
-        },
         {
           "timestamp": "2026-03-28T07:30:00Z",
           "value": 0.012
@@ -7537,6 +7513,30 @@
         {
           "timestamp": "2026-04-02T07:00:00Z",
           "value": 0.009
+        },
+        {
+          "timestamp": "2026-04-02T07:05:00Z",
+          "value": 0.009
+        },
+        {
+          "timestamp": "2026-04-02T07:10:00Z",
+          "value": 0.009
+        },
+        {
+          "timestamp": "2026-04-02T07:15:00Z",
+          "value": 0.009
+        },
+        {
+          "timestamp": "2026-04-02T07:20:00Z",
+          "value": 0.009
+        },
+        {
+          "timestamp": "2026-04-02T07:25:00Z",
+          "value": 0.009
+        },
+        {
+          "timestamp": "2026-04-02T07:30:00Z",
+          "value": 0.009
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -7609,7 +7609,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-04-02T07:18:57.015121Z"
+    "updated_at": "2026-04-02T07:33:57.263650Z"
   },
   "panels": {
     "depth": {
@@ -7621,14 +7621,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-03-28T07:00:00Z",
-          "value": 0.106
-        },
-        {
-          "timestamp": "2026-03-28T07:15:00Z",
-          "value": 0.105
-        },
         {
           "timestamp": "2026-03-28T07:30:00Z",
           "value": 0.105
@@ -9543,7 +9535,15 @@
         },
         {
           "timestamp": "2026-04-02T07:00:00Z",
-          "value": 0.094
+          "value": 0.095
+        },
+        {
+          "timestamp": "2026-04-02T07:15:00Z",
+          "value": 0.096
+        },
+        {
+          "timestamp": "2026-04-02T07:30:00Z",
+          "value": 0.095
         }
       ],
       "title": "Observed Water Depth",
@@ -9560,14 +9560,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-04-02T04:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-28T07:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-03-28T07:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-28T07:45:00Z",
           "value": 0.0
@@ -11445,17 +11437,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-04-02T07:03:00Z",
-    "start_timestamp": "2026-04-01T07:04:00Z"
+    "end_timestamp": "2026-04-02T07:33:00Z",
+    "start_timestamp": "2026-04-01T07:34:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-04-02T07:03:00Z",
-      "start_timestamp": "2026-04-01T07:04:00Z"
+      "end_timestamp": "2026-04-02T07:33:00Z",
+      "start_timestamp": "2026-04-01T07:34:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-04-02T07:03:00Z",
-      "start_timestamp": "2026-03-28T07:04:00Z"
+      "end_timestamp": "2026-04-02T07:33:00Z",
+      "start_timestamp": "2026-03-28T07:34:00Z"
     }
   },
   "site": {
@@ -11471,7 +11463,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-04-02T07:18:57.253179Z",
+    "published_at": "2026-04-02T07:33:57.391289Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -11480,7 +11472,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.094
+      "value": 0.095
     },
     {
       "decimals": 3,
