@@ -2352,9 +2352,10 @@
         }
       ],
       "deployment_label": "November 2025",
-      "description": "Maximum daily river level as a percentage of the average level recorded since the Flash Flood Observatory deployment in November 2025 (0.269 m)",
+      "description": "This heatmap shows the maximum 24h recorded water depth as a percentage of the average water depth recorded since the Flash Flood Observatory deployment in November 2025 (0.269 m). Each cell represents a specific day of the week and month, allowing patterns in river behaviour to be seen across the Observatory's operation. The colours indicate how each day's maximum level compares to the average: days close to the average appear white, wetter-than-average days appear blue or purple, and drier-than-average days appear brown.",
       "empty_message": "Daily maximum river-level heatmap data will appear here after the historical record is built.",
       "eyebrow": "River Levels",
+      "footer_description": "This makes it easy to identify periods of typical flow, sustained dry spells, and clusters of high-water days associated with storm events or rapid catchment response. A value such as 30% means the river reached 0.30 x the average (0.30 x 0.269 m = 0.0808 m, represented in brown), while 450% means 4.50 x the average (4.50 x 0.269 m = 1.2126 m, represented in purple).",
       "legend": {
         "band_colors": [
           "#6B3A09",
@@ -4458,7 +4459,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-04-02T13:34:13.478275Z"
+    "updated_at": "2026-04-02T13:49:06.369053Z"
   },
   "panels": {
     "depth": {
@@ -8292,7 +8293,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-04-02T13:34:13.711054Z",
+    "published_at": "2026-04-02T13:49:06.598747Z",
     "state": "Online"
   },
   "summary_metrics": [
