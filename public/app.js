@@ -465,13 +465,22 @@ function renderResponseChart(panel, rainfallPanel, reportingWindow) {
 
 function renderHistoricalRangeChart(panel) {
   const points = panel.points || [];
+  const scatterPoints = points
+    .map((point) => ({
+      x: Number(point.x),
+      y: Number(point.y),
+      date: point.date,
+      timestamp: toEpochMs(point.timestamp),
+    }))
+    .filter((point) => Number.isFinite(point.x) && Number.isFinite(point.y));
+
   if (!points.length) {
     showEmptyChart("historicalRange", panel.empty_message || "Historical range data is not available yet.");
     historicalRangeChart?.destroy();
     return;
   }
 
-  const scatterMode = points.some((point) => Number.isFinite(Number(point.x)) && Number.isFinite(Number(point.y)));
+  const scatterMode = scatterPoints.length > 0;
 
   hideEmptyChart("historicalRange");
   historicalRangeChart?.destroy();
@@ -482,12 +491,7 @@ function renderHistoricalRangeChart(panel) {
           datasets: [
             {
               label: panel.subtitle || panel.y_axis_label || "Daily Range and Peak Levels",
-              data: points.map((point) => ({
-                x: point.x,
-                y: point.y,
-                date: point.date,
-                timestamp: toEpochMs(point.timestamp),
-              })),
+              data: scatterPoints,
               parsing: false,
               pointBackgroundColor: chartPalette.green,
               pointBorderColor: "rgba(9, 19, 31, 0.92)",
@@ -498,6 +502,7 @@ function renderHistoricalRangeChart(panel) {
           ],
         },
         options: historicalScatterOptions(
+          scatterPoints,
           panel.x_axis_label || "Daily Water Depth Range (m)",
           panel.y_axis_label || "Maximum Daily Water Depth (m)"
         ),
@@ -1093,7 +1098,14 @@ function historicalTimeSeriesOptions(points, yTitle) {
   };
 }
 
-function historicalScatterOptions(xTitle, yTitle) {
+function historicalScatterOptions(points, xTitle, yTitle) {
+  const xValues = points.map((point) => point.x).filter((value) => Number.isFinite(value));
+  const yValues = points.map((point) => point.y).filter((value) => Number.isFinite(value));
+  const maxX = xValues.length ? Math.max(...xValues) : 0;
+  const maxY = yValues.length ? Math.max(...yValues) : 0;
+  const xPadding = maxX > 0 ? Math.max(maxX * 0.08, 0.01) : 0.01;
+  const yPadding = maxY > 0 ? Math.max(maxY * 0.08, 0.05) : 0.05;
+
   return {
     maintainAspectRatio: false,
     plugins: {
@@ -1126,6 +1138,8 @@ function historicalScatterOptions(xTitle, yTitle) {
       x: {
         type: "linear",
         beginAtZero: true,
+        min: 0,
+        max: maxX + xPadding,
         grid: {
           color: chartPalette.grid,
         },
@@ -1140,6 +1154,8 @@ function historicalScatterOptions(xTitle, yTitle) {
       },
       y: {
         beginAtZero: true,
+        min: 0,
+        max: maxY + yPadding,
         grid: {
           color: chartPalette.grid,
         },
