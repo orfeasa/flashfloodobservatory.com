@@ -1447,8 +1447,8 @@
           "date_label": "31/12/2025",
           "difference_from_average_m": -0.137,
           "max_level_m": 0.126,
-          "percent_difference_from_average": -52.1,
-          "percent_of_average": 47.9,
+          "percent_difference_from_average": -52.2,
+          "percent_of_average": 47.8,
           "week_index": 8,
           "weekday_index": 2
         },
@@ -1707,8 +1707,8 @@
           "date_label": "26/01/2026",
           "difference_from_average_m": 0.239,
           "max_level_m": 0.502,
-          "percent_difference_from_average": 91.0,
-          "percent_of_average": 191.0,
+          "percent_difference_from_average": 90.9,
+          "percent_of_average": 190.9,
           "week_index": 12,
           "weekday_index": 0
         },
@@ -1777,8 +1777,8 @@
           "date_label": "02/02/2026",
           "difference_from_average_m": 0.074,
           "max_level_m": 0.337,
-          "percent_difference_from_average": 28.2,
-          "percent_of_average": 128.2,
+          "percent_difference_from_average": 28.1,
+          "percent_of_average": 128.1,
           "week_index": 13,
           "weekday_index": 0
         },
@@ -2487,16 +2487,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-03-28T23:30:00Z",
-          "value": 0.012346
-        },
-        {
-          "timestamp": "2026-03-28T23:45:00Z",
-          "value": 0.01232
-        },
-        {
           "timestamp": "2026-03-29T00:00:00Z",
-          "value": 0.01232
+          "value": 0.01227
         },
         {
           "timestamp": "2026-03-29T00:15:00Z",
@@ -4408,7 +4400,15 @@
         },
         {
           "timestamp": "2026-04-02T23:30:00Z",
-          "value": 0.010563
+          "value": 0.010627
+        },
+        {
+          "timestamp": "2026-04-02T23:45:00Z",
+          "value": 0.010525
+        },
+        {
+          "timestamp": "2026-04-03T00:00:00Z",
+          "value": 0.010766
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -4481,7 +4481,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-04-02T23:49:09.190144Z"
+    "updated_at": "2026-04-03T00:04:03.146902Z"
   },
   "panels": {
     "depth": {
@@ -4494,16 +4494,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-03-28T23:30:00Z",
-          "value": 0.107
-        },
-        {
-          "timestamp": "2026-03-28T23:45:00Z",
-          "value": 0.107
-        },
-        {
           "timestamp": "2026-03-29T00:00:00Z",
-          "value": 0.107
+          "value": 0.106
         },
         {
           "timestamp": "2026-03-29T00:15:00Z",
@@ -6416,13 +6408,21 @@
         {
           "timestamp": "2026-04-02T23:30:00Z",
           "value": 0.101
+        },
+        {
+          "timestamp": "2026-04-02T23:45:00Z",
+          "value": 0.101
+        },
+        {
+          "timestamp": "2026-04-03T00:00:00Z",
+          "value": 0.101
         }
       ],
       "title": "Observed Water Depth",
       "y_axis_label": "Water Depth (m)"
     },
     "rainfall": {
-      "data_url": "https://environment.data.gov.uk/flood-monitoring/data/readings?parameter=rainfall&stationReference=49149&startdate=2026-03-28&enddate=2026-04-02&_sorted=",
+      "data_url": "https://environment.data.gov.uk/flood-monitoring/data/readings?parameter=rainfall&stationReference=49149&startdate=2026-03-29&enddate=2026-04-03&_sorted=",
       "description": "Rainfall measured every 15 minutes over the last 24 hours, plotted in millimetres (mm) on the left and Date & Time along the bottom at Environment Agency station 49149",
       "descriptions": {
         "24h": "Rainfall measured every 15 minutes over the last 24 hours, plotted in millimetres (mm) on the left and Date & Time along the bottom at Environment Agency station 49149",
@@ -6432,14 +6432,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-04-02T16:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-28T23:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-03-29T00:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-29T00:15:00Z",
           "value": 0.0
@@ -8245,17 +8237,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-04-02T23:33:00Z",
-    "start_timestamp": "2026-04-01T23:34:00Z"
+    "end_timestamp": "2026-04-03T00:03:00Z",
+    "start_timestamp": "2026-04-02T00:04:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-04-02T23:33:00Z",
-      "start_timestamp": "2026-04-01T23:34:00Z"
+      "end_timestamp": "2026-04-03T00:03:00Z",
+      "start_timestamp": "2026-04-02T00:04:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-04-02T23:33:00Z",
-      "start_timestamp": "2026-03-28T23:34:00Z"
+      "end_timestamp": "2026-04-03T00:03:00Z",
+      "start_timestamp": "2026-03-29T00:04:00Z"
     }
   },
   "site": {
@@ -8271,7 +8263,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-04-02T23:49:09.618711Z",
+    "published_at": "2026-04-03T00:04:03.464809Z",
     "state": "Online"
   },
   "summary_metrics": [
