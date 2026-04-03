@@ -935,7 +935,7 @@
         {
           "date": "2025-11-10",
           "date_label": "10/11/2025",
-          "difference_from_average_m": 0.018,
+          "difference_from_average_m": 0.017,
           "max_level_m": 0.281,
           "percent_difference_from_average": 6.6,
           "percent_of_average": 106.6,
@@ -1007,8 +1007,8 @@
           "date_label": "17/11/2025",
           "difference_from_average_m": 0.04,
           "max_level_m": 0.303,
-          "percent_difference_from_average": 15.1,
-          "percent_of_average": 115.1,
+          "percent_difference_from_average": 15.0,
+          "percent_of_average": 115.0,
           "week_index": 2,
           "weekday_index": 0
         },
@@ -1177,8 +1177,8 @@
           "date_label": "04/12/2025",
           "difference_from_average_m": 0.248,
           "max_level_m": 0.511,
-          "percent_difference_from_average": 94.0,
-          "percent_of_average": 194.0,
+          "percent_difference_from_average": 93.9,
+          "percent_of_average": 193.9,
           "week_index": 4,
           "weekday_index": 3
         },
@@ -1437,8 +1437,8 @@
           "date_label": "30/12/2025",
           "difference_from_average_m": -0.097,
           "max_level_m": 0.166,
-          "percent_difference_from_average": -36.9,
-          "percent_of_average": 63.1,
+          "percent_difference_from_average": -37.0,
+          "percent_of_average": 63.0,
           "week_index": 8,
           "weekday_index": 1
         },
@@ -1585,7 +1585,7 @@
         {
           "date": "2026-01-14",
           "date_label": "14/01/2026",
-          "difference_from_average_m": -0.075,
+          "difference_from_average_m": -0.076,
           "max_level_m": 0.188,
           "percent_difference_from_average": -28.6,
           "percent_of_average": 71.4,
@@ -2017,8 +2017,8 @@
           "date_label": "26/02/2026",
           "difference_from_average_m": 0.251,
           "max_level_m": 0.515,
-          "percent_difference_from_average": 95.3,
-          "percent_of_average": 195.3,
+          "percent_difference_from_average": 95.2,
+          "percent_of_average": 195.2,
           "week_index": 16,
           "weekday_index": 3
         },
@@ -2047,8 +2047,8 @@
           "date_label": "01/03/2026",
           "difference_from_average_m": 0.142,
           "max_level_m": 0.405,
-          "percent_difference_from_average": 53.8,
-          "percent_of_average": 153.8,
+          "percent_difference_from_average": 53.7,
+          "percent_of_average": 153.7,
           "week_index": 16,
           "weekday_index": 6
         },
@@ -2095,7 +2095,7 @@
         {
           "date": "2026-03-06",
           "date_label": "06/03/2026",
-          "difference_from_average_m": -0.004,
+          "difference_from_average_m": -0.005,
           "max_level_m": 0.259,
           "percent_difference_from_average": -1.7,
           "percent_of_average": 98.3,
@@ -2337,8 +2337,8 @@
           "date_label": "30/03/2026",
           "difference_from_average_m": -0.109,
           "max_level_m": 0.154,
-          "percent_difference_from_average": -41.4,
-          "percent_of_average": 58.6,
+          "percent_difference_from_average": -41.5,
+          "percent_of_average": 58.5,
           "week_index": 21,
           "weekday_index": 0
         },
@@ -2487,16 +2487,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-03-29T19:30:00Z",
-          "value": 0.049723
-        },
-        {
-          "timestamp": "2026-03-29T19:45:00Z",
-          "value": 0.051591
-        },
-        {
           "timestamp": "2026-03-29T20:00:00Z",
-          "value": 0.056393
+          "value": 0.057393
         },
         {
           "timestamp": "2026-03-29T20:15:00Z",
@@ -4408,7 +4400,15 @@
         },
         {
           "timestamp": "2026-04-03T19:30:00Z",
-          "value": 0.016707
+          "value": 0.016705
+        },
+        {
+          "timestamp": "2026-04-03T19:45:00Z",
+          "value": 0.0165
+        },
+        {
+          "timestamp": "2026-04-03T20:00:00Z",
+          "value": 0.016456
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -4481,7 +4481,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-04-03T19:33:52.600941Z"
+    "updated_at": "2026-04-03T20:03:54.087322Z"
   },
   "panels": {
     "depth": {
@@ -4494,16 +4494,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-03-29T19:30:00Z",
-          "value": 0.182
-        },
-        {
-          "timestamp": "2026-03-29T19:45:00Z",
-          "value": 0.184
-        },
-        {
           "timestamp": "2026-03-29T20:00:00Z",
-          "value": 0.191
+          "value": 0.192
         },
         {
           "timestamp": "2026-03-29T20:15:00Z",
@@ -6416,6 +6408,14 @@
         {
           "timestamp": "2026-04-03T19:30:00Z",
           "value": 0.12
+        },
+        {
+          "timestamp": "2026-04-03T19:45:00Z",
+          "value": 0.119
+        },
+        {
+          "timestamp": "2026-04-03T20:00:00Z",
+          "value": 0.119
         }
       ],
       "title": "Observed Water Depth",
@@ -6432,14 +6432,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-04-03T16:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-03-29T19:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-03-29T20:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-03-29T20:15:00Z",
           "value": 0.0
@@ -8309,17 +8301,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-04-03T19:33:00Z",
-    "start_timestamp": "2026-04-02T19:34:00Z"
+    "end_timestamp": "2026-04-03T20:03:00Z",
+    "start_timestamp": "2026-04-02T20:04:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-04-03T19:33:00Z",
-      "start_timestamp": "2026-04-02T19:34:00Z"
+      "end_timestamp": "2026-04-03T20:03:00Z",
+      "start_timestamp": "2026-04-02T20:04:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-04-03T19:33:00Z",
-      "start_timestamp": "2026-03-29T19:34:00Z"
+      "end_timestamp": "2026-04-03T20:03:00Z",
+      "start_timestamp": "2026-03-29T20:04:00Z"
     }
   },
   "site": {
@@ -8335,7 +8327,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-04-03T19:33:52.954253Z",
+    "published_at": "2026-04-03T20:03:54.441124Z",
     "state": "Online"
   },
   "summary_metrics": [
