@@ -689,10 +689,14 @@ function buildLevelHeatmapSvg(panel) {
     return `<rect class="level-heatmap-legend-band" x="${legendX}" y="${y}" width="${legendWidth}" height="${bandHeight}" fill="${color}"></rect>`;
   }).join("");
 
+  const maxLegendEdge = legendEdges.length ? legendEdges[legendEdges.length - 1] : null;
   const legendTicks = selectHeatmapLegendLabelValues(legendEdges).reverse().map((value) => {
     const edgeIndex = legendEdges.indexOf(value);
     const y = legendY + (legendEdges.length - edgeIndex - 1) * bandHeight;
-    return `<g><line class="level-heatmap-grid-outline" x1="${legendX + legendWidth + 6}" y1="${y}" x2="${legendX + legendWidth + 14}" y2="${y}"></line><text class="level-heatmap-tick" x="${legendX + legendWidth + 20}" y="${y + 4}">${escapeHtml(String(Math.round(value)))}</text></g>`;
+    const label = Number.isFinite(maxLegendEdge) && value === maxLegendEdge
+      ? `>${Math.round(value)}`
+      : String(Math.round(value));
+    return `<g><line class="level-heatmap-grid-outline" x1="${legendX + legendWidth + 6}" y1="${y}" x2="${legendX + legendWidth + 14}" y2="${y}"></line><text class="level-heatmap-tick" x="${legendX + legendWidth + 20}" y="${y + 4}">${escapeHtml(label)}</text></g>`;
   }).join("");
 
   return `
