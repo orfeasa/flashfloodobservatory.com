@@ -254,7 +254,7 @@ function renderAnalysisPanels() {
   renderPanelCopy("response", responsePanel);
   renderPanelCopy("historicalRange", historicalRangePanel);
   renderContextChip("responseContextChip", currentWindowLabel());
-  applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel);
+  applyAnalysisVisibility(responsePanel, historicalRangePanel);
   renderResponseChart(responsePanel, rainfallPanel, reportingWindow);
   renderHistoricalRangeChart(historicalRangePanel);
   renderLevelHeatmap(levelHeatmapPanel);
@@ -326,11 +326,11 @@ function applyPanelVisibility(rainfallPanel, depthPanel) {
   dashboardGrid.classList.toggle("dashboard-grid--single", visiblePanelCount <= 1);
 }
 
-function applyAnalysisVisibility(responsePanel, historicalRangePanel, rainfallPanel) {
+function applyAnalysisVisibility(responsePanel, historicalRangePanel) {
   const responsePlaceholder = responsePanel.mode === "placeholder";
   const responseVisible = responsePlaceholder
     ? Boolean(responsePanel.title || responsePanel.subtitle || responsePanel.description || responsePanel.empty_message || responsePanel.eyebrow)
-    : (rainfallPanel.points || []).length > 0 && (responsePanel.points || []).length > 0;
+    : (responsePanel.points || []).length > 0;
   const historicalVisible = (historicalRangePanel.points || []).length > 0;
 
   togglePanel("responsePanel", responseVisible);
@@ -424,7 +424,7 @@ function renderResponseChart(panel, rainfallPanel, reportingWindow) {
 
   const rainfallPoints = rainfallPanel.points || [];
   const flowPoints = panel.points || [];
-  if (!rainfallPoints.length || !flowPoints.length) {
+  if (!flowPoints.length) {
     responseChart?.destroy();
     showEmptyChart("response", panel.empty_message || "River flow event analysis is temporarily unavailable.");
     return;
@@ -432,33 +432,44 @@ function renderResponseChart(panel, rainfallPanel, reportingWindow) {
 
   hideEmptyChart("response");
   responseChart?.destroy();
+  const hasRainfall = rainfallPoints.length > 0;
+  const datasets = [];
+
+  if (hasRainfall) {
+    datasets.push(
+      buildRainfallDataset(
+        rainfallPoints,
+        panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
+        "yRain"
+      )
+    );
+  }
+
+  datasets.push(
+    {
+      type: "line",
+      label: panel.y_axis_label || "Flow Rate",
+      data: flowPoints.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
+      parsing: false,
+      yAxisID: "yFlow",
+      borderColor: chartPalette.cyan,
+      backgroundColor: chartPalette.cyanFill,
+      borderWidth: 2.2,
+      tension: 0.28,
+      pointRadius: 0,
+      fill: false,
+    }
+  );
+
   responseChart = new Chart(document.getElementById("responseChart"), {
     data: {
-      datasets: [
-        buildRainfallDataset(
-          rainfallPoints,
-          panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
-          "yRain"
-        ),
-        {
-          type: "line",
-          label: panel.y_axis_label || "Flow Rate",
-          data: flowPoints.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
-          parsing: false,
-          yAxisID: "yFlow",
-          borderColor: chartPalette.cyan,
-          backgroundColor: chartPalette.cyanFill,
-          borderWidth: 2.2,
-          tension: 0.28,
-          pointRadius: 0,
-          fill: false,
-        },
-      ],
+      datasets,
     },
     options: responseChartOptions(
       reportingWindow,
       panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
-      panel.y_axis_label || "Flow Rate"
+      panel.y_axis_label || "Flow Rate",
+      hasRainfall
     ),
   });
 }
@@ -945,7 +956,7 @@ function formatIsoDateLabel(value) {
   return year && month && day ? `${day}/${month}/${year}` : String(value);
 }
 
-function responseChartOptions(reportingWindow, rainfallTitle, flowTitle) {
+function responseChartOptions(reportingWindow, rainfallTitle, flowTitle, hasRainfall = true) {
   const durationHours = (reportingWindow.end - reportingWindow.start) / (60 * 60 * 1000);
   const maxTicksLimit = durationHours > 30 ? 8 : 6;
 
@@ -994,29 +1005,13 @@ function responseChartOptions(reportingWindow, rainfallTitle, flowTitle) {
           color: chartPalette.text,
         },
       },
-      yRain: {
-        type: "linear",
-        position: "left",
-        beginAtZero: true,
-        grid: {
-          color: chartPalette.grid,
-        },
-        ticks: {
-          color: chartPalette.muted,
-        },
-        title: {
-          display: true,
-          text: rainfallTitle,
-          color: chartPalette.text,
-        },
-      },
       yFlow: {
         type: "linear",
-        position: "right",
+        position: hasRainfall ? "right" : "left",
         beginAtZero: true,
-        grid: {
-          drawOnChartArea: false,
-        },
+        grid: hasRainfall
+          ? { drawOnChartArea: false }
+          : { color: chartPalette.grid },
         ticks: {
           color: chartPalette.muted,
         },
@@ -1026,6 +1021,24 @@ function responseChartOptions(reportingWindow, rainfallTitle, flowTitle) {
           color: chartPalette.text,
         },
       },
+      ...(hasRainfall ? {
+        yRain: {
+          type: "linear",
+          position: "left",
+          beginAtZero: true,
+          grid: {
+            color: chartPalette.grid,
+          },
+          ticks: {
+            color: chartPalette.muted,
+          },
+          title: {
+            display: true,
+            text: rainfallTitle,
+            color: chartPalette.text,
+          },
+        },
+      } : {}),
     },
   };
 }
