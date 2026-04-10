@@ -317,13 +317,26 @@ function currentWindowLabel() {
 function applyPanelVisibility(rainfallPanel, depthPanel) {
   const rainfallPoints = rainfallPanel.points || [];
   const depthPoints = depthPanel.points || [];
+  const rainfallVisible = Boolean(
+    rainfallPoints.length
+    || rainfallPanel.title
+    || rainfallPanel.subtitle
+    || rainfallPanel.description
+    || rainfallPanel.empty_message
+    || rainfallPanel.eyebrow
+  );
+  const depthVisible = depthPoints.length > 0;
 
-  togglePanel("rainfallPanel", rainfallPoints.length > 0);
-  togglePanel("depthPanel", depthPoints.length > 0);
+  togglePanel("rainfallPanel", rainfallVisible);
+  togglePanel("depthPanel", depthVisible);
 
-  const visiblePanelCount = [rainfallPoints, depthPoints].filter((points) => points.length > 0).length;
+  const visiblePanelCount = [rainfallVisible, depthVisible].filter(Boolean).length;
   const dashboardGrid = document.getElementById("dashboardGrid");
   dashboardGrid.classList.toggle("dashboard-grid--single", visiblePanelCount <= 1);
+
+  if (!rainfallPoints.length) {
+    showEmptyChart("rainfall", rainfallPanel.empty_message || "Rainfall data is temporarily unavailable.");
+  }
 }
 
 function applyAnalysisVisibility(responsePanel, historicalRangePanel) {
@@ -370,6 +383,7 @@ function renderRainfallChart(panel, reportingWindow) {
   const points = panel.points || [];
   if (!points.length) {
     rainfallChart?.destroy();
+    showEmptyChart("rainfall", panel.empty_message || "Rainfall data is temporarily unavailable.");
     return;
   }
 

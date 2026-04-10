@@ -43,12 +43,12 @@ The current site shell assumes:
 - that historical scatter should render the full deployment-to-date payload point set, with numeric x/y coercion and axis extents derived from the plotted points so high-event outliers remain visible
 - a full-width historical heatmap sits below the analysis row and shows each completed day's maximum daily water depth as a percentage of the observatory-wide average since deployment, using a blue-to-purple high-end palette that avoids black for extreme values and an open-ended top legend band labelled `>450`
 - chart copy is payload-driven: rainfall, river-level, and Event Analysis panels can swap description text by window, and Event Analysis plus the historical scatter and heatmap can also render payload-provided footer text below the chart
-- the rainfall panel renders 15-minute rainfall totals across the last 5 days when `panels.rainfall.points` is populated
+- the rainfall panel renders 15-minute rainfall totals across the last 5 days when `panels.rainfall.points` is populated, and should also remain visible with a zero-valued series when the Environment Agency window contains no rainfall readings
 - rainfall and depth charts use the selected exported window from `reporting_windows`, so their x-axes and tick spacing stay aligned in both modes
 - the depth panel is live from the operational sidecar
 - the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series using a trailing 24-hour window ending at the latest observation
 - the fifth summary card is the all-time maximum recorded trailing 24-hour range from the payload, not a client-side recomputation
-- the rainfall panel stays hidden when `panels.rainfall.points` is empty
+- the rainfall panel should remain visible even if `panels.rainfall.points` is empty, using the payload empty-state message when the rainfall feed is temporarily unavailable
 - partner logos render as individual white cards in a single row rather than inside a boxed footer panel
 - the footer also renders payload-driven public contact links such as LinkedIn
 
@@ -219,7 +219,7 @@ Point shape:
 - `level_heatmap.value_label`
 - `level_heatmap.empty_message`
 
-The website now treats `analysis_panels.response` as a payload-driven Event Analysis chart when `response.points` are present, while `historical_range` and `level_heatmap` both come directly from the sidecar payload. When rainfall points are also available, Event Analysis overlays rainfall bars against the river-flow line; when the rainfall feed is temporarily unavailable, the panel should remain visible as a flow-only line chart rather than disappearing with the rainfall panel. The historical scatter is deployment-to-date with `x = Daily Water Depth Range (m)` and `y = Maximum Daily Water Depth (m)`, and the frontend should coerce those values to numbers before plotting and derive the linear axis extents from the plotted point set so the largest events remain visible. The heatmap colours represent each day's maximum daily water depth as a stepped percent of the observatory-wide average carried in the same payload, with 20-point legend bands and an open-ended top legend label of `>450`, plus a blue-to-purple high-end palette chosen to avoid confusion with missing black cells on the dark dashboard.
+The website now treats `analysis_panels.response` as a payload-driven Event Analysis chart when `response.points` are present, while `historical_range` and `level_heatmap` both come directly from the sidecar payload. When rainfall points are also available, Event Analysis overlays rainfall bars against the river-flow line; when the rainfall feed is temporarily unavailable, the panel should remain visible as a flow-only line chart rather than disappearing with the rainfall panel. For rainfall itself, a successful Environment Agency query that returns no readings for the requested window should still render a zero-valued rainfall chart rather than hiding the panel, while real feed failures should leave the panel visible with its empty-state message. The historical scatter is deployment-to-date with `x = Daily Water Depth Range (m)` and `y = Maximum Daily Water Depth (m)`, and the frontend should coerce those values to numbers before plotting and derive the linear axis extents from the plotted point set so the largest events remain visible. The heatmap colours represent each day's maximum daily water depth as a stepped percent of the observatory-wide average carried in the same payload, with 20-point legend bands and an open-ended top legend label of `>450`, plus a blue-to-purple high-end palette chosen to avoid confusion with missing black cells on the dark dashboard.
 
 ### `notes`
 

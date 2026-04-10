@@ -18,7 +18,7 @@ Rules for future changes:
 - Treat `official_alert` as supplementary official Environment Agency warning context, not as an observatory-generated flash-flood alert.
 - Supported `official_alert.state` values are `none`, `flood_alert`, `flood_warning`, `severe_flood_warning`, `warning_no_longer_in_force`, and `unavailable`.
 - `panels.rainfall` should reflect Environment Agency station `49149` when the sidecar has data.
-- If `panels.rainfall.points` is empty, keep the rainfall panel hidden rather than rendering an empty chart panel.
+- Keep the rainfall panel visible whenever the payload includes rainfall panel copy, even if `panels.rainfall.points` is empty; successful no-rain windows should render a zero-valued chart, while feed outages should show the rainfall empty-state message instead of hiding the panel.
 - The current public site shape is 5 summary cards, 3 notes, 1 official alert section below the notes, a plain single-row partner logo strip, a top operational chart row, a second analysis row, and a full-width historical heatmap panel beneath it.
 - Keep the shared `24 hours` / `5 days` chart toggle above the two graphs, not duplicated inside individual panels.
 - Keep chart copy payload-driven: rainfall, river-level, and Event Analysis panels can swap description text by window, and Event Analysis plus the historical scatter and heatmap can also render payload-provided footer text below the chart.
