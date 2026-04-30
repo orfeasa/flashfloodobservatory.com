@@ -4913,7 +4913,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-04-30T04:18:50.811585Z"
+    "updated_at": "2026-04-30T04:33:54.287568Z"
   },
   "panels": {
     "depth": {
@@ -6862,7 +6862,7 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-04-29T16:15:00Z",
+      "last_updated": "2026-04-30T04:00:00Z",
       "points": [
         {
           "timestamp": "2026-04-25T04:15:00Z",
@@ -8595,6 +8595,194 @@
         {
           "timestamp": "2026-04-29T16:15:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T16:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T16:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T17:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T17:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T17:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T17:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T18:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T18:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T18:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T18:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T19:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T19:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T19:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T19:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T20:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T20:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T20:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T20:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T21:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T21:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T21:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T21:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T22:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T22:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T22:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T22:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T23:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T23:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T23:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-29T23:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T00:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T00:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T00:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T00:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T01:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T01:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T01:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T01:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T02:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T02:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T02:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T02:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T03:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T03:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T03:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T03:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-04-30T04:00:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -8631,7 +8819,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-04-30T04:18:51.118682Z",
+    "published_at": "2026-04-30T04:33:54.594438Z",
     "state": "Online"
   },
   "summary_metrics": [
