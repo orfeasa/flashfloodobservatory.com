@@ -265,7 +265,7 @@ function buildPanelForWindow(panel, windowId, reportingWindow) {
     ...panel,
     description: panel.descriptions?.[windowId] || panel.description || "",
     footer_description: panel.footer_descriptions?.[windowId] || panel.footer_description || "",
-    points: filterPointsForWindow(panel.points || [], reportingWindow),
+    points: Array.isArray(panel.points) ? filterPointsForWindow(panel.points, reportingWindow) : undefined,
   };
 }
 
@@ -315,10 +315,10 @@ function currentWindowLabel() {
 }
 
 function applyPanelVisibility(rainfallPanel, depthPanel) {
-  const rainfallPoints = rainfallPanel.points || [];
+  const rainfallPoints = rainfallPanel.points;
   const depthPoints = depthPanel.points || [];
   const rainfallVisible = Boolean(
-    rainfallPoints.length
+    rainfallPoints
     || rainfallPanel.title
     || rainfallPanel.subtitle
     || rainfallPanel.description
@@ -334,7 +334,7 @@ function applyPanelVisibility(rainfallPanel, depthPanel) {
   const dashboardGrid = document.getElementById("dashboardGrid");
   dashboardGrid.classList.toggle("dashboard-grid--single", visiblePanelCount <= 1);
 
-  if (!rainfallPoints.length) {
+  if (!rainfallPoints) {
     showEmptyChart("rainfall", rainfallPanel.empty_message || "Rainfall data is temporarily unavailable.");
   }
 }
@@ -380,8 +380,8 @@ function buildRainfallDataset(points, label, yAxisID = "y") {
 }
 
 function renderRainfallChart(panel, reportingWindow) {
-  const points = panel.points || [];
-  if (!points.length) {
+  const points = panel.points;
+  if (!points) {
     rainfallChart?.destroy();
     showEmptyChart("rainfall", panel.empty_message || "Rainfall data is temporarily unavailable.");
     return;
@@ -436,7 +436,6 @@ function renderResponseChart(panel, rainfallPanel, reportingWindow) {
     return;
   }
 
-  const rainfallPoints = rainfallPanel.points || [];
   const flowPoints = panel.points || [];
   if (!flowPoints.length) {
     responseChart?.destroy();
@@ -446,13 +445,13 @@ function renderResponseChart(panel, rainfallPanel, reportingWindow) {
 
   hideEmptyChart("response");
   responseChart?.destroy();
-  const hasRainfall = rainfallPoints.length > 0;
+  const hasRainfall = Array.isArray(rainfallPanel.points);
   const datasets = [];
 
   if (hasRainfall) {
     datasets.push(
       buildRainfallDataset(
-        rainfallPoints,
+        rainfallPanel.points,
         panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
         "yRain"
       )
