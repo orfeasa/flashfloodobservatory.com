@@ -5429,7 +5429,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-06-01T09:18:50.535300Z"
+    "updated_at": "2026-06-01T09:33:52.045867Z"
   },
   "panels": {
     "depth": {
@@ -7378,7 +7378,7 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-06-01T04:15:00Z",
+      "last_updated": "2026-06-01T09:00:00Z",
       "points": [
         {
           "timestamp": "2026-05-27T09:15:00Z",
@@ -9223,6 +9223,82 @@
         {
           "timestamp": "2026-06-01T04:15:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T04:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T04:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T05:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T05:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T05:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T05:45:00Z",
+          "value": 0.2
+        },
+        {
+          "timestamp": "2026-06-01T06:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T06:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T06:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T06:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T07:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T07:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T07:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T07:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T08:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T08:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T08:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-01T08:45:00Z",
+          "value": 0.2
+        },
+        {
+          "timestamp": "2026-06-01T09:00:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -9259,7 +9335,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-06-01T09:18:50.868127Z",
+    "published_at": "2026-06-01T09:33:52.387305Z",
     "state": "Online"
   },
   "summary_metrics": [
