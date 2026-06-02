@@ -1301,7 +1301,7 @@
         {
           "date": "2025-11-10",
           "date_label": "10/11/2025",
-          "difference_from_average_m": 0.021,
+          "difference_from_average_m": 0.022,
           "max_level_m": 0.281,
           "percent_difference_from_average": 8.3,
           "percent_of_average": 108.3,
@@ -1663,8 +1663,8 @@
           "date_label": "16/12/2025",
           "difference_from_average_m": 0.245,
           "max_level_m": 0.505,
-          "percent_difference_from_average": 94.4,
-          "percent_of_average": 194.4,
+          "percent_difference_from_average": 94.5,
+          "percent_of_average": 194.5,
           "week_index": 6,
           "weekday_index": 1
         },
@@ -1863,8 +1863,8 @@
           "date_label": "05/01/2026",
           "difference_from_average_m": -0.142,
           "max_level_m": 0.118,
-          "percent_difference_from_average": -54.6,
-          "percent_of_average": 45.4,
+          "percent_difference_from_average": -54.5,
+          "percent_of_average": 45.5,
           "week_index": 9,
           "weekday_index": 0
         },
@@ -1951,7 +1951,7 @@
         {
           "date": "2026-01-14",
           "date_label": "14/01/2026",
-          "difference_from_average_m": -0.072,
+          "difference_from_average_m": -0.071,
           "max_level_m": 0.188,
           "percent_difference_from_average": -27.5,
           "percent_of_average": 72.5,
@@ -2123,8 +2123,8 @@
           "date_label": "31/01/2026",
           "difference_from_average_m": 0.109,
           "max_level_m": 0.369,
-          "percent_difference_from_average": 41.9,
-          "percent_of_average": 141.9,
+          "percent_difference_from_average": 42.0,
+          "percent_of_average": 142.0,
           "week_index": 12,
           "weekday_index": 5
         },
@@ -2461,7 +2461,7 @@
         {
           "date": "2026-03-06",
           "date_label": "06/03/2026",
-          "difference_from_average_m": -0.001,
+          "difference_from_average_m": -0.0,
           "max_level_m": 0.259,
           "percent_difference_from_average": -0.2,
           "percent_of_average": 99.8,
@@ -3471,16 +3471,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-05-28T22:30:00Z",
-          "value": 0.00394
-        },
-        {
-          "timestamp": "2026-05-28T22:45:00Z",
-          "value": 0.003981
-        },
-        {
           "timestamp": "2026-05-28T23:00:00Z",
-          "value": 0.003539
+          "value": 0.003678
         },
         {
           "timestamp": "2026-05-28T23:15:00Z",
@@ -5392,7 +5384,15 @@
         },
         {
           "timestamp": "2026-06-02T22:30:00Z",
-          "value": 0.00333
+          "value": 0.003353
+        },
+        {
+          "timestamp": "2026-06-02T22:45:00Z",
+          "value": 0.003295
+        },
+        {
+          "timestamp": "2026-06-02T23:00:00Z",
+          "value": 0.003237
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -5465,7 +5465,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-06-02T23:03:56.842122Z"
+    "updated_at": "2026-06-02T23:18:55.070020Z"
   },
   "panels": {
     "depth": {
@@ -5478,16 +5478,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-05-28T22:30:00Z",
-          "value": 0.069
-        },
-        {
-          "timestamp": "2026-05-28T22:45:00Z",
-          "value": 0.069
-        },
-        {
           "timestamp": "2026-05-28T23:00:00Z",
-          "value": 0.066
+          "value": 0.067
         },
         {
           "timestamp": "2026-05-28T23:15:00Z",
@@ -7400,6 +7392,14 @@
         {
           "timestamp": "2026-06-02T22:30:00Z",
           "value": 0.065
+        },
+        {
+          "timestamp": "2026-06-02T22:45:00Z",
+          "value": 0.064
+        },
+        {
+          "timestamp": "2026-06-02T23:00:00Z",
+          "value": 0.064
         }
       ],
       "title": "Observed Water Depth",
@@ -7416,14 +7416,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-06-02T16:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-05-28T22:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-05-28T23:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-05-28T23:15:00Z",
           "value": 0.0
@@ -9245,17 +9237,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-06-02T22:39:00Z",
-    "start_timestamp": "2026-06-01T22:40:00Z"
+    "end_timestamp": "2026-06-02T23:09:00Z",
+    "start_timestamp": "2026-06-01T23:10:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-06-02T22:39:00Z",
-      "start_timestamp": "2026-06-01T22:40:00Z"
+      "end_timestamp": "2026-06-02T23:09:00Z",
+      "start_timestamp": "2026-06-01T23:10:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-06-02T22:39:00Z",
-      "start_timestamp": "2026-05-28T22:40:00Z"
+      "end_timestamp": "2026-06-02T23:09:00Z",
+      "start_timestamp": "2026-05-28T23:10:00Z"
     }
   },
   "site": {
@@ -9271,7 +9263,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-06-02T23:03:57.233646Z",
+    "published_at": "2026-06-02T23:18:55.435551Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -9280,14 +9272,14 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.063
+      "value": 0.064
     },
     {
       "decimals": 3,
       "label": "Maximum 24h River Level",
       "note": "Highest recorded water depth in the last 24 hours at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.092
+      "value": 0.087
     },
     {
       "decimals": 3,
@@ -9301,7 +9293,7 @@
       "label": "Current 24h River Level Range",
       "note": "Water depth range recorded in the last 24 hours (max to min) at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.033
+      "value": 0.028
     },
     {
       "decimals": 3,
