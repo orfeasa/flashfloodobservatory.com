@@ -1389,8 +1389,8 @@
           "date_label": "15/11/2025",
           "difference_from_average_m": 0.147,
           "max_level_m": 0.407,
-          "percent_difference_from_average": 56.3,
-          "percent_of_average": 156.3,
+          "percent_difference_from_average": 56.2,
+          "percent_of_average": 156.2,
           "week_index": 1,
           "weekday_index": 5
         },
@@ -1409,8 +1409,8 @@
           "date_label": "17/11/2025",
           "difference_from_average_m": 0.043,
           "max_level_m": 0.303,
-          "percent_difference_from_average": 16.5,
-          "percent_of_average": 116.5,
+          "percent_difference_from_average": 16.4,
+          "percent_of_average": 116.4,
           "week_index": 2,
           "weekday_index": 0
         },
@@ -1457,7 +1457,7 @@
         {
           "date": "2025-11-22",
           "date_label": "22/11/2025",
-          "difference_from_average_m": 0.029,
+          "difference_from_average_m": 0.028,
           "max_level_m": 0.289,
           "percent_difference_from_average": 10.9,
           "percent_of_average": 110.9,
@@ -1467,7 +1467,7 @@
         {
           "date": "2025-11-23",
           "date_label": "23/11/2025",
-          "difference_from_average_m": 0.015,
+          "difference_from_average_m": 0.014,
           "max_level_m": 0.275,
           "percent_difference_from_average": 5.6,
           "percent_of_average": 105.6,
@@ -1549,8 +1549,8 @@
           "date_label": "01/12/2025",
           "difference_from_average_m": 0.403,
           "max_level_m": 0.663,
-          "percent_difference_from_average": 154.7,
-          "percent_of_average": 254.7,
+          "percent_difference_from_average": 154.6,
+          "percent_of_average": 254.6,
           "week_index": 4,
           "weekday_index": 0
         },
@@ -1569,8 +1569,8 @@
           "date_label": "03/12/2025",
           "difference_from_average_m": 0.113,
           "max_level_m": 0.374,
-          "percent_difference_from_average": 43.6,
-          "percent_of_average": 143.6,
+          "percent_difference_from_average": 43.5,
+          "percent_of_average": 143.5,
           "week_index": 4,
           "weekday_index": 2
         },
@@ -1689,8 +1689,8 @@
           "date_label": "15/12/2025",
           "difference_from_average_m": 0.702,
           "max_level_m": 0.962,
-          "percent_difference_from_average": 269.5,
-          "percent_of_average": 369.5,
+          "percent_difference_from_average": 269.4,
+          "percent_of_average": 369.4,
           "week_index": 6,
           "weekday_index": 0
         },
@@ -1739,8 +1739,8 @@
           "date_label": "20/12/2025",
           "difference_from_average_m": 0.18,
           "max_level_m": 0.44,
-          "percent_difference_from_average": 69.1,
-          "percent_of_average": 169.1,
+          "percent_difference_from_average": 69.0,
+          "percent_of_average": 169.0,
           "week_index": 6,
           "weekday_index": 5
         },
@@ -1927,7 +1927,7 @@
         {
           "date": "2026-01-08",
           "date_label": "08/01/2026",
-          "difference_from_average_m": 0.289,
+          "difference_from_average_m": 0.288,
           "max_level_m": 0.549,
           "percent_difference_from_average": 110.8,
           "percent_of_average": 210.8,
@@ -2049,8 +2049,8 @@
           "date_label": "20/01/2026",
           "difference_from_average_m": 0.352,
           "max_level_m": 0.613,
-          "percent_difference_from_average": 135.3,
-          "percent_of_average": 235.3,
+          "percent_difference_from_average": 135.2,
+          "percent_of_average": 235.2,
           "week_index": 11,
           "weekday_index": 1
         },
@@ -2069,8 +2069,8 @@
           "date_label": "22/01/2026",
           "difference_from_average_m": 0.318,
           "max_level_m": 0.578,
-          "percent_difference_from_average": 122.1,
-          "percent_of_average": 222.1,
+          "percent_difference_from_average": 122.0,
+          "percent_of_average": 222.0,
           "week_index": 11,
           "weekday_index": 3
         },
@@ -2079,8 +2079,8 @@
           "date_label": "23/01/2026",
           "difference_from_average_m": 0.596,
           "max_level_m": 0.856,
-          "percent_difference_from_average": 228.8,
-          "percent_of_average": 328.8,
+          "percent_difference_from_average": 228.7,
+          "percent_of_average": 328.7,
           "week_index": 11,
           "weekday_index": 4
         },
@@ -2109,8 +2109,8 @@
           "date_label": "26/01/2026",
           "difference_from_average_m": 0.241,
           "max_level_m": 0.502,
-          "percent_difference_from_average": 92.7,
-          "percent_of_average": 192.7,
+          "percent_difference_from_average": 92.6,
+          "percent_of_average": 192.6,
           "week_index": 12,
           "weekday_index": 0
         },
@@ -2217,7 +2217,7 @@
         {
           "date": "2026-02-06",
           "date_label": "06/02/2026",
-          "difference_from_average_m": 0.062,
+          "difference_from_average_m": 0.061,
           "max_level_m": 0.322,
           "percent_difference_from_average": 23.6,
           "percent_of_average": 123.6,
@@ -2299,18 +2299,18 @@
           "date_label": "14/02/2026",
           "difference_from_average_m": 0.044,
           "max_level_m": 0.305,
-          "percent_difference_from_average": 17.0,
-          "percent_of_average": 117.0,
+          "percent_difference_from_average": 16.9,
+          "percent_of_average": 116.9,
           "week_index": 14,
           "weekday_index": 5
         },
         {
           "date": "2026-02-15",
           "date_label": "15/02/2026",
-          "difference_from_average_m": 0.19,
+          "difference_from_average_m": 0.189,
           "max_level_m": 0.45,
-          "percent_difference_from_average": 72.8,
-          "percent_of_average": 172.8,
+          "percent_difference_from_average": 72.7,
+          "percent_of_average": 172.7,
           "week_index": 14,
           "weekday_index": 6
         },
@@ -2439,8 +2439,8 @@
           "date_label": "28/02/2026",
           "difference_from_average_m": 0.137,
           "max_level_m": 0.397,
-          "percent_difference_from_average": 52.6,
-          "percent_of_average": 152.6,
+          "percent_difference_from_average": 52.5,
+          "percent_of_average": 152.5,
           "week_index": 16,
           "weekday_index": 5
         },
@@ -2509,8 +2509,8 @@
           "date_label": "07/03/2026",
           "difference_from_average_m": -0.033,
           "max_level_m": 0.228,
-          "percent_difference_from_average": -12.5,
-          "percent_of_average": 87.5,
+          "percent_difference_from_average": -12.6,
+          "percent_of_average": 87.4,
           "week_index": 17,
           "weekday_index": 5
         },
@@ -2529,8 +2529,8 @@
           "date_label": "09/03/2026",
           "difference_from_average_m": -0.051,
           "max_level_m": 0.21,
-          "percent_difference_from_average": -19.4,
-          "percent_of_average": 80.6,
+          "percent_difference_from_average": -19.5,
+          "percent_of_average": 80.5,
           "week_index": 18,
           "weekday_index": 0
         },
@@ -2667,7 +2667,7 @@
         {
           "date": "2026-03-23",
           "date_label": "23/03/2026",
-          "difference_from_average_m": -0.108,
+          "difference_from_average_m": -0.109,
           "max_level_m": 0.152,
           "percent_difference_from_average": -41.7,
           "percent_of_average": 58.3,
@@ -2769,8 +2769,8 @@
           "date_label": "02/04/2026",
           "difference_from_average_m": -0.162,
           "max_level_m": 0.098,
-          "percent_difference_from_average": -62.3,
-          "percent_of_average": 37.7,
+          "percent_difference_from_average": -62.4,
+          "percent_of_average": 37.6,
           "week_index": 21,
           "weekday_index": 3
         },
@@ -2797,7 +2797,7 @@
         {
           "date": "2026-04-05",
           "date_label": "05/04/2026",
-          "difference_from_average_m": -0.198,
+          "difference_from_average_m": -0.199,
           "max_level_m": 0.062,
           "percent_difference_from_average": -76.2,
           "percent_of_average": 23.8,
@@ -2919,8 +2919,8 @@
           "date_label": "17/04/2026",
           "difference_from_average_m": -0.171,
           "max_level_m": 0.089,
-          "percent_difference_from_average": -65.6,
-          "percent_of_average": 34.4,
+          "percent_difference_from_average": -65.7,
+          "percent_of_average": 34.3,
           "week_index": 23,
           "weekday_index": 4
         },
@@ -2999,8 +2999,8 @@
           "date_label": "25/04/2026",
           "difference_from_average_m": -0.197,
           "max_level_m": 0.063,
-          "percent_difference_from_average": -75.6,
-          "percent_of_average": 24.4,
+          "percent_difference_from_average": -75.7,
+          "percent_of_average": 24.3,
           "week_index": 24,
           "weekday_index": 5
         },
@@ -3187,7 +3187,7 @@
         {
           "date": "2026-05-14",
           "date_label": "14/05/2026",
-          "difference_from_average_m": -0.198,
+          "difference_from_average_m": -0.199,
           "max_level_m": 0.062,
           "percent_difference_from_average": -76.2,
           "percent_of_average": 23.8,
@@ -3399,15 +3399,15 @@
           "date_label": "04/06/2026",
           "difference_from_average_m": -0.154,
           "max_level_m": 0.107,
-          "percent_difference_from_average": -58.9,
-          "percent_of_average": 41.1,
+          "percent_difference_from_average": -59.0,
+          "percent_of_average": 41.0,
           "week_index": 30,
           "weekday_index": 3
         },
         {
           "date": "2026-06-05",
           "date_label": "05/06/2026",
-          "difference_from_average_m": -0.184,
+          "difference_from_average_m": -0.185,
           "max_level_m": 0.076,
           "percent_difference_from_average": -70.8,
           "percent_of_average": 29.2,
@@ -3439,8 +3439,8 @@
           "date_label": "08/06/2026",
           "difference_from_average_m": 0.01,
           "max_level_m": 0.27,
-          "percent_difference_from_average": 3.9,
-          "percent_of_average": 103.9,
+          "percent_difference_from_average": 3.8,
+          "percent_of_average": 103.8,
           "week_index": 31,
           "weekday_index": 0
         }
@@ -3449,7 +3449,7 @@
       "description": "This heatmap shows the maximum daily water depth as a percentage of the average water depth recorded since the Flash Flood Observatory deployment in November 2025 (0.260 m). Each cell represents a specific day of the week and month, allowing patterns in river behaviour to be seen across the Observatory's operation. The colours indicate how each day's maximum level compares to the average: days close to the average appear white (\u2b1c), wetter-than-average days appear blue (\ud83d\udfe6) or purple (\ud83d\udfea), and drier-than-average days appear brown (\ud83d\udfeb).",
       "empty_message": "Daily maximum river-level heatmap data will appear here after the historical record is built.",
       "eyebrow": "River Levels",
-      "footer_description": "This makes it easy to identify periods of typical flow, sustained dry spells, and clusters of high-water days associated with storm events or rapid catchment response. A value such as 30% means the river reached 0.30 \u00d7 the average (0.30 \u00d7 0.260 m = 0.0781 m, represented in brown \ud83d\udfeb), while the highest band (>450%) represents days above 4.50 \u00d7 the average (>4.50 \u00d7 0.260 m = >1.1721 m, represented in purple \ud83d\udfea).",
+      "footer_description": "This makes it easy to identify periods of typical flow, sustained dry spells, and clusters of high-water days associated with storm events or rapid catchment response. A value such as 30% means the river reached 0.30 \u00d7 the average (0.30 \u00d7 0.260 m = 0.0781 m, represented in brown \ud83d\udfeb), while the highest band (>450%) represents days above 4.50 \u00d7 the average (>4.50 \u00d7 0.260 m = >1.1722 m, represented in purple \ud83d\udfea).",
       "legend": {
         "band_colors": [
           "#6B3A09",
@@ -3566,14 +3566,6 @@
       },
       "mode": "flow_overlay",
       "points": [
-        {
-          "timestamp": "2026-06-04T07:30:00Z",
-          "value": 0.008115
-        },
-        {
-          "timestamp": "2026-06-04T07:45:00Z",
-          "value": 0.007822
-        },
         {
           "timestamp": "2026-06-04T08:00:00Z",
           "value": 0.007176
@@ -5488,7 +5480,15 @@
         },
         {
           "timestamp": "2026-06-09T07:30:00Z",
-          "value": 0.00491
+          "value": 0.004866
+        },
+        {
+          "timestamp": "2026-06-09T07:45:00Z",
+          "value": 0.005189
+        },
+        {
+          "timestamp": "2026-06-09T08:00:00Z",
+          "value": 0.005423
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -5561,7 +5561,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-06-09T08:03:53.399412Z"
+    "updated_at": "2026-06-09T08:18:52.090425Z"
   },
   "panels": {
     "depth": {
@@ -5573,14 +5573,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-06-04T07:30:00Z",
-          "value": 0.091
-        },
-        {
-          "timestamp": "2026-06-04T07:45:00Z",
-          "value": 0.09
-        },
         {
           "timestamp": "2026-06-04T08:00:00Z",
           "value": 0.087
@@ -7496,6 +7488,14 @@
         {
           "timestamp": "2026-06-09T07:30:00Z",
           "value": 0.075
+        },
+        {
+          "timestamp": "2026-06-09T07:45:00Z",
+          "value": 0.077
+        },
+        {
+          "timestamp": "2026-06-09T08:00:00Z",
+          "value": 0.078
         }
       ],
       "title": "Observed Water Depth",
@@ -7512,14 +7512,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-06-09T04:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-06-04T07:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-06-04T08:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-06-04T08:15:00Z",
           "value": 0.0
@@ -9389,17 +9381,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-06-09T07:40:00Z",
-    "start_timestamp": "2026-06-08T07:41:00Z"
+    "end_timestamp": "2026-06-09T08:10:00Z",
+    "start_timestamp": "2026-06-08T08:11:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-06-09T07:40:00Z",
-      "start_timestamp": "2026-06-08T07:41:00Z"
+      "end_timestamp": "2026-06-09T08:10:00Z",
+      "start_timestamp": "2026-06-08T08:11:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-06-09T07:40:00Z",
-      "start_timestamp": "2026-06-04T07:41:00Z"
+      "end_timestamp": "2026-06-09T08:10:00Z",
+      "start_timestamp": "2026-06-04T08:11:00Z"
     }
   },
   "site": {
@@ -9415,7 +9407,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-06-09T08:03:53.742454Z",
+    "published_at": "2026-06-09T08:18:52.419395Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -9424,14 +9416,14 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.074
+      "value": 0.078
     },
     {
       "decimals": 3,
       "label": "Maximum 24h River Level",
       "note": "Highest recorded water depth in the last 24 hours at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.187
+      "value": 0.172
     },
     {
       "decimals": 3,
@@ -9445,7 +9437,7 @@
       "label": "Current 24h River Level Range",
       "note": "Water depth range recorded in the last 24 hours (max to min) at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.132
+      "value": 0.117
     },
     {
       "decimals": 3,
