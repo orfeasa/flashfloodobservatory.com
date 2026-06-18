@@ -467,6 +467,46 @@ canvas {
   display: none;
 }
 
+.heatmap-period-control {
+  display: grid;
+  grid-template-columns: max-content minmax(9rem, max-content) minmax(0, 1fr);
+  gap: 0.55rem 0.75rem;
+  align-items: center;
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.heatmap-period-control[hidden] {
+  display: none;
+}
+
+.heatmap-period-control label {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.heatmap-period-control select {
+  min-height: 2.4rem;
+  padding: 0.45rem 2.2rem 0.45rem 0.75rem;
+  border: 1px solid rgba(119, 232, 255, 0.24);
+  border-radius: 0.7rem;
+  background: #09131d;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+}
+
+.heatmap-period-control select:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.heatmap-period-control select:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
 .heatmap-frame {
   margin-top: 1rem;
   padding: 0.85rem 1rem 1rem;
@@ -690,6 +730,10 @@ canvas {
   .window-button {
     flex: 1 1 0;
     text-align: center;
+  }
+
+  .heatmap-period-control {
+    grid-template-columns: 1fr;
   }
 
   .summary-strip,

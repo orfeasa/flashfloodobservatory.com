@@ -29,6 +29,8 @@ Rules for future changes:
 - Coerce historical scatter `x` and `y` values to numbers before plotting and derive the linear axis extents from the plotted point set so high-event outliers remain visible.
 - Treat `analysis_panels.level_heatmap` as the only source for the historical river-level heatmap, including its average label, calendar cells, and legend values.
 - Heatmap colours should reflect each completed day's maximum daily water depth as a stepped percent of the observatory-wide average carried in that same payload, with 20-point legend bands and an open-ended top legend label of `>450`, plus a blue-to-purple high-end palette that avoids black.
+- Render one payload-provided hydrological year at a time, from 1 October through 30 September, and retain earlier years through the heatmap selector.
+- Keep the observed rainfall and Event Analysis rainfall axes automatic, but never allow their upper bound to fall below 1 mm.
 - The fifth summary card should reflect the all-time max 24h range record from the payload, not a client-side recomputation.
 
 Operational intent:

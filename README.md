@@ -42,6 +42,7 @@ The current site shell assumes:
 - the second analysis panel is a deployment-to-date scatter showing each completed day's daily water depth range on the x-axis against its corresponding maximum daily water depth on the y-axis
 - that historical scatter should render the full deployment-to-date payload point set, with numeric x/y coercion and axis extents derived from the plotted points so high-event outliers remain visible
 - a full-width historical heatmap sits below the analysis row and shows each completed day's maximum daily water depth as a percentage of the observatory-wide average since deployment, using a blue-to-purple high-end palette that avoids black for extreme values and an open-ended top legend band labelled `>450`
+- the heatmap displays one hydrological year at a time (1 October through 30 September), with a selector that preserves access to earlier years without allowing the chart to widen indefinitely
 - chart copy is payload-driven: rainfall, river-level, and Event Analysis panels can swap description text by window, and Event Analysis plus the historical scatter and heatmap can also render payload-provided footer text below the chart
 - the rainfall panel renders 15-minute rainfall totals across the last 5 days when `panels.rainfall.points` is populated, and should also remain visible with a zero-valued series when the Environment Agency window contains no rainfall readings
 - rainfall and depth charts use the selected exported window from `reporting_windows`, so their x-axes and tick spacing stay aligned in both modes
@@ -49,6 +50,7 @@ The current site shell assumes:
 - the 24-hour river-level summary cards are intended to align with the plotted depth curve, because they are derived from the same cleaned 1-minute median series using a trailing 24-hour window ending at the latest observation
 - the fifth summary card is the all-time maximum recorded trailing 24-hour range from the payload, not a client-side recomputation
 - the rainfall panel should remain visible even if `panels.rainfall.points` is empty, using the payload empty-state message when the rainfall feed is temporarily unavailable
+- rainfall axes expand automatically for larger events but retain a minimum upper bound of 1 mm in both the observed rainfall and Event Analysis charts
 - partner logos render as individual white cards in a single row rather than inside a boxed footer panel
 - the footer also renders payload-driven public contact links such as LinkedIn
 
@@ -215,6 +217,14 @@ Point shape:
 - `level_heatmap.weekday_labels`
 - `level_heatmap.month_ticks[]`
 - `level_heatmap.cells[]`
+- `level_heatmap.default_hydrological_year`
+- `level_heatmap.hydrological_years[].id`
+- `level_heatmap.hydrological_years[].label`
+- `level_heatmap.hydrological_years[].period_label`
+- `level_heatmap.hydrological_years[].start_date`
+- `level_heatmap.hydrological_years[].end_date`
+- `level_heatmap.hydrological_years[].month_ticks[]`
+- `level_heatmap.hydrological_years[].cells[]`
 - `level_heatmap.legend`
 - `level_heatmap.value_label`
 - `level_heatmap.empty_message`

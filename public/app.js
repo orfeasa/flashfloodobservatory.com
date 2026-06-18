@@ -22,6 +22,7 @@ let displayTimeZone = "UTC";
 let dashboardPayload;
 let timeWindowState;
 let selectedTimeWindowId = fallbackWindowOption.id;
+let selectedHydrologicalYearId;
 
 async function main() {
   try {
@@ -394,7 +395,7 @@ function renderRainfallChart(panel, reportingWindow) {
     data: {
       datasets: [buildRainfallDataset(points, panel.y_axis_label || "Rainfall")],
     },
-    options: chartOptions(reportingWindow, panel.y_axis_label || "Rainfall"),
+    options: chartOptions(reportingWindow, panel.y_axis_label || "Rainfall", 1),
   });
 }
 
@@ -561,10 +562,18 @@ function renderLevelHeatmap(panel) {
   const average = document.getElementById("levelHeatmapAverage");
   const mount = document.getElementById("levelHeatmapMount");
   const empty = document.getElementById("levelHeatmapEmpty");
-  const cells = Array.isArray(panel?.cells) ? panel.cells : [];
+  const yearState = buildHydrologicalYearState(panel);
+  const selectedYear = yearState.years.find((year) => year.id === selectedHydrologicalYearId)
+    || yearState.years.find((year) => year.id === yearState.defaultId)
+    || yearState.years[0];
+  const selectedPanel = selectedYear
+    ? { ...panel, cells: selectedYear.cells, month_ticks: selectedYear.month_ticks }
+    : panel;
+  const cells = Array.isArray(selectedPanel?.cells) ? selectedPanel.cells : [];
   const hasPanel = Boolean(panel?.title || panel?.eyebrow || panel?.empty_message || cells.length);
 
   wrapper.hidden = !hasPanel;
+  renderHydrologicalYearControl(yearState, selectedYear);
   if (!hasPanel) {
     mount.innerHTML = "";
     mount.hidden = true;
@@ -591,7 +600,64 @@ function renderLevelHeatmap(panel) {
   mount.hidden = false;
   empty.hidden = true;
   mount.setAttribute("aria-label", panel.title || "River-level difference heatmap");
-  mount.innerHTML = buildLevelHeatmapSvg(panel);
+  mount.innerHTML = buildLevelHeatmapSvg(selectedPanel);
+}
+
+function buildHydrologicalYearState(panel) {
+  const explicitYears = Array.isArray(panel?.hydrological_years)
+    ? panel.hydrological_years.filter((year) => year?.id && Array.isArray(year.cells))
+    : [];
+  const years = explicitYears.length
+    ? explicitYears
+    : (Array.isArray(panel?.cells) && panel.cells.length
+      ? [{
+          id: "all",
+          label: "All available data",
+          period_label: "",
+          cells: panel.cells,
+          month_ticks: panel.month_ticks || [],
+        }]
+      : []);
+  const requestedDefault = panel?.default_hydrological_year;
+  const defaultId = years.some((year) => year.id === requestedDefault)
+    ? requestedDefault
+    : years[years.length - 1]?.id;
+
+  if (!years.some((year) => year.id === selectedHydrologicalYearId)) {
+    selectedHydrologicalYearId = defaultId;
+  }
+
+  return { years, defaultId };
+}
+
+function renderHydrologicalYearControl(state, selectedYear) {
+  const control = document.getElementById("heatmapPeriodControl");
+  const select = document.getElementById("heatmapPeriodSelect");
+  const periodLabel = document.getElementById("heatmapPeriodLabel");
+  if (!control || !select || !periodLabel) {
+    return;
+  }
+
+  control.hidden = !state.years.length;
+  if (!state.years.length) {
+    select.replaceChildren();
+    periodLabel.textContent = "";
+    return;
+  }
+
+  select.replaceChildren(...state.years.map((year) => {
+    const option = document.createElement("option");
+    option.value = year.id;
+    option.textContent = year.label || year.id;
+    return option;
+  }));
+  select.value = selectedYear?.id || state.defaultId || "";
+  select.disabled = state.years.length <= 1;
+  periodLabel.textContent = selectedYear?.period_label || "";
+  select.onchange = () => {
+    selectedHydrologicalYearId = select.value;
+    renderLevelHeatmap(dashboardPayload?.analysis_panels?.level_heatmap || {});
+  };
 }
 
 function buildLevelHeatmapSvg(panel) {
@@ -899,7 +965,7 @@ function hideEmptyChart(prefix) {
   empty.hidden = true;
 }
 
-function chartOptions(reportingWindow, yTitle) {
+function chartOptions(reportingWindow, yTitle, suggestedMax = null) {
   const durationHours = (reportingWindow.end - reportingWindow.start) / (60 * 60 * 1000);
   const maxTicksLimit = durationHours > 30 ? 8 : 6;
 
@@ -950,6 +1016,7 @@ function chartOptions(reportingWindow, yTitle) {
       },
       y: {
         beginAtZero: true,
+        ...(Number.isFinite(suggestedMax) ? { suggestedMax } : {}),
         grid: {
           color: chartPalette.grid,
         },
@@ -1044,6 +1111,7 @@ function responseChartOptions(reportingWindow, rainfallTitle, flowTitle, hasRain
           type: "linear",
           position: "left",
           beginAtZero: true,
+          suggestedMax: 1,
           grid: {
             color: chartPalette.grid,
           },
