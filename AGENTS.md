@@ -32,6 +32,8 @@ Rules for future changes:
 - Render one payload-provided hydrological year at a time, from 1 October through 30 September, and retain earlier years through the heatmap selector.
 - Keep the observed rainfall and Event Analysis rainfall axes automatic, but never allow their upper bound to fall below 1 mm.
 - The fifth summary card should reflect the all-time max 24h range record from the payload, not a client-side recomputation.
+- Keep `public/v2/` as an isolated redesign prototype. It may read `public/data/site_payload.json` and shared public brand assets, but it must not change the production homepage contract, payload destination, publisher configuration, or scheduled workflow.
+- Do not redirect the root site to `/v2/` or promote the prototype to production without explicit approval.
 
 Operational intent:
 

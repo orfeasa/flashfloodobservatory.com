@@ -17,6 +17,7 @@ Everything at the repository root is for maintenance only and should not be trea
 - [`public/assets/brand`](public/assets/brand) contains static branding and partner imagery
 - [`public/404.html`](public/404.html) is the public not-found page
 - [`public/CNAME`](public/CNAME) keeps the custom domain with the site artifact
+- [`public/v2`](public/v2) is an isolated redesign prototype that reads the same public payload without replacing the production homepage
 
 ## Single payload rule
 
@@ -25,6 +26,18 @@ The public site is driven by one file only:
 - [`public/data/site_payload.json`](public/data/site_payload.json)
 
 All summary cards, charts, official alert content, notes, and footer partner entries should be inferred from that payload.
+
+## Redesign prototype
+
+The parallel redesign is available at `/v2/`.
+
+It is intentionally isolated:
+
+- the production homepage remains `public/index.html`
+- the publisher continues to update only `public/data/site_payload.json`
+- `/v2/` reads that same payload using `../data/site_payload.json`
+- no redirect or workflow change points public traffic at the prototype
+- the prototype can be reviewed and revised independently before any explicit production cutover
 
 ## Current public behaviour
 
