@@ -6075,16 +6075,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-06-16T02:30:00Z",
-          "value": 0.006844
-        },
-        {
-          "timestamp": "2026-06-16T02:45:00Z",
-          "value": 0.006781
-        },
-        {
           "timestamp": "2026-06-16T03:00:00Z",
-          "value": 0.006817
+          "value": 0.006727
         },
         {
           "timestamp": "2026-06-16T03:15:00Z",
@@ -7996,7 +7988,15 @@
         },
         {
           "timestamp": "2026-06-21T02:30:00Z",
-          "value": 0.004683
+          "value": 0.004676
+        },
+        {
+          "timestamp": "2026-06-21T02:45:00Z",
+          "value": 0.004749
+        },
+        {
+          "timestamp": "2026-06-21T03:00:00Z",
+          "value": 0.004705
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -8069,7 +8069,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-06-21T03:03:54.396662Z"
+    "updated_at": "2026-06-21T03:18:51.251714Z"
   },
   "panels": {
     "depth": {
@@ -8081,14 +8081,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-06-16T02:30:00Z",
-          "value": 0.085
-        },
-        {
-          "timestamp": "2026-06-16T02:45:00Z",
-          "value": 0.085
-        },
         {
           "timestamp": "2026-06-16T03:00:00Z",
           "value": 0.085
@@ -10004,6 +9996,14 @@
         {
           "timestamp": "2026-06-21T02:30:00Z",
           "value": 0.074
+        },
+        {
+          "timestamp": "2026-06-21T02:45:00Z",
+          "value": 0.074
+        },
+        {
+          "timestamp": "2026-06-21T03:00:00Z",
+          "value": 0.074
         }
       ],
       "title": "Observed Water Depth",
@@ -10020,14 +10020,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-06-21T02:30:00Z",
       "points": [
-        {
-          "timestamp": "2026-06-16T02:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-06-16T03:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-06-16T03:15:00Z",
           "value": 0.0
@@ -11817,17 +11809,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-06-21T02:41:00Z",
-    "start_timestamp": "2026-06-20T02:42:00Z"
+    "end_timestamp": "2026-06-21T03:11:00Z",
+    "start_timestamp": "2026-06-20T03:12:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-06-21T02:41:00Z",
-      "start_timestamp": "2026-06-20T02:42:00Z"
+      "end_timestamp": "2026-06-21T03:11:00Z",
+      "start_timestamp": "2026-06-20T03:12:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-06-21T02:41:00Z",
-      "start_timestamp": "2026-06-16T02:42:00Z"
+      "end_timestamp": "2026-06-21T03:11:00Z",
+      "start_timestamp": "2026-06-16T03:12:00Z"
     }
   },
   "site": {
@@ -11843,7 +11835,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-06-21T03:03:54.713139Z",
+    "published_at": "2026-06-21T03:18:51.585119Z",
     "state": "Online"
   },
   "summary_metrics": [
