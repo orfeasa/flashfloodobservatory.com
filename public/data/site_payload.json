@@ -6179,16 +6179,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-06-20T12:00:00Z",
-          "value": 0.010652
-        },
-        {
-          "timestamp": "2026-06-20T12:15:00Z",
-          "value": 0.010804
-        },
-        {
           "timestamp": "2026-06-20T12:30:00Z",
-          "value": 0.010753
+          "value": 0.010854
         },
         {
           "timestamp": "2026-06-20T12:45:00Z",
@@ -8101,6 +8093,14 @@
         {
           "timestamp": "2026-06-25T12:00:00Z",
           "value": 0.039651
+        },
+        {
+          "timestamp": "2026-06-25T12:15:00Z",
+          "value": 0.038967
+        },
+        {
+          "timestamp": "2026-06-25T12:30:00Z",
+          "value": 0.039336
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -8173,7 +8173,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-06-25T12:33:55.370939Z"
+    "updated_at": "2026-06-25T12:48:52.184284Z"
   },
   "panels": {
     "depth": {
@@ -8186,16 +8186,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-06-20T12:00:00Z",
-          "value": 0.101
-        },
-        {
-          "timestamp": "2026-06-20T12:15:00Z",
-          "value": 0.102
-        },
-        {
           "timestamp": "2026-06-20T12:30:00Z",
-          "value": 0.101
+          "value": 0.102
         },
         {
           "timestamp": "2026-06-20T12:45:00Z",
@@ -10108,6 +10100,14 @@
         {
           "timestamp": "2026-06-25T12:00:00Z",
           "value": 0.167
+        },
+        {
+          "timestamp": "2026-06-25T12:15:00Z",
+          "value": 0.166
+        },
+        {
+          "timestamp": "2026-06-25T12:30:00Z",
+          "value": 0.166
         }
       ],
       "title": "Observed Water Depth",
@@ -10122,16 +10122,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-06-25T12:00:00Z",
+      "last_updated": "2026-06-25T12:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-06-20T12:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-06-20T12:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-06-20T12:45:00Z",
           "value": 0.0
@@ -12027,6 +12019,10 @@
         {
           "timestamp": "2026-06-25T12:00:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-06-25T12:15:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -12037,17 +12033,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-06-25T12:12:00Z",
-    "start_timestamp": "2026-06-24T12:13:00Z"
+    "end_timestamp": "2026-06-25T12:42:00Z",
+    "start_timestamp": "2026-06-24T12:43:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-06-25T12:12:00Z",
-      "start_timestamp": "2026-06-24T12:13:00Z"
+      "end_timestamp": "2026-06-25T12:42:00Z",
+      "start_timestamp": "2026-06-24T12:43:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-06-25T12:12:00Z",
-      "start_timestamp": "2026-06-20T12:13:00Z"
+      "end_timestamp": "2026-06-25T12:42:00Z",
+      "start_timestamp": "2026-06-20T12:43:00Z"
     }
   },
   "site": {
@@ -12063,7 +12059,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-06-25T12:33:55.742281Z",
+    "published_at": "2026-06-25T12:48:52.530031Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -12072,7 +12068,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.174
+      "value": 0.164
     },
     {
       "decimals": 3,
