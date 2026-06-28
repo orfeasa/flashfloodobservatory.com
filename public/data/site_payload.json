@@ -6257,16 +6257,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-06-23T10:00:00Z",
-          "value": 0.018348
-        },
-        {
-          "timestamp": "2026-06-23T10:15:00Z",
-          "value": 0.018012
-        },
-        {
           "timestamp": "2026-06-23T10:30:00Z",
-          "value": 0.017878
+          "value": 0.017778
         },
         {
           "timestamp": "2026-06-23T10:45:00Z",
@@ -8179,6 +8171,14 @@
         {
           "timestamp": "2026-06-28T10:00:00Z",
           "value": 0.013281
+        },
+        {
+          "timestamp": "2026-06-28T10:15:00Z",
+          "value": 0.013336
+        },
+        {
+          "timestamp": "2026-06-28T10:30:00Z",
+          "value": 0.013307
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -8243,15 +8243,15 @@
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
-    "label": "Official Environment Agency flood alerts and warnings unavailable",
-    "message": "The Environment Agency flood warning feed could not be reached during this update.",
+    "label": "There are no flood warnings or alerts.",
+    "message": "No Environment Agency flood warnings or alerts are currently active in Boscastle, Cornwall.",
     "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
     "severity": null,
     "severity_level": null,
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
-    "state": "unavailable",
-    "updated_at": "2026-06-28T10:34:23.594090Z"
+    "state": "none",
+    "updated_at": "2026-06-28T10:48:52.234826Z"
   },
   "panels": {
     "depth": {
@@ -8263,14 +8263,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-06-23T10:00:00Z",
-          "value": 0.124
-        },
-        {
-          "timestamp": "2026-06-23T10:15:00Z",
-          "value": 0.123
-        },
         {
           "timestamp": "2026-06-23T10:30:00Z",
           "value": 0.123
@@ -10186,6 +10178,14 @@
         {
           "timestamp": "2026-06-28T10:00:00Z",
           "value": 0.11
+        },
+        {
+          "timestamp": "2026-06-28T10:15:00Z",
+          "value": 0.11
+        },
+        {
+          "timestamp": "2026-06-28T10:30:00Z",
+          "value": 0.11
         }
       ],
       "title": "Observed Water Depth",
@@ -10202,14 +10202,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-06-28T10:00:00Z",
       "points": [
-        {
-          "timestamp": "2026-06-23T10:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-06-23T10:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-06-23T10:45:00Z",
           "value": 0.0
@@ -12119,17 +12111,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-06-28T10:12:00Z",
-    "start_timestamp": "2026-06-27T10:13:00Z"
+    "end_timestamp": "2026-06-28T10:42:00Z",
+    "start_timestamp": "2026-06-27T10:43:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-06-28T10:12:00Z",
-      "start_timestamp": "2026-06-27T10:13:00Z"
+      "end_timestamp": "2026-06-28T10:42:00Z",
+      "start_timestamp": "2026-06-27T10:43:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-06-28T10:12:00Z",
-      "start_timestamp": "2026-06-23T10:13:00Z"
+      "end_timestamp": "2026-06-28T10:42:00Z",
+      "start_timestamp": "2026-06-23T10:43:00Z"
     }
   },
   "site": {
@@ -12145,7 +12137,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-06-28T10:34:23.962364Z",
+    "published_at": "2026-06-28T10:48:52.545917Z",
     "state": "Online"
   },
   "summary_metrics": [
