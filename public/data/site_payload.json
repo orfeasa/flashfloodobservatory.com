@@ -6335,16 +6335,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-06-26T11:30:00Z",
-          "value": 0.017191
-        },
-        {
-          "timestamp": "2026-06-26T11:45:00Z",
-          "value": 0.017342
-        },
-        {
           "timestamp": "2026-06-26T12:00:00Z",
-          "value": 0.017308
+          "value": 0.017492
         },
         {
           "timestamp": "2026-06-26T12:15:00Z",
@@ -8256,7 +8248,15 @@
         },
         {
           "timestamp": "2026-07-01T11:30:00Z",
-          "value": 0.013142
+          "value": 0.01318
+        },
+        {
+          "timestamp": "2026-07-01T11:45:00Z",
+          "value": 0.012725
+        },
+        {
+          "timestamp": "2026-07-01T12:00:00Z",
+          "value": 0.012674
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -8329,7 +8329,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-07-01T12:04:55.430568Z"
+    "updated_at": "2026-07-01T12:33:54.287633Z"
   },
   "panels": {
     "depth": {
@@ -8341,14 +8341,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-06-26T11:30:00Z",
-          "value": 0.121
-        },
-        {
-          "timestamp": "2026-06-26T11:45:00Z",
-          "value": 0.122
-        },
         {
           "timestamp": "2026-06-26T12:00:00Z",
           "value": 0.122
@@ -10263,7 +10255,15 @@
         },
         {
           "timestamp": "2026-07-01T11:30:00Z",
-          "value": 0.109
+          "value": 0.11
+        },
+        {
+          "timestamp": "2026-07-01T11:45:00Z",
+          "value": 0.108
+        },
+        {
+          "timestamp": "2026-07-01T12:00:00Z",
+          "value": 0.108
         }
       ],
       "title": "Observed Water Depth",
@@ -10278,16 +10278,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-07-01T10:45:00Z",
+      "last_updated": "2026-07-01T12:00:00Z",
       "points": [
-        {
-          "timestamp": "2026-06-26T11:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-06-26T12:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-06-26T12:15:00Z",
           "value": 0.0
@@ -12179,6 +12171,26 @@
         {
           "timestamp": "2026-07-01T10:45:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-07-01T11:00:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-07-01T11:15:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-07-01T11:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-07-01T11:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-07-01T12:00:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -12189,17 +12201,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-07-01T11:43:00Z",
-    "start_timestamp": "2026-06-30T11:44:00Z"
+    "end_timestamp": "2026-07-01T12:13:00Z",
+    "start_timestamp": "2026-06-30T12:14:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-07-01T11:43:00Z",
-      "start_timestamp": "2026-06-30T11:44:00Z"
+      "end_timestamp": "2026-07-01T12:13:00Z",
+      "start_timestamp": "2026-06-30T12:14:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-07-01T11:43:00Z",
-      "start_timestamp": "2026-06-26T11:44:00Z"
+      "end_timestamp": "2026-07-01T12:13:00Z",
+      "start_timestamp": "2026-06-26T12:14:00Z"
     }
   },
   "site": {
@@ -12215,7 +12227,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-07-01T12:04:55.748825Z",
+    "published_at": "2026-07-01T12:33:54.627998Z",
     "state": "Online"
   },
   "summary_metrics": [
