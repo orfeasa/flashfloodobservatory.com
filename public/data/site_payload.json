@@ -8833,7 +8833,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-07-23T03:33:52.192923Z"
+    "updated_at": "2026-07-23T03:45:49.280517Z"
   },
   "panels": {
     "depth": {
@@ -10706,7 +10706,7 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-07-23T02:30:00Z",
+      "last_updated": "2026-07-23T02:45:00Z",
       "points": [
         {
           "timestamp": "2026-07-18T08:30:00Z",
@@ -12531,6 +12531,10 @@
         {
           "timestamp": "2026-07-23T02:30:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-07-23T02:45:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -12567,7 +12571,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-07-23T03:33:52.541244Z",
+    "published_at": "2026-07-23T03:45:49.624100Z",
     "state": "Online"
   },
   "summary_metrics": [
