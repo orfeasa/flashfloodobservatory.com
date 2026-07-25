@@ -6967,16 +6967,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-07-20T17:30:00Z",
-          "value": 0.016771
-        },
-        {
-          "timestamp": "2026-07-20T17:45:00Z",
-          "value": 0.016471
-        },
-        {
           "timestamp": "2026-07-20T18:00:00Z",
-          "value": 0.0165
+          "value": 0.016559
         },
         {
           "timestamp": "2026-07-20T18:15:00Z",
@@ -8888,7 +8880,15 @@
         },
         {
           "timestamp": "2026-07-25T17:30:00Z",
-          "value": 0.014127
+          "value": 0.01442
+        },
+        {
+          "timestamp": "2026-07-25T17:45:00Z",
+          "value": 0.013746
+        },
+        {
+          "timestamp": "2026-07-25T18:00:00Z",
+          "value": 0.013256
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -8961,7 +8961,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-07-25T17:49:01.357355Z"
+    "updated_at": "2026-07-25T18:00:58.078651Z"
   },
   "panels": {
     "depth": {
@@ -8974,16 +8974,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-07-20T17:30:00Z",
-          "value": 0.12
-        },
-        {
-          "timestamp": "2026-07-20T17:45:00Z",
-          "value": 0.119
-        },
-        {
           "timestamp": "2026-07-20T18:00:00Z",
-          "value": 0.119
+          "value": 0.12
         },
         {
           "timestamp": "2026-07-20T18:15:00Z",
@@ -10895,7 +10887,15 @@
         },
         {
           "timestamp": "2026-07-25T17:30:00Z",
-          "value": 0.112
+          "value": 0.113
+        },
+        {
+          "timestamp": "2026-07-25T17:45:00Z",
+          "value": 0.111
+        },
+        {
+          "timestamp": "2026-07-25T18:00:00Z",
+          "value": 0.11
         }
       ],
       "title": "Observed Water Depth",
@@ -10910,16 +10910,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-07-25T17:15:00Z",
+      "last_updated": "2026-07-25T17:30:00Z",
       "points": [
-        {
-          "timestamp": "2026-07-20T17:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-20T18:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-07-20T18:15:00Z",
           "value": 0.0
@@ -12827,6 +12819,10 @@
         {
           "timestamp": "2026-07-25T17:15:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-07-25T17:30:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -12837,17 +12833,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-07-25T17:30:00Z",
-    "start_timestamp": "2026-07-24T17:31:00Z"
+    "end_timestamp": "2026-07-25T18:00:00Z",
+    "start_timestamp": "2026-07-24T18:01:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-07-25T17:30:00Z",
-      "start_timestamp": "2026-07-24T17:31:00Z"
+      "end_timestamp": "2026-07-25T18:00:00Z",
+      "start_timestamp": "2026-07-24T18:01:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-07-25T17:30:00Z",
-      "start_timestamp": "2026-07-20T17:31:00Z"
+      "end_timestamp": "2026-07-25T18:00:00Z",
+      "start_timestamp": "2026-07-20T18:01:00Z"
     }
   },
   "site": {
@@ -12863,7 +12859,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-07-25T17:49:01.766231Z",
+    "published_at": "2026-07-25T18:00:58.587554Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -12872,7 +12868,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.112
+      "value": 0.11
     },
     {
       "decimals": 3,
