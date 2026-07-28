@@ -7045,14 +7045,6 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-07-23T22:00:00Z",
-          "value": 0.01045
-        },
-        {
-          "timestamp": "2026-07-23T22:15:00Z",
-          "value": 0.010307
-        },
-        {
           "timestamp": "2026-07-23T22:30:00Z",
           "value": 0.009921
         },
@@ -8966,7 +8958,15 @@
         },
         {
           "timestamp": "2026-07-28T22:00:00Z",
-          "value": 0.009276
+          "value": 0.009104
+        },
+        {
+          "timestamp": "2026-07-28T22:15:00Z",
+          "value": 0.00876
+        },
+        {
+          "timestamp": "2026-07-28T22:30:00Z",
+          "value": 0.008652
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -9039,7 +9039,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-07-28T22:18:53.464914Z"
+    "updated_at": "2026-07-28T22:30:57.407096Z"
   },
   "panels": {
     "depth": {
@@ -9051,14 +9051,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-07-23T22:00:00Z",
-          "value": 0.1
-        },
-        {
-          "timestamp": "2026-07-23T22:15:00Z",
-          "value": 0.1
-        },
         {
           "timestamp": "2026-07-23T22:30:00Z",
           "value": 0.098
@@ -10973,7 +10965,15 @@
         },
         {
           "timestamp": "2026-07-28T22:00:00Z",
-          "value": 0.096
+          "value": 0.095
+        },
+        {
+          "timestamp": "2026-07-28T22:15:00Z",
+          "value": 0.094
+        },
+        {
+          "timestamp": "2026-07-28T22:30:00Z",
+          "value": 0.093
         }
       ],
       "title": "Observed Water Depth",
@@ -10990,14 +10990,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-07-28T21:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-07-23T22:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-23T22:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-07-23T22:45:00Z",
           "value": 0.0
@@ -12903,17 +12895,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-07-28T22:00:00Z",
-    "start_timestamp": "2026-07-27T22:01:00Z"
+    "end_timestamp": "2026-07-28T22:30:00Z",
+    "start_timestamp": "2026-07-27T22:31:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-07-28T22:00:00Z",
-      "start_timestamp": "2026-07-27T22:01:00Z"
+      "end_timestamp": "2026-07-28T22:30:00Z",
+      "start_timestamp": "2026-07-27T22:31:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-07-28T22:00:00Z",
-      "start_timestamp": "2026-07-23T22:01:00Z"
+      "end_timestamp": "2026-07-28T22:30:00Z",
+      "start_timestamp": "2026-07-23T22:31:00Z"
     }
   },
   "site": {
@@ -12929,7 +12921,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-07-28T22:18:53.894656Z",
+    "published_at": "2026-07-28T22:30:57.799872Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -12938,7 +12930,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.096
+      "value": 0.093
     },
     {
       "decimals": 3,
@@ -12952,14 +12944,14 @@
       "label": "Minimum 24h River Level",
       "note": "Lowest recorded water depth in the last 24 hours at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.095
+      "value": 0.054
     },
     {
       "decimals": 3,
       "label": "Current 24h River Level Range",
       "note": "Water depth range recorded in the last 24 hours (max to min) at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.027
+      "value": 0.069
     },
     {
       "decimals": 3,
