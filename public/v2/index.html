@@ -17,9 +17,9 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="styles.css?v=20260729g">
+    <link rel="stylesheet" href="styles.css?v=20260729h">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
-    <script src="app.js?v=20260729h" defer></script>
+    <script src="app.js?v=20260729i" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#mainContent">Skip to observations</a>
@@ -177,14 +177,21 @@
               </div>
               <p id="levelHeatmapDescription"></p>
               <p class="heatmap-average" id="levelHeatmapAverage"></p>
-              <div class="heatmap-period-control" id="heatmapPeriodControl" hidden>
-                <label for="heatmapPeriodSelect">Hydrological year</label>
-                <select id="heatmapPeriodSelect"></select>
-                <span id="heatmapPeriodLabel"></span>
+              <div class="heatmap-controls">
+                <div class="heatmap-period-control" id="heatmapPeriodControl" hidden>
+                  <label for="heatmapPeriodSelect">Hydrological year</label>
+                  <select id="heatmapPeriodSelect"></select>
+                  <span id="heatmapPeriodLabel"></span>
+                </div>
+                <div class="heatmap-week-control" id="heatmapWeekControl" hidden>
+                  <label for="heatmapWeekSelect" id="heatmapWeekLabel">Week of Year</label>
+                  <select id="heatmapWeekSelect"></select>
+                </div>
               </div>
             </div>
             <div class="heatmap-frame">
               <div class="heatmap-mount" id="levelHeatmapMount" aria-label="Historical river-level heatmap"></div>
+              <div class="heatmap-day-detail" id="levelHeatmapDayDetail" aria-live="polite" aria-atomic="true" hidden></div>
               <div class="panel-empty" id="levelHeatmapEmpty" hidden></div>
             </div>
             <p class="panel-footer-copy" id="levelHeatmapFooterDescription"></p>

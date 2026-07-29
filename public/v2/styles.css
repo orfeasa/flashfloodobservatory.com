@@ -711,19 +711,30 @@ h3 {
   font-weight: 600;
 }
 
-.heatmap-period-control {
+.heatmap-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-xl);
+  align-items: start;
+}
+
+.heatmap-period-control,
+.heatmap-week-control {
   display: grid;
+  flex: 1 1 15rem;
   gap: var(--space-xs);
   max-width: 23rem;
 }
 
-.heatmap-period-control label {
+.heatmap-period-control label,
+.heatmap-week-control label {
   color: var(--ink);
   font-size: var(--text-xs);
   font-weight: 700;
 }
 
-.heatmap-period-control select {
+.heatmap-period-control select,
+.heatmap-week-control select {
   min-height: 2.75rem;
   padding: 0.55rem 2.4rem 0.55rem 0.75rem;
   border: 1px solid var(--line-strong);
@@ -749,7 +760,9 @@ h3 {
 .heatmap-mount {
   overflow-x: auto;
   overflow-y: hidden;
+  overscroll-behavior-inline: contain;
   padding: var(--space-md) var(--space-md) var(--space-sm);
+  scrollbar-gutter: stable;
 }
 
 .level-heatmap-svg {
@@ -782,8 +795,73 @@ h3 {
   stroke-width: 1;
 }
 
+.level-heatmap-cell {
+  cursor: crosshair;
+  transition:
+    opacity 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    stroke 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    stroke-width 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.level-heatmap-cell--week {
+  stroke: var(--cobalt);
+  stroke-width: 2;
+}
+
+.level-heatmap-cell--selected,
+.level-heatmap-cell:hover,
+.level-heatmap-cell:focus {
+  stroke: var(--navy);
+  stroke-width: 3;
+  outline: none;
+}
+
 .level-heatmap-cell--missing {
   fill: var(--canvas-deep);
+}
+
+.heatmap-day-detail {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.heatmap-day-detail__date {
+  margin: 0;
+  color: var(--navy);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.heatmap-day-detail dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--space-sm) var(--space-xl);
+  margin: 0;
+}
+
+.heatmap-day-detail dl > div {
+  display: grid;
+  gap: var(--space-2xs);
+  min-width: 0;
+}
+
+.heatmap-day-detail dt {
+  color: var(--muted);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.heatmap-day-detail dd {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
 }
 
 .context-section {
@@ -1133,7 +1211,7 @@ h3 {
   }
 
   .heatmap-panel {
-    grid-template-columns: minmax(19rem, 0.32fr) minmax(0, 0.68fr);
+    grid-template-columns: minmax(0, 1fr);
     padding: var(--space-xl);
   }
 
@@ -1154,7 +1232,8 @@ h3 {
 @media (pointer: coarse) {
   .section-nav a,
   .window-button,
-  .heatmap-period-control select {
+  .heatmap-period-control select,
+  .heatmap-week-control select {
     min-height: 3rem;
   }
 }

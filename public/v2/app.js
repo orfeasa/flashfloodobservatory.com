@@ -17,6 +17,8 @@ let dashboardPayload;
 let timeWindowState;
 let selectedTimeWindowId = fallbackWindowOption.id;
 let selectedHydrologicalYearId;
+let selectedHeatmapWeekIndex;
+let selectedHeatmapDate;
 let rainfallChart;
 let depthChart;
 let responseChart;
@@ -664,6 +666,8 @@ function renderLevelHeatmap(panel) {
   if (!cells.length) {
     mount.innerHTML = "";
     mount.hidden = true;
+    renderHeatmapWeekControl([], selectedPanel);
+    document.getElementById("levelHeatmapDayDetail").hidden = true;
     empty.hidden = false;
     empty.textContent =
       panel.empty_message ||
@@ -674,6 +678,7 @@ function renderLevelHeatmap(panel) {
   mount.hidden = false;
   empty.hidden = true;
   mount.innerHTML = heatmapSvg(selectedPanel);
+  setupHeatmapInteraction(selectedPanel);
 }
 
 function hydrologicalYearState(panel) {
@@ -734,18 +739,246 @@ function renderHydrologicalYearControl(state, selectedYear) {
   label.textContent = selectedYear?.period_label || "";
   select.onchange = () => {
     selectedHydrologicalYearId = select.value;
+    selectedHeatmapWeekIndex = undefined;
+    selectedHeatmapDate = undefined;
     renderLevelHeatmap(
       dashboardPayload?.analysis_panels?.level_heatmap || {}
     );
   };
 }
 
-function heatmapSvg(panel) {
-  const cells = (panel.cells || []).filter(
-    (cell) =>
-      Number.isFinite(Number(cell.week_index)) &&
-      Number.isFinite(Number(cell.weekday_index))
+function setupHeatmapInteraction(panel) {
+  const mount = document.getElementById("levelHeatmapMount");
+  const cells = Array.from(
+    mount.querySelectorAll(".level-heatmap-cell")
   );
+  const panelCells = (panel.cells || [])
+    .filter((cell) => cell?.date)
+    .sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  const cellsByDate = new Map(
+    panelCells.map((cell) => [String(cell.date), cell])
+  );
+
+  if (!cells.length || !panelCells.length) {
+    renderHeatmapWeekControl([], panel);
+    document.getElementById("levelHeatmapDayDetail").hidden = true;
+    return;
+  }
+
+  const weeks = heatmapWeeks(panelCells);
+  const availableDates = new Set(cellsByDate.keys());
+  if (!availableDates.has(selectedHeatmapDate)) {
+    selectedHeatmapDate =
+      [...panelCells]
+        .reverse()
+        .find((cell) => Number.isFinite(heatmapNumber(cell.max_level_m)))
+        ?.date || panelCells[panelCells.length - 1].date;
+  }
+  const selectedCell = cellsByDate.get(String(selectedHeatmapDate));
+  selectedHeatmapWeekIndex = Number(selectedCell.week_index);
+
+  renderHeatmapWeekControl(weeks, panel, cellsByDate);
+
+  const selectCell = (target, { focus = false, scroll = false } = {}) => {
+    const data = cellsByDate.get(String(target.dataset.date));
+    if (!data) {
+      return;
+    }
+
+    selectedHeatmapDate = data.date;
+    selectedHeatmapWeekIndex = Number(data.week_index);
+    cells.forEach((cell) => {
+      const isSelected = cell === target;
+      const isSelectedWeek =
+        Number(cell.dataset.weekIndex) === selectedHeatmapWeekIndex;
+      cell.classList.toggle("level-heatmap-cell--selected", isSelected);
+      cell.classList.toggle("level-heatmap-cell--week", isSelectedWeek);
+      cell.setAttribute("aria-pressed", String(isSelected));
+      cell.setAttribute("tabindex", isSelected ? "0" : "-1");
+    });
+
+    const weekSelect = document.getElementById("heatmapWeekSelect");
+    weekSelect.value = String(selectedHeatmapWeekIndex);
+    renderHeatmapDayDetail(data);
+    if (focus) {
+      target.focus({ preventScroll: true });
+    }
+    if (scroll) {
+      scrollHeatmapCellIntoView(target, mount);
+    }
+  };
+
+  cells.forEach((cell, index) => {
+    cell.addEventListener("pointerenter", () => selectCell(cell));
+    cell.addEventListener("focus", () => selectCell(cell));
+    cell.addEventListener("click", () =>
+      selectCell(cell, { focus: true, scroll: true })
+    );
+    cell.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        selectCell(cell, { focus: true, scroll: true });
+        return;
+      }
+      const movement = {
+        ArrowLeft: -7,
+        ArrowRight: 7,
+        ArrowUp: -1,
+        ArrowDown: 1,
+        Home: -index,
+        End: cells.length - index - 1,
+      }[event.key];
+      if (!Number.isFinite(movement)) {
+        return;
+      }
+      event.preventDefault();
+      const target = cells[index + movement];
+      if (target) {
+        selectCell(target, { focus: true, scroll: true });
+      }
+    });
+  });
+
+  const initial = cells.find(
+    (cell) => cell.dataset.date === String(selectedHeatmapDate)
+  );
+  if (initial) {
+    selectCell(initial, { scroll: true });
+  }
+}
+
+function heatmapWeeks(cells) {
+  const groups = new Map();
+  cells.forEach((cell) => {
+    const week = Number(cell.week_index);
+    if (!Number.isFinite(week)) {
+      return;
+    }
+    if (!groups.has(week)) {
+      groups.set(week, []);
+    }
+    groups.get(week).push(cell);
+  });
+  return Array.from(groups, ([index, days]) => ({
+    index,
+    days: days.sort((a, b) => String(a.date).localeCompare(String(b.date))),
+  })).sort((a, b) => a.index - b.index);
+}
+
+function renderHeatmapWeekControl(weeks, panel, cellsByDate = new Map()) {
+  const control = document.getElementById("heatmapWeekControl");
+  const select = document.getElementById("heatmapWeekSelect");
+  const label = document.getElementById("heatmapWeekLabel");
+
+  control.hidden = !weeks.length;
+  label.textContent = panel?.x_axis_label || "Week of Year";
+  select.replaceChildren(
+    ...weeks.map((week) => {
+      const option = document.createElement("option");
+      const first = week.days[0];
+      const last = week.days[week.days.length - 1];
+      option.value = String(week.index);
+      option.textContent =
+        first === last
+          ? first.date_label || first.date
+          : `${first.date_label || first.date}–${last.date_label || last.date}`;
+      return option;
+    })
+  );
+  if (!weeks.length) {
+    return;
+  }
+
+  select.value = String(selectedHeatmapWeekIndex ?? weeks.at(-1).index);
+  select.onchange = () => {
+    const week = weeks.find(
+      (candidate) => String(candidate.index) === select.value
+    );
+    const day = week?.days[0];
+    const target = day
+      ? document.querySelector(
+          `.level-heatmap-cell[data-date="${cssEscape(day.date)}"]`
+        )
+      : null;
+    if (target && cellsByDate.has(String(day.date))) {
+      target.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    }
+  };
+}
+
+function renderHeatmapDayDetail(cell) {
+  const detail = document.getElementById("levelHeatmapDayDetail");
+  const level = heatmapNumber(cell.max_level_m);
+  const percent = heatmapNumber(cell.percent_of_average);
+  const difference = heatmapNumber(cell.difference_from_average_m);
+  const metrics = [
+    {
+      label: "Maximum level",
+      value: Number.isFinite(level)
+        ? `${level.toFixed(3)} m`
+        : "No daily maximum available",
+    },
+    {
+      label: "% of observatory average",
+      value: Number.isFinite(percent) ? `${percent.toFixed(1)}%` : "—",
+    },
+    {
+      label: "Difference from average",
+      value: Number.isFinite(difference)
+        ? `${signed(difference, 3)} m`
+        : "—",
+    },
+  ];
+  const date = document.createElement("p");
+  date.className = "heatmap-day-detail__date";
+  date.textContent = cell.date_label || cell.date || "";
+  const list = document.createElement("dl");
+  list.replaceChildren(
+    ...metrics.map((metric) => {
+      const item = document.createElement("div");
+      const term = document.createElement("dt");
+      const value = document.createElement("dd");
+      term.textContent = metric.label;
+      value.textContent = metric.value;
+      item.append(term, value);
+      return item;
+    })
+  );
+  detail.replaceChildren(date, list);
+  detail.hidden = false;
+}
+
+function scrollHeatmapCellIntoView(cell, mount) {
+  const cellBounds = cell.getBoundingClientRect();
+  const mountBounds = mount.getBoundingClientRect();
+  const left =
+    mount.scrollLeft +
+    cellBounds.left -
+    mountBounds.left -
+    mount.clientWidth / 2 +
+    cellBounds.width / 2;
+  mount.scrollTo({
+    left: Math.max(0, left),
+    behavior: prefersReducedMotion() ? "auto" : "smooth",
+  });
+}
+
+function cssEscape(value) {
+  return window.CSS?.escape
+    ? window.CSS.escape(String(value))
+    : String(value).replaceAll('"', '\\"');
+}
+
+function heatmapSvg(panel) {
+  const cells = (panel.cells || [])
+    .filter(
+      (cell) =>
+        Number.isFinite(Number(cell.week_index)) &&
+        Number.isFinite(Number(cell.weekday_index))
+    )
+    .sort((a, b) =>
+      String(a.date || "").localeCompare(String(b.date || ""))
+    );
   if (!cells.length) {
     return "";
   }
@@ -795,22 +1028,30 @@ function heatmapSvg(panel) {
   const gridHeight = 7 * step - gap;
   const gridX = 98;
   const gridY = 14;
-  const legendWidth = 30;
-  const legendX = gridX + gridWidth + 44;
-  const legendHeight = gridHeight;
-  const bandHeight = legendHeight / colors.length;
   const monthY = gridY + gridHeight + 26;
   const axisY = monthY + 26;
-  const width = legendX + legendWidth + 130;
-  const height = axisY + 24;
+  const legendX = gridX;
+  const legendBandWidth = 32;
+  const legendBandHeight = 16;
+  const legendWidth = legendBandWidth * colors.length;
+  const legendTitleY = axisY + 32;
+  const legendY = legendTitleY + 12;
+  const legendTickY = legendY + legendBandHeight + 18;
+  const width = Math.max(
+    gridX + gridWidth + 24,
+    legendX + legendWidth + 36
+  );
+  const height = legendTickY + 18;
 
   const cellMarkup = cells
     .map((cell) => {
-      const x = gridX + Number(cell.week_index) * step;
-      const y = gridY + Number(cell.weekday_index) * step;
-      const percent = Number(cell.percent_of_average);
-      const level = Number(cell.max_level_m);
-      const difference = Number(cell.difference_from_average_m);
+      const weekIndex = Number(cell.week_index);
+      const weekdayIndex = Number(cell.weekday_index);
+      const x = gridX + weekIndex * step;
+      const y = gridY + weekdayIndex * step;
+      const percent = heatmapNumber(cell.percent_of_average);
+      const level = heatmapNumber(cell.max_level_m);
+      const difference = heatmapNumber(cell.difference_from_average_m);
       const fill = Number.isFinite(percent)
         ? heatmapColor(percent, edges, colors)
         : "#e6e3da";
@@ -831,7 +1072,7 @@ function heatmapSvg(panel) {
       ]
         .filter(Boolean)
         .join("\n");
-      return `<rect class="level-heatmap-cell${missing}" x="${x}" y="${y}" width="${size}" height="${size}" rx="2" fill="${fill}"><title>${escapeHtml(tooltip)}</title></rect>`;
+      return `<rect class="level-heatmap-cell${missing}" x="${x}" y="${y}" width="${size}" height="${size}" rx="2" fill="${fill}" role="button" aria-label="${escapeHtml(tooltip)}" aria-pressed="false" tabindex="-1" data-date="${escapeHtml(cell.date || "")}" data-week-index="${weekIndex}" data-weekday-index="${weekdayIndex}"><title>${escapeHtml(tooltip)}</title></rect>`;
     })
     .join("");
 
@@ -855,34 +1096,33 @@ function heatmapSvg(panel) {
 
   const bands = colors
     .map((color, index) => {
-      const y = gridY + (colors.length - index - 1) * bandHeight;
-      return `<rect class="level-heatmap-legend-band" x="${legendX}" y="${y}" width="${legendWidth}" height="${bandHeight}" fill="${color}"></rect>`;
+      const x = legendX + index * legendBandWidth;
+      return `<rect class="level-heatmap-legend-band" x="${x}" y="${legendY}" width="${legendBandWidth}" height="${legendBandHeight}" fill="${color}"></rect>`;
     })
     .join("");
 
   const preferred = [30, 90, 150, 210, 270, 330, 390, 450];
   const labels = preferred
     .filter((value) => edges.includes(value))
-    .reverse()
     .map((value) => {
       const index = edges.indexOf(value);
-      const y = gridY + (edges.length - index - 1) * bandHeight;
+      const x = legendX + index * legendBandWidth;
       const label =
         value === edges[edges.length - 1] ? `>${value}` : String(value);
-      return `<g><line class="level-heatmap-grid-outline" x1="${legendX + legendWidth + 6}" y1="${y}" x2="${legendX + legendWidth + 14}" y2="${y}"></line><text class="level-heatmap-tick" x="${legendX + legendWidth + 20}" y="${y + 4}">${label}</text></g>`;
+      return `<g><line class="level-heatmap-grid-outline" x1="${x}" y1="${legendY + legendBandHeight + 4}" x2="${x}" y2="${legendY + legendBandHeight + 10}"></line><text class="level-heatmap-tick" x="${x}" y="${legendTickY}" text-anchor="middle">${label}</text></g>`;
     })
     .join("");
 
   return `
-    <svg class="level-heatmap-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMinYMin meet" style="min-width:${width}px" role="img" aria-label="${escapeHtml(panel.title || "River-level heatmap")}">
+    <svg class="level-heatmap-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMinYMin meet" style="min-width:${width}px" role="group" aria-label="${escapeHtml(panel.title || "River-level heatmap")}">
       <rect class="level-heatmap-grid-outline" x="${gridX - 1}" y="${gridY - 1}" width="${gridWidth + 2}" height="${gridHeight + 2}" fill="none"></rect>
       ${cellMarkup}
       ${weekdayMarkup}
       ${monthMarkup}
       <text class="level-heatmap-axis-label" x="${gridX + gridWidth / 2}" y="${axisY}" text-anchor="middle">${escapeHtml(panel.x_axis_label || "Week of year")}</text>
+      <text class="level-heatmap-legend-title" x="${legendX}" y="${legendTitleY}">${escapeHtml(legend.label || "% of average")}</text>
       ${bands}
       ${labels}
-      <text class="level-heatmap-legend-title" x="${legendX + legendWidth + 58}" y="${gridY + legendHeight / 2}" text-anchor="middle" transform="rotate(90 ${legendX + legendWidth + 58} ${gridY + legendHeight / 2})">${escapeHtml(legend.label || "% of average")}</text>
     </svg>`;
 }
 
@@ -1368,6 +1608,13 @@ function signed(value, decimals = 0) {
     return "";
   }
   return `${numeric > 0 ? "+" : ""}${numeric.toFixed(decimals)}`;
+}
+
+function heatmapNumber(value) {
+  if (value === null || value === undefined || value === "") {
+    return Number.NaN;
+  }
+  return Number(value);
 }
 
 function escapeHtml(value) {
