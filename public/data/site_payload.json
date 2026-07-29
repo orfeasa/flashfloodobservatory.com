@@ -7071,16 +7071,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-07-24T12:30:00Z",
-          "value": 0.017308
-        },
-        {
-          "timestamp": "2026-07-24T12:45:00Z",
-          "value": 0.017476
-        },
-        {
           "timestamp": "2026-07-24T13:00:00Z",
-          "value": 0.017845
+          "value": 0.017878
         },
         {
           "timestamp": "2026-07-24T13:15:00Z",
@@ -8992,7 +8984,15 @@
         },
         {
           "timestamp": "2026-07-29T12:30:00Z",
-          "value": 0.016442
+          "value": 0.017006
+        },
+        {
+          "timestamp": "2026-07-29T12:45:00Z",
+          "value": 0.017073
+        },
+        {
+          "timestamp": "2026-07-29T13:00:00Z",
+          "value": 0.016872
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -9065,7 +9065,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-07-29T12:48:54.736012Z"
+    "updated_at": "2026-07-29T13:01:05.967214Z"
   },
   "panels": {
     "depth": {
@@ -9077,14 +9077,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-07-24T12:30:00Z",
-          "value": 0.122
-        },
-        {
-          "timestamp": "2026-07-24T12:45:00Z",
-          "value": 0.122
-        },
         {
           "timestamp": "2026-07-24T13:00:00Z",
           "value": 0.123
@@ -10999,7 +10991,15 @@
         },
         {
           "timestamp": "2026-07-29T12:30:00Z",
-          "value": 0.119
+          "value": 0.121
+        },
+        {
+          "timestamp": "2026-07-29T12:45:00Z",
+          "value": 0.121
+        },
+        {
+          "timestamp": "2026-07-29T13:00:00Z",
+          "value": 0.12
         }
       ],
       "title": "Observed Water Depth",
@@ -11014,16 +11014,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-07-29T12:15:00Z",
+      "last_updated": "2026-07-29T12:30:00Z",
       "points": [
-        {
-          "timestamp": "2026-07-24T12:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-24T13:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-07-24T13:15:00Z",
           "value": 0.0
@@ -12927,6 +12919,10 @@
         {
           "timestamp": "2026-07-29T12:15:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-07-29T12:30:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -12937,17 +12933,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-07-29T12:30:00Z",
-    "start_timestamp": "2026-07-28T12:31:00Z"
+    "end_timestamp": "2026-07-29T13:00:00Z",
+    "start_timestamp": "2026-07-28T13:01:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-07-29T12:30:00Z",
-      "start_timestamp": "2026-07-28T12:31:00Z"
+      "end_timestamp": "2026-07-29T13:00:00Z",
+      "start_timestamp": "2026-07-28T13:01:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-07-29T12:30:00Z",
-      "start_timestamp": "2026-07-24T12:31:00Z"
+      "end_timestamp": "2026-07-29T13:00:00Z",
+      "start_timestamp": "2026-07-24T13:01:00Z"
     }
   },
   "site": {
@@ -12963,7 +12959,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-07-29T12:48:55.146799Z",
+    "published_at": "2026-07-29T13:01:06.359952Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -12972,7 +12968,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.119
+      "value": 0.12
     },
     {
       "decimals": 3,
