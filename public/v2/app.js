@@ -2,15 +2,15 @@ const payloadPath = "../data/site_payload.json";
 const fallbackWindowOption = { id: "24h", label: "24 hours" };
 
 const chartPalette = {
-  river: "#126b72",
-  riverFill: "rgba(18, 107, 114, 0.12)",
-  rain: "#477aa1",
-  rainFill: "rgba(71, 122, 161, 0.24)",
-  moss: "#617f43",
-  ink: "#17312f",
-  muted: "#65726e",
-  grid: "#d7dcd4",
-  paper: "#f8f6ef",
+  river: "#00838a",
+  riverFill: "rgba(0, 131, 138, 0.12)",
+  rain: "#2f6fd6",
+  rainFill: "rgba(47, 111, 214, 0.24)",
+  moss: "#6a49b8",
+  ink: "#17263d",
+  muted: "#5b6b80",
+  grid: "#d6deea",
+  paper: "#ffffff",
 };
 
 let dashboardPayload;
@@ -45,9 +45,31 @@ async function main() {
     renderAnalysisPanels();
     renderNotes(dashboardPayload.notes || []);
     renderFooter(dashboardPayload.footer || {});
+    restoreAnchorAfterRender();
   } catch (error) {
     console.error(error);
     applyErrorState(error);
+  }
+}
+
+function restoreAnchorAfterRender() {
+  const anchorId = window.location.hash.slice(1);
+  if (!anchorId) {
+    return;
+  }
+  const target = document.getElementById(anchorId);
+  if (!target) {
+    return;
+  }
+  const restore = () => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
+    });
+  };
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(restore);
+  } else {
+    restore();
   }
 }
 
@@ -55,13 +77,15 @@ function applyHero(site, status) {
   text("heroEyebrow", site.eyebrow || "Flash Flood Observatory");
   text("siteNameLine", site.name || "Flash Flood Observatory");
   text("siteLocationLine", site.location || "");
-  text(
-    "heroStrapline",
-    site.strapline || "Real-time monitoring of rainfall and river conditions."
-  );
+  text("headerSiteNameLine", site.name || "Flash Flood Observatory");
+  text("headerSiteLocationLine", site.location || "");
+  text("heroStrapline", site.strapline || "Public dashboard");
+
+  document.getElementById("siteLocationLine").hidden = !site.location;
+  document.getElementById("headerSiteLocationLine").hidden = !site.location;
 
   displayTimeZone = site.timezone || "UTC";
-  const titleBits = [site.name, site.location, "V2 prototype"].filter(Boolean);
+  const titleBits = [site.name, site.location].filter(Boolean);
   document.title = titleBits.join(" — ");
 
   const mark = document.getElementById("siteMark");
@@ -173,6 +197,9 @@ function renderSummaryMetrics(metrics) {
 function renderSummaryCard(metric) {
   const card = document.createElement("article");
   card.className = "summary-card";
+  if (metric.label === "Current River Level") {
+    card.classList.add("summary-card--current");
+  }
 
   const label = document.createElement("p");
   label.className = "section-label";
@@ -1102,14 +1129,14 @@ function chartPlugins() {
         color: chartPalette.ink,
         boxWidth: 14,
         boxHeight: 8,
-        font: { family: "Atkinson Hyperlegible Next", weight: "600" },
+        font: { family: "IBM Plex Sans", weight: "600" },
       },
     },
     tooltip: {
-      backgroundColor: "#17312f",
-      titleColor: "#f8f6ef",
-      bodyColor: "#e0e8e3",
-      borderColor: "#66807b",
+      backgroundColor: "#071a33",
+      titleColor: "#ffffff",
+      bodyColor: "#dce8f8",
+      borderColor: "#6f8aab",
       borderWidth: 1,
       padding: 12,
       callbacks: {
@@ -1223,11 +1250,10 @@ function fallbackReportingWindow(panels) {
 
 function applyErrorState(error) {
   text("heroEyebrow", "Flash Flood Observatory");
-  text("leadTitle", "The live observations could not be loaded.");
-  text(
-    "heroStrapline",
-    "We could not reach the curated public data file. The current dashboard may still be available."
-  );
+  text("siteNameLine", "Public dashboard");
+  text("siteLocationLine", "");
+  document.getElementById("siteLocationLine").hidden = true;
+  text("heroStrapline", "The public payload could not be loaded.");
   text("currentReadingValue", "Unavailable");
   text(
     "currentReadingNote",
