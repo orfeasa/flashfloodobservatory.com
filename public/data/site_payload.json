@@ -7097,14 +7097,6 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-07-25T08:45:00Z",
-          "value": 0.015211
-        },
-        {
-          "timestamp": "2026-07-25T09:00:00Z",
-          "value": 0.015416
-        },
-        {
           "timestamp": "2026-07-25T09:15:00Z",
           "value": 0.015504
         },
@@ -9014,7 +9006,15 @@
         },
         {
           "timestamp": "2026-07-30T08:45:00Z",
-          "value": 0.014039
+          "value": 0.013922
+        },
+        {
+          "timestamp": "2026-07-30T09:00:00Z",
+          "value": 0.013028
+        },
+        {
+          "timestamp": "2026-07-30T09:15:00Z",
+          "value": 0.012927
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -9087,7 +9087,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-07-30T09:18:55.706974Z"
+    "updated_at": "2026-07-30T09:34:00.691736Z"
   },
   "panels": {
     "depth": {
@@ -9099,14 +9099,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-07-25T08:45:00Z",
-          "value": 0.116
-        },
-        {
-          "timestamp": "2026-07-25T09:00:00Z",
-          "value": 0.116
-        },
         {
           "timestamp": "2026-07-25T09:15:00Z",
           "value": 0.116
@@ -11018,6 +11010,14 @@
         {
           "timestamp": "2026-07-30T08:45:00Z",
           "value": 0.112
+        },
+        {
+          "timestamp": "2026-07-30T09:00:00Z",
+          "value": 0.109
+        },
+        {
+          "timestamp": "2026-07-30T09:15:00Z",
+          "value": 0.109
         }
       ],
       "title": "Observed Water Depth",
@@ -11034,14 +11034,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-07-30T07:00:00Z",
       "points": [
-        {
-          "timestamp": "2026-07-25T09:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-25T09:15:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-07-25T09:30:00Z",
           "value": 0.0
@@ -12931,17 +12923,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-07-30T08:55:00Z",
-    "start_timestamp": "2026-07-29T08:56:00Z"
+    "end_timestamp": "2026-07-30T09:25:00Z",
+    "start_timestamp": "2026-07-29T09:26:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-07-30T08:55:00Z",
-      "start_timestamp": "2026-07-29T08:56:00Z"
+      "end_timestamp": "2026-07-30T09:25:00Z",
+      "start_timestamp": "2026-07-29T09:26:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-07-30T08:55:00Z",
-      "start_timestamp": "2026-07-25T08:56:00Z"
+      "end_timestamp": "2026-07-30T09:25:00Z",
+      "start_timestamp": "2026-07-25T09:26:00Z"
     }
   },
   "site": {
@@ -12957,7 +12949,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-07-30T09:18:56.022246Z",
+    "published_at": "2026-07-30T09:34:01.120102Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -12966,7 +12958,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.109
+      "value": 0.11
     },
     {
       "decimals": 3,
