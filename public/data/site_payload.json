@@ -7123,16 +7123,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-07-26T21:15:00Z",
-          "value": 0.013256
-        },
-        {
-          "timestamp": "2026-07-26T21:30:00Z",
-          "value": 0.013365
-        },
-        {
           "timestamp": "2026-07-26T21:45:00Z",
-          "value": 0.013395
+          "value": 0.013281
         },
         {
           "timestamp": "2026-07-26T22:00:00Z",
@@ -9040,7 +9032,15 @@
         },
         {
           "timestamp": "2026-07-31T21:15:00Z",
-          "value": 0.012371
+          "value": 0.012421
+        },
+        {
+          "timestamp": "2026-07-31T21:30:00Z",
+          "value": 0.012421
+        },
+        {
+          "timestamp": "2026-07-31T21:45:00Z",
+          "value": 0.012447
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -9105,15 +9105,15 @@
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
-    "label": "There are no flood warnings or alerts.",
-    "message": "No Environment Agency flood warnings or alerts are currently active in Boscastle, Cornwall.",
+    "label": "Official Environment Agency flood alerts and warnings unavailable",
+    "message": "The Environment Agency flood warning feed could not be reached during this update.",
     "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
     "severity": null,
     "severity_level": null,
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
-    "state": "none",
-    "updated_at": "2026-07-31T21:48:52.016035Z"
+    "state": "unavailable",
+    "updated_at": "2026-07-31T22:04:44.722624Z"
   },
   "panels": {
     "depth": {
@@ -9125,14 +9125,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-07-26T21:15:00Z",
-          "value": 0.11
-        },
-        {
-          "timestamp": "2026-07-26T21:30:00Z",
-          "value": 0.11
-        },
         {
           "timestamp": "2026-07-26T21:45:00Z",
           "value": 0.11
@@ -11044,6 +11036,14 @@
         {
           "timestamp": "2026-07-31T21:15:00Z",
           "value": 0.107
+        },
+        {
+          "timestamp": "2026-07-31T21:30:00Z",
+          "value": 0.107
+        },
+        {
+          "timestamp": "2026-07-31T21:45:00Z",
+          "value": 0.107
         }
       ],
       "title": "Observed Water Depth",
@@ -11060,14 +11060,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-07-31T21:15:00Z",
       "points": [
-        {
-          "timestamp": "2026-07-26T21:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-26T21:45:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-07-26T22:00:00Z",
           "value": 0.0
@@ -12985,17 +12977,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-07-31T21:25:00Z",
-    "start_timestamp": "2026-07-30T21:26:00Z"
+    "end_timestamp": "2026-07-31T21:55:00Z",
+    "start_timestamp": "2026-07-30T21:56:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-07-31T21:25:00Z",
-      "start_timestamp": "2026-07-30T21:26:00Z"
+      "end_timestamp": "2026-07-31T21:55:00Z",
+      "start_timestamp": "2026-07-30T21:56:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-07-31T21:25:00Z",
-      "start_timestamp": "2026-07-26T21:26:00Z"
+      "end_timestamp": "2026-07-31T21:55:00Z",
+      "start_timestamp": "2026-07-26T21:56:00Z"
     }
   },
   "site": {
@@ -13011,7 +13003,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-07-31T21:48:52.416762Z",
+    "published_at": "2026-07-31T22:04:45.297615Z",
     "state": "Online"
   },
   "summary_metrics": [
