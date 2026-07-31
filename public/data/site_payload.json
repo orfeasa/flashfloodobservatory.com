@@ -7123,14 +7123,6 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-07-25T23:45:00Z",
-          "value": 0.015358
-        },
-        {
-          "timestamp": "2026-07-26T00:00:00Z",
-          "value": 0.01527
-        },
-        {
           "timestamp": "2026-07-26T00:15:00Z",
           "value": 0.01527
         },
@@ -9040,7 +9032,15 @@
         },
         {
           "timestamp": "2026-07-30T23:45:00Z",
-          "value": 0.012169
+          "value": 0.012194
+        },
+        {
+          "timestamp": "2026-07-31T00:00:00Z",
+          "value": 0.012194
+        },
+        {
+          "timestamp": "2026-07-31T00:15:00Z",
+          "value": 0.01232
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -9113,7 +9113,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-07-31T00:18:53.849757Z"
+    "updated_at": "2026-07-31T00:33:55.320978Z"
   },
   "panels": {
     "depth": {
@@ -9125,14 +9125,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-07-25T23:45:00Z",
-          "value": 0.116
-        },
-        {
-          "timestamp": "2026-07-26T00:00:00Z",
-          "value": 0.116
-        },
         {
           "timestamp": "2026-07-26T00:15:00Z",
           "value": 0.116
@@ -11044,13 +11036,21 @@
         {
           "timestamp": "2026-07-30T23:45:00Z",
           "value": 0.106
+        },
+        {
+          "timestamp": "2026-07-31T00:00:00Z",
+          "value": 0.106
+        },
+        {
+          "timestamp": "2026-07-31T00:15:00Z",
+          "value": 0.107
         }
       ],
       "title": "Observed Water Depth",
       "y_axis_label": "Water Depth (m)"
     },
     "rainfall": {
-      "data_url": "https://environment.data.gov.uk/flood-monitoring/data/readings?parameter=rainfall&stationReference=49149&startdate=2026-07-25&enddate=2026-07-30&_sorted=",
+      "data_url": "https://environment.data.gov.uk/flood-monitoring/data/readings?parameter=rainfall&stationReference=49149&startdate=2026-07-26&enddate=2026-07-31&_sorted=",
       "description": "Rainfall measured every 15 minutes over the last 24 hours, plotted in millimetres (mm) on the left and Date & Time along the bottom at Environment Agency station 49149",
       "descriptions": {
         "24h": "Rainfall measured every 15 minutes over the last 24 hours, plotted in millimetres (mm) on the left and Date & Time along the bottom at Environment Agency station 49149",
@@ -11060,14 +11060,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-07-30T23:00:00Z",
       "points": [
-        {
-          "timestamp": "2026-07-26T00:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-26T00:15:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-07-26T00:30:00Z",
           "value": 0.2
@@ -12973,17 +12965,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-07-30T23:55:00Z",
-    "start_timestamp": "2026-07-29T23:56:00Z"
+    "end_timestamp": "2026-07-31T00:25:00Z",
+    "start_timestamp": "2026-07-30T00:26:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-07-30T23:55:00Z",
-      "start_timestamp": "2026-07-29T23:56:00Z"
+      "end_timestamp": "2026-07-31T00:25:00Z",
+      "start_timestamp": "2026-07-30T00:26:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-07-30T23:55:00Z",
-      "start_timestamp": "2026-07-25T23:56:00Z"
+      "end_timestamp": "2026-07-31T00:25:00Z",
+      "start_timestamp": "2026-07-26T00:26:00Z"
     }
   },
   "site": {
@@ -12999,7 +12991,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-07-31T00:18:54.313007Z",
+    "published_at": "2026-07-31T00:33:55.695322Z",
     "state": "Online"
   },
   "summary_metrics": [
