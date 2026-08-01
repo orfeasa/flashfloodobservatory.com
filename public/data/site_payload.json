@@ -7149,16 +7149,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-07-27T20:45:00Z",
-          "value": 0.015153
-        },
-        {
-          "timestamp": "2026-07-27T21:00:00Z",
-          "value": 0.015153
-        },
-        {
           "timestamp": "2026-07-27T21:15:00Z",
-          "value": 0.015123
+          "value": 0.015035
         },
         {
           "timestamp": "2026-07-27T21:30:00Z",
@@ -9066,7 +9058,15 @@
         },
         {
           "timestamp": "2026-08-01T20:45:00Z",
-          "value": 0.007032
+          "value": 0.006763
+        },
+        {
+          "timestamp": "2026-08-01T21:00:00Z",
+          "value": 0.005335
+        },
+        {
+          "timestamp": "2026-08-01T21:15:00Z",
+          "value": 0.005365
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -9139,7 +9139,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-08-01T21:18:53.624570Z"
+    "updated_at": "2026-08-01T21:34:02.930969Z"
   },
   "panels": {
     "depth": {
@@ -9151,14 +9151,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-07-27T20:45:00Z",
-          "value": 0.115
-        },
-        {
-          "timestamp": "2026-07-27T21:00:00Z",
-          "value": 0.115
-        },
         {
           "timestamp": "2026-07-27T21:15:00Z",
           "value": 0.115
@@ -11069,7 +11061,15 @@
         },
         {
           "timestamp": "2026-08-01T20:45:00Z",
-          "value": 0.086
+          "value": 0.085
+        },
+        {
+          "timestamp": "2026-08-01T21:00:00Z",
+          "value": 0.077
+        },
+        {
+          "timestamp": "2026-08-01T21:15:00Z",
+          "value": 0.078
         }
       ],
       "title": "Observed Water Depth",
@@ -11086,14 +11086,6 @@
       "eyebrow": "Rainfall",
       "last_updated": "2026-08-01T18:45:00Z",
       "points": [
-        {
-          "timestamp": "2026-07-27T21:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-27T21:15:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-07-27T21:30:00Z",
           "value": 0.0
@@ -12983,17 +12975,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-08-01T20:55:00Z",
-    "start_timestamp": "2026-07-31T20:56:00Z"
+    "end_timestamp": "2026-08-01T21:25:00Z",
+    "start_timestamp": "2026-07-31T21:26:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-08-01T20:55:00Z",
-      "start_timestamp": "2026-07-31T20:56:00Z"
+      "end_timestamp": "2026-08-01T21:25:00Z",
+      "start_timestamp": "2026-07-31T21:26:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-08-01T20:55:00Z",
-      "start_timestamp": "2026-07-27T20:56:00Z"
+      "end_timestamp": "2026-08-01T21:25:00Z",
+      "start_timestamp": "2026-07-27T21:26:00Z"
     }
   },
   "site": {
@@ -13009,7 +13001,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-08-01T21:18:54.002401Z",
+    "published_at": "2026-08-01T21:34:03.320739Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -13018,7 +13010,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.08
+      "value": 0.079
     },
     {
       "decimals": 3,
@@ -13032,14 +13024,14 @@
       "label": "Minimum 24h River Level",
       "note": "Lowest recorded water depth in the last 24 hours at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.08
+      "value": 0.076
     },
     {
       "decimals": 3,
       "label": "Current 24h River Level Range",
       "note": "Water depth range recorded in the last 24 hours (max to min) at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.037
+      "value": 0.041
     },
     {
       "decimals": 3,
