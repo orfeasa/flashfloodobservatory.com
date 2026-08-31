@@ -1613,6 +1613,12 @@
           "timestamp": "2026-08-02T11:00:00Z",
           "x": 0.072,
           "y": 0.127
+        },
+        {
+          "date": "2026-08-03",
+          "timestamp": "2026-08-03T11:00:00Z",
+          "x": 0.01,
+          "y": 0.074
         }
       ],
       "subtitle": "Daily Range and Peak Levels",
@@ -1667,10 +1673,10 @@
         {
           "date": "2025-11-10",
           "date_label": "10/11/2025",
-          "difference_from_average_m": 0.097,
+          "difference_from_average_m": 0.098,
           "max_level_m": 0.281,
-          "percent_difference_from_average": 53.0,
-          "percent_of_average": 153.0,
+          "percent_difference_from_average": 53.1,
+          "percent_of_average": 153.1,
           "week_index": 1,
           "weekday_index": 0
         },
@@ -1689,8 +1695,8 @@
           "date_label": "12/11/2025",
           "difference_from_average_m": 0.254,
           "max_level_m": 0.437,
-          "percent_difference_from_average": 138.0,
-          "percent_of_average": 238.0,
+          "percent_difference_from_average": 138.1,
+          "percent_of_average": 238.1,
           "week_index": 1,
           "weekday_index": 2
         },
@@ -1709,8 +1715,8 @@
           "date_label": "14/11/2025",
           "difference_from_average_m": 0.367,
           "max_level_m": 0.551,
-          "percent_difference_from_average": 199.9,
-          "percent_of_average": 299.9,
+          "percent_difference_from_average": 200.0,
+          "percent_of_average": 300.0,
           "week_index": 1,
           "weekday_index": 4
         },
@@ -1729,8 +1735,8 @@
           "date_label": "16/11/2025",
           "difference_from_average_m": 0.182,
           "max_level_m": 0.365,
-          "percent_difference_from_average": 98.8,
-          "percent_of_average": 198.8,
+          "percent_difference_from_average": 98.9,
+          "percent_of_average": 198.9,
           "week_index": 1,
           "weekday_index": 6
         },
@@ -1739,8 +1745,8 @@
           "date_label": "17/11/2025",
           "difference_from_average_m": 0.12,
           "max_level_m": 0.303,
-          "percent_difference_from_average": 65.1,
-          "percent_of_average": 165.1,
+          "percent_difference_from_average": 65.2,
+          "percent_of_average": 165.2,
           "week_index": 2,
           "weekday_index": 0
         },
@@ -1769,8 +1775,8 @@
           "date_label": "20/11/2025",
           "difference_from_average_m": 0.048,
           "max_level_m": 0.232,
-          "percent_difference_from_average": 26.1,
-          "percent_of_average": 126.1,
+          "percent_difference_from_average": 26.2,
+          "percent_of_average": 126.2,
           "week_index": 2,
           "weekday_index": 3
         },
@@ -1789,8 +1795,8 @@
           "date_label": "22/11/2025",
           "difference_from_average_m": 0.105,
           "max_level_m": 0.289,
-          "percent_difference_from_average": 57.3,
-          "percent_of_average": 157.3,
+          "percent_difference_from_average": 57.4,
+          "percent_of_average": 157.4,
           "week_index": 2,
           "weekday_index": 5
         },
@@ -1809,8 +1815,8 @@
           "date_label": "24/11/2025",
           "difference_from_average_m": 0.066,
           "max_level_m": 0.249,
-          "percent_difference_from_average": 35.7,
-          "percent_of_average": 135.7,
+          "percent_difference_from_average": 35.8,
+          "percent_of_average": 135.8,
           "week_index": 3,
           "weekday_index": 0
         },
@@ -1837,7 +1843,7 @@
         {
           "date": "2025-11-27",
           "date_label": "27/11/2025",
-          "difference_from_average_m": 0.095,
+          "difference_from_average_m": 0.096,
           "max_level_m": 0.279,
           "percent_difference_from_average": 52.0,
           "percent_of_average": 152.0,
@@ -1859,8 +1865,8 @@
           "date_label": "29/11/2025",
           "difference_from_average_m": 0.158,
           "max_level_m": 0.341,
-          "percent_difference_from_average": 85.8,
-          "percent_of_average": 185.8,
+          "percent_difference_from_average": 85.9,
+          "percent_of_average": 185.9,
           "week_index": 3,
           "weekday_index": 5
         },
@@ -1869,8 +1875,8 @@
           "date_label": "30/11/2025",
           "difference_from_average_m": 0.117,
           "max_level_m": 0.301,
-          "percent_difference_from_average": 63.9,
-          "percent_of_average": 163.9,
+          "percent_difference_from_average": 64.0,
+          "percent_of_average": 164.0,
           "week_index": 3,
           "weekday_index": 6
         },
@@ -1879,8 +1885,8 @@
           "date_label": "01/12/2025",
           "difference_from_average_m": 0.48,
           "max_level_m": 0.663,
-          "percent_difference_from_average": 261.1,
-          "percent_of_average": 361.1,
+          "percent_difference_from_average": 261.2,
+          "percent_of_average": 361.2,
           "week_index": 4,
           "weekday_index": 0
         },
@@ -1899,8 +1905,8 @@
           "date_label": "03/12/2025",
           "difference_from_average_m": 0.19,
           "max_level_m": 0.374,
-          "percent_difference_from_average": 103.5,
-          "percent_of_average": 203.5,
+          "percent_difference_from_average": 103.6,
+          "percent_of_average": 203.6,
           "week_index": 4,
           "weekday_index": 2
         },
@@ -1919,8 +1925,8 @@
           "date_label": "05/12/2025",
           "difference_from_average_m": 0.332,
           "max_level_m": 0.515,
-          "percent_difference_from_average": 180.6,
-          "percent_of_average": 280.6,
+          "percent_difference_from_average": 180.7,
+          "percent_of_average": 280.7,
           "week_index": 4,
           "weekday_index": 4
         },
@@ -1929,8 +1935,8 @@
           "date_label": "06/12/2025",
           "difference_from_average_m": 0.191,
           "max_level_m": 0.375,
-          "percent_difference_from_average": 104.1,
-          "percent_of_average": 204.1,
+          "percent_difference_from_average": 104.2,
+          "percent_of_average": 204.2,
           "week_index": 4,
           "weekday_index": 5
         },
@@ -1939,8 +1945,8 @@
           "date_label": "07/12/2025",
           "difference_from_average_m": 0.291,
           "max_level_m": 0.475,
-          "percent_difference_from_average": 158.3,
-          "percent_of_average": 258.3,
+          "percent_difference_from_average": 158.4,
+          "percent_of_average": 258.4,
           "week_index": 4,
           "weekday_index": 6
         },
@@ -1949,8 +1955,8 @@
           "date_label": "08/12/2025",
           "difference_from_average_m": 0.239,
           "max_level_m": 0.423,
-          "percent_difference_from_average": 130.3,
-          "percent_of_average": 230.3,
+          "percent_difference_from_average": 130.4,
+          "percent_of_average": 230.4,
           "week_index": 5,
           "weekday_index": 0
         },
@@ -1959,8 +1965,8 @@
           "date_label": "09/12/2025",
           "difference_from_average_m": 0.419,
           "max_level_m": 0.602,
-          "percent_difference_from_average": 227.9,
-          "percent_of_average": 327.9,
+          "percent_difference_from_average": 228.0,
+          "percent_of_average": 328.0,
           "week_index": 5,
           "weekday_index": 1
         },
@@ -1969,8 +1975,8 @@
           "date_label": "10/12/2025",
           "difference_from_average_m": 0.305,
           "max_level_m": 0.489,
-          "percent_difference_from_average": 166.0,
-          "percent_of_average": 266.0,
+          "percent_difference_from_average": 166.1,
+          "percent_of_average": 266.1,
           "week_index": 5,
           "weekday_index": 2
         },
@@ -1979,8 +1985,8 @@
           "date_label": "11/12/2025",
           "difference_from_average_m": 0.211,
           "max_level_m": 0.395,
-          "percent_difference_from_average": 115.0,
-          "percent_of_average": 215.0,
+          "percent_difference_from_average": 115.1,
+          "percent_of_average": 215.1,
           "week_index": 5,
           "weekday_index": 3
         },
@@ -1989,8 +1995,8 @@
           "date_label": "12/12/2025",
           "difference_from_average_m": 0.335,
           "max_level_m": 0.519,
-          "percent_difference_from_average": 182.4,
-          "percent_of_average": 282.4,
+          "percent_difference_from_average": 182.5,
+          "percent_of_average": 282.5,
           "week_index": 5,
           "weekday_index": 4
         },
@@ -1999,8 +2005,8 @@
           "date_label": "13/12/2025",
           "difference_from_average_m": 0.156,
           "max_level_m": 0.34,
-          "percent_difference_from_average": 85.0,
-          "percent_of_average": 185.0,
+          "percent_difference_from_average": 85.1,
+          "percent_of_average": 185.1,
           "week_index": 5,
           "weekday_index": 5
         },
@@ -2009,8 +2015,8 @@
           "date_label": "14/12/2025",
           "difference_from_average_m": 0.136,
           "max_level_m": 0.319,
-          "percent_difference_from_average": 73.8,
-          "percent_of_average": 173.8,
+          "percent_difference_from_average": 73.9,
+          "percent_of_average": 173.9,
           "week_index": 5,
           "weekday_index": 6
         },
@@ -2019,8 +2025,8 @@
           "date_label": "15/12/2025",
           "difference_from_average_m": 0.779,
           "max_level_m": 0.962,
-          "percent_difference_from_average": 423.9,
-          "percent_of_average": 523.9,
+          "percent_difference_from_average": 424.0,
+          "percent_of_average": 524.0,
           "week_index": 6,
           "weekday_index": 0
         },
@@ -2029,8 +2035,8 @@
           "date_label": "16/12/2025",
           "difference_from_average_m": 0.321,
           "max_level_m": 0.505,
-          "percent_difference_from_average": 174.8,
-          "percent_of_average": 274.8,
+          "percent_difference_from_average": 174.9,
+          "percent_of_average": 274.9,
           "week_index": 6,
           "weekday_index": 1
         },
@@ -2039,8 +2045,8 @@
           "date_label": "17/12/2025",
           "difference_from_average_m": 0.381,
           "max_level_m": 0.564,
-          "percent_difference_from_average": 207.2,
-          "percent_of_average": 307.2,
+          "percent_difference_from_average": 207.3,
+          "percent_of_average": 307.3,
           "week_index": 6,
           "weekday_index": 2
         },
@@ -2049,8 +2055,8 @@
           "date_label": "18/12/2025",
           "difference_from_average_m": 0.322,
           "max_level_m": 0.505,
-          "percent_difference_from_average": 175.1,
-          "percent_of_average": 275.1,
+          "percent_difference_from_average": 175.2,
+          "percent_of_average": 275.2,
           "week_index": 6,
           "weekday_index": 3
         },
@@ -2069,8 +2075,8 @@
           "date_label": "20/12/2025",
           "difference_from_average_m": 0.257,
           "max_level_m": 0.44,
-          "percent_difference_from_average": 139.7,
-          "percent_of_average": 239.7,
+          "percent_difference_from_average": 139.8,
+          "percent_of_average": 239.8,
           "week_index": 6,
           "weekday_index": 5
         },
@@ -2079,8 +2085,8 @@
           "date_label": "21/12/2025",
           "difference_from_average_m": 0.158,
           "max_level_m": 0.342,
-          "percent_difference_from_average": 85.9,
-          "percent_of_average": 185.9,
+          "percent_difference_from_average": 86.0,
+          "percent_of_average": 186.0,
           "week_index": 6,
           "weekday_index": 6
         },
@@ -2089,8 +2095,8 @@
           "date_label": "22/12/2025",
           "difference_from_average_m": 0.181,
           "max_level_m": 0.365,
-          "percent_difference_from_average": 98.6,
-          "percent_of_average": 198.6,
+          "percent_difference_from_average": 98.7,
+          "percent_of_average": 198.7,
           "week_index": 7,
           "weekday_index": 0
         },
@@ -2099,8 +2105,8 @@
           "date_label": "23/12/2025",
           "difference_from_average_m": 0.142,
           "max_level_m": 0.326,
-          "percent_difference_from_average": 77.4,
-          "percent_of_average": 177.4,
+          "percent_difference_from_average": 77.5,
+          "percent_of_average": 177.5,
           "week_index": 7,
           "weekday_index": 1
         },
@@ -2119,8 +2125,8 @@
           "date_label": "25/12/2025",
           "difference_from_average_m": 0.048,
           "max_level_m": 0.232,
-          "percent_difference_from_average": 26.2,
-          "percent_of_average": 126.2,
+          "percent_difference_from_average": 26.3,
+          "percent_of_average": 126.3,
           "week_index": 7,
           "weekday_index": 3
         },
@@ -2129,8 +2135,8 @@
           "date_label": "26/12/2025",
           "difference_from_average_m": 0.037,
           "max_level_m": 0.221,
-          "percent_difference_from_average": 20.2,
-          "percent_of_average": 120.2,
+          "percent_difference_from_average": 20.3,
+          "percent_of_average": 120.3,
           "week_index": 7,
           "weekday_index": 4
         },
@@ -2149,15 +2155,15 @@
           "date_label": "28/12/2025",
           "difference_from_average_m": 0.015,
           "max_level_m": 0.198,
-          "percent_difference_from_average": 8.0,
-          "percent_of_average": 108.0,
+          "percent_difference_from_average": 8.1,
+          "percent_of_average": 108.1,
           "week_index": 7,
           "weekday_index": 6
         },
         {
           "date": "2025-12-29",
           "date_label": "29/12/2025",
-          "difference_from_average_m": -0.006,
+          "difference_from_average_m": -0.005,
           "max_level_m": 0.178,
           "percent_difference_from_average": -3.0,
           "percent_of_average": 97.0,
@@ -2229,8 +2235,8 @@
           "date_label": "05/01/2026",
           "difference_from_average_m": -0.066,
           "max_level_m": 0.118,
-          "percent_difference_from_average": -35.8,
-          "percent_of_average": 64.2,
+          "percent_difference_from_average": -35.7,
+          "percent_of_average": 64.3,
           "week_index": 9,
           "weekday_index": 0
         },
@@ -2259,8 +2265,8 @@
           "date_label": "08/01/2026",
           "difference_from_average_m": 0.365,
           "max_level_m": 0.549,
-          "percent_difference_from_average": 198.8,
-          "percent_of_average": 298.8,
+          "percent_difference_from_average": 198.9,
+          "percent_of_average": 298.9,
           "week_index": 9,
           "weekday_index": 3
         },
@@ -2269,8 +2275,8 @@
           "date_label": "09/01/2026",
           "difference_from_average_m": 0.03,
           "max_level_m": 0.214,
-          "percent_difference_from_average": 16.3,
-          "percent_of_average": 116.3,
+          "percent_difference_from_average": 16.4,
+          "percent_of_average": 116.4,
           "week_index": 9,
           "weekday_index": 4
         },
@@ -2279,8 +2285,8 @@
           "date_label": "10/01/2026",
           "difference_from_average_m": -0.011,
           "max_level_m": 0.173,
-          "percent_difference_from_average": -5.9,
-          "percent_of_average": 94.1,
+          "percent_difference_from_average": -5.8,
+          "percent_of_average": 94.2,
           "week_index": 9,
           "weekday_index": 5
         },
@@ -2309,25 +2315,25 @@
           "date_label": "13/01/2026",
           "difference_from_average_m": 0.023,
           "max_level_m": 0.207,
-          "percent_difference_from_average": 12.6,
-          "percent_of_average": 112.6,
+          "percent_difference_from_average": 12.7,
+          "percent_of_average": 112.7,
           "week_index": 10,
           "weekday_index": 1
         },
         {
           "date": "2026-01-14",
           "date_label": "14/01/2026",
-          "difference_from_average_m": 0.004,
+          "difference_from_average_m": 0.005,
           "max_level_m": 0.188,
-          "percent_difference_from_average": 2.4,
-          "percent_of_average": 102.4,
+          "percent_difference_from_average": 2.5,
+          "percent_of_average": 102.5,
           "week_index": 10,
           "weekday_index": 2
         },
         {
           "date": "2026-01-15",
           "date_label": "15/01/2026",
-          "difference_from_average_m": 0.021,
+          "difference_from_average_m": 0.022,
           "max_level_m": 0.205,
           "percent_difference_from_average": 11.7,
           "percent_of_average": 111.7,
@@ -2339,8 +2345,8 @@
           "date_label": "16/01/2026",
           "difference_from_average_m": 0.008,
           "max_level_m": 0.191,
-          "percent_difference_from_average": 4.2,
-          "percent_of_average": 104.2,
+          "percent_difference_from_average": 4.3,
+          "percent_of_average": 104.3,
           "week_index": 10,
           "weekday_index": 4
         },
@@ -2379,8 +2385,8 @@
           "date_label": "20/01/2026",
           "difference_from_average_m": 0.429,
           "max_level_m": 0.613,
-          "percent_difference_from_average": 233.6,
-          "percent_of_average": 333.6,
+          "percent_difference_from_average": 233.7,
+          "percent_of_average": 333.7,
           "week_index": 11,
           "weekday_index": 1
         },
@@ -2389,8 +2395,8 @@
           "date_label": "21/01/2026",
           "difference_from_average_m": 0.329,
           "max_level_m": 0.513,
-          "percent_difference_from_average": 179.3,
-          "percent_of_average": 279.3,
+          "percent_difference_from_average": 179.4,
+          "percent_of_average": 279.4,
           "week_index": 11,
           "weekday_index": 2
         },
@@ -2409,8 +2415,8 @@
           "date_label": "23/01/2026",
           "difference_from_average_m": 0.673,
           "max_level_m": 0.856,
-          "percent_difference_from_average": 366.1,
-          "percent_of_average": 466.1,
+          "percent_difference_from_average": 366.3,
+          "percent_of_average": 466.3,
           "week_index": 11,
           "weekday_index": 4
         },
@@ -2419,8 +2425,8 @@
           "date_label": "24/01/2026",
           "difference_from_average_m": 0.961,
           "max_level_m": 1.144,
-          "percent_difference_from_average": 523.0,
-          "percent_of_average": 623.0,
+          "percent_difference_from_average": 523.2,
+          "percent_of_average": 623.2,
           "week_index": 11,
           "weekday_index": 5
         },
@@ -2429,8 +2435,8 @@
           "date_label": "25/01/2026",
           "difference_from_average_m": 0.544,
           "max_level_m": 0.727,
-          "percent_difference_from_average": 296.0,
-          "percent_of_average": 396.0,
+          "percent_difference_from_average": 296.1,
+          "percent_of_average": 396.1,
           "week_index": 11,
           "weekday_index": 6
         },
@@ -2449,8 +2455,8 @@
           "date_label": "27/01/2026",
           "difference_from_average_m": 0.592,
           "max_level_m": 0.775,
-          "percent_difference_from_average": 322.1,
-          "percent_of_average": 422.1,
+          "percent_difference_from_average": 322.2,
+          "percent_of_average": 422.2,
           "week_index": 12,
           "weekday_index": 1
         },
@@ -2459,8 +2465,8 @@
           "date_label": "28/01/2026",
           "difference_from_average_m": 0.237,
           "max_level_m": 0.42,
-          "percent_difference_from_average": 128.9,
-          "percent_of_average": 228.9,
+          "percent_difference_from_average": 129.0,
+          "percent_of_average": 229.0,
           "week_index": 12,
           "weekday_index": 2
         },
@@ -2469,8 +2475,8 @@
           "date_label": "29/01/2026",
           "difference_from_average_m": 0.241,
           "max_level_m": 0.425,
-          "percent_difference_from_average": 131.1,
-          "percent_of_average": 231.1,
+          "percent_difference_from_average": 131.2,
+          "percent_of_average": 231.2,
           "week_index": 12,
           "weekday_index": 3
         },
@@ -2489,8 +2495,8 @@
           "date_label": "31/01/2026",
           "difference_from_average_m": 0.185,
           "max_level_m": 0.369,
-          "percent_difference_from_average": 100.6,
-          "percent_of_average": 200.6,
+          "percent_difference_from_average": 100.7,
+          "percent_of_average": 200.7,
           "week_index": 12,
           "weekday_index": 5
         },
@@ -2499,8 +2505,8 @@
           "date_label": "01/02/2026",
           "difference_from_average_m": 0.236,
           "max_level_m": 0.419,
-          "percent_difference_from_average": 128.3,
-          "percent_of_average": 228.3,
+          "percent_difference_from_average": 128.4,
+          "percent_of_average": 228.4,
           "week_index": 12,
           "weekday_index": 6
         },
@@ -2509,8 +2515,8 @@
           "date_label": "02/02/2026",
           "difference_from_average_m": 0.153,
           "max_level_m": 0.337,
-          "percent_difference_from_average": 83.3,
-          "percent_of_average": 183.3,
+          "percent_difference_from_average": 83.4,
+          "percent_of_average": 183.4,
           "week_index": 13,
           "weekday_index": 0
         },
@@ -2519,8 +2525,8 @@
           "date_label": "03/02/2026",
           "difference_from_average_m": 0.153,
           "max_level_m": 0.337,
-          "percent_difference_from_average": 83.2,
-          "percent_of_average": 183.2,
+          "percent_difference_from_average": 83.3,
+          "percent_of_average": 183.3,
           "week_index": 13,
           "weekday_index": 1
         },
@@ -2529,8 +2535,8 @@
           "date_label": "04/02/2026",
           "difference_from_average_m": 0.105,
           "max_level_m": 0.289,
-          "percent_difference_from_average": 57.2,
-          "percent_of_average": 157.2,
+          "percent_difference_from_average": 57.3,
+          "percent_of_average": 157.3,
           "week_index": 13,
           "weekday_index": 2
         },
@@ -2539,8 +2545,8 @@
           "date_label": "05/02/2026",
           "difference_from_average_m": 0.177,
           "max_level_m": 0.36,
-          "percent_difference_from_average": 96.1,
-          "percent_of_average": 196.1,
+          "percent_difference_from_average": 96.2,
+          "percent_of_average": 196.2,
           "week_index": 13,
           "weekday_index": 3
         },
@@ -2559,18 +2565,18 @@
           "date_label": "07/02/2026",
           "difference_from_average_m": 0.16,
           "max_level_m": 0.344,
-          "percent_difference_from_average": 87.1,
-          "percent_of_average": 187.1,
+          "percent_difference_from_average": 87.2,
+          "percent_of_average": 187.2,
           "week_index": 13,
           "weekday_index": 5
         },
         {
           "date": "2026-02-08",
           "date_label": "08/02/2026",
-          "difference_from_average_m": 0.15,
+          "difference_from_average_m": 0.151,
           "max_level_m": 0.334,
-          "percent_difference_from_average": 81.9,
-          "percent_of_average": 181.9,
+          "percent_difference_from_average": 82.0,
+          "percent_of_average": 182.0,
           "week_index": 13,
           "weekday_index": 6
         },
@@ -2579,8 +2585,8 @@
           "date_label": "09/02/2026",
           "difference_from_average_m": 0.152,
           "max_level_m": 0.336,
-          "percent_difference_from_average": 82.8,
-          "percent_of_average": 182.8,
+          "percent_difference_from_average": 82.9,
+          "percent_of_average": 182.9,
           "week_index": 14,
           "weekday_index": 0
         },
@@ -2589,8 +2595,8 @@
           "date_label": "10/02/2026",
           "difference_from_average_m": 0.167,
           "max_level_m": 0.35,
-          "percent_difference_from_average": 90.7,
-          "percent_of_average": 190.7,
+          "percent_difference_from_average": 90.8,
+          "percent_of_average": 190.8,
           "week_index": 14,
           "weekday_index": 1
         },
@@ -2617,7 +2623,7 @@
         {
           "date": "2026-02-13",
           "date_label": "13/02/2026",
-          "difference_from_average_m": 0.156,
+          "difference_from_average_m": 0.157,
           "max_level_m": 0.34,
           "percent_difference_from_average": 85.2,
           "percent_of_average": 185.2,
@@ -2629,8 +2635,8 @@
           "date_label": "14/02/2026",
           "difference_from_average_m": 0.121,
           "max_level_m": 0.305,
-          "percent_difference_from_average": 65.8,
-          "percent_of_average": 165.8,
+          "percent_difference_from_average": 65.9,
+          "percent_of_average": 165.9,
           "week_index": 14,
           "weekday_index": 5
         },
@@ -2639,8 +2645,8 @@
           "date_label": "15/02/2026",
           "difference_from_average_m": 0.266,
           "max_level_m": 0.45,
-          "percent_difference_from_average": 144.9,
-          "percent_of_average": 244.9,
+          "percent_difference_from_average": 145.0,
+          "percent_of_average": 245.0,
           "week_index": 14,
           "weekday_index": 6
         },
@@ -2657,10 +2663,10 @@
         {
           "date": "2026-02-17",
           "date_label": "17/02/2026",
-          "difference_from_average_m": 0.161,
+          "difference_from_average_m": 0.162,
           "max_level_m": 0.345,
-          "percent_difference_from_average": 87.9,
-          "percent_of_average": 187.9,
+          "percent_difference_from_average": 88.0,
+          "percent_of_average": 188.0,
           "week_index": 15,
           "weekday_index": 1
         },
@@ -2669,8 +2675,8 @@
           "date_label": "18/02/2026",
           "difference_from_average_m": 0.139,
           "max_level_m": 0.323,
-          "percent_difference_from_average": 75.8,
-          "percent_of_average": 175.8,
+          "percent_difference_from_average": 75.9,
+          "percent_of_average": 175.9,
           "week_index": 15,
           "weekday_index": 2
         },
@@ -2689,8 +2695,8 @@
           "date_label": "20/02/2026",
           "difference_from_average_m": 0.101,
           "max_level_m": 0.284,
-          "percent_difference_from_average": 54.8,
-          "percent_of_average": 154.8,
+          "percent_difference_from_average": 54.9,
+          "percent_of_average": 154.9,
           "week_index": 15,
           "weekday_index": 4
         },
@@ -2699,18 +2705,18 @@
           "date_label": "21/02/2026",
           "difference_from_average_m": 0.09,
           "max_level_m": 0.274,
-          "percent_difference_from_average": 48.9,
-          "percent_of_average": 148.9,
+          "percent_difference_from_average": 49.0,
+          "percent_of_average": 149.0,
           "week_index": 15,
           "weekday_index": 5
         },
         {
           "date": "2026-02-22",
           "date_label": "22/02/2026",
-          "difference_from_average_m": 0.164,
+          "difference_from_average_m": 0.165,
           "max_level_m": 0.348,
-          "percent_difference_from_average": 89.5,
-          "percent_of_average": 189.5,
+          "percent_difference_from_average": 89.6,
+          "percent_of_average": 189.6,
           "week_index": 15,
           "weekday_index": 6
         },
@@ -2719,8 +2725,8 @@
           "date_label": "23/02/2026",
           "difference_from_average_m": 0.086,
           "max_level_m": 0.269,
-          "percent_difference_from_average": 46.6,
-          "percent_of_average": 146.6,
+          "percent_difference_from_average": 46.7,
+          "percent_of_average": 146.7,
           "week_index": 16,
           "weekday_index": 0
         },
@@ -2749,8 +2755,8 @@
           "date_label": "26/02/2026",
           "difference_from_average_m": 0.331,
           "max_level_m": 0.515,
-          "percent_difference_from_average": 180.2,
-          "percent_of_average": 280.2,
+          "percent_difference_from_average": 180.3,
+          "percent_of_average": 280.3,
           "week_index": 16,
           "weekday_index": 3
         },
@@ -2759,8 +2765,8 @@
           "date_label": "27/02/2026",
           "difference_from_average_m": 0.315,
           "max_level_m": 0.499,
-          "percent_difference_from_average": 171.5,
-          "percent_of_average": 271.5,
+          "percent_difference_from_average": 171.6,
+          "percent_of_average": 271.6,
           "week_index": 16,
           "weekday_index": 4
         },
@@ -2769,8 +2775,8 @@
           "date_label": "28/02/2026",
           "difference_from_average_m": 0.214,
           "max_level_m": 0.397,
-          "percent_difference_from_average": 116.3,
-          "percent_of_average": 216.3,
+          "percent_difference_from_average": 116.4,
+          "percent_of_average": 216.4,
           "week_index": 16,
           "weekday_index": 5
         },
@@ -2789,8 +2795,8 @@
           "date_label": "02/03/2026",
           "difference_from_average_m": 0.156,
           "max_level_m": 0.34,
-          "percent_difference_from_average": 84.9,
-          "percent_of_average": 184.9,
+          "percent_difference_from_average": 85.0,
+          "percent_of_average": 185.0,
           "week_index": 17,
           "weekday_index": 0
         },
@@ -2799,8 +2805,8 @@
           "date_label": "03/03/2026",
           "difference_from_average_m": 0.126,
           "max_level_m": 0.31,
-          "percent_difference_from_average": 68.7,
-          "percent_of_average": 168.7,
+          "percent_difference_from_average": 68.8,
+          "percent_of_average": 168.8,
           "week_index": 17,
           "weekday_index": 1
         },
@@ -2809,8 +2815,8 @@
           "date_label": "04/03/2026",
           "difference_from_average_m": 0.128,
           "max_level_m": 0.312,
-          "percent_difference_from_average": 69.8,
-          "percent_of_average": 169.8,
+          "percent_difference_from_average": 69.9,
+          "percent_of_average": 169.9,
           "week_index": 17,
           "weekday_index": 2
         },
@@ -2899,8 +2905,8 @@
           "date_label": "13/03/2026",
           "difference_from_average_m": 0.117,
           "max_level_m": 0.3,
-          "percent_difference_from_average": 63.5,
-          "percent_of_average": 163.5,
+          "percent_difference_from_average": 63.6,
+          "percent_of_average": 163.6,
           "week_index": 18,
           "weekday_index": 4
         },
@@ -2969,8 +2975,8 @@
           "date_label": "20/03/2026",
           "difference_from_average_m": -0.003,
           "max_level_m": 0.181,
-          "percent_difference_from_average": -1.5,
-          "percent_of_average": 98.5,
+          "percent_difference_from_average": -1.4,
+          "percent_of_average": 98.6,
           "week_index": 19,
           "weekday_index": 4
         },
@@ -2979,8 +2985,8 @@
           "date_label": "21/03/2026",
           "difference_from_average_m": -0.003,
           "max_level_m": 0.181,
-          "percent_difference_from_average": -1.5,
-          "percent_of_average": 98.5,
+          "percent_difference_from_average": -1.4,
+          "percent_of_average": 98.6,
           "week_index": 19,
           "weekday_index": 5
         },
@@ -2989,8 +2995,8 @@
           "date_label": "22/03/2026",
           "difference_from_average_m": -0.004,
           "max_level_m": 0.18,
-          "percent_difference_from_average": -2.2,
-          "percent_of_average": 97.8,
+          "percent_difference_from_average": -2.1,
+          "percent_of_average": 97.9,
           "week_index": 19,
           "weekday_index": 6
         },
@@ -3029,8 +3035,8 @@
           "date_label": "26/03/2026",
           "difference_from_average_m": -0.065,
           "max_level_m": 0.119,
-          "percent_difference_from_average": -35.2,
-          "percent_of_average": 64.8,
+          "percent_difference_from_average": -35.1,
+          "percent_of_average": 64.9,
           "week_index": 20,
           "weekday_index": 3
         },
@@ -3039,8 +3045,8 @@
           "date_label": "27/03/2026",
           "difference_from_average_m": 0.004,
           "max_level_m": 0.188,
-          "percent_difference_from_average": 2.1,
-          "percent_of_average": 102.1,
+          "percent_difference_from_average": 2.2,
+          "percent_of_average": 102.2,
           "week_index": 20,
           "weekday_index": 4
         },
@@ -3057,10 +3063,10 @@
         {
           "date": "2026-03-29",
           "date_label": "29/03/2026",
-          "difference_from_average_m": 0.018,
+          "difference_from_average_m": 0.019,
           "max_level_m": 0.202,
-          "percent_difference_from_average": 10.0,
-          "percent_of_average": 110.0,
+          "percent_difference_from_average": 10.1,
+          "percent_of_average": 110.1,
           "week_index": 20,
           "weekday_index": 6
         },
@@ -3069,8 +3075,8 @@
           "date_label": "30/03/2026",
           "difference_from_average_m": -0.029,
           "max_level_m": 0.154,
-          "percent_difference_from_average": -16.0,
-          "percent_of_average": 84.0,
+          "percent_difference_from_average": -15.9,
+          "percent_of_average": 84.1,
           "week_index": 21,
           "weekday_index": 0
         },
@@ -3089,8 +3095,8 @@
           "date_label": "01/04/2026",
           "difference_from_average_m": -0.06,
           "max_level_m": 0.123,
-          "percent_difference_from_average": -32.9,
-          "percent_of_average": 67.1,
+          "percent_difference_from_average": -32.8,
+          "percent_of_average": 67.2,
           "week_index": 21,
           "weekday_index": 2
         },
@@ -3119,8 +3125,8 @@
           "date_label": "04/04/2026",
           "difference_from_average_m": -0.055,
           "max_level_m": 0.129,
-          "percent_difference_from_average": -30.0,
-          "percent_of_average": 70.0,
+          "percent_difference_from_average": -29.9,
+          "percent_of_average": 70.1,
           "week_index": 21,
           "weekday_index": 5
         },
@@ -3229,8 +3235,8 @@
           "date_label": "15/04/2026",
           "difference_from_average_m": -0.056,
           "max_level_m": 0.127,
-          "percent_difference_from_average": -30.7,
-          "percent_of_average": 69.3,
+          "percent_difference_from_average": -30.6,
+          "percent_of_average": 69.4,
           "week_index": 23,
           "weekday_index": 2
         },
@@ -3249,8 +3255,8 @@
           "date_label": "17/04/2026",
           "difference_from_average_m": 0.006,
           "max_level_m": 0.189,
-          "percent_difference_from_average": 3.0,
-          "percent_of_average": 103.0,
+          "percent_difference_from_average": 3.1,
+          "percent_of_average": 103.1,
           "week_index": 23,
           "weekday_index": 4
         },
@@ -3289,8 +3295,8 @@
           "date_label": "21/04/2026",
           "difference_from_average_m": -0.081,
           "max_level_m": 0.103,
-          "percent_difference_from_average": -43.9,
-          "percent_of_average": 56.1,
+          "percent_difference_from_average": -43.8,
+          "percent_of_average": 56.2,
           "week_index": 24,
           "weekday_index": 1
         },
@@ -3339,15 +3345,15 @@
           "date_label": "26/04/2026",
           "difference_from_average_m": -0.082,
           "max_level_m": 0.102,
-          "percent_difference_from_average": -44.6,
-          "percent_of_average": 55.4,
+          "percent_difference_from_average": -44.5,
+          "percent_of_average": 55.5,
           "week_index": 24,
           "weekday_index": 6
         },
         {
           "date": "2026-04-27",
           "date_label": "27/04/2026",
-          "difference_from_average_m": -0.047,
+          "difference_from_average_m": -0.046,
           "max_level_m": 0.137,
           "percent_difference_from_average": -25.3,
           "percent_of_average": 74.7,
@@ -3359,8 +3365,8 @@
           "date_label": "28/04/2026",
           "difference_from_average_m": -0.064,
           "max_level_m": 0.119,
-          "percent_difference_from_average": -35.1,
-          "percent_of_average": 64.9,
+          "percent_difference_from_average": -35.0,
+          "percent_of_average": 65.0,
           "week_index": 25,
           "weekday_index": 1
         },
@@ -3557,7 +3563,7 @@
         {
           "date": "2026-05-18",
           "date_label": "18/05/2026",
-          "difference_from_average_m": -0.102,
+          "difference_from_average_m": -0.101,
           "max_level_m": 0.082,
           "percent_difference_from_average": -55.3,
           "percent_of_average": 44.7,
@@ -3569,8 +3575,8 @@
           "date_label": "19/05/2026",
           "difference_from_average_m": -0.033,
           "max_level_m": 0.15,
-          "percent_difference_from_average": -18.1,
-          "percent_of_average": 81.9,
+          "percent_difference_from_average": -18.0,
+          "percent_of_average": 82.0,
           "week_index": 28,
           "weekday_index": 1
         },
@@ -3589,8 +3595,8 @@
           "date_label": "21/05/2026",
           "difference_from_average_m": -0.082,
           "max_level_m": 0.102,
-          "percent_difference_from_average": -44.7,
-          "percent_of_average": 55.3,
+          "percent_difference_from_average": -44.6,
+          "percent_of_average": 55.4,
           "week_index": 28,
           "weekday_index": 3
         },
@@ -3617,7 +3623,7 @@
         {
           "date": "2026-05-24",
           "date_label": "24/05/2026",
-          "difference_from_average_m": -0.064,
+          "difference_from_average_m": -0.063,
           "max_level_m": 0.12,
           "percent_difference_from_average": -34.6,
           "percent_of_average": 65.4,
@@ -3649,8 +3655,8 @@
           "date_label": "27/05/2026",
           "difference_from_average_m": -0.052,
           "max_level_m": 0.131,
-          "percent_difference_from_average": -28.5,
-          "percent_of_average": 71.5,
+          "percent_difference_from_average": -28.4,
+          "percent_of_average": 71.6,
           "week_index": 29,
           "weekday_index": 2
         },
@@ -3679,8 +3685,8 @@
           "date_label": "30/05/2026",
           "difference_from_average_m": -0.097,
           "max_level_m": 0.087,
-          "percent_difference_from_average": -52.7,
-          "percent_of_average": 47.3,
+          "percent_difference_from_average": -52.6,
+          "percent_of_average": 47.4,
           "week_index": 29,
           "weekday_index": 5
         },
@@ -3689,8 +3695,8 @@
           "date_label": "31/05/2026",
           "difference_from_average_m": -0.101,
           "max_level_m": 0.083,
-          "percent_difference_from_average": -54.9,
-          "percent_of_average": 45.1,
+          "percent_difference_from_average": -54.8,
+          "percent_of_average": 45.2,
           "week_index": 29,
           "weekday_index": 6
         },
@@ -3709,8 +3715,8 @@
           "date_label": "02/06/2026",
           "difference_from_average_m": -0.095,
           "max_level_m": 0.088,
-          "percent_difference_from_average": -52.0,
-          "percent_of_average": 48.0,
+          "percent_difference_from_average": -51.9,
+          "percent_of_average": 48.1,
           "week_index": 30,
           "weekday_index": 1
         },
@@ -3769,8 +3775,8 @@
           "date_label": "08/06/2026",
           "difference_from_average_m": 0.087,
           "max_level_m": 0.27,
-          "percent_difference_from_average": 47.2,
-          "percent_of_average": 147.2,
+          "percent_difference_from_average": 47.3,
+          "percent_of_average": 147.3,
           "week_index": 31,
           "weekday_index": 0
         },
@@ -3797,7 +3803,7 @@
         {
           "date": "2026-06-11",
           "date_label": "11/06/2026",
-          "difference_from_average_m": -0.083,
+          "difference_from_average_m": -0.082,
           "max_level_m": 0.101,
           "percent_difference_from_average": -44.9,
           "percent_of_average": 55.1,
@@ -3827,10 +3833,10 @@
         {
           "date": "2026-06-14",
           "date_label": "14/06/2026",
-          "difference_from_average_m": -0.066,
+          "difference_from_average_m": -0.065,
           "max_level_m": 0.118,
-          "percent_difference_from_average": -35.7,
-          "percent_of_average": 64.3,
+          "percent_difference_from_average": -35.6,
+          "percent_of_average": 64.4,
           "week_index": 31,
           "weekday_index": 6
         },
@@ -3849,8 +3855,8 @@
           "date_label": "16/06/2026",
           "difference_from_average_m": -0.066,
           "max_level_m": 0.118,
-          "percent_difference_from_average": -35.9,
-          "percent_of_average": 64.1,
+          "percent_difference_from_average": -35.8,
+          "percent_of_average": 64.2,
           "week_index": 32,
           "weekday_index": 1
         },
@@ -3869,8 +3875,8 @@
           "date_label": "18/06/2026",
           "difference_from_average_m": -0.063,
           "max_level_m": 0.121,
-          "percent_difference_from_average": -34.4,
-          "percent_of_average": 65.6,
+          "percent_difference_from_average": -34.3,
+          "percent_of_average": 65.7,
           "week_index": 32,
           "weekday_index": 3
         },
@@ -3989,15 +3995,15 @@
           "date_label": "30/06/2026",
           "difference_from_average_m": -0.063,
           "max_level_m": 0.121,
-          "percent_difference_from_average": -34.3,
-          "percent_of_average": 65.7,
+          "percent_difference_from_average": -34.2,
+          "percent_of_average": 65.8,
           "week_index": 34,
           "weekday_index": 1
         },
         {
           "date": "2026-07-01",
           "date_label": "01/07/2026",
-          "difference_from_average_m": -0.072,
+          "difference_from_average_m": -0.071,
           "max_level_m": 0.112,
           "percent_difference_from_average": -38.9,
           "percent_of_average": 61.1,
@@ -4059,8 +4065,8 @@
           "date_label": "07/07/2026",
           "difference_from_average_m": -0.066,
           "max_level_m": 0.118,
-          "percent_difference_from_average": -35.9,
-          "percent_of_average": 64.1,
+          "percent_difference_from_average": -35.8,
+          "percent_of_average": 64.2,
           "week_index": 35,
           "weekday_index": 1
         },
@@ -4097,10 +4103,10 @@
         {
           "date": "2026-07-11",
           "date_label": "11/07/2026",
-          "difference_from_average_m": -0.014,
+          "difference_from_average_m": -0.013,
           "max_level_m": 0.17,
-          "percent_difference_from_average": -7.4,
-          "percent_of_average": 92.6,
+          "percent_difference_from_average": -7.3,
+          "percent_of_average": 92.7,
           "week_index": 35,
           "weekday_index": 5
         },
@@ -4159,8 +4165,8 @@
           "date_label": "17/07/2026",
           "difference_from_average_m": -0.052,
           "max_level_m": 0.131,
-          "percent_difference_from_average": -28.6,
-          "percent_of_average": 71.4,
+          "percent_difference_from_average": -28.5,
+          "percent_of_average": 71.5,
           "week_index": 36,
           "weekday_index": 4
         },
@@ -4189,8 +4195,8 @@
           "date_label": "20/07/2026",
           "difference_from_average_m": -0.058,
           "max_level_m": 0.126,
-          "percent_difference_from_average": -31.4,
-          "percent_of_average": 68.6,
+          "percent_difference_from_average": -31.3,
+          "percent_of_average": 68.7,
           "week_index": 37,
           "weekday_index": 0
         },
@@ -4259,8 +4265,8 @@
           "date_label": "27/07/2026",
           "difference_from_average_m": -0.063,
           "max_level_m": 0.121,
-          "percent_difference_from_average": -34.3,
-          "percent_of_average": 65.7,
+          "percent_difference_from_average": -34.2,
+          "percent_of_average": 65.8,
           "week_index": 38,
           "weekday_index": 0
         },
@@ -4323,6 +4329,16 @@
           "percent_of_average": 69.2,
           "week_index": 38,
           "weekday_index": 6
+        },
+        {
+          "date": "2026-08-03",
+          "date_label": "03/08/2026",
+          "difference_from_average_m": -0.11,
+          "max_level_m": 0.074,
+          "percent_difference_from_average": -59.8,
+          "percent_of_average": 40.2,
+          "week_index": 39,
+          "weekday_index": 0
         }
       ],
       "default_hydrological_year": "2025-26",
@@ -4330,7 +4346,7 @@
       "description": "This heatmap shows the maximum daily water depth as a percentage of the average water depth recorded since the Flash Flood Observatory deployment in November 2025 (0.184 m). Each cell represents a specific day of the week and month within the selected hydrological year (1 October to 30 September), allowing patterns in river behaviour to be compared without the heatmap growing indefinitely. The colours indicate how each day's maximum level compares to the average: days close to the average appear white (\u2b1c), wetter-than-average days appear blue (\ud83d\udfe6) or purple (\ud83d\udfea), and drier-than-average days appear brown (\ud83d\udfeb).",
       "empty_message": "Daily maximum river-level heatmap data will appear here after the historical record is built.",
       "eyebrow": "River Levels",
-      "footer_description": "This makes it easy to identify periods of typical flow, sustained dry spells, and clusters of high-water days associated with storm events or rapid catchment response. A value such as 30% means the river reached 0.30 \u00d7 the average (0.30 \u00d7 0.184 m = 0.0551 m, represented in brown \ud83d\udfeb), while the highest band (>450%) represents days above 4.50 \u00d7 the average (>4.50 \u00d7 0.184 m = >0.8266 m, represented in purple \ud83d\udfea).",
+      "footer_description": "This makes it easy to identify periods of typical flow, sustained dry spells, and clusters of high-water days associated with storm events or rapid catchment response. A value such as 30% means the river reached 0.30 \u00d7 the average (0.30 \u00d7 0.184 m = 0.0551 m, represented in brown \ud83d\udfeb), while the highest band (>450%) represents days above 4.50 \u00d7 the average (>4.50 \u00d7 0.184 m = >0.8264 m, represented in purple \ud83d\udfea).",
       "hydrological_years": [
         {
           "cells": [
@@ -4377,10 +4393,10 @@
             {
               "date": "2025-11-10",
               "date_label": "10/11/2025",
-              "difference_from_average_m": 0.097,
+              "difference_from_average_m": 0.098,
               "max_level_m": 0.281,
-              "percent_difference_from_average": 53.0,
-              "percent_of_average": 153.0,
+              "percent_difference_from_average": 53.1,
+              "percent_of_average": 153.1,
               "week_index": 1,
               "weekday_index": 0
             },
@@ -4399,8 +4415,8 @@
               "date_label": "12/11/2025",
               "difference_from_average_m": 0.254,
               "max_level_m": 0.437,
-              "percent_difference_from_average": 138.0,
-              "percent_of_average": 238.0,
+              "percent_difference_from_average": 138.1,
+              "percent_of_average": 238.1,
               "week_index": 1,
               "weekday_index": 2
             },
@@ -4419,8 +4435,8 @@
               "date_label": "14/11/2025",
               "difference_from_average_m": 0.367,
               "max_level_m": 0.551,
-              "percent_difference_from_average": 199.9,
-              "percent_of_average": 299.9,
+              "percent_difference_from_average": 200.0,
+              "percent_of_average": 300.0,
               "week_index": 1,
               "weekday_index": 4
             },
@@ -4439,8 +4455,8 @@
               "date_label": "16/11/2025",
               "difference_from_average_m": 0.182,
               "max_level_m": 0.365,
-              "percent_difference_from_average": 98.8,
-              "percent_of_average": 198.8,
+              "percent_difference_from_average": 98.9,
+              "percent_of_average": 198.9,
               "week_index": 1,
               "weekday_index": 6
             },
@@ -4449,8 +4465,8 @@
               "date_label": "17/11/2025",
               "difference_from_average_m": 0.12,
               "max_level_m": 0.303,
-              "percent_difference_from_average": 65.1,
-              "percent_of_average": 165.1,
+              "percent_difference_from_average": 65.2,
+              "percent_of_average": 165.2,
               "week_index": 2,
               "weekday_index": 0
             },
@@ -4479,8 +4495,8 @@
               "date_label": "20/11/2025",
               "difference_from_average_m": 0.048,
               "max_level_m": 0.232,
-              "percent_difference_from_average": 26.1,
-              "percent_of_average": 126.1,
+              "percent_difference_from_average": 26.2,
+              "percent_of_average": 126.2,
               "week_index": 2,
               "weekday_index": 3
             },
@@ -4499,8 +4515,8 @@
               "date_label": "22/11/2025",
               "difference_from_average_m": 0.105,
               "max_level_m": 0.289,
-              "percent_difference_from_average": 57.3,
-              "percent_of_average": 157.3,
+              "percent_difference_from_average": 57.4,
+              "percent_of_average": 157.4,
               "week_index": 2,
               "weekday_index": 5
             },
@@ -4519,8 +4535,8 @@
               "date_label": "24/11/2025",
               "difference_from_average_m": 0.066,
               "max_level_m": 0.249,
-              "percent_difference_from_average": 35.7,
-              "percent_of_average": 135.7,
+              "percent_difference_from_average": 35.8,
+              "percent_of_average": 135.8,
               "week_index": 3,
               "weekday_index": 0
             },
@@ -4547,7 +4563,7 @@
             {
               "date": "2025-11-27",
               "date_label": "27/11/2025",
-              "difference_from_average_m": 0.095,
+              "difference_from_average_m": 0.096,
               "max_level_m": 0.279,
               "percent_difference_from_average": 52.0,
               "percent_of_average": 152.0,
@@ -4569,8 +4585,8 @@
               "date_label": "29/11/2025",
               "difference_from_average_m": 0.158,
               "max_level_m": 0.341,
-              "percent_difference_from_average": 85.8,
-              "percent_of_average": 185.8,
+              "percent_difference_from_average": 85.9,
+              "percent_of_average": 185.9,
               "week_index": 3,
               "weekday_index": 5
             },
@@ -4579,8 +4595,8 @@
               "date_label": "30/11/2025",
               "difference_from_average_m": 0.117,
               "max_level_m": 0.301,
-              "percent_difference_from_average": 63.9,
-              "percent_of_average": 163.9,
+              "percent_difference_from_average": 64.0,
+              "percent_of_average": 164.0,
               "week_index": 3,
               "weekday_index": 6
             },
@@ -4589,8 +4605,8 @@
               "date_label": "01/12/2025",
               "difference_from_average_m": 0.48,
               "max_level_m": 0.663,
-              "percent_difference_from_average": 261.1,
-              "percent_of_average": 361.1,
+              "percent_difference_from_average": 261.2,
+              "percent_of_average": 361.2,
               "week_index": 4,
               "weekday_index": 0
             },
@@ -4609,8 +4625,8 @@
               "date_label": "03/12/2025",
               "difference_from_average_m": 0.19,
               "max_level_m": 0.374,
-              "percent_difference_from_average": 103.5,
-              "percent_of_average": 203.5,
+              "percent_difference_from_average": 103.6,
+              "percent_of_average": 203.6,
               "week_index": 4,
               "weekday_index": 2
             },
@@ -4629,8 +4645,8 @@
               "date_label": "05/12/2025",
               "difference_from_average_m": 0.332,
               "max_level_m": 0.515,
-              "percent_difference_from_average": 180.6,
-              "percent_of_average": 280.6,
+              "percent_difference_from_average": 180.7,
+              "percent_of_average": 280.7,
               "week_index": 4,
               "weekday_index": 4
             },
@@ -4639,8 +4655,8 @@
               "date_label": "06/12/2025",
               "difference_from_average_m": 0.191,
               "max_level_m": 0.375,
-              "percent_difference_from_average": 104.1,
-              "percent_of_average": 204.1,
+              "percent_difference_from_average": 104.2,
+              "percent_of_average": 204.2,
               "week_index": 4,
               "weekday_index": 5
             },
@@ -4649,8 +4665,8 @@
               "date_label": "07/12/2025",
               "difference_from_average_m": 0.291,
               "max_level_m": 0.475,
-              "percent_difference_from_average": 158.3,
-              "percent_of_average": 258.3,
+              "percent_difference_from_average": 158.4,
+              "percent_of_average": 258.4,
               "week_index": 4,
               "weekday_index": 6
             },
@@ -4659,8 +4675,8 @@
               "date_label": "08/12/2025",
               "difference_from_average_m": 0.239,
               "max_level_m": 0.423,
-              "percent_difference_from_average": 130.3,
-              "percent_of_average": 230.3,
+              "percent_difference_from_average": 130.4,
+              "percent_of_average": 230.4,
               "week_index": 5,
               "weekday_index": 0
             },
@@ -4669,8 +4685,8 @@
               "date_label": "09/12/2025",
               "difference_from_average_m": 0.419,
               "max_level_m": 0.602,
-              "percent_difference_from_average": 227.9,
-              "percent_of_average": 327.9,
+              "percent_difference_from_average": 228.0,
+              "percent_of_average": 328.0,
               "week_index": 5,
               "weekday_index": 1
             },
@@ -4679,8 +4695,8 @@
               "date_label": "10/12/2025",
               "difference_from_average_m": 0.305,
               "max_level_m": 0.489,
-              "percent_difference_from_average": 166.0,
-              "percent_of_average": 266.0,
+              "percent_difference_from_average": 166.1,
+              "percent_of_average": 266.1,
               "week_index": 5,
               "weekday_index": 2
             },
@@ -4689,8 +4705,8 @@
               "date_label": "11/12/2025",
               "difference_from_average_m": 0.211,
               "max_level_m": 0.395,
-              "percent_difference_from_average": 115.0,
-              "percent_of_average": 215.0,
+              "percent_difference_from_average": 115.1,
+              "percent_of_average": 215.1,
               "week_index": 5,
               "weekday_index": 3
             },
@@ -4699,8 +4715,8 @@
               "date_label": "12/12/2025",
               "difference_from_average_m": 0.335,
               "max_level_m": 0.519,
-              "percent_difference_from_average": 182.4,
-              "percent_of_average": 282.4,
+              "percent_difference_from_average": 182.5,
+              "percent_of_average": 282.5,
               "week_index": 5,
               "weekday_index": 4
             },
@@ -4709,8 +4725,8 @@
               "date_label": "13/12/2025",
               "difference_from_average_m": 0.156,
               "max_level_m": 0.34,
-              "percent_difference_from_average": 85.0,
-              "percent_of_average": 185.0,
+              "percent_difference_from_average": 85.1,
+              "percent_of_average": 185.1,
               "week_index": 5,
               "weekday_index": 5
             },
@@ -4719,8 +4735,8 @@
               "date_label": "14/12/2025",
               "difference_from_average_m": 0.136,
               "max_level_m": 0.319,
-              "percent_difference_from_average": 73.8,
-              "percent_of_average": 173.8,
+              "percent_difference_from_average": 73.9,
+              "percent_of_average": 173.9,
               "week_index": 5,
               "weekday_index": 6
             },
@@ -4729,8 +4745,8 @@
               "date_label": "15/12/2025",
               "difference_from_average_m": 0.779,
               "max_level_m": 0.962,
-              "percent_difference_from_average": 423.9,
-              "percent_of_average": 523.9,
+              "percent_difference_from_average": 424.0,
+              "percent_of_average": 524.0,
               "week_index": 6,
               "weekday_index": 0
             },
@@ -4739,8 +4755,8 @@
               "date_label": "16/12/2025",
               "difference_from_average_m": 0.321,
               "max_level_m": 0.505,
-              "percent_difference_from_average": 174.8,
-              "percent_of_average": 274.8,
+              "percent_difference_from_average": 174.9,
+              "percent_of_average": 274.9,
               "week_index": 6,
               "weekday_index": 1
             },
@@ -4749,8 +4765,8 @@
               "date_label": "17/12/2025",
               "difference_from_average_m": 0.381,
               "max_level_m": 0.564,
-              "percent_difference_from_average": 207.2,
-              "percent_of_average": 307.2,
+              "percent_difference_from_average": 207.3,
+              "percent_of_average": 307.3,
               "week_index": 6,
               "weekday_index": 2
             },
@@ -4759,8 +4775,8 @@
               "date_label": "18/12/2025",
               "difference_from_average_m": 0.322,
               "max_level_m": 0.505,
-              "percent_difference_from_average": 175.1,
-              "percent_of_average": 275.1,
+              "percent_difference_from_average": 175.2,
+              "percent_of_average": 275.2,
               "week_index": 6,
               "weekday_index": 3
             },
@@ -4779,8 +4795,8 @@
               "date_label": "20/12/2025",
               "difference_from_average_m": 0.257,
               "max_level_m": 0.44,
-              "percent_difference_from_average": 139.7,
-              "percent_of_average": 239.7,
+              "percent_difference_from_average": 139.8,
+              "percent_of_average": 239.8,
               "week_index": 6,
               "weekday_index": 5
             },
@@ -4789,8 +4805,8 @@
               "date_label": "21/12/2025",
               "difference_from_average_m": 0.158,
               "max_level_m": 0.342,
-              "percent_difference_from_average": 85.9,
-              "percent_of_average": 185.9,
+              "percent_difference_from_average": 86.0,
+              "percent_of_average": 186.0,
               "week_index": 6,
               "weekday_index": 6
             },
@@ -4799,8 +4815,8 @@
               "date_label": "22/12/2025",
               "difference_from_average_m": 0.181,
               "max_level_m": 0.365,
-              "percent_difference_from_average": 98.6,
-              "percent_of_average": 198.6,
+              "percent_difference_from_average": 98.7,
+              "percent_of_average": 198.7,
               "week_index": 7,
               "weekday_index": 0
             },
@@ -4809,8 +4825,8 @@
               "date_label": "23/12/2025",
               "difference_from_average_m": 0.142,
               "max_level_m": 0.326,
-              "percent_difference_from_average": 77.4,
-              "percent_of_average": 177.4,
+              "percent_difference_from_average": 77.5,
+              "percent_of_average": 177.5,
               "week_index": 7,
               "weekday_index": 1
             },
@@ -4829,8 +4845,8 @@
               "date_label": "25/12/2025",
               "difference_from_average_m": 0.048,
               "max_level_m": 0.232,
-              "percent_difference_from_average": 26.2,
-              "percent_of_average": 126.2,
+              "percent_difference_from_average": 26.3,
+              "percent_of_average": 126.3,
               "week_index": 7,
               "weekday_index": 3
             },
@@ -4839,8 +4855,8 @@
               "date_label": "26/12/2025",
               "difference_from_average_m": 0.037,
               "max_level_m": 0.221,
-              "percent_difference_from_average": 20.2,
-              "percent_of_average": 120.2,
+              "percent_difference_from_average": 20.3,
+              "percent_of_average": 120.3,
               "week_index": 7,
               "weekday_index": 4
             },
@@ -4859,15 +4875,15 @@
               "date_label": "28/12/2025",
               "difference_from_average_m": 0.015,
               "max_level_m": 0.198,
-              "percent_difference_from_average": 8.0,
-              "percent_of_average": 108.0,
+              "percent_difference_from_average": 8.1,
+              "percent_of_average": 108.1,
               "week_index": 7,
               "weekday_index": 6
             },
             {
               "date": "2025-12-29",
               "date_label": "29/12/2025",
-              "difference_from_average_m": -0.006,
+              "difference_from_average_m": -0.005,
               "max_level_m": 0.178,
               "percent_difference_from_average": -3.0,
               "percent_of_average": 97.0,
@@ -4939,8 +4955,8 @@
               "date_label": "05/01/2026",
               "difference_from_average_m": -0.066,
               "max_level_m": 0.118,
-              "percent_difference_from_average": -35.8,
-              "percent_of_average": 64.2,
+              "percent_difference_from_average": -35.7,
+              "percent_of_average": 64.3,
               "week_index": 9,
               "weekday_index": 0
             },
@@ -4969,8 +4985,8 @@
               "date_label": "08/01/2026",
               "difference_from_average_m": 0.365,
               "max_level_m": 0.549,
-              "percent_difference_from_average": 198.8,
-              "percent_of_average": 298.8,
+              "percent_difference_from_average": 198.9,
+              "percent_of_average": 298.9,
               "week_index": 9,
               "weekday_index": 3
             },
@@ -4979,8 +4995,8 @@
               "date_label": "09/01/2026",
               "difference_from_average_m": 0.03,
               "max_level_m": 0.214,
-              "percent_difference_from_average": 16.3,
-              "percent_of_average": 116.3,
+              "percent_difference_from_average": 16.4,
+              "percent_of_average": 116.4,
               "week_index": 9,
               "weekday_index": 4
             },
@@ -4989,8 +5005,8 @@
               "date_label": "10/01/2026",
               "difference_from_average_m": -0.011,
               "max_level_m": 0.173,
-              "percent_difference_from_average": -5.9,
-              "percent_of_average": 94.1,
+              "percent_difference_from_average": -5.8,
+              "percent_of_average": 94.2,
               "week_index": 9,
               "weekday_index": 5
             },
@@ -5019,25 +5035,25 @@
               "date_label": "13/01/2026",
               "difference_from_average_m": 0.023,
               "max_level_m": 0.207,
-              "percent_difference_from_average": 12.6,
-              "percent_of_average": 112.6,
+              "percent_difference_from_average": 12.7,
+              "percent_of_average": 112.7,
               "week_index": 10,
               "weekday_index": 1
             },
             {
               "date": "2026-01-14",
               "date_label": "14/01/2026",
-              "difference_from_average_m": 0.004,
+              "difference_from_average_m": 0.005,
               "max_level_m": 0.188,
-              "percent_difference_from_average": 2.4,
-              "percent_of_average": 102.4,
+              "percent_difference_from_average": 2.5,
+              "percent_of_average": 102.5,
               "week_index": 10,
               "weekday_index": 2
             },
             {
               "date": "2026-01-15",
               "date_label": "15/01/2026",
-              "difference_from_average_m": 0.021,
+              "difference_from_average_m": 0.022,
               "max_level_m": 0.205,
               "percent_difference_from_average": 11.7,
               "percent_of_average": 111.7,
@@ -5049,8 +5065,8 @@
               "date_label": "16/01/2026",
               "difference_from_average_m": 0.008,
               "max_level_m": 0.191,
-              "percent_difference_from_average": 4.2,
-              "percent_of_average": 104.2,
+              "percent_difference_from_average": 4.3,
+              "percent_of_average": 104.3,
               "week_index": 10,
               "weekday_index": 4
             },
@@ -5089,8 +5105,8 @@
               "date_label": "20/01/2026",
               "difference_from_average_m": 0.429,
               "max_level_m": 0.613,
-              "percent_difference_from_average": 233.6,
-              "percent_of_average": 333.6,
+              "percent_difference_from_average": 233.7,
+              "percent_of_average": 333.7,
               "week_index": 11,
               "weekday_index": 1
             },
@@ -5099,8 +5115,8 @@
               "date_label": "21/01/2026",
               "difference_from_average_m": 0.329,
               "max_level_m": 0.513,
-              "percent_difference_from_average": 179.3,
-              "percent_of_average": 279.3,
+              "percent_difference_from_average": 179.4,
+              "percent_of_average": 279.4,
               "week_index": 11,
               "weekday_index": 2
             },
@@ -5119,8 +5135,8 @@
               "date_label": "23/01/2026",
               "difference_from_average_m": 0.673,
               "max_level_m": 0.856,
-              "percent_difference_from_average": 366.1,
-              "percent_of_average": 466.1,
+              "percent_difference_from_average": 366.3,
+              "percent_of_average": 466.3,
               "week_index": 11,
               "weekday_index": 4
             },
@@ -5129,8 +5145,8 @@
               "date_label": "24/01/2026",
               "difference_from_average_m": 0.961,
               "max_level_m": 1.144,
-              "percent_difference_from_average": 523.0,
-              "percent_of_average": 623.0,
+              "percent_difference_from_average": 523.2,
+              "percent_of_average": 623.2,
               "week_index": 11,
               "weekday_index": 5
             },
@@ -5139,8 +5155,8 @@
               "date_label": "25/01/2026",
               "difference_from_average_m": 0.544,
               "max_level_m": 0.727,
-              "percent_difference_from_average": 296.0,
-              "percent_of_average": 396.0,
+              "percent_difference_from_average": 296.1,
+              "percent_of_average": 396.1,
               "week_index": 11,
               "weekday_index": 6
             },
@@ -5159,8 +5175,8 @@
               "date_label": "27/01/2026",
               "difference_from_average_m": 0.592,
               "max_level_m": 0.775,
-              "percent_difference_from_average": 322.1,
-              "percent_of_average": 422.1,
+              "percent_difference_from_average": 322.2,
+              "percent_of_average": 422.2,
               "week_index": 12,
               "weekday_index": 1
             },
@@ -5169,8 +5185,8 @@
               "date_label": "28/01/2026",
               "difference_from_average_m": 0.237,
               "max_level_m": 0.42,
-              "percent_difference_from_average": 128.9,
-              "percent_of_average": 228.9,
+              "percent_difference_from_average": 129.0,
+              "percent_of_average": 229.0,
               "week_index": 12,
               "weekday_index": 2
             },
@@ -5179,8 +5195,8 @@
               "date_label": "29/01/2026",
               "difference_from_average_m": 0.241,
               "max_level_m": 0.425,
-              "percent_difference_from_average": 131.1,
-              "percent_of_average": 231.1,
+              "percent_difference_from_average": 131.2,
+              "percent_of_average": 231.2,
               "week_index": 12,
               "weekday_index": 3
             },
@@ -5199,8 +5215,8 @@
               "date_label": "31/01/2026",
               "difference_from_average_m": 0.185,
               "max_level_m": 0.369,
-              "percent_difference_from_average": 100.6,
-              "percent_of_average": 200.6,
+              "percent_difference_from_average": 100.7,
+              "percent_of_average": 200.7,
               "week_index": 12,
               "weekday_index": 5
             },
@@ -5209,8 +5225,8 @@
               "date_label": "01/02/2026",
               "difference_from_average_m": 0.236,
               "max_level_m": 0.419,
-              "percent_difference_from_average": 128.3,
-              "percent_of_average": 228.3,
+              "percent_difference_from_average": 128.4,
+              "percent_of_average": 228.4,
               "week_index": 12,
               "weekday_index": 6
             },
@@ -5219,8 +5235,8 @@
               "date_label": "02/02/2026",
               "difference_from_average_m": 0.153,
               "max_level_m": 0.337,
-              "percent_difference_from_average": 83.3,
-              "percent_of_average": 183.3,
+              "percent_difference_from_average": 83.4,
+              "percent_of_average": 183.4,
               "week_index": 13,
               "weekday_index": 0
             },
@@ -5229,8 +5245,8 @@
               "date_label": "03/02/2026",
               "difference_from_average_m": 0.153,
               "max_level_m": 0.337,
-              "percent_difference_from_average": 83.2,
-              "percent_of_average": 183.2,
+              "percent_difference_from_average": 83.3,
+              "percent_of_average": 183.3,
               "week_index": 13,
               "weekday_index": 1
             },
@@ -5239,8 +5255,8 @@
               "date_label": "04/02/2026",
               "difference_from_average_m": 0.105,
               "max_level_m": 0.289,
-              "percent_difference_from_average": 57.2,
-              "percent_of_average": 157.2,
+              "percent_difference_from_average": 57.3,
+              "percent_of_average": 157.3,
               "week_index": 13,
               "weekday_index": 2
             },
@@ -5249,8 +5265,8 @@
               "date_label": "05/02/2026",
               "difference_from_average_m": 0.177,
               "max_level_m": 0.36,
-              "percent_difference_from_average": 96.1,
-              "percent_of_average": 196.1,
+              "percent_difference_from_average": 96.2,
+              "percent_of_average": 196.2,
               "week_index": 13,
               "weekday_index": 3
             },
@@ -5269,18 +5285,18 @@
               "date_label": "07/02/2026",
               "difference_from_average_m": 0.16,
               "max_level_m": 0.344,
-              "percent_difference_from_average": 87.1,
-              "percent_of_average": 187.1,
+              "percent_difference_from_average": 87.2,
+              "percent_of_average": 187.2,
               "week_index": 13,
               "weekday_index": 5
             },
             {
               "date": "2026-02-08",
               "date_label": "08/02/2026",
-              "difference_from_average_m": 0.15,
+              "difference_from_average_m": 0.151,
               "max_level_m": 0.334,
-              "percent_difference_from_average": 81.9,
-              "percent_of_average": 181.9,
+              "percent_difference_from_average": 82.0,
+              "percent_of_average": 182.0,
               "week_index": 13,
               "weekday_index": 6
             },
@@ -5289,8 +5305,8 @@
               "date_label": "09/02/2026",
               "difference_from_average_m": 0.152,
               "max_level_m": 0.336,
-              "percent_difference_from_average": 82.8,
-              "percent_of_average": 182.8,
+              "percent_difference_from_average": 82.9,
+              "percent_of_average": 182.9,
               "week_index": 14,
               "weekday_index": 0
             },
@@ -5299,8 +5315,8 @@
               "date_label": "10/02/2026",
               "difference_from_average_m": 0.167,
               "max_level_m": 0.35,
-              "percent_difference_from_average": 90.7,
-              "percent_of_average": 190.7,
+              "percent_difference_from_average": 90.8,
+              "percent_of_average": 190.8,
               "week_index": 14,
               "weekday_index": 1
             },
@@ -5327,7 +5343,7 @@
             {
               "date": "2026-02-13",
               "date_label": "13/02/2026",
-              "difference_from_average_m": 0.156,
+              "difference_from_average_m": 0.157,
               "max_level_m": 0.34,
               "percent_difference_from_average": 85.2,
               "percent_of_average": 185.2,
@@ -5339,8 +5355,8 @@
               "date_label": "14/02/2026",
               "difference_from_average_m": 0.121,
               "max_level_m": 0.305,
-              "percent_difference_from_average": 65.8,
-              "percent_of_average": 165.8,
+              "percent_difference_from_average": 65.9,
+              "percent_of_average": 165.9,
               "week_index": 14,
               "weekday_index": 5
             },
@@ -5349,8 +5365,8 @@
               "date_label": "15/02/2026",
               "difference_from_average_m": 0.266,
               "max_level_m": 0.45,
-              "percent_difference_from_average": 144.9,
-              "percent_of_average": 244.9,
+              "percent_difference_from_average": 145.0,
+              "percent_of_average": 245.0,
               "week_index": 14,
               "weekday_index": 6
             },
@@ -5367,10 +5383,10 @@
             {
               "date": "2026-02-17",
               "date_label": "17/02/2026",
-              "difference_from_average_m": 0.161,
+              "difference_from_average_m": 0.162,
               "max_level_m": 0.345,
-              "percent_difference_from_average": 87.9,
-              "percent_of_average": 187.9,
+              "percent_difference_from_average": 88.0,
+              "percent_of_average": 188.0,
               "week_index": 15,
               "weekday_index": 1
             },
@@ -5379,8 +5395,8 @@
               "date_label": "18/02/2026",
               "difference_from_average_m": 0.139,
               "max_level_m": 0.323,
-              "percent_difference_from_average": 75.8,
-              "percent_of_average": 175.8,
+              "percent_difference_from_average": 75.9,
+              "percent_of_average": 175.9,
               "week_index": 15,
               "weekday_index": 2
             },
@@ -5399,8 +5415,8 @@
               "date_label": "20/02/2026",
               "difference_from_average_m": 0.101,
               "max_level_m": 0.284,
-              "percent_difference_from_average": 54.8,
-              "percent_of_average": 154.8,
+              "percent_difference_from_average": 54.9,
+              "percent_of_average": 154.9,
               "week_index": 15,
               "weekday_index": 4
             },
@@ -5409,18 +5425,18 @@
               "date_label": "21/02/2026",
               "difference_from_average_m": 0.09,
               "max_level_m": 0.274,
-              "percent_difference_from_average": 48.9,
-              "percent_of_average": 148.9,
+              "percent_difference_from_average": 49.0,
+              "percent_of_average": 149.0,
               "week_index": 15,
               "weekday_index": 5
             },
             {
               "date": "2026-02-22",
               "date_label": "22/02/2026",
-              "difference_from_average_m": 0.164,
+              "difference_from_average_m": 0.165,
               "max_level_m": 0.348,
-              "percent_difference_from_average": 89.5,
-              "percent_of_average": 189.5,
+              "percent_difference_from_average": 89.6,
+              "percent_of_average": 189.6,
               "week_index": 15,
               "weekday_index": 6
             },
@@ -5429,8 +5445,8 @@
               "date_label": "23/02/2026",
               "difference_from_average_m": 0.086,
               "max_level_m": 0.269,
-              "percent_difference_from_average": 46.6,
-              "percent_of_average": 146.6,
+              "percent_difference_from_average": 46.7,
+              "percent_of_average": 146.7,
               "week_index": 16,
               "weekday_index": 0
             },
@@ -5459,8 +5475,8 @@
               "date_label": "26/02/2026",
               "difference_from_average_m": 0.331,
               "max_level_m": 0.515,
-              "percent_difference_from_average": 180.2,
-              "percent_of_average": 280.2,
+              "percent_difference_from_average": 180.3,
+              "percent_of_average": 280.3,
               "week_index": 16,
               "weekday_index": 3
             },
@@ -5469,8 +5485,8 @@
               "date_label": "27/02/2026",
               "difference_from_average_m": 0.315,
               "max_level_m": 0.499,
-              "percent_difference_from_average": 171.5,
-              "percent_of_average": 271.5,
+              "percent_difference_from_average": 171.6,
+              "percent_of_average": 271.6,
               "week_index": 16,
               "weekday_index": 4
             },
@@ -5479,8 +5495,8 @@
               "date_label": "28/02/2026",
               "difference_from_average_m": 0.214,
               "max_level_m": 0.397,
-              "percent_difference_from_average": 116.3,
-              "percent_of_average": 216.3,
+              "percent_difference_from_average": 116.4,
+              "percent_of_average": 216.4,
               "week_index": 16,
               "weekday_index": 5
             },
@@ -5499,8 +5515,8 @@
               "date_label": "02/03/2026",
               "difference_from_average_m": 0.156,
               "max_level_m": 0.34,
-              "percent_difference_from_average": 84.9,
-              "percent_of_average": 184.9,
+              "percent_difference_from_average": 85.0,
+              "percent_of_average": 185.0,
               "week_index": 17,
               "weekday_index": 0
             },
@@ -5509,8 +5525,8 @@
               "date_label": "03/03/2026",
               "difference_from_average_m": 0.126,
               "max_level_m": 0.31,
-              "percent_difference_from_average": 68.7,
-              "percent_of_average": 168.7,
+              "percent_difference_from_average": 68.8,
+              "percent_of_average": 168.8,
               "week_index": 17,
               "weekday_index": 1
             },
@@ -5519,8 +5535,8 @@
               "date_label": "04/03/2026",
               "difference_from_average_m": 0.128,
               "max_level_m": 0.312,
-              "percent_difference_from_average": 69.8,
-              "percent_of_average": 169.8,
+              "percent_difference_from_average": 69.9,
+              "percent_of_average": 169.9,
               "week_index": 17,
               "weekday_index": 2
             },
@@ -5609,8 +5625,8 @@
               "date_label": "13/03/2026",
               "difference_from_average_m": 0.117,
               "max_level_m": 0.3,
-              "percent_difference_from_average": 63.5,
-              "percent_of_average": 163.5,
+              "percent_difference_from_average": 63.6,
+              "percent_of_average": 163.6,
               "week_index": 18,
               "weekday_index": 4
             },
@@ -5679,8 +5695,8 @@
               "date_label": "20/03/2026",
               "difference_from_average_m": -0.003,
               "max_level_m": 0.181,
-              "percent_difference_from_average": -1.5,
-              "percent_of_average": 98.5,
+              "percent_difference_from_average": -1.4,
+              "percent_of_average": 98.6,
               "week_index": 19,
               "weekday_index": 4
             },
@@ -5689,8 +5705,8 @@
               "date_label": "21/03/2026",
               "difference_from_average_m": -0.003,
               "max_level_m": 0.181,
-              "percent_difference_from_average": -1.5,
-              "percent_of_average": 98.5,
+              "percent_difference_from_average": -1.4,
+              "percent_of_average": 98.6,
               "week_index": 19,
               "weekday_index": 5
             },
@@ -5699,8 +5715,8 @@
               "date_label": "22/03/2026",
               "difference_from_average_m": -0.004,
               "max_level_m": 0.18,
-              "percent_difference_from_average": -2.2,
-              "percent_of_average": 97.8,
+              "percent_difference_from_average": -2.1,
+              "percent_of_average": 97.9,
               "week_index": 19,
               "weekday_index": 6
             },
@@ -5739,8 +5755,8 @@
               "date_label": "26/03/2026",
               "difference_from_average_m": -0.065,
               "max_level_m": 0.119,
-              "percent_difference_from_average": -35.2,
-              "percent_of_average": 64.8,
+              "percent_difference_from_average": -35.1,
+              "percent_of_average": 64.9,
               "week_index": 20,
               "weekday_index": 3
             },
@@ -5749,8 +5765,8 @@
               "date_label": "27/03/2026",
               "difference_from_average_m": 0.004,
               "max_level_m": 0.188,
-              "percent_difference_from_average": 2.1,
-              "percent_of_average": 102.1,
+              "percent_difference_from_average": 2.2,
+              "percent_of_average": 102.2,
               "week_index": 20,
               "weekday_index": 4
             },
@@ -5767,10 +5783,10 @@
             {
               "date": "2026-03-29",
               "date_label": "29/03/2026",
-              "difference_from_average_m": 0.018,
+              "difference_from_average_m": 0.019,
               "max_level_m": 0.202,
-              "percent_difference_from_average": 10.0,
-              "percent_of_average": 110.0,
+              "percent_difference_from_average": 10.1,
+              "percent_of_average": 110.1,
               "week_index": 20,
               "weekday_index": 6
             },
@@ -5779,8 +5795,8 @@
               "date_label": "30/03/2026",
               "difference_from_average_m": -0.029,
               "max_level_m": 0.154,
-              "percent_difference_from_average": -16.0,
-              "percent_of_average": 84.0,
+              "percent_difference_from_average": -15.9,
+              "percent_of_average": 84.1,
               "week_index": 21,
               "weekday_index": 0
             },
@@ -5799,8 +5815,8 @@
               "date_label": "01/04/2026",
               "difference_from_average_m": -0.06,
               "max_level_m": 0.123,
-              "percent_difference_from_average": -32.9,
-              "percent_of_average": 67.1,
+              "percent_difference_from_average": -32.8,
+              "percent_of_average": 67.2,
               "week_index": 21,
               "weekday_index": 2
             },
@@ -5829,8 +5845,8 @@
               "date_label": "04/04/2026",
               "difference_from_average_m": -0.055,
               "max_level_m": 0.129,
-              "percent_difference_from_average": -30.0,
-              "percent_of_average": 70.0,
+              "percent_difference_from_average": -29.9,
+              "percent_of_average": 70.1,
               "week_index": 21,
               "weekday_index": 5
             },
@@ -5939,8 +5955,8 @@
               "date_label": "15/04/2026",
               "difference_from_average_m": -0.056,
               "max_level_m": 0.127,
-              "percent_difference_from_average": -30.7,
-              "percent_of_average": 69.3,
+              "percent_difference_from_average": -30.6,
+              "percent_of_average": 69.4,
               "week_index": 23,
               "weekday_index": 2
             },
@@ -5959,8 +5975,8 @@
               "date_label": "17/04/2026",
               "difference_from_average_m": 0.006,
               "max_level_m": 0.189,
-              "percent_difference_from_average": 3.0,
-              "percent_of_average": 103.0,
+              "percent_difference_from_average": 3.1,
+              "percent_of_average": 103.1,
               "week_index": 23,
               "weekday_index": 4
             },
@@ -5999,8 +6015,8 @@
               "date_label": "21/04/2026",
               "difference_from_average_m": -0.081,
               "max_level_m": 0.103,
-              "percent_difference_from_average": -43.9,
-              "percent_of_average": 56.1,
+              "percent_difference_from_average": -43.8,
+              "percent_of_average": 56.2,
               "week_index": 24,
               "weekday_index": 1
             },
@@ -6049,15 +6065,15 @@
               "date_label": "26/04/2026",
               "difference_from_average_m": -0.082,
               "max_level_m": 0.102,
-              "percent_difference_from_average": -44.6,
-              "percent_of_average": 55.4,
+              "percent_difference_from_average": -44.5,
+              "percent_of_average": 55.5,
               "week_index": 24,
               "weekday_index": 6
             },
             {
               "date": "2026-04-27",
               "date_label": "27/04/2026",
-              "difference_from_average_m": -0.047,
+              "difference_from_average_m": -0.046,
               "max_level_m": 0.137,
               "percent_difference_from_average": -25.3,
               "percent_of_average": 74.7,
@@ -6069,8 +6085,8 @@
               "date_label": "28/04/2026",
               "difference_from_average_m": -0.064,
               "max_level_m": 0.119,
-              "percent_difference_from_average": -35.1,
-              "percent_of_average": 64.9,
+              "percent_difference_from_average": -35.0,
+              "percent_of_average": 65.0,
               "week_index": 25,
               "weekday_index": 1
             },
@@ -6267,7 +6283,7 @@
             {
               "date": "2026-05-18",
               "date_label": "18/05/2026",
-              "difference_from_average_m": -0.102,
+              "difference_from_average_m": -0.101,
               "max_level_m": 0.082,
               "percent_difference_from_average": -55.3,
               "percent_of_average": 44.7,
@@ -6279,8 +6295,8 @@
               "date_label": "19/05/2026",
               "difference_from_average_m": -0.033,
               "max_level_m": 0.15,
-              "percent_difference_from_average": -18.1,
-              "percent_of_average": 81.9,
+              "percent_difference_from_average": -18.0,
+              "percent_of_average": 82.0,
               "week_index": 28,
               "weekday_index": 1
             },
@@ -6299,8 +6315,8 @@
               "date_label": "21/05/2026",
               "difference_from_average_m": -0.082,
               "max_level_m": 0.102,
-              "percent_difference_from_average": -44.7,
-              "percent_of_average": 55.3,
+              "percent_difference_from_average": -44.6,
+              "percent_of_average": 55.4,
               "week_index": 28,
               "weekday_index": 3
             },
@@ -6327,7 +6343,7 @@
             {
               "date": "2026-05-24",
               "date_label": "24/05/2026",
-              "difference_from_average_m": -0.064,
+              "difference_from_average_m": -0.063,
               "max_level_m": 0.12,
               "percent_difference_from_average": -34.6,
               "percent_of_average": 65.4,
@@ -6359,8 +6375,8 @@
               "date_label": "27/05/2026",
               "difference_from_average_m": -0.052,
               "max_level_m": 0.131,
-              "percent_difference_from_average": -28.5,
-              "percent_of_average": 71.5,
+              "percent_difference_from_average": -28.4,
+              "percent_of_average": 71.6,
               "week_index": 29,
               "weekday_index": 2
             },
@@ -6389,8 +6405,8 @@
               "date_label": "30/05/2026",
               "difference_from_average_m": -0.097,
               "max_level_m": 0.087,
-              "percent_difference_from_average": -52.7,
-              "percent_of_average": 47.3,
+              "percent_difference_from_average": -52.6,
+              "percent_of_average": 47.4,
               "week_index": 29,
               "weekday_index": 5
             },
@@ -6399,8 +6415,8 @@
               "date_label": "31/05/2026",
               "difference_from_average_m": -0.101,
               "max_level_m": 0.083,
-              "percent_difference_from_average": -54.9,
-              "percent_of_average": 45.1,
+              "percent_difference_from_average": -54.8,
+              "percent_of_average": 45.2,
               "week_index": 29,
               "weekday_index": 6
             },
@@ -6419,8 +6435,8 @@
               "date_label": "02/06/2026",
               "difference_from_average_m": -0.095,
               "max_level_m": 0.088,
-              "percent_difference_from_average": -52.0,
-              "percent_of_average": 48.0,
+              "percent_difference_from_average": -51.9,
+              "percent_of_average": 48.1,
               "week_index": 30,
               "weekday_index": 1
             },
@@ -6479,8 +6495,8 @@
               "date_label": "08/06/2026",
               "difference_from_average_m": 0.087,
               "max_level_m": 0.27,
-              "percent_difference_from_average": 47.2,
-              "percent_of_average": 147.2,
+              "percent_difference_from_average": 47.3,
+              "percent_of_average": 147.3,
               "week_index": 31,
               "weekday_index": 0
             },
@@ -6507,7 +6523,7 @@
             {
               "date": "2026-06-11",
               "date_label": "11/06/2026",
-              "difference_from_average_m": -0.083,
+              "difference_from_average_m": -0.082,
               "max_level_m": 0.101,
               "percent_difference_from_average": -44.9,
               "percent_of_average": 55.1,
@@ -6537,10 +6553,10 @@
             {
               "date": "2026-06-14",
               "date_label": "14/06/2026",
-              "difference_from_average_m": -0.066,
+              "difference_from_average_m": -0.065,
               "max_level_m": 0.118,
-              "percent_difference_from_average": -35.7,
-              "percent_of_average": 64.3,
+              "percent_difference_from_average": -35.6,
+              "percent_of_average": 64.4,
               "week_index": 31,
               "weekday_index": 6
             },
@@ -6559,8 +6575,8 @@
               "date_label": "16/06/2026",
               "difference_from_average_m": -0.066,
               "max_level_m": 0.118,
-              "percent_difference_from_average": -35.9,
-              "percent_of_average": 64.1,
+              "percent_difference_from_average": -35.8,
+              "percent_of_average": 64.2,
               "week_index": 32,
               "weekday_index": 1
             },
@@ -6579,8 +6595,8 @@
               "date_label": "18/06/2026",
               "difference_from_average_m": -0.063,
               "max_level_m": 0.121,
-              "percent_difference_from_average": -34.4,
-              "percent_of_average": 65.6,
+              "percent_difference_from_average": -34.3,
+              "percent_of_average": 65.7,
               "week_index": 32,
               "weekday_index": 3
             },
@@ -6699,15 +6715,15 @@
               "date_label": "30/06/2026",
               "difference_from_average_m": -0.063,
               "max_level_m": 0.121,
-              "percent_difference_from_average": -34.3,
-              "percent_of_average": 65.7,
+              "percent_difference_from_average": -34.2,
+              "percent_of_average": 65.8,
               "week_index": 34,
               "weekday_index": 1
             },
             {
               "date": "2026-07-01",
               "date_label": "01/07/2026",
-              "difference_from_average_m": -0.072,
+              "difference_from_average_m": -0.071,
               "max_level_m": 0.112,
               "percent_difference_from_average": -38.9,
               "percent_of_average": 61.1,
@@ -6769,8 +6785,8 @@
               "date_label": "07/07/2026",
               "difference_from_average_m": -0.066,
               "max_level_m": 0.118,
-              "percent_difference_from_average": -35.9,
-              "percent_of_average": 64.1,
+              "percent_difference_from_average": -35.8,
+              "percent_of_average": 64.2,
               "week_index": 35,
               "weekday_index": 1
             },
@@ -6807,10 +6823,10 @@
             {
               "date": "2026-07-11",
               "date_label": "11/07/2026",
-              "difference_from_average_m": -0.014,
+              "difference_from_average_m": -0.013,
               "max_level_m": 0.17,
-              "percent_difference_from_average": -7.4,
-              "percent_of_average": 92.6,
+              "percent_difference_from_average": -7.3,
+              "percent_of_average": 92.7,
               "week_index": 35,
               "weekday_index": 5
             },
@@ -6869,8 +6885,8 @@
               "date_label": "17/07/2026",
               "difference_from_average_m": -0.052,
               "max_level_m": 0.131,
-              "percent_difference_from_average": -28.6,
-              "percent_of_average": 71.4,
+              "percent_difference_from_average": -28.5,
+              "percent_of_average": 71.5,
               "week_index": 36,
               "weekday_index": 4
             },
@@ -6899,8 +6915,8 @@
               "date_label": "20/07/2026",
               "difference_from_average_m": -0.058,
               "max_level_m": 0.126,
-              "percent_difference_from_average": -31.4,
-              "percent_of_average": 68.6,
+              "percent_difference_from_average": -31.3,
+              "percent_of_average": 68.7,
               "week_index": 37,
               "weekday_index": 0
             },
@@ -6969,8 +6985,8 @@
               "date_label": "27/07/2026",
               "difference_from_average_m": -0.063,
               "max_level_m": 0.121,
-              "percent_difference_from_average": -34.3,
-              "percent_of_average": 65.7,
+              "percent_difference_from_average": -34.2,
+              "percent_of_average": 65.8,
               "week_index": 38,
               "weekday_index": 0
             },
@@ -7033,6 +7049,16 @@
               "percent_of_average": 69.2,
               "week_index": 38,
               "weekday_index": 6
+            },
+            {
+              "date": "2026-08-03",
+              "date_label": "03/08/2026",
+              "difference_from_average_m": -0.11,
+              "max_level_m": 0.074,
+              "percent_difference_from_average": -59.8,
+              "percent_of_average": 40.2,
+              "week_index": 39,
+              "weekday_index": 0
             }
           ],
           "end_date": "2026-09-30",
@@ -7208,14 +7234,6 @@
       },
       "mode": "flow_overlay",
       "points": [
-        {
-          "timestamp": "2026-07-29T01:15:00Z",
-          "value": 0.008072
-        },
-        {
-          "timestamp": "2026-07-29T01:30:00Z",
-          "value": 0.007822
-        },
         {
           "timestamp": "2026-07-29T01:45:00Z",
           "value": 0.007714
@@ -9127,6 +9145,14 @@
         {
           "timestamp": "2026-08-03T01:15:00Z",
           "value": 0.00326
+        },
+        {
+          "timestamp": "2026-08-03T01:30:00Z",
+          "value": 0.003655
+        },
+        {
+          "timestamp": "2026-08-03T01:45:00Z",
+          "value": 0.003492
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -9199,7 +9225,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-08-03T01:48:58.255885Z"
+    "updated_at": "2026-08-31T13:33:53.633720Z"
   },
   "panels": {
     "depth": {
@@ -9211,14 +9237,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-07-29T01:15:00Z",
-          "value": 0.091
-        },
-        {
-          "timestamp": "2026-07-29T01:30:00Z",
-          "value": 0.09
-        },
         {
           "timestamp": "2026-07-29T01:45:00Z",
           "value": 0.089
@@ -11130,6 +11148,14 @@
         {
           "timestamp": "2026-08-03T01:15:00Z",
           "value": 0.064
+        },
+        {
+          "timestamp": "2026-08-03T01:30:00Z",
+          "value": 0.067
+        },
+        {
+          "timestamp": "2026-08-03T01:45:00Z",
+          "value": 0.066
         }
       ],
       "title": "Observed Water Depth",
@@ -11144,1520 +11170,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-08-03T01:15:00Z",
+      "last_updated": "2026-08-03T01:45:00Z",
       "points": [
-        {
-          "timestamp": "2026-07-29T01:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T01:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T02:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T02:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T02:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T02:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T03:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T03:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T03:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T03:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T04:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T04:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T04:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T04:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T05:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T05:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T05:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T05:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T06:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T06:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T06:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T06:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T07:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T07:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T07:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T07:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T08:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T08:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T08:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T08:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T09:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T09:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T09:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T09:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T10:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T10:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T10:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T10:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T11:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T11:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T11:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T11:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T12:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T12:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T12:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T12:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T13:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T13:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T13:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T13:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T14:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T14:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T14:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T14:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T15:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T15:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T15:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T15:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T16:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T16:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T16:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T16:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T17:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T17:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T17:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T17:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T18:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T18:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T18:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T18:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T19:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T19:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T19:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T19:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T20:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T20:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T20:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T20:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T21:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T21:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T21:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T21:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T22:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T22:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T22:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T22:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T23:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T23:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T23:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-29T23:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T00:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T00:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T00:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T00:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T01:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T01:15:00Z",
-          "value": 0.2
-        },
-        {
-          "timestamp": "2026-07-30T01:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T01:45:00Z",
-          "value": 0.6
-        },
-        {
-          "timestamp": "2026-07-30T02:00:00Z",
-          "value": 0.6
-        },
-        {
-          "timestamp": "2026-07-30T02:15:00Z",
-          "value": 0.6
-        },
-        {
-          "timestamp": "2026-07-30T02:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T02:45:00Z",
-          "value": 0.2
-        },
-        {
-          "timestamp": "2026-07-30T03:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T03:15:00Z",
-          "value": 0.2
-        },
-        {
-          "timestamp": "2026-07-30T03:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T03:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T04:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T04:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T04:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T04:45:00Z",
-          "value": 0.4
-        },
-        {
-          "timestamp": "2026-07-30T05:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T05:15:00Z",
-          "value": 0.2
-        },
-        {
-          "timestamp": "2026-07-30T05:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T05:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T06:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T06:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T06:30:00Z",
-          "value": 0.8
-        },
-        {
-          "timestamp": "2026-07-30T06:45:00Z",
-          "value": 0.4
-        },
-        {
-          "timestamp": "2026-07-30T07:00:00Z",
-          "value": 1.0
-        },
-        {
-          "timestamp": "2026-07-30T07:15:00Z",
-          "value": 0.4
-        },
-        {
-          "timestamp": "2026-07-30T07:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T07:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T08:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T08:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T08:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T08:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T09:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T09:15:00Z",
-          "value": 0.2
-        },
-        {
-          "timestamp": "2026-07-30T09:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T09:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T10:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T10:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T10:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T10:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T11:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T11:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T11:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T11:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T12:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T12:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T12:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T12:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T13:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T13:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T13:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T13:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T14:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T14:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T14:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T14:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T15:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T15:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T15:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T15:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T16:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T16:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T16:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T16:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T17:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T17:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T17:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T17:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T18:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T18:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T18:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T18:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T19:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T19:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T19:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T19:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T20:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T20:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T20:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T20:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T21:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T21:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T21:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T21:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T22:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T22:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T22:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T22:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T23:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T23:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T23:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-30T23:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T00:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T00:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T00:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T00:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T01:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T01:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T01:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T01:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T02:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T02:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T02:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T02:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T03:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T03:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T03:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T03:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T04:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T04:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T04:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T04:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T05:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T05:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T05:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T05:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T06:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T06:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T06:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T06:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T07:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T07:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T07:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T07:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T08:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T08:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T08:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T08:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T09:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T09:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T09:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T09:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T10:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T10:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T10:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T10:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T11:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T11:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T11:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T11:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T12:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T12:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T12:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T12:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T13:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T13:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T13:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T13:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T14:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T14:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T14:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T14:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T15:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T15:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T15:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T15:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T16:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T16:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T16:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T16:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T17:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T17:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T17:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T17:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T18:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T18:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T18:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T18:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T19:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T19:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T19:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T19:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T20:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T20:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T20:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T20:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T21:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T21:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T21:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T21:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T22:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T22:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T22:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T22:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T23:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T23:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T23:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-07-31T23:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T00:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T00:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T00:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T00:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T01:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T01:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T01:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T01:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T02:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T02:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T02:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T02:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T03:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T03:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T03:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T03:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T04:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T04:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T04:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T04:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T05:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T05:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T05:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T05:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T06:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T06:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T06:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T06:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T07:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T07:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T07:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T07:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T08:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T08:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T08:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T08:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T09:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T09:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T09:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T09:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T10:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T10:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T10:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T10:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T11:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T11:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T11:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T11:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T12:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T12:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T12:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T12:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T13:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T13:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T13:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T13:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T14:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T14:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T14:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T14:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T15:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T15:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T15:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T15:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T16:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T16:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T16:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T16:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T17:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T17:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T17:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T17:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T18:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T18:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T18:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T18:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T19:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T19:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T19:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T19:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T20:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T20:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T20:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T20:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T21:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T21:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T21:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T21:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T22:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T22:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T22:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T22:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T23:00:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T23:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T23:30:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-08-01T23:45:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-08-02T00:00:00Z",
           "value": 0.0
@@ -13065,6 +11579,14 @@
         {
           "timestamp": "2026-08-03T01:15:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-08-03T01:30:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-08-03T01:45:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -13075,17 +11597,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-08-03T01:25:00Z",
-    "start_timestamp": "2026-08-02T01:26:00Z"
+    "end_timestamp": "2026-08-03T01:55:00Z",
+    "start_timestamp": "2026-08-02T01:56:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-08-03T01:25:00Z",
-      "start_timestamp": "2026-08-02T01:26:00Z"
+      "end_timestamp": "2026-08-03T01:55:00Z",
+      "start_timestamp": "2026-08-02T01:56:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-08-03T01:25:00Z",
-      "start_timestamp": "2026-07-29T01:26:00Z"
+      "end_timestamp": "2026-08-03T01:55:00Z",
+      "start_timestamp": "2026-07-29T01:56:00Z"
     }
   },
   "site": {
@@ -13101,7 +11623,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-08-03T01:48:58.662601Z",
+    "published_at": "2026-08-31T13:33:54.081980Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -13110,7 +11632,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.064
+      "value": 0.067
     },
     {
       "decimals": 3,
