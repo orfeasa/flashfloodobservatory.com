@@ -8428,7 +8428,15 @@
         },
         {
           "timestamp": "2026-09-02T07:30:00Z",
-          "value": 0.011145
+          "value": 0.011183
+        },
+        {
+          "timestamp": "2026-09-02T07:45:00Z",
+          "value": 0.011612
+        },
+        {
+          "timestamp": "2026-09-02T08:00:00Z",
+          "value": 0.011663
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -8501,7 +8509,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-09-02T08:03:58.812615Z"
+    "updated_at": "2026-09-02T08:18:58.086311Z"
   },
   "panels": {
     "depth": {
@@ -9108,6 +9116,14 @@
         {
           "timestamp": "2026-09-02T07:30:00Z",
           "value": 0.103
+        },
+        {
+          "timestamp": "2026-09-02T07:45:00Z",
+          "value": 0.104
+        },
+        {
+          "timestamp": "2026-09-02T08:00:00Z",
+          "value": 0.104
         }
       ],
       "title": "Observed Water Depth",
@@ -9721,16 +9737,16 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-09-02T07:39:00Z",
-    "start_timestamp": "2026-09-01T07:40:00Z"
+    "end_timestamp": "2026-09-02T08:09:00Z",
+    "start_timestamp": "2026-09-01T08:10:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-09-02T07:39:00Z",
-      "start_timestamp": "2026-09-01T07:40:00Z"
+      "end_timestamp": "2026-09-02T08:09:00Z",
+      "start_timestamp": "2026-09-01T08:10:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-09-02T07:39:00Z",
+      "end_timestamp": "2026-09-02T08:09:00Z",
       "start_timestamp": "2026-08-31T18:41:00Z"
     }
   },
@@ -9747,7 +9763,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-09-02T08:03:59.120536Z",
+    "published_at": "2026-09-02T08:18:58.613641Z",
     "state": "Online"
   },
   "summary_metrics": [
