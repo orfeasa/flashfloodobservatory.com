@@ -7965,16 +7965,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-09-02T05:30:00Z",
-          "value": 0.009749
-        },
-        {
-          "timestamp": "2026-09-02T05:45:00Z",
-          "value": 0.009598
-        },
-        {
           "timestamp": "2026-09-02T06:00:00Z",
-          "value": 0.009577
+          "value": 0.00962
         },
         {
           "timestamp": "2026-09-02T06:15:00Z",
@@ -9886,7 +9878,15 @@
         },
         {
           "timestamp": "2026-09-07T05:30:00Z",
-          "value": 0.009985
+          "value": 0.0102
+        },
+        {
+          "timestamp": "2026-09-07T05:45:00Z",
+          "value": 0.00962
+        },
+        {
+          "timestamp": "2026-09-07T06:00:00Z",
+          "value": 0.010286
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -9959,7 +9959,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-09-07T06:03:58.562279Z"
+    "updated_at": "2026-09-07T06:18:52.629720Z"
   },
   "panels": {
     "depth": {
@@ -9971,14 +9971,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-09-02T05:30:00Z",
-          "value": 0.098
-        },
-        {
-          "timestamp": "2026-09-02T05:45:00Z",
-          "value": 0.097
-        },
         {
           "timestamp": "2026-09-02T06:00:00Z",
           "value": 0.097
@@ -11893,7 +11885,15 @@
         },
         {
           "timestamp": "2026-09-07T05:30:00Z",
-          "value": 0.098
+          "value": 0.099
+        },
+        {
+          "timestamp": "2026-09-07T05:45:00Z",
+          "value": 0.097
+        },
+        {
+          "timestamp": "2026-09-07T06:00:00Z",
+          "value": 0.1
         }
       ],
       "title": "Observed Water Depth",
@@ -11908,16 +11908,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-09-07T05:30:00Z",
+      "last_updated": "2026-09-07T05:45:00Z",
       "points": [
-        {
-          "timestamp": "2026-09-02T05:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-09-02T06:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-09-02T06:15:00Z",
           "value": 0.0
@@ -13829,6 +13821,10 @@
         {
           "timestamp": "2026-09-07T05:30:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-09-07T05:45:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -13839,17 +13835,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-09-07T05:40:00Z",
-    "start_timestamp": "2026-09-06T05:41:00Z"
+    "end_timestamp": "2026-09-07T06:10:00Z",
+    "start_timestamp": "2026-09-06T06:11:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-09-07T05:40:00Z",
-      "start_timestamp": "2026-09-06T05:41:00Z"
+      "end_timestamp": "2026-09-07T06:10:00Z",
+      "start_timestamp": "2026-09-06T06:11:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-09-07T05:40:00Z",
-      "start_timestamp": "2026-09-02T05:41:00Z"
+      "end_timestamp": "2026-09-07T06:10:00Z",
+      "start_timestamp": "2026-09-02T06:11:00Z"
     }
   },
   "site": {
@@ -13865,7 +13861,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-09-07T06:03:58.885191Z",
+    "published_at": "2026-09-07T06:18:52.954129Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -13874,7 +13870,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.1
+      "value": 0.082
     },
     {
       "decimals": 3,
