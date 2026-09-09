@@ -8017,16 +8017,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-09-04T13:00:00Z",
-          "value": 0.010307
-        },
-        {
-          "timestamp": "2026-09-04T13:15:00Z",
-          "value": 0.010424
-        },
-        {
           "timestamp": "2026-09-04T13:30:00Z",
-          "value": 0.010551
+          "value": 0.010702
         },
         {
           "timestamp": "2026-09-04T13:45:00Z",
@@ -9939,6 +9931,14 @@
         {
           "timestamp": "2026-09-09T13:00:00Z",
           "value": 0.009383
+        },
+        {
+          "timestamp": "2026-09-09T13:15:00Z",
+          "value": 0.009491
+        },
+        {
+          "timestamp": "2026-09-09T13:30:00Z",
+          "value": 0.009362
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -10003,15 +10003,15 @@
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
-    "label": "There are no flood warnings or alerts.",
-    "message": "No Environment Agency flood warnings or alerts are currently active in Boscastle, Cornwall.",
+    "label": "Official Environment Agency flood alerts and warnings unavailable",
+    "message": "The Environment Agency flood warning feed could not be reached during this update.",
     "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
     "severity": null,
     "severity_level": null,
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
-    "state": "none",
-    "updated_at": "2026-09-09T13:34:39.564241Z"
+    "state": "unavailable",
+    "updated_at": "2026-09-09T13:49:54.061012Z"
   },
   "panels": {
     "depth": {
@@ -10023,14 +10023,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-09-04T13:00:00Z",
-          "value": 0.1
-        },
-        {
-          "timestamp": "2026-09-04T13:15:00Z",
-          "value": 0.1
-        },
         {
           "timestamp": "2026-09-04T13:30:00Z",
           "value": 0.101
@@ -11946,6 +11938,14 @@
         {
           "timestamp": "2026-09-09T13:00:00Z",
           "value": 0.096
+        },
+        {
+          "timestamp": "2026-09-09T13:15:00Z",
+          "value": 0.097
+        },
+        {
+          "timestamp": "2026-09-09T13:30:00Z",
+          "value": 0.096
         }
       ],
       "title": "Observed Water Depth",
@@ -11970,17 +11970,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-09-09T13:10:00Z",
-    "start_timestamp": "2026-09-08T13:11:00Z"
+    "end_timestamp": "2026-09-09T13:40:00Z",
+    "start_timestamp": "2026-09-08T13:41:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-09-09T13:10:00Z",
-      "start_timestamp": "2026-09-08T13:11:00Z"
+      "end_timestamp": "2026-09-09T13:40:00Z",
+      "start_timestamp": "2026-09-08T13:41:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-09-09T13:10:00Z",
-      "start_timestamp": "2026-09-04T13:11:00Z"
+      "end_timestamp": "2026-09-09T13:40:00Z",
+      "start_timestamp": "2026-09-04T13:41:00Z"
     }
   },
   "site": {
@@ -11996,7 +11996,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-09-09T13:34:39.890346Z",
+    "published_at": "2026-09-09T13:49:54.382328Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -12012,7 +12012,7 @@
       "label": "Maximum 24h River Level",
       "note": "Highest recorded water depth in the last 24 hours at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.128
+      "value": 0.12
     },
     {
       "decimals": 3,
@@ -12026,7 +12026,7 @@
       "label": "Current 24h River Level Range",
       "note": "Water depth range recorded in the last 24 hours (max to min) at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.042
+      "value": 0.034
     },
     {
       "decimals": 3,
