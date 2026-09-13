@@ -10115,7 +10115,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "unavailable",
-    "updated_at": "2026-09-13T10:19:49.512036Z"
+    "updated_at": "2026-09-13T10:34:49.680329Z"
   },
   "panels": {
     "depth": {
@@ -12100,7 +12100,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-09-13T10:19:49.837844Z",
+    "published_at": "2026-09-13T10:34:50.012173Z",
     "state": "Online"
   },
   "summary_metrics": [
