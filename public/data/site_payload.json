@@ -8147,14 +8147,6 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-09-09T09:00:00Z",
-          "value": 0.007858
-        },
-        {
-          "timestamp": "2026-09-09T09:15:00Z",
-          "value": 0.008373
-        },
-        {
           "timestamp": "2026-09-09T09:30:00Z",
           "value": 0.00833
         },
@@ -10069,6 +10061,14 @@
         {
           "timestamp": "2026-09-14T09:00:00Z",
           "value": 0.013395
+        },
+        {
+          "timestamp": "2026-09-14T09:15:00Z",
+          "value": 0.013336
+        },
+        {
+          "timestamp": "2026-09-14T09:30:00Z",
+          "value": 0.013512
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -10141,7 +10141,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "unavailable",
-    "updated_at": "2026-09-14T09:34:49.257197Z"
+    "updated_at": "2026-09-14T09:49:49.449236Z"
   },
   "panels": {
     "depth": {
@@ -10153,14 +10153,6 @@
       "empty_message": "Depth data will appear here once the public payload is published.",
       "eyebrow": "River Levels",
       "points": [
-        {
-          "timestamp": "2026-09-09T09:00:00Z",
-          "value": 0.09
-        },
-        {
-          "timestamp": "2026-09-09T09:15:00Z",
-          "value": 0.092
-        },
         {
           "timestamp": "2026-09-09T09:30:00Z",
           "value": 0.092
@@ -12076,6 +12068,14 @@
         {
           "timestamp": "2026-09-14T09:00:00Z",
           "value": 0.11
+        },
+        {
+          "timestamp": "2026-09-14T09:15:00Z",
+          "value": 0.11
+        },
+        {
+          "timestamp": "2026-09-14T09:30:00Z",
+          "value": 0.111
         }
       ],
       "title": "Observed Water Depth",
@@ -12100,17 +12100,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-09-14T09:10:00Z",
-    "start_timestamp": "2026-09-13T09:11:00Z"
+    "end_timestamp": "2026-09-14T09:40:00Z",
+    "start_timestamp": "2026-09-13T09:41:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-09-14T09:10:00Z",
-      "start_timestamp": "2026-09-13T09:11:00Z"
+      "end_timestamp": "2026-09-14T09:40:00Z",
+      "start_timestamp": "2026-09-13T09:41:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-09-14T09:10:00Z",
-      "start_timestamp": "2026-09-09T09:11:00Z"
+      "end_timestamp": "2026-09-14T09:40:00Z",
+      "start_timestamp": "2026-09-09T09:41:00Z"
     }
   },
   "site": {
@@ -12126,7 +12126,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-09-14T09:34:49.654932Z",
+    "published_at": "2026-09-14T09:49:49.771224Z",
     "state": "Online"
   },
   "summary_metrics": [
