@@ -8173,16 +8173,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-09-09T23:30:00Z",
-          "value": 0.003748
-        },
-        {
-          "timestamp": "2026-09-09T23:45:00Z",
-          "value": 0.003818
-        },
-        {
           "timestamp": "2026-09-10T00:00:00Z",
-          "value": 0.004004
+          "value": 0.004163
         },
         {
           "timestamp": "2026-09-10T00:15:00Z",
@@ -10094,7 +10086,15 @@
         },
         {
           "timestamp": "2026-09-14T23:30:00Z",
-          "value": 0.011259
+          "value": 0.011284
+        },
+        {
+          "timestamp": "2026-09-14T23:45:00Z",
+          "value": 0.011309
+        },
+        {
+          "timestamp": "2026-09-15T00:00:00Z",
+          "value": 0.01141
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -10167,7 +10167,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-09-15T00:04:07.027375Z"
+    "updated_at": "2026-09-15T00:18:49.796684Z"
   },
   "panels": {
     "depth": {
@@ -10180,16 +10180,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-09-09T23:30:00Z",
-          "value": 0.068
-        },
-        {
-          "timestamp": "2026-09-09T23:45:00Z",
-          "value": 0.068
-        },
-        {
           "timestamp": "2026-09-10T00:00:00Z",
-          "value": 0.07
+          "value": 0.071
         },
         {
           "timestamp": "2026-09-10T00:15:00Z",
@@ -12102,13 +12094,21 @@
         {
           "timestamp": "2026-09-14T23:30:00Z",
           "value": 0.103
+        },
+        {
+          "timestamp": "2026-09-14T23:45:00Z",
+          "value": 0.103
+        },
+        {
+          "timestamp": "2026-09-15T00:00:00Z",
+          "value": 0.104
         }
       ],
       "title": "Observed Water Depth",
       "y_axis_label": "Water Depth (m)"
     },
     "rainfall": {
-      "data_url": "https://environment.data.gov.uk/flood-monitoring/data/readings?parameter=rainfall&stationReference=49149&startdate=2026-09-09&enddate=2026-09-14&_sorted=",
+      "data_url": "https://environment.data.gov.uk/flood-monitoring/data/readings?parameter=rainfall&stationReference=49149&startdate=2026-09-10&enddate=2026-09-15&_sorted=",
       "description": "Rainfall measured every 15 minutes over the last 24 hours, plotted in millimetres (mm) on the left and Date & Time along the bottom at Environment Agency station 49149",
       "descriptions": {
         "24h": "Rainfall measured every 15 minutes over the last 24 hours, plotted in millimetres (mm) on the left and Date & Time along the bottom at Environment Agency station 49149",
@@ -12116,16 +12116,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-09-14T23:30:00Z",
+      "last_updated": "2026-09-15T00:00:00Z",
       "points": [
-        {
-          "timestamp": "2026-09-09T23:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-09-10T00:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-09-10T00:15:00Z",
           "value": 0.0
@@ -14029,6 +14021,14 @@
         {
           "timestamp": "2026-09-14T23:30:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-09-14T23:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-09-15T00:00:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -14039,17 +14039,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-09-14T23:40:00Z",
-    "start_timestamp": "2026-09-13T23:41:00Z"
+    "end_timestamp": "2026-09-15T00:10:00Z",
+    "start_timestamp": "2026-09-14T00:11:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-09-14T23:40:00Z",
-      "start_timestamp": "2026-09-13T23:41:00Z"
+      "end_timestamp": "2026-09-15T00:10:00Z",
+      "start_timestamp": "2026-09-14T00:11:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-09-14T23:40:00Z",
-      "start_timestamp": "2026-09-09T23:41:00Z"
+      "end_timestamp": "2026-09-15T00:10:00Z",
+      "start_timestamp": "2026-09-10T00:11:00Z"
     }
   },
   "site": {
@@ -14065,7 +14065,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-09-15T00:04:07.361518Z",
+    "published_at": "2026-09-15T00:18:50.119935Z",
     "state": "Online"
   },
   "summary_metrics": [
