@@ -8173,16 +8173,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-09-10T04:00:00Z",
-          "value": 0.005526
-        },
-        {
-          "timestamp": "2026-09-10T04:15:00Z",
-          "value": 0.005643
-        },
-        {
           "timestamp": "2026-09-10T04:30:00Z",
-          "value": 0.005716
+          "value": 0.00557
         },
         {
           "timestamp": "2026-09-10T04:45:00Z",
@@ -10094,7 +10086,15 @@
         },
         {
           "timestamp": "2026-09-15T04:00:00Z",
-          "value": 0.011966
+          "value": 0.011562
+        },
+        {
+          "timestamp": "2026-09-15T04:15:00Z",
+          "value": 0.009749
+        },
+        {
+          "timestamp": "2026-09-15T04:30:00Z",
+          "value": 0.009878
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -10167,7 +10167,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-09-15T04:34:05.083315Z"
+    "updated_at": "2026-09-15T04:48:58.783204Z"
   },
   "panels": {
     "depth": {
@@ -10180,16 +10180,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-09-10T04:00:00Z",
-          "value": 0.079
-        },
-        {
-          "timestamp": "2026-09-10T04:15:00Z",
-          "value": 0.079
-        },
-        {
           "timestamp": "2026-09-10T04:30:00Z",
-          "value": 0.08
+          "value": 0.079
         },
         {
           "timestamp": "2026-09-10T04:45:00Z",
@@ -12101,7 +12093,15 @@
         },
         {
           "timestamp": "2026-09-15T04:00:00Z",
-          "value": 0.105
+          "value": 0.104
+        },
+        {
+          "timestamp": "2026-09-15T04:15:00Z",
+          "value": 0.098
+        },
+        {
+          "timestamp": "2026-09-15T04:30:00Z",
+          "value": 0.098
         }
       ],
       "title": "Observed Water Depth",
@@ -12116,16 +12116,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-09-15T04:00:00Z",
+      "last_updated": "2026-09-15T04:30:00Z",
       "points": [
-        {
-          "timestamp": "2026-09-10T04:15:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-09-10T04:30:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-09-10T04:45:00Z",
           "value": 0.0
@@ -14025,6 +14017,14 @@
         {
           "timestamp": "2026-09-15T04:00:00Z",
           "value": 0.2
+        },
+        {
+          "timestamp": "2026-09-15T04:15:00Z",
+          "value": 1.0
+        },
+        {
+          "timestamp": "2026-09-15T04:30:00Z",
+          "value": 0.2
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -14035,17 +14035,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-09-15T04:10:00Z",
-    "start_timestamp": "2026-09-14T04:11:00Z"
+    "end_timestamp": "2026-09-15T04:40:00Z",
+    "start_timestamp": "2026-09-14T04:41:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-09-15T04:10:00Z",
-      "start_timestamp": "2026-09-14T04:11:00Z"
+      "end_timestamp": "2026-09-15T04:40:00Z",
+      "start_timestamp": "2026-09-14T04:41:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-09-15T04:10:00Z",
-      "start_timestamp": "2026-09-10T04:11:00Z"
+      "end_timestamp": "2026-09-15T04:40:00Z",
+      "start_timestamp": "2026-09-10T04:41:00Z"
     }
   },
   "site": {
@@ -14061,7 +14061,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-09-15T04:34:05.400961Z",
+    "published_at": "2026-09-15T04:48:59.097725Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -14070,7 +14070,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.088
+      "value": 0.097
     },
     {
       "decimals": 3,
