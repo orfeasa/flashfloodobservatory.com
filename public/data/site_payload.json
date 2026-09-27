@@ -8485,16 +8485,8 @@
       "mode": "flow_overlay",
       "points": [
         {
-          "timestamp": "2026-09-22T09:30:00Z",
-          "value": 0.012674
-        },
-        {
-          "timestamp": "2026-09-22T09:45:00Z",
-          "value": 0.012573
-        },
-        {
           "timestamp": "2026-09-22T10:00:00Z",
-          "value": 0.012017
+          "value": 0.011966
         },
         {
           "timestamp": "2026-09-22T10:15:00Z",
@@ -10407,6 +10399,14 @@
         {
           "timestamp": "2026-09-27T09:30:00Z",
           "value": 0.011663
+        },
+        {
+          "timestamp": "2026-09-27T09:45:00Z",
+          "value": 0.011562
+        },
+        {
+          "timestamp": "2026-09-27T10:00:00Z",
+          "value": 0.011562
         }
       ],
       "rainfall_y_axis_label": "Rainfall (mm)",
@@ -10479,7 +10479,7 @@
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
     "state": "none",
-    "updated_at": "2026-09-27T10:04:00.576709Z"
+    "updated_at": "2026-09-27T10:19:00.555509Z"
   },
   "panels": {
     "depth": {
@@ -10492,16 +10492,8 @@
       "eyebrow": "River Levels",
       "points": [
         {
-          "timestamp": "2026-09-22T09:30:00Z",
-          "value": 0.108
-        },
-        {
-          "timestamp": "2026-09-22T09:45:00Z",
-          "value": 0.108
-        },
-        {
           "timestamp": "2026-09-22T10:00:00Z",
-          "value": 0.106
+          "value": 0.105
         },
         {
           "timestamp": "2026-09-22T10:15:00Z",
@@ -12414,6 +12406,14 @@
         {
           "timestamp": "2026-09-27T09:30:00Z",
           "value": 0.104
+        },
+        {
+          "timestamp": "2026-09-27T09:45:00Z",
+          "value": 0.104
+        },
+        {
+          "timestamp": "2026-09-27T10:00:00Z",
+          "value": 0.104
         }
       ],
       "title": "Observed Water Depth",
@@ -12428,16 +12428,8 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-09-27T09:30:00Z",
+      "last_updated": "2026-09-27T10:00:00Z",
       "points": [
-        {
-          "timestamp": "2026-09-22T09:45:00Z",
-          "value": 0.0
-        },
-        {
-          "timestamp": "2026-09-22T10:00:00Z",
-          "value": 0.0
-        },
         {
           "timestamp": "2026-09-22T10:15:00Z",
           "value": 0.0
@@ -14341,6 +14333,14 @@
         {
           "timestamp": "2026-09-27T09:30:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-09-27T09:45:00Z",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-09-27T10:00:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -14351,17 +14351,17 @@
     }
   },
   "reporting_window": {
-    "end_timestamp": "2026-09-27T09:42:00Z",
-    "start_timestamp": "2026-09-26T09:43:00Z"
+    "end_timestamp": "2026-09-27T10:12:00Z",
+    "start_timestamp": "2026-09-26T10:13:00Z"
   },
   "reporting_windows": {
     "24h": {
-      "end_timestamp": "2026-09-27T09:42:00Z",
-      "start_timestamp": "2026-09-26T09:43:00Z"
+      "end_timestamp": "2026-09-27T10:12:00Z",
+      "start_timestamp": "2026-09-26T10:13:00Z"
     },
     "5d": {
-      "end_timestamp": "2026-09-27T09:42:00Z",
-      "start_timestamp": "2026-09-22T09:43:00Z"
+      "end_timestamp": "2026-09-27T10:12:00Z",
+      "start_timestamp": "2026-09-22T10:13:00Z"
     }
   },
   "site": {
@@ -14377,7 +14377,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-09-27T10:04:00.898087Z",
+    "published_at": "2026-09-27T10:19:00.885635Z",
     "state": "Online"
   },
   "summary_metrics": [
@@ -14386,7 +14386,7 @@
       "label": "Current River Level",
       "note": "Current water depth at the Flash Flood Observatory",
       "unit": "m",
-      "value": 0.105
+      "value": 0.104
     },
     {
       "decimals": 3,
