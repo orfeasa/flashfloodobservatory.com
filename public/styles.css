@@ -563,7 +563,7 @@ canvas {
 }
 
 .level-heatmap-cell--missing {
-  fill: rgba(157, 176, 190, 0.08);
+  fill: url(#level-heatmap-no-data);
 }
 
 .notes-grid {

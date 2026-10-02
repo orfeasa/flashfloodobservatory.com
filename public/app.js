@@ -728,19 +728,22 @@ function buildLevelHeatmapSvg(panel) {
   const rects = cells.map((cell) => {
     const x = gridX + Number(cell.week_index) * step;
     const y = gridY + Number(cell.weekday_index) * step;
-    const percentOfAverage = Number.isFinite(Number(cell.percent_of_average))
-      ? Number(cell.percent_of_average)
-      : (Number.isFinite(Number(cell.percent_difference_from_average)) ? Number(cell.percent_difference_from_average) + 100 : NaN);
-    const maxLevel = Number(cell.max_level_m);
-    const fallbackMeanLevel = Number(cell.mean_level_m);
+    const percent = heatmapNumber(cell.percent_of_average);
+    const percentDifference = heatmapNumber(cell.percent_difference_from_average);
+    const percentOfAverage = Number.isFinite(percent)
+      ? percent
+      : (Number.isFinite(percentDifference) ? percentDifference + 100 : NaN);
+    const maxLevel = heatmapNumber(cell.max_level_m);
+    const fallbackMeanLevel = heatmapNumber(cell.mean_level_m);
     const plottedLevel = Number.isFinite(maxLevel) ? maxLevel : fallbackMeanLevel;
     const plottedLabel = Number.isFinite(maxLevel) ? "Maximum level" : "Mean level";
-    const missingLabel = Number.isFinite(maxLevel) ? "No daily maximum available" : "No daily mean available";
-    const difference = Number(cell.difference_from_average_m);
-    const fill = Number.isFinite(percentOfAverage)
+    const missingLabel = "No data";
+    const difference = heatmapNumber(cell.difference_from_average_m);
+    const hasData = Number.isFinite(plottedLevel) && Number.isFinite(percentOfAverage);
+    const fill = hasData
       ? heatmapColor(percentOfAverage, { edges: legendEdges, colors: legendBandColors })
-      : "rgba(157, 176, 190, 0.08)";
-    const extraClass = Number.isFinite(percentOfAverage) ? "" : " level-heatmap-cell--missing";
+      : "url(#level-heatmap-no-data)";
+    const extraClass = hasData ? "" : " level-heatmap-cell--missing";
     const tooltip = [
       cell.date_label || cell.date || "",
       Number.isFinite(plottedLevel) ? `${plottedLabel}: ${plottedLevel.toFixed(3)} m` : missingLabel,
@@ -781,6 +784,12 @@ function buildLevelHeatmapSvg(panel) {
 
   return `
     <svg class="level-heatmap-svg" viewBox="0 0 ${svgWidth} ${svgHeight}" preserveAspectRatio="xMinYMin meet" style="min-width:${svgWidth}px" role="img" aria-label="${escapeHtml(panel.title || "River-level difference heatmap")}">
+      <defs>
+        <pattern id="level-heatmap-no-data" width="1" height="1" patternUnits="objectBoundingBox" viewBox="0 0 18 18">
+          <rect width="18" height="18" fill="#59636b"></rect>
+          <path d="M3 15L15 3" stroke="#c4ccd1" stroke-width="1.5"></path>
+        </pattern>
+      </defs>
       ${gridOutline}
       ${rects}
       ${yLabels}
@@ -788,8 +797,16 @@ function buildLevelHeatmapSvg(panel) {
       <text class="level-heatmap-axis-label" x="${gridX + gridWidth / 2}" y="${axisLabelY}" text-anchor="middle">${escapeHtml(xAxisLabel)}</text>
       ${legendBands}
       ${legendTicks}
+      <rect x="${legendX}" y="${monthLabelY - 14}" width="18" height="18" rx="3" fill="url(#level-heatmap-no-data)"></rect>
+      <text class="level-heatmap-axis" x="${legendX + 26}" y="${monthLabelY}">No data</text>
       <text class="level-heatmap-legend-title" x="${legendTitleX}" y="${legendTitleY}" text-anchor="middle" transform="rotate(90 ${legendTitleX} ${legendTitleY})">${escapeHtml(legend.label || "% of Average")}</text>
     </svg>`;
+}
+
+function heatmapNumber(value) {
+  return value === null || value === undefined || (typeof value === "string" && value.trim() === "")
+    ? NaN
+    : Number(value);
 }
 
 function selectHeatmapLegendLabelValues(edges) {
