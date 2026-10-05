@@ -7364,15 +7364,15 @@
     "count": 0,
     "disclaimer": "Official warning information relates to Environment Agency flood alerts and warnings.",
     "eyebrow": "Official Environment Agency Flood Alerts and Warnings",
-    "label": "Official Environment Agency flood alerts and warnings unavailable",
-    "message": "The Environment Agency flood warning feed could not be reached during this update.",
+    "label": "There are no flood warnings or alerts.",
+    "message": "No Environment Agency flood warnings or alerts are currently active in Boscastle, Cornwall.",
     "reference_url": "https://environment.data.gov.uk/flood-monitoring/doc/reference",
     "severity": null,
     "severity_level": null,
     "source_name": "Environment Agency / GOV.UK Check for flooding",
     "source_url": "https://check-for-flooding.service.gov.uk/location/boscastle-cornwall",
-    "state": "unavailable",
-    "updated_at": "2026-10-05T00:19:15.404216Z"
+    "state": "none",
+    "updated_at": "2026-10-05T00:33:55.362573Z"
   },
   "panels": {
     "depth": {
@@ -9321,7 +9321,7 @@
       },
       "empty_message": "Rainfall data is temporarily unavailable.",
       "eyebrow": "Rainfall",
-      "last_updated": "2026-10-04T23:45:00Z",
+      "last_updated": "2026-10-05T00:00:00Z",
       "points": [
         {
           "timestamp": "2026-09-30T00:15:00Z",
@@ -11226,6 +11226,10 @@
         {
           "timestamp": "2026-10-04T23:45:00Z",
           "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-05T00:00:00Z",
+          "value": 0.0
         }
       ],
       "source_name": "Environment Agency real-time rainfall data API",
@@ -11262,7 +11266,7 @@
   },
   "status": {
     "message": "Public dashboard feed online.",
-    "published_at": "2026-10-05T00:19:15.726112Z",
+    "published_at": "2026-10-05T00:33:55.693971Z",
     "state": "Online"
   },
   "summary_metrics": [
