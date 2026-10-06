@@ -748,3 +748,43 @@ canvas {
     min-height: 260px;
   }
 }
+
+/* Read-aloud controls stay beside each section, with room for touch and focus. */
+.read-aloud-section { position: relative; min-width: 0; padding-right: 3.5rem; }
+.read-aloud-button {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #9db0be;
+  border-radius: 8px;
+  background: #0b1822;
+  color: #f4f8fb;
+  cursor: pointer;
+}
+.read-aloud-button:hover, .read-aloud-button[aria-pressed="true"] {
+  color: #77e8ff;
+  border-color: #77e8ff;
+  background: #163040;
+}
+.read-aloud-button:focus-visible { outline: 2px solid #f7de5e; outline-offset: 3px; }
+.read-aloud-status {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: fit-content;
+  max-width: calc(100% - 2rem);
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  border: 1px solid #9db0be;
+  border-radius: 8px;
+  background: #0b1822;
+  color: #f4f8fb;
+}
+.read-aloud-status:empty { display: none; }

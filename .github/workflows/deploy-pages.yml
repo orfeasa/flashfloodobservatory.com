@@ -7,6 +7,9 @@ on:
     paths:
       - public/**
       - .github/workflows/deploy-pages.yml
+      - scripts/**
+      - package.json
+      - package-lock.json
   workflow_dispatch:
 
 permissions:
@@ -22,6 +25,43 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache British voice model
+        uses: actions/cache@v4
+        with:
+          path: .cache/voice
+          key: cori-medium-c10ece1aade47bb51c153c893d14e5bf8e5b7117
+
+      - name: Cache generated narration
+        uses: actions/cache@v4
+        with:
+          path: .cache/clips
+          key: narration-v1-${{ hashFiles('public/app.js', 'scripts/build_audio.py') }}-${{ github.run_id }}
+          restore-keys: |
+            narration-v1-${{ hashFiles('public/app.js', 'scripts/build_audio.py') }}-
+
+      - name: Generate British English narration
+        id: narration
+        # An audio service failure must never hold back fresh flood observations.
+        continue-on-error: true
+        timeout-minutes: 5
+        run: |
+          npm ci --ignore-scripts
+          npm test
+          python -m pip install -r scripts/requirements-audio.txt
+          npm run audio:build
+
+      - name: Report unavailable narration
+        if: steps.narration.outcome == 'failure'
+        run: echo "::warning::Narration build failed. Publishing current observations without audio."
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

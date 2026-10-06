@@ -44,6 +44,7 @@ async function main() {
     renderAnalysisPanels();
     renderNotes(payload.notes || []);
     renderFooter(payload.footer || {});
+    setupReadAloud();
   } catch (error) {
     console.error(error);
     applyErrorState(error);
@@ -426,7 +427,7 @@ function renderDepthChart(panel, reportingWindow) {
         },
       ],
     },
-    options: chartOptions(reportingWindow, panel.y_axis_label || "Depth"),
+    options: chartOptions(reportingWindow, panel.y_axis_label || "Depth", positiveAxisFloor(panel.minimum_axis_max) || 0.173),
   });
 }
 
@@ -484,7 +485,8 @@ function renderResponseChart(panel, rainfallPanel, reportingWindow) {
       reportingWindow,
       panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
       panel.y_axis_label || "Flow Rate",
-      hasRainfall
+      hasRainfall,
+      positiveAxisFloor(panel.minimum_axis_max)
     ),
   });
 }
@@ -702,7 +704,8 @@ function buildLevelHeatmapSvg(panel) {
   const legendBandColors = Array.isArray(legend.band_colors) && legend.band_colors.length === Math.max(legendEdges.length - 1, 0)
     ? legend.band_colors
     : defaultBandColors;
-  const maxWeekIndex = Math.max(...cells.map((cell) => Number(cell.week_index)));
+  // Reserve a full hydrological year even when only its first week has data.
+  const maxWeekIndex = Math.max(52, ...cells.map((cell) => Number(cell.week_index)));
   const cellSize = 18;
   const cellGap = 2;
   const step = cellSize + cellGap;
@@ -1058,7 +1061,7 @@ function formatIsoDateLabel(value) {
   return year && month && day ? `${day}/${month}/${year}` : String(value);
 }
 
-function responseChartOptions(reportingWindow, rainfallTitle, flowTitle, hasRainfall = true) {
+function responseChartOptions(reportingWindow, rainfallTitle, flowTitle, hasRainfall = true, minimumAxisMax = null) {
   const durationHours = (reportingWindow.end - reportingWindow.start) / (60 * 60 * 1000);
   const maxTicksLimit = durationHours > 30 ? 8 : 6;
 
@@ -1108,6 +1111,7 @@ function responseChartOptions(reportingWindow, rainfallTitle, flowTitle, hasRain
         },
       },
       yFlow: {
+        ...(minimumAxisMax !== null ? { suggestedMax: minimumAxisMax } : {}),
         type: "linear",
         position: hasRainfall ? "right" : "left",
         beginAtZero: true,
@@ -1464,6 +1468,126 @@ function formatDate(timestamp) {
     timeZone: displayTimeZone,
     timeZoneName: "short",
   }).format(date);
+}
+
+function positiveAxisFloor(value) {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0 ? number : null;
+}
+
+function readAloudText(section) {
+  const parts = [];
+  function visit(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      if (node.textContent.trim()) parts.push(node.textContent.trim());
+      return;
+    }
+    if (!(node instanceof Element) || node.hidden ||
+        node.matches('button, select, svg, canvas, script, [aria-hidden="true"]') ||
+        getComputedStyle(node).display === "none") return;
+    node.childNodes.forEach(visit);
+  }
+  visit(section);
+  const explanations = {
+    rainfallPanel: "The blue bars represent rainfall totals in millimetres.",
+    depthPanel: "The light blue line represents water depth in metres.",
+    responsePanel: "The light blue line represents calculated river flow in cubic metres per second. Blue bars, when available, represent rainfall in millimetres. The two measurements use separate vertical axes.",
+    historicalRangePanel: "Each plotted point represents one completed day. The horizontal axis shows its water depth range and the vertical axis shows its maximum water depth, both in metres.",
+    levelHeatmapPanel: "Each coloured square represents a completed day's maximum water depth as a percentage of the overall average since deployment, across all water years. Brown squares represent lower values, pale squares values around the average, and progressively blue and purple squares higher values. The top of the colour scale includes values above 450 percent of the average. A grey square with a diagonal line means no data. Blank space to the right is reserved for the rest of the water year.",
+  };
+  if (explanations[section.id]) parts.push(explanations[section.id]);
+  return parts.join(". ").replace(/m³\/s/g, "cubic metres per second")
+    .replace(/\bmm\b/g, "millimetres").replace(/\bm\b/g, "metres")
+    .replace(/%/g, " percent")
+    .replace(/⬜/g, "white square").replace(/🟦/g, "blue square")
+    .replace(/🟪/g, "purple square").replace(/🟫/g, "brown square")
+    .replace(/>/g, " greater than ").replace(/×/g, " times ")
+    .replace(/\s+/g, " ").trim();
+}
+
+// Bump when the voice, model or synthesis settings change; old audio must not match.
+var readAloudAudioVersion = "cori-medium-20261006-v1";
+
+async function readAloudAudioPath(content) {
+  const bytes = new TextEncoder().encode(readAloudAudioVersion + "\n" + content);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  const hash = [...new Uint8Array(digest)].map(value => value.toString(16).padStart(2, "0")).join("");
+  return `assets/audio/${hash}.mp3`;
+}
+
+function setupReadAloud() {
+  const status = document.getElementById("readAloudStatus");
+  const player = new Audio();
+  player.preload = "none";
+  player.hidden = true;
+  player.id = "readAloudPlayer";
+  document.body.append(player);
+  let activeButton = null;
+  let generation = 0;
+  function stop() {
+    generation += 1;
+    player.onended = null;
+    player.onerror = null;
+    player.pause();
+    player.removeAttribute("src");
+    player.load();
+    if (activeButton) {
+      activeButton.setAttribute("aria-pressed", "false");
+      activeButton.setAttribute("aria-label", activeButton.dataset.readLabel);
+      activeButton.title = activeButton.dataset.readLabel;
+    }
+    activeButton = null;
+    status.textContent = "";
+  }
+  document.querySelectorAll('.hero-copy, .summary-card, .panel-chart, .panel-heatmap, .note-panel, .official-alert, .footer-copy, .footer-contact').forEach((section) => {
+    const heading = [...section.querySelectorAll('h1, h2, .panel-subtitle, .footer-title')]
+      .find((item) => item.textContent.trim() && !item.hidden && getComputedStyle(item).display !== "none")
+      || section.querySelector(".panel-label");
+    const label = heading?.textContent.trim() || "this section";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "read-aloud-button";
+    button.dataset.readLabel = `Read aloud: ${label}`;
+    button.setAttribute("aria-label", button.dataset.readLabel);
+    button.setAttribute("aria-pressed", "false");
+    button.title = button.dataset.readLabel;
+    button.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h4l10-5v14L8 14H4zM8 14l2 6h3l-2-5M21 9v6"/></svg>';
+    section.classList.add("read-aloud-section");
+    section.prepend(button);
+    button.addEventListener("click", async () => {
+      const wasActive = activeButton === button;
+      stop();
+      if (wasActive) return;
+      activeButton = button;
+      button.setAttribute("aria-pressed", "true");
+      button.setAttribute("aria-label", `Stop reading: ${label}`);
+      button.title = `Stop reading: ${label}`;
+      status.textContent = `Loading British English audio for ${label}. Press again to stop.`;
+      const token = generation;
+      function failed() {
+        if (token !== generation) return;
+        stop();
+        status.textContent = "Audio could not be loaded. Please try again in a moment.";
+      }
+      try {
+        const source = await readAloudAudioPath(readAloudText(section));
+        if (token !== generation) return;
+        player.src = source;
+        player.onended = () => { if (token === generation) stop(); };
+        player.onerror = failed;
+        await player.play();
+        if (token === generation) {
+          status.textContent = `Reading ${label} in British English. Press the same megaphone to stop.`;
+        }
+      } catch (error) {
+        console.warn("Read-aloud playback failed:", error.name);
+        failed();
+      }
+    });
+  });
+  document.querySelector(".window-switcher")?.addEventListener("click", stop);
+  document.getElementById("heatmapPeriodSelect")?.addEventListener("change", stop);
+  window.addEventListener("pagehide", stop);
 }
 
 main();

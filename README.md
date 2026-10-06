@@ -295,3 +295,33 @@ Operationally, the Wales PC sidecar updates this repository by syncing the local
 Repository setting required:
 
 - GitHub Pages -> Build and deployment -> Source -> `GitHub Actions`
+
+## V1 display scale and read-aloud trial
+
+The optional `panels.depth.minimum_axis_max` is 0.173 metres, a fixed display reference for this trial. `analysis_panels.response.minimum_axis_max` is Q at that same depth, interpolated by the producer using the same local rating curve as the flow series. It is null when the curve is unavailable or does not cover that depth. These are minimum upper bounds, not clipping limits: axes start at zero and expand for larger observations. Older payloads retain the 0.173 m depth fallback; flow stays automatic until the updated producer exports its bound. No discharge is guessed in the browser.
+
+The scientific heatmap average is unchanged: total depth sum divided by total observation count across all completed-day aggregates since deployment. Each completed day's maximum is divided by that average for colouring, including after 1 October. The browser reserves 53 calendar-week columns for every year, preserving the prior full-year dimensions without filling future days with invented data.
+
+V1 megaphone controls play site-owned British-English MP3 narration of visible section text and plain-English chart/colour explanations. The website build generates these assets from the curated payload; no voice installation, speech API key or Windows-side speech dependency is required. Clicking again stops playback; selecting another section or changing the chart window/year cancels previous audio. V2 is unchanged.
+
+### Site-owned British narration
+
+The Pages build renders the trusted v1 HTML, CSS and JavaScript in JSDOM (without external resources), enumerates both time windows and every water year, then generates MP3s from `readAloudText`. The browser uses the same text function. Filenames hash the exact normalised text and voice version, so a recording for older readings cannot be selected for new readings. There is no second scientific data feed and no public speech service or model download.
+
+Voice: **Cori medium, English (Great Britain), female**, generated with Piper 1.3.0. The [voice model card](https://huggingface.co/rhasspy/piper-voices/blob/c10ece1aade47bb51c153c893d14e5bf8e5b7117/en/en_GB/cori/medium/MODEL_CARD) identifies public-domain LibriVox source recordings. The model is pinned to that revision; Piper is a GPL-3.0 build dependency, not shipped to visitors. LAME encodes the generated PCM as 64 kbps mono MP3. Generation runs locally or on the existing GitHub Actions runner, with no per-request speech API charge (normal Actions/storage usage still applies).
+
+For a local preview, from this repository:
+
+```sh
+npm ci --ignore-scripts
+python3.12 -m venv .cache/audio-venv
+.cache/audio-venv/bin/pip install -r scripts/requirements-audio.txt
+npm run audio:text
+.cache/audio-venv/bin/python scripts/build_audio.py
+npm test
+python3 -m http.server 8769 --bind 127.0.0.1 --directory public
+```
+
+Only `public/assets/audio/*.mp3` is served; models and synthesis dependencies remain under `.cache/`. Generated audio is ignored by Git and recreated for the Pages artifact. The build caches unchanged clips and the model separately, regenerates changed text, and copies only the current complete clip set into the public artifact. Bump `readAloudAudioVersion` in `public/app.js` and `VERSION` in `scripts/build_audio.py` together when synthesis changes.
+
+Audio generation has a five-minute limit and is optional to publishing: if it fails, the latest observations still deploy, with a CI warning and a clear playback-unavailable message. Never retain a stale scientific payload just to preserve audio. Browsers still need ordinary audio playback support and an internet connection to load clips. Audible voice quality should be reviewed using the local preview before publication.

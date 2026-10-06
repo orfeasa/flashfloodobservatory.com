@@ -1,0 +1,10 @@
+{
+  "name": "flash-flood-observatory-site",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "audio:text": "node scripts/collect-narration.cjs",
+    "audio:build": "node scripts/collect-narration.cjs && python scripts/build_audio.py"
+  },
+  "devDependencies": { "jsdom": "26.1.0" }
+}
