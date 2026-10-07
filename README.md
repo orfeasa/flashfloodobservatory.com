@@ -39,6 +39,21 @@ It is intentionally isolated:
 - no redirect or workflow change points public traffic at the prototype
 - the prototype can be reviewed and revised independently before any explicit production cutover
 
+### Professor review revision — 7 October 2026
+
+The `/v3/` review now combines the production dark palette (cyan location and water depth, blue rainfall, yellow uppercase category labels) with V2 section bands and compact typography. The production homepage remains unchanged.
+
+- Persistent section navigation and a separate observatory row identify Boscastle and two unconfirmed Cornwall locations. The latter are unavailable labels, not working data tabs; only Boscastle has a payload.
+- One main title, an optimized 480px WebP logo (about 29 KB versus the 1.4 MB source), update/timezone metadata and a continuous statistics strip form the first desktop view.
+- Both chart pairs use equal columns and stack at full width on narrow screens. Depth retains V1's 0.173 m minimum upper bound; flow retains its payload-provided minimum upper bound when supplied. Neither caps high events. Tooltips explicitly identify date/time, measurement, value and units.
+- The heatmap derives calendar positions from the supplied water-year dates. October 2025 and other absent completed days are grey with a diagonal mark. Future dates remain blank. The annual dimensions and month labels remain consistent. Phones use four consecutive blocks of up to fourteen weeks, retaining the complete year without horizontal scrolling. A yellow outline encloses the selected week; the scale and selected-day detail sit below the calendar.
+- Eight unboxed speaker controls cover introduction, the entire statistics strip, each of four graphs, heatmap, and all context columns. Narration expands units and 24h and removes repeated colour names. The existing British English audio build collects both homepage and V3 clips; day hover does not invalidate narration. Audio generation is still optional to publishing.
+- The context heading is “Why is this catchment being observed?” Official EA status remains separate, with green reserved for the no-alert state and distinct warning/unavailable states.
+
+Design choices for this review: use the existing recognizable blue logo with the cyan Boscastle location treatment. Do not invent location-specific identities before the two new locations are confirmed. Prefer a clear logo and text location over an additional UK map in the compact introduction; a map remains an optional follow-up, not a data or navigation dependency.
+
+Validation: `npm test` includes V3 calendar, selection, scale, tooltip and narration regressions. `npm run audio:text` prepares clips for both variants; `python scripts/build_audio.py` builds them with the dependencies in `scripts/requirements-audio.txt`. Preview from `public/` and open `/v3/`. This revision is not a production cutover.
+
 ## Current public behaviour
 
 The current site shell assumes:

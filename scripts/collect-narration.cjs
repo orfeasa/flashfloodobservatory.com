@@ -6,17 +6,21 @@ const crypto = require('node:crypto');
 const {JSDOM} = require('jsdom');
 const root = path.resolve(__dirname, '..');
 
-async function renderNarrationDocument(payload) {
+async function renderNarrationDocument(payload, variant = '') {
   const [html, css, app] = await Promise.all(['index.html', 'styles.css', 'app.js']
-    .map(file => fs.readFile(path.join(root, 'public', file), 'utf8')));
+    .map(file => fs.readFile(path.join(root, 'public', variant, file), 'utf8')));
   const dom = new JSDOM(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, ''), {
-    url: 'https://flashfloodobservatory.com/', runScripts: 'outside-only',
+    url: `https://flashfloodobservatory.com/${variant ? variant + '/' : ''}`, runScripts: 'outside-only',
   });
   const {window} = dom;
   const style = window.document.createElement('style');
   style.textContent = css;
   window.document.head.append(style);
   // Only our checked-in renderer runs. No external resources or networks load.
+  window.matchMedia = () => ({matches:false, addEventListener() {}, removeEventListener() {}});
+  window.requestAnimationFrame = callback => callback();
+  window.HTMLElement.prototype.scrollIntoView = () => {};
+  window.HTMLElement.prototype.scrollTo = () => {};
   window.Chart = class { destroy() {} };
   window.Audio = function () {
     const audio = window.document.createElement('audio');
@@ -38,8 +42,8 @@ async function renderNarrationDocument(payload) {
   return dom;
 }
 
-async function collectNarration(payload) {
-  const dom = await renderNarrationDocument(payload);
+async function collectNarration(payload, variant = '') {
+  const dom = await renderNarrationDocument(payload, variant);
   const {window} = dom;
   const requests = new Map();
   try {
@@ -72,7 +76,8 @@ async function collectNarration(payload) {
 if (require.main === module) {
   (async () => {
     const payload = JSON.parse(await fs.readFile(path.join(root, 'public/data/site_payload.json'), 'utf8'));
-    const requests = await collectNarration(payload);
+    const all = [...await collectNarration(payload), ...await collectNarration(payload, 'v3')];
+    const requests = [...new Map(all.map(item => [item.hash, item])).values()];
     await fs.mkdir(path.join(root, '.cache'), {recursive:true});
     await fs.writeFile(path.join(root, '.cache/narration.json'), JSON.stringify(requests, null, 2));
     console.log(`Collected ${requests.length} distinct narration clips, including every window and water year.`);

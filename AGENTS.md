@@ -41,3 +41,5 @@ Operational intent:
 - that same sidecar currently syncs a local website repo clone, updates `public/data/site_payload.json`, and pushes back to GitHub
 - the public website should consume only the curated payload and static assets
 - do not assume the operational Windows machine can auto-update files outside its checked-out sidecar repo
+
+- `public/v3/` is the professor-review revision combining V1 styling and V2 usability. Keep V1 and the original `public/v2/` intact for comparison. V3 reads the same curated payload and shares brand/audio assets; production promotion still requires explicit approval.
