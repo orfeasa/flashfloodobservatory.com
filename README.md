@@ -299,7 +299,7 @@ The optional `panels.depth.minimum_axis_max` is 0.173 metres, a fixed display re
 
 The scientific heatmap average is unchanged: total depth sum divided by total observation count across all completed-day aggregates since deployment. Each completed day's maximum is divided by that average for colouring, including after 1 October. The browser reserves 53 calendar-week columns for every year, preserving the prior full-year dimensions without filling future days with invented data.
 
-V1 megaphone controls play site-owned British-English MP3 narration of visible section text and plain-English chart/colour explanations. The website build generates these assets from the curated payload; no voice installation, speech API key or Windows-side speech dependency is required. Clicking again stops playback; selecting another section or changing the chart window/year cancels previous audio. V2 is unchanged.
+The grouped speaker controls play site-owned British-English MP3 narration of visible section text and plain-English chart/colour explanations. The website build generates these assets from the curated payload; no voice installation, speech API key or Windows-side speech dependency is required. Clicking again stops playback; selecting another section or changing the chart window/year cancels previous audio.
 
 ### Site-owned British narration
 
@@ -328,7 +328,7 @@ Audio generation has a five-minute limit and is optional to publishing: if it fa
 
 Summary and event-analysis labels now match Live observations in cyan capitals; the summary also has the requested larger heading. The heatmap starts with All weeks / No day selected. Selecting a week leaves the day unselected; selecting a day shows a compact table above the calendar. Hover uses the SVG title without changing persistent selection. Either selector can clear its selection, and changing years clears both. Year options show full date ranges. No-data cells use a per-cell bounding-box pattern with one diagonal matching the legend. Spacing is condensed, while the annual calendar still wraps into four blocks on phones. Rainfall boundaries use the normal grid colour and width.
 
-V3 now trials the British female Piper Alba medium voice at its default pace. `Flash` receives an explicit TRAP-vowel phoneme override during synthesis; visible text and narration hashes still use the correctly spelled word. The voice version is part of each narration request and cache key, so V1 continues using Cori with unchanged files. Both models are pinned to the existing source revision; credits and dataset licence are in `public/assets/audio-credits.txt`. Preference and naturalness still need human listening feedback. The build refuses unknown voice versions and regenerates only changed clips.
+The production dashboard uses the British female Piper Alba medium voice at its default pace. `Flash` receives an explicit TRAP-vowel phoneme override during synthesis; visible text and narration hashes still use the correctly spelled word. The voice version is part of each narration request and cache key, and only production narration is collected. The voice models are pinned to the existing source revision; credits and dataset licence are in `public/assets/audio-credits.txt`. Preference and naturalness still need human listening feedback. The build refuses unknown voice versions and regenerates only changed clips.
 
 ### Appearance and scatter controls
 
