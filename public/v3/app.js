@@ -760,12 +760,12 @@ function hydrologicalYearState(panel) {
 function renderHydrologicalYearControl(state, selectedYear) {
   const control = document.getElementById("heatmapPeriodControl");
   const select = document.getElementById("heatmapPeriodSelect");
-  const label = document.getElementById("heatmapPeriodLabel");
+
 
   control.hidden = !state.years.length;
   if (!state.years.length) {
     select.replaceChildren();
-    label.textContent = "";
+
     return;
   }
 
@@ -773,13 +773,14 @@ function renderHydrologicalYearControl(state, selectedYear) {
     ...state.years.map((year) => {
       const option = document.createElement("option");
       option.value = year.id;
-      option.textContent = year.label || year.id;
+      const date = value => new Date(`${value}T12:00:00Z`).toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
+      option.textContent = `${date(year.start_date)}–${date(year.end_date)}`;
       return option;
     })
   );
   select.value = selectedYear?.id || state.defaultId || "";
   select.disabled = state.years.length <= 1;
-  label.textContent = selectedYear?.period_label || "";
+
   select.onchange = () => {
     selectedHydrologicalYearId = select.value;
     selectedHeatmapWeekIndex = undefined;
@@ -792,125 +793,72 @@ function renderHydrologicalYearControl(state, selectedYear) {
 
 function setupHeatmapInteraction(panel) {
   const mount = document.getElementById("levelHeatmapMount");
-  const cells = Array.from(
-    mount.querySelectorAll(".level-heatmap-cell")
-  );
-  const panelCells = (panel.cells || [])
-    .filter((cell) => cell?.date && !cell.future)
-    .sort((a, b) => String(a.date).localeCompare(String(b.date)));
-  const cellsByDate = new Map(
-    panelCells.map((cell) => [String(cell.date), cell])
-  );
+  const cells = [...mount.querySelectorAll(".level-heatmap-cell")];
+  const days = (panel.cells || []).filter(day => day.date && !day.future);
+  const byDate = new Map(days.map(day => [day.date, day]));
+  const weeks = heatmapWeeks(days);
+  const weekSelect = document.getElementById("heatmapWeekSelect");
+  const daySelect = document.getElementById("heatmapDaySelect");
+  renderHeatmapWeekControl(weeks, panel);
+  document.getElementById("heatmapDayControl").hidden = !days.length;
+  if (!byDate.has(selectedHeatmapDate)) selectedHeatmapDate = undefined;
+  if (!weeks.some(week => week.index === selectedHeatmapWeekIndex)) selectedHeatmapWeekIndex = undefined;
 
-  if (!cells.length || !panelCells.length) {
-    renderHeatmapWeekControl([], panel);
-    document.getElementById("levelHeatmapDayDetail").hidden = true;
-    document.getElementById("heatmapDayControl").hidden = true;
-    return;
-  }
-
-  const weeks = heatmapWeeks(panelCells);
-  const availableDates = new Set(cellsByDate.keys());
-  if (!availableDates.has(selectedHeatmapDate)) {
-    selectedHeatmapDate =
-      [...panelCells]
-        .reverse()
-        .find((cell) => Number.isFinite(heatmapNumber(cell.max_level_m)))
-        ?.date || panelCells[panelCells.length - 1].date;
-  }
-  const selectedCell = cellsByDate.get(String(selectedHeatmapDate));
-  selectedHeatmapWeekIndex = Number(selectedCell.week_index);
-
-  document.getElementById("heatmapDaySelect").dataset.week = "";
-  renderHeatmapWeekControl(weeks, panel, cellsByDate);
-
-  const selectCell = (target, { focus = false, scroll = false } = {}) => {
-    const data = cellsByDate.get(String(target.dataset.date));
-    if (!data) {
-      return;
-    }
-
-    selectedHeatmapDate = data.date;
-    selectedHeatmapWeekIndex = Number(data.week_index);
-    cells.forEach((cell) => {
-      const isSelected = cell === target;
-      const isSelectedWeek =
-        Number(cell.dataset.weekIndex) === selectedHeatmapWeekIndex;
-      cell.classList.toggle("level-heatmap-cell--selected", isSelected);
-      cell.classList.toggle("level-heatmap-cell--week", isSelectedWeek);
-      cell.setAttribute("aria-pressed", String(isSelected));
-      cell.setAttribute("tabindex", isSelected ? "0" : "-1");
+  const update = () => {
+    weekSelect.value = selectedHeatmapWeekIndex === undefined ? "" : String(selectedHeatmapWeekIndex);
+    const options = days.filter(day => selectedHeatmapWeekIndex === undefined || Number(day.week_index) === selectedHeatmapWeekIndex);
+    daySelect.replaceChildren(new Option("No day selected", ""), ...options.map(day => new Option(day.date_label || day.date, day.date)));
+    daySelect.value = selectedHeatmapDate || "";
+    cells.forEach((cell, index) => {
+      const selected = cell.dataset.date === selectedHeatmapDate;
+      cell.classList.toggle("level-heatmap-cell--selected", selected);
+      cell.classList.toggle("level-heatmap-cell--week", Number(cell.dataset.weekIndex) === selectedHeatmapWeekIndex);
+      cell.setAttribute("aria-pressed", String(selected));
+      cell.setAttribute("tabindex", selected || (!selectedHeatmapDate && index === 0) ? "0" : "-1");
     });
-
     const outline = document.getElementById("heatmapWeekOutline");
-    outline.setAttribute("x", String(98 + selectedHeatmapWeekIndex * 20 - 3));
-    outline.removeAttribute("hidden");
+    if (selectedHeatmapWeekIndex === undefined) outline.setAttribute("hidden", "");
+    else {
+      outline.setAttribute("x", String(98 + selectedHeatmapWeekIndex * 20 - 3));
+      outline.removeAttribute("hidden");
+    }
     mount.updateWeekOutline?.();
-    const weekSelect = document.getElementById("heatmapWeekSelect");
-    weekSelect.value = String(selectedHeatmapWeekIndex);
-    const dayControl = document.getElementById("heatmapDayControl");
-    const daySelect = document.getElementById("heatmapDaySelect");
-    dayControl.hidden = false;
-    if (daySelect.dataset.week !== String(selectedHeatmapWeekIndex)) {
-      daySelect.replaceChildren(...panelCells.filter(day => Number(day.week_index) === selectedHeatmapWeekIndex).map(day => {
-        const option = document.createElement("option");
-        option.value = day.date;
-        option.textContent = `${new Date(`${day.date}T12:00:00Z`).toLocaleDateString("en-GB", {weekday:"short", timeZone:"UTC"})} ${day.date_label || day.date}`;
-        return option;
-      }));
-      daySelect.dataset.week = String(selectedHeatmapWeekIndex);
-    }
-    daySelect.value = data.date;
-    daySelect.onchange = () => {
-      const selected = cells.find(cell => cell.dataset.date === daySelect.value);
-      if (selected) selectCell(selected);
-    };
-    renderHeatmapDayDetail(data);
-    if (focus) {
-      target.focus({ preventScroll: true });
-    }
-    if (scroll) {
-      scrollHeatmapCellIntoView(target, mount);
-    }
+    const day = byDate.get(selectedHeatmapDate);
+    if (day) renderHeatmapDayDetail(day);
+    else document.getElementById("levelHeatmapDayDetail").hidden = true;
   };
-
+  const selectCell = cell => {
+    const day = byDate.get(cell.dataset.date);
+    if (!day) return;
+    selectedHeatmapDate = day.date;
+    selectedHeatmapWeekIndex = Number(day.week_index);
+    update();
+  };
+  weekSelect.onchange = () => {
+    selectedHeatmapWeekIndex = weekSelect.value === "" ? undefined : Number(weekSelect.value);
+    selectedHeatmapDate = undefined;
+    update();
+  };
+  daySelect.onchange = () => {
+    selectedHeatmapDate = daySelect.value || undefined;
+    if (selectedHeatmapDate) selectedHeatmapWeekIndex = Number(byDate.get(selectedHeatmapDate).week_index);
+    update();
+  };
   cells.forEach((cell, index) => {
-    cell.addEventListener("pointerenter", () => selectCell(cell));
-    cell.addEventListener("focus", () => selectCell(cell));
-    cell.addEventListener("click", () =>
-      selectCell(cell, { focus: true, scroll: true })
-    );
-    cell.addEventListener("keydown", (event) => {
+    // Native SVG titles retain hover readings without changing the selection.
+    cell.addEventListener("click", () => selectCell(cell));
+    cell.addEventListener("keydown", event => {
       if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        selectCell(cell, { focus: true, scroll: true });
-        return;
+        event.preventDefault(); selectCell(cell); return;
       }
-      const movement = {
-        ArrowLeft: -7,
-        ArrowRight: 7,
-        ArrowUp: -1,
-        ArrowDown: 1,
-        Home: -index,
-        End: cells.length - index - 1,
-      }[event.key];
-      if (!Number.isFinite(movement)) {
-        return;
-      }
+      const movement = {ArrowLeft:-7, ArrowRight:7, ArrowUp:-1, ArrowDown:1, Home:-index, End:cells.length-index-1}[event.key];
+      if (!Number.isFinite(movement)) return;
       event.preventDefault();
       const target = cells[index + movement];
-      if (target) {
-        selectCell(target, { focus: true, scroll: true });
-      }
+      if (target) { selectCell(target); target.focus({preventScroll:true}); }
     });
   });
-
-  const initial = cells.find(
-    (cell) => cell.dataset.date === String(selectedHeatmapDate)
-  );
-  if (initial) {
-    selectCell(initial, { scroll: true });
-  }
+  update();
 }
 
 function heatmapWeeks(cells) {
@@ -939,42 +887,13 @@ function compactWeekLabel(first, last) {
   return `${left}–${format(end)}`;
 }
 
-function renderHeatmapWeekControl(weeks, panel, cellsByDate = new Map()) {
-  const control = document.getElementById("heatmapWeekControl");
-  const select = document.getElementById("heatmapWeekSelect");
-  const label = document.getElementById("heatmapWeekLabel");
-
-  control.hidden = !weeks.length;
-  label.textContent = panel?.x_axis_label || "Week of Year";
-  select.replaceChildren(
-    ...weeks.map((week) => {
-      const option = document.createElement("option");
-      const first = week.days[0];
-      const last = week.days[week.days.length - 1];
-      option.value = String(week.index);
-      option.textContent = compactWeekLabel(first.date, last.date);
-      return option;
-    })
+function renderHeatmapWeekControl(weeks, panel) {
+  document.getElementById("heatmapWeekControl").hidden = !weeks.length;
+  document.getElementById("heatmapWeekLabel").textContent = panel?.x_axis_label || "Week of Year";
+  document.getElementById("heatmapWeekSelect").replaceChildren(
+    new Option("All weeks", ""),
+    ...weeks.map(week => new Option(compactWeekLabel(week.days[0].date, week.days.at(-1).date), String(week.index)))
   );
-  if (!weeks.length) {
-    return;
-  }
-
-  select.value = String(selectedHeatmapWeekIndex ?? weeks.at(-1).index);
-  select.onchange = () => {
-    const week = weeks.find(
-      (candidate) => String(candidate.index) === select.value
-    );
-    const day = week?.days[0];
-    const target = day
-      ? document.querySelector(
-          `.level-heatmap-cell[data-date="${cssEscape(day.date)}"]`
-        )
-      : null;
-    if (target && cellsByDate.has(String(day.date))) {
-      target.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    }
-  };
 }
 
 function renderHeatmapDayDetail(cell) {
@@ -1000,22 +919,17 @@ function renderHeatmapDayDetail(cell) {
         : "—",
     },
   ];
-  const date = document.createElement("p");
-  date.className = "heatmap-day-detail__date";
-  date.textContent = cell.date_label || cell.date || "";
-  const list = document.createElement("dl");
-  list.replaceChildren(
-    ...metrics.map((metric) => {
-      const item = document.createElement("div");
-      const term = document.createElement("dt");
-      const value = document.createElement("dd");
-      term.textContent = metric.label;
-      value.textContent = metric.value;
-      item.append(term, value);
-      return item;
-    })
-  );
-  detail.replaceChildren(date, list);
+  const table = document.createElement("table");
+  const caption = document.createElement("caption");
+  caption.textContent = `Selected day: ${cell.date_label || cell.date}`;
+  const body = document.createElement("tbody");
+  for (const metric of metrics) {
+    const row = document.createElement("tr"), label = document.createElement("th"), value = document.createElement("td");
+    label.scope = "row"; label.textContent = metric.label; value.textContent = metric.value;
+    row.append(label, value); body.append(row);
+  }
+  table.append(caption, body);
+  detail.replaceChildren(table);
   detail.hidden = false;
 }
 
@@ -1170,7 +1084,7 @@ function heatmapSvg(panel) {
 
   return `
     <svg class="level-heatmap-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMinYMin meet"  role="group" aria-label="${escapeHtml(panel.title || "River-level heatmap")}">
-      <defs><pattern id="heatmap-no-data" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="#68747d"/><path d="M0 18L18 0" stroke="#c0ccd5" stroke-width="1.5"/></pattern></defs>
+      <defs><pattern id="heatmap-no-data" width="1" height="1" patternContentUnits="objectBoundingBox"><rect width="1" height="1" fill="#68747d"/><path d="M0 1L1 0" stroke="#c0ccd5" stroke-width="0.0714286"/></pattern></defs>
       <rect id="heatmapWeekOutline" x="0" y="${gridY - 3}" width="${step + 4}" height="${gridHeight + 6}" rx="3" fill="none" stroke="#f7de5e" stroke-width="2" pointer-events="none" hidden></rect>
       <rect class="level-heatmap-grid-outline" x="${gridX - 1}" y="${gridY - 1}" width="${gridWidth + 2}" height="${gridHeight + 2}" fill="none"></rect>
       ${cellMarkup}
@@ -1352,9 +1266,14 @@ const observationFrame = {
   afterDraw(chart) {
     if (chart.canvas.id !== "rainfallChart") return;
     const {ctx, chartArea:{left,right,top,bottom}} = chart;
-    ctx.save(); ctx.strokeStyle = "#688392"; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(left,top); ctx.lineTo(left,bottom);
-    ctx.moveTo(right,top); ctx.lineTo(right,bottom); ctx.stroke(); ctx.restore();
+    ctx.save(); ctx.strokeStyle = chartPalette.grid; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (const edge of [left, right]) {
+      // Existing tick gridlines already supply boundaries in the 24-hour view.
+      if (chart.scales.x.ticks.some(tick => Math.abs(chart.scales.x.getPixelForValue(tick.value) - edge) < 1)) continue;
+      ctx.moveTo(edge, top); ctx.lineTo(edge, bottom);
+    }
+    ctx.stroke(); ctx.restore();
   },
 };
 
@@ -1371,6 +1290,7 @@ function standardChartOptions(reportingWindow, yTitle, suggestedMax = null) {
       x: timeScale(reportingWindow, durationHours > 30 ? 8 : 6),
       y: {
         afterFit(axis) { axis.width = 66; },
+        border: { display: false },
         beginAtZero: true,
         ...(Number.isFinite(suggestedMax) ? { suggestedMax } : {}),
         grid: { color: chartPalette.grid },
@@ -1788,6 +1708,7 @@ function readAloudText(section) {
     node.childNodes.forEach(visit);
   }
   visit(section);
+  if (section.id === "levelHeatmapPanel") parts.push(document.getElementById("heatmapPeriodSelect").selectedOptions[0]?.textContent || "");
   const explanations = {
     rainfallPanel: "The blue bars represent rainfall totals in millimetres.",
     depthPanel: "The light blue line represents water depth in metres.",
@@ -1807,7 +1728,7 @@ function readAloudText(section) {
 }
 
 // Bump when the voice, model or synthesis settings change; old audio must not match.
-var readAloudAudioVersion = "cori-medium-20261006-v1";
+var readAloudAudioVersion = "alba-medium-20261007-v2";
 
 async function readAloudAudioPath(content) {
   const bytes = new TextEncoder().encode(readAloudAudioVersion + "\n" + content);

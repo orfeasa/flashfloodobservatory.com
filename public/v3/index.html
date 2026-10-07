@@ -17,9 +17,9 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="styles.css?v=20261007c">
+    <link rel="stylesheet" href="styles.css?v=20261007e">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
-    <script src="app.js?v=20261007c" defer></script>
+    <script src="app.js?v=20261007e" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#mainContent">Skip to observations</a>
@@ -68,7 +68,7 @@
       </section>
 
       <section class="readings content-frame" id="readings" aria-label="River statistics">
-        <div class="summary-heading"><h2>River level summary</h2></div>
+        <div class="summary-heading"><div><p class="section-label">River level summary</p><h2>Levels and ranges at the observatory</h2></div></div>
         <div class="metric-ledger" aria-label="Key river figures" id="summaryStrip"></div>
       </section>
 
@@ -125,7 +125,7 @@
         <div class="content-frame">
           <div class="section-heading section-heading--analysis">
             <div>
-              <h2 id="analysisTitle">EVENT ANALYSIS</h2>
+              <h2 class="section-label" id="analysisTitle">EVENT ANALYSIS</h2>
             </div>
           </div>
 
@@ -174,7 +174,7 @@
                 <div class="heatmap-period-control" id="heatmapPeriodControl" hidden>
                   <label for="heatmapPeriodSelect">Hydrological year</label>
                   <select id="heatmapPeriodSelect"></select>
-                  <span id="heatmapPeriodLabel"></span>
+
                 </div>
                 <div class="heatmap-week-control" id="heatmapWeekControl" hidden>
                   <label for="heatmapWeekSelect" id="heatmapWeekLabel">Week of Year</label>
@@ -186,9 +186,10 @@
                 </div>
               </div>
             </div>
+            <div class="heatmap-day-detail" id="levelHeatmapDayDetail" aria-live="polite" aria-atomic="true" hidden></div>
             <div class="heatmap-frame">
               <div class="heatmap-mount" id="levelHeatmapMount" aria-label="Historical river-level heatmap"></div>
-              <div class="heatmap-day-detail" id="levelHeatmapDayDetail" aria-live="polite" aria-atomic="true" hidden></div>
+
               <div class="panel-empty" id="levelHeatmapEmpty" hidden></div>
             </div>
             <p class="panel-footer-copy" id="levelHeatmapFooterDescription"></p>

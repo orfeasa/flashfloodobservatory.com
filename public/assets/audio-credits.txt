@@ -1,0 +1,5 @@
+V3 read-aloud trial: Piper en_GB-alba-medium.
+Model: https://huggingface.co/rhasspy/piper-voices/tree/c10ece1aade47bb51c153c893d14e5bf8e5b7117/en/en_GB/alba/medium
+Training dataset: University of Edinburgh, https://datashare.ed.ac.uk/handle/10283/3270
+Dataset licence: Creative Commons Attribution 4.0, https://creativecommons.org/licenses/by/4.0/
+Generated narration includes an explicit pronunciation for Flash and runs at the model default speed.

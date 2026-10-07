@@ -65,7 +65,7 @@ async function collectNarration(payload, variant = '') {
           if (requests.has(hash) && requests.get(hash).text !== text) {
             throw new Error('Narration hash collision');
           }
-          requests.set(hash, {hash, text});
+          requests.set(hash, {hash, text, version: window.readAloudAudioVersion});
         }
       }
     }

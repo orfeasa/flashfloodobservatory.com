@@ -38,7 +38,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .cache/voice
-          key: cori-medium-c10ece1aade47bb51c153c893d14e5bf8e5b7117
+          key: cori-alba-medium-c10ece1aade47bb51c153c893d14e5bf8e5b7117
 
       - name: Cache generated narration
         uses: actions/cache@v4

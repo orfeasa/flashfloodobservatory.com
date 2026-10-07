@@ -36,6 +36,7 @@ test('v3 eight grouped speakers expand units, remove repeated colours and have g
  try {
   const w=dom.window;
   assert.equal(w.document.querySelectorAll('.read-aloud-button').length,8);
+  assert.equal(w.readAloudAudioVersion,'alba-medium-20261007-v2');
   const stats=w.readAloudText(w.document.getElementById('readings'));
   assert.ok(stats.includes('24 hours')); assert.ok(stats.includes('metres')); assert.doesNotMatch(stats,/\b24h\b/);
   const heat=w.readAloudText(w.document.getElementById('levelHeatmapPanel'));
@@ -43,7 +44,7 @@ test('v3 eight grouped speakers expand units, remove repeated colours and have g
   const context=w.readAloudText(w.document.getElementById('context'));
   assert.ok(context.includes('Why Boscastle')); assert.ok(context.includes('How it is observed')); assert.ok(context.includes('Impact'));
   const requests=await collectNarration(payload,'v3');
-  assert.ok(requests.some(r=>r.text.includes('last 5 days'))); assert.ok(requests.some(r=>r.text.includes('1 Oct 2025')));
+  assert.ok(requests.some(r=>r.text.includes('last 5 days'))); assert.ok(requests.some(r=>r.text.includes('1 October 2025')));
   w.document.querySelector('#depthPanel .read-aloud-button').click(); await new Promise(r=>setTimeout(r,30));
   assert.match(dom.audio.getAttribute('src'),/^\.\.\/assets\/audio\/[a-f0-9]{64}\.mp3$/);
   assert.ok(requests.some(r=>dom.audio.src.includes(r.hash)));
@@ -62,12 +63,12 @@ test('v3 day selector follows week/year changes without changing narration', asy
   const week=d.getElementById('heatmapWeekSelect'); week.value='0'; week.dispatchEvent(new w.Event('change'));
   const day=d.getElementById('heatmapDaySelect');
   const spoken=w.readAloudText(d.getElementById('levelHeatmapPanel'));
-  assert.equal(day.options.length,5);
+  assert.equal(day.options.length,6);
   day.value='2025-10-03'; day.dispatchEvent(new w.Event('change'));
   assert.match(d.getElementById('levelHeatmapDayDetail').textContent,/03\/10\/2025/);
   assert.equal(w.readAloudText(d.getElementById('levelHeatmapPanel')),spoken);
   year.value='2026-27'; year.dispatchEvent(new w.Event('change'));
-  assert.ok([...day.options].every(o=>o.value.startsWith('2026-')));
+  assert.ok([...day.options].every(o=>!o.value || o.value.startsWith('2026-')));
  } finally {dom.window.close();}
 });
 test('v3 six-hour ticks preserve real bounds and identical observation plot margins',async()=>{
@@ -100,5 +101,22 @@ test('v3 map follows confirmed site config and summary speaker belongs to its he
   w.renderLocatorMap({location:'Boscastle, UK'});assert.equal(d.getElementById('observatoryMap').hidden,false);
   assert.equal(d.getElementById('analysisTitle').textContent,'EVENT ANALYSIS');
   assert.equal(d.querySelectorAll('#responseEyebrow, #historicalRangeEyebrow').length,0);
+ }finally{dom.window.close();}
+});
+
+test('v3 heatmap starts clear and supports clearing day, week and year without hover selection',async()=>{
+ const dom=await renderNarrationDocument(payload,'v3');
+ try {
+  const w=dom.window,d=w.document,week=d.getElementById('heatmapWeekSelect'),day=d.getElementById('heatmapDaySelect'),detail=d.getElementById('levelHeatmapDayDetail');
+  assert.equal(week.value,'');assert.equal(day.value,'');assert.equal(detail.hidden,true);
+  assert.equal(d.getElementById('heatmapWeekOutline').hasAttribute('hidden'),true);
+  const cell=d.querySelector('.level-heatmap-cell');cell.dispatchEvent(new w.Event('pointerenter'));
+  assert.equal(day.value,'');assert.equal(detail.hidden,true);assert.ok(cell.querySelector('title').textContent);
+  cell.dispatchEvent(new w.Event('click'));assert.equal(detail.hidden,false);assert.ok(detail.querySelector('table caption'));
+  day.value='';day.dispatchEvent(new w.Event('change'));assert.equal(detail.hidden,true);assert.notEqual(week.value,'');
+  week.value='';week.dispatchEvent(new w.Event('change'));assert.equal(d.getElementById('heatmapWeekOutline').hasAttribute('hidden'),true);
+  assert.equal(d.querySelectorAll('.level-heatmap-cell--selected').length,0);
+  assert.match(d.getElementById('heatmapPeriodSelect').options[0].textContent,/1 October 2025–30 September 2026/);
+  assert.equal(d.querySelector('#heatmap-no-data').getAttribute('patternContentUnits'),'objectBoundingBox');
  }finally{dom.window.close();}
 });

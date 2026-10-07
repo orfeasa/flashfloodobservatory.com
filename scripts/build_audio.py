@@ -20,12 +20,12 @@ BASE = f"https://huggingface.co/rhasspy/piper-voices/resolve/{REVISION}/en/en_GB
 VERSION = "cori-medium-20261006-v1"
 
 
-def model_file(filename):
+def model_file(filename, base=BASE):
     destination = CACHE / "voice" / filename
     if not destination.exists():
         destination.parent.mkdir(parents=True, exist_ok=True)
         temporary = destination.with_suffix(destination.suffix + ".part")
-        with urllib.request.urlopen(f"{BASE}/{filename}", timeout=120) as source:
+        with urllib.request.urlopen(f"{base}/{filename}", timeout=120) as source:
             with temporary.open("wb") as target:
                 shutil.copyfileobj(source, target)
         temporary.replace(destination)
@@ -41,23 +41,32 @@ def build():
         raise ValueError("No narration requests; refusing an empty audio build")
     clip_cache = CACHE / "clips"
     clip_cache.mkdir(parents=True, exist_ok=True)
-    voice = None
+    voices = {}
     generated = 0
     for request in requests:
         key, text = request["hash"], request["text"]
-        expected = hashlib.sha256((VERSION + "\n" + text).encode()).hexdigest()
+        version = request.get("version", VERSION)
+        if version not in (VERSION, "alba-medium-20261007-v2"):
+            raise ValueError("Unknown narration voice version")
+        expected = hashlib.sha256((version + "\n" + text).encode()).hexdigest()
         if not re.fullmatch(r"[a-f0-9]{64}", key) or key != expected:
             raise ValueError("Audio version or text hash mismatch")
         target = clip_cache / f"{key}.mp3"
         if target.exists() and target.stat().st_size > 100:
             continue
-        if voice is None:
-            model_file(f"{VOICE}.onnx.json")
-            model = model_file(f"{VOICE}.onnx")
-            voice = PiperVoice.load(str(model))
+        alternate = version == "alba-medium-20261007-v2"
+        voice_name = "en_GB-alba-medium" if alternate else VOICE
+        base = BASE.replace("/cori/", "/alba/") if alternate else BASE
+        if voice_name not in voices:
+            model_file(f"{voice_name}.onnx.json", base)
+            model = model_file(f"{voice_name}.onnx", base)
+            voices[voice_name] = PiperVoice.load(str(model))
+        voice = voices[voice_name]
+        # Keep the full name together, with the TRAP vowel in Flash.
+        spoken = re.sub(r"\bFlash Flood Observatory\b", "[[flˈæʃ flˈʌd ɒbzˈɜːvətəɹɪ]]", text, flags=re.IGNORECASE) if alternate else text
         buffer = io.BytesIO()
         with wave.open(buffer, "wb") as wav:
-            voice.synthesize_wav(text, wav, syn_config=SynthesisConfig(length_scale=1.05))
+            voice.synthesize_wav(spoken, wav, syn_config=SynthesisConfig(length_scale=1.0 if alternate else 1.05))
         buffer.seek(0)
         with wave.open(buffer, "rb") as wav:
             if wav.getnframes() == 0 or wav.getsampwidth() != 2:
