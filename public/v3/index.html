@@ -10,6 +10,17 @@
       content="Public dashboard for the Flash Flood Observatory on the River Valency in Boscastle."
     >
     <title>Flash Flood Observatory — Boscastle, UK</title>
+    <script>
+      // Resolve before styles paint; unavailable storage must not block rendering.
+      (() => {
+        let preference = "system";
+        try { preference = localStorage.getItem("ffo-v3-theme") || "system"; } catch (_) {}
+        if (!["system", "light", "dark"].includes(preference)) preference = "system";
+        document.documentElement.dataset.themePreference = preference;
+        document.documentElement.dataset.theme = preference === "system"
+          ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : preference;
+      })();
+    </script>
     <link rel="icon" href="../assets/brand/site-mark-small.webp" type="image/webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,9 +28,9 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="styles.css?v=20261007e">
+    <link rel="stylesheet" href="styles.css?v=20261007f">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
-    <script src="app.js?v=20261007e" defer></script>
+    <script src="app.js?v=20261007f" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#mainContent">Skip to observations</a>
@@ -33,6 +44,11 @@
           <a href="#analysis">Analysis</a>
           <a href="#context">Context</a>
         </nav>
+        <label class="theme-control" for="themeSelect"><span>Theme</span>
+          <select id="themeSelect" aria-label="Colour theme">
+            <option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option>
+          </select>
+        </label>
       </div>
       <nav class="observatory-nav content-frame" aria-label="Observatories">
         <a href="#top" aria-current="page">Boscastle <span>River Valency</span></a>

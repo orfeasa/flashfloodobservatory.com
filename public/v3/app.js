@@ -25,7 +25,36 @@ let responseChart;
 let historicalRangeChart;
 let displayTimeZone = "UTC";
 
+const darkChartPalette = {...chartPalette};
+function setupTheme() {
+  const root = document.documentElement;
+  const select = document.getElementById("themeSelect");
+  const system = window.matchMedia("(prefers-color-scheme: dark)");
+  let preference = root.dataset.themePreference || "system";
+  if (!["system", "light", "dark"].includes(preference)) preference = "system";
+  function apply() {
+    const theme = preference === "system" ? (system.matches ? "dark" : "light") : preference;
+    root.dataset.theme = theme;
+    root.dataset.themePreference = preference;
+    select.value = preference;
+    document.querySelector('meta[name="theme-color"]').content = theme === "light" ? "#f2f6f8" : "#070e16";
+    Object.assign(chartPalette, theme === "light" ? {
+      river:"#087c96", riverFill:"rgba(8,124,150,0.20)", rain:"#2457a7", rainFill:"rgba(36,87,167,0.72)",
+      moss:"#217744", ink:"#172f40", muted:"#4c6475", grid:"rgba(53,83,104,0.18)", paper:"#ffffff"
+    } : darkChartPalette);
+    if (dashboardPayload) { renderDashboardPanels(); renderAnalysisPanels(); }
+  }
+  select.onchange = () => {
+    preference = select.value;
+    try { if (preference === "system") localStorage.removeItem("ffo-v3-theme"); else localStorage.setItem("ffo-v3-theme", preference); } catch (_) {}
+    apply();
+  };
+  system.addEventListener("change", () => { if (preference === "system") apply(); });
+  apply();
+}
+
 async function main() {
+  setupTheme();
   try {
     const response = await fetch(payloadPath, { cache: "no-store" });
     if (!response.ok) {

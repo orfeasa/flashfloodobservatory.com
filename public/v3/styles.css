@@ -1509,3 +1509,55 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
 @media (max-width: 24rem) {
   #heatmapPeriodSelect { font-size: .75rem; font-weight: 500; }
 }
+
+/* Theme roles: preserve dark identity; use cool paper and deep teal in daylight. */
+:root { --header-surface: #070e16; --selected-surface: #103340; --category: #f7de5e; }
+:root[data-theme="light"] {
+  color-scheme: light;
+  --canvas: #f2f6f8; --canvas-deep: #e9f0f4; --surface: #ffffff;
+  --navy: #172f40; --navy-soft: #e9f0f4; --navy-pale: #e4eef3;
+  --ink: #172f40; --ink-soft: #344f61; --muted: #4c6475;
+  --line: #c7d5de; --line-strong: #728c9e;
+  --cyan: #086e85; --cobalt-dark: #086e85; --cobalt: #2457a7;
+  --rain: #2457a7; --river: #087c96; --history: #806000; --event: #806000;
+  --category: #806000; --focus: #806000; --header-surface: #f2f6f8; --selected-surface: #dceef2;
+  --success: #196638; --success-pale: #e7f3e9;
+  --warning: #785900; --warning-pale: #fff2ce;
+  --danger: #a52f29; --danger-pale: #fbe9e7;
+}
+.site-header { background: var(--header-surface); }
+* { scrollbar-color: var(--line-strong) var(--canvas-deep); }
+::selection { color: var(--canvas); background: var(--cyan); }
+.summary-card--current, .window-button[aria-pressed="true"] { background: var(--selected-surface); }
+.summary-card .section-label, .panel-signal { color: var(--category); }
+.theme-control { display: flex; align-items: center; gap: .5rem; color: var(--muted); font-size: .85rem; }
+.theme-control select { min-height: 44px; padding: .4rem .6rem; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-control); }
+:root[data-theme="light"] .section-nav a { color: var(--ink-soft); }
+:root[data-theme="light"] .section-nav a:hover { color: var(--cyan); background: var(--selected-surface); }
+:root[data-theme="light"] .summary-card--current .summary-note,
+:root[data-theme="light"] .footer-contact-value,
+:root[data-theme="light"] .footer-note { color: var(--muted); }
+:root[data-theme="light"] .context-chip { color: var(--cyan); background: var(--selected-surface); }
+:root[data-theme="light"] #mapMarker circle { fill: var(--cyan); stroke: var(--surface); }
+:root[data-theme="light"] #mapMarker path { stroke: var(--cyan); }
+:root[data-theme="light"] #mapLabel { fill: var(--cyan); }
+:root[data-theme="light"] .heatmap-frame { background: #e4ecf1; }
+:root[data-theme="light"] #heatmapWeekOutline { stroke: #9a7300; }
+:root[data-theme="light"] .level-heatmap-cell--selected,
+:root[data-theme="light"] .level-heatmap-cell:hover,
+:root[data-theme="light"] .level-heatmap-cell:focus { stroke: #9a7300; }
+@media (min-width: 62rem) {
+  .masthead { grid-template-columns: minmax(0,1fr) auto auto; column-gap: 1.25rem; }
+}
+@media (max-width: 61.999rem) {
+  .masthead { grid-template-columns: minmax(0,1fr) auto; column-gap: .5rem; }
+  .identity { grid-column: 1; }
+  .theme-control { grid-column: 2; grid-row: 1; }
+  .theme-control > span { display: none; }
+  .section-nav { grid-column: 1 / -1; }
+}
+:root[data-theme="light"] .site-footer { background: var(--canvas-deep); }
+:root[data-theme="light"] .footer-main p,
+:root[data-theme="light"] .footer-contact-label { color: var(--muted); }
+:root[data-theme="light"] .footer-contact .control-label { color: var(--cyan); }
+:root[data-theme="light"] #mapLabel { paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
