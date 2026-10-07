@@ -49,3 +49,24 @@ test('v3 eight grouped speakers expand units, remove repeated colours and have g
   assert.ok(requests.some(r=>dom.audio.src.includes(r.hash)));
  } finally {dom.window.close();}
 });
+test('v3 day selector follows week/year changes without changing narration', async()=>{
+ const dom=await renderNarrationDocument(payload,'v3');
+ try {
+  const w=dom.window, d=w.document;
+  w.matchMedia = () => ({matches:true, addEventListener(){}, removeEventListener(){}});
+  w.layoutHeatmap(d.getElementById('levelHeatmapMount'));
+  assert.equal(d.querySelectorAll('.level-heatmap-axis').length,28);
+  assert.equal(w.compactWeekLabel('2025-12-29','2026-01-04'),'29 Dec–4 Jan 2026');
+  const year=d.getElementById('heatmapPeriodSelect');
+  year.value='2025-26'; year.dispatchEvent(new w.Event('change'));
+  const week=d.getElementById('heatmapWeekSelect'); week.value='0'; week.dispatchEvent(new w.Event('change'));
+  const day=d.getElementById('heatmapDaySelect');
+  const spoken=w.readAloudText(d.getElementById('levelHeatmapPanel'));
+  assert.equal(day.options.length,5);
+  day.value='2025-10-03'; day.dispatchEvent(new w.Event('change'));
+  assert.match(d.getElementById('levelHeatmapDayDetail').textContent,/03\/10\/2025/);
+  assert.equal(w.readAloudText(d.getElementById('levelHeatmapPanel')),spoken);
+  year.value='2026-27'; year.dispatchEvent(new w.Event('change'));
+  assert.ok([...day.options].every(o=>o.value.startsWith('2026-')));
+ } finally {dom.window.close();}
+});

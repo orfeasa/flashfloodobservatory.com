@@ -52,6 +52,8 @@ The `/v3/` review now combines the production dark palette (cyan location and wa
 
 Design choices for this review: use the existing recognizable blue logo with the cyan Boscastle location treatment. Do not invent location-specific identities before the two new locations are confirmed. Prefer a clear logo and text location over an additional UK map in the compact introduction; a map remains an optional follow-up, not a data or navigation dependency.
 
+Mobile inspection fixes: controls and partner logos are constrained to their containers, statistics keep values and units together, calendar weekday labels use readable abbreviations, and the colour scale uses responsive HTML instead of shrinking SVG text. A day selector complements the week selector for touch access.
+
 Validation: `npm test` includes V3 calendar, selection, scale, tooltip and narration regressions. `npm run audio:text` prepares clips for both variants; `python scripts/build_audio.py` builds them with the dependencies in `scripts/requirements-audio.txt`. Preview from `public/` and open `/v3/`. This revision is not a production cutover.
 
 ## Current public behaviour

@@ -661,6 +661,7 @@ function renderLevelHeatmap(panel) {
     mount.hidden = true;
     renderHeatmapWeekControl([], selectedPanel);
     document.getElementById("levelHeatmapDayDetail").hidden = true;
+    document.getElementById("heatmapDayControl").hidden = true;
     empty.hidden = false;
     empty.textContent =
       panel.empty_message ||
@@ -776,6 +777,7 @@ function setupHeatmapInteraction(panel) {
   if (!cells.length || !panelCells.length) {
     renderHeatmapWeekControl([], panel);
     document.getElementById("levelHeatmapDayDetail").hidden = true;
+    document.getElementById("heatmapDayControl").hidden = true;
     return;
   }
 
@@ -791,6 +793,7 @@ function setupHeatmapInteraction(panel) {
   const selectedCell = cellsByDate.get(String(selectedHeatmapDate));
   selectedHeatmapWeekIndex = Number(selectedCell.week_index);
 
+  document.getElementById("heatmapDaySelect").dataset.week = "";
   renderHeatmapWeekControl(weeks, panel, cellsByDate);
 
   const selectCell = (target, { focus = false, scroll = false } = {}) => {
@@ -817,6 +820,23 @@ function setupHeatmapInteraction(panel) {
     mount.updateWeekOutline?.();
     const weekSelect = document.getElementById("heatmapWeekSelect");
     weekSelect.value = String(selectedHeatmapWeekIndex);
+    const dayControl = document.getElementById("heatmapDayControl");
+    const daySelect = document.getElementById("heatmapDaySelect");
+    dayControl.hidden = false;
+    if (daySelect.dataset.week !== String(selectedHeatmapWeekIndex)) {
+      daySelect.replaceChildren(...panelCells.filter(day => Number(day.week_index) === selectedHeatmapWeekIndex).map(day => {
+        const option = document.createElement("option");
+        option.value = day.date;
+        option.textContent = `${new Date(`${day.date}T12:00:00Z`).toLocaleDateString("en-GB", {weekday:"short", timeZone:"UTC"})} ${day.date_label || day.date}`;
+        return option;
+      }));
+      daySelect.dataset.week = String(selectedHeatmapWeekIndex);
+    }
+    daySelect.value = data.date;
+    daySelect.onchange = () => {
+      const selected = cells.find(cell => cell.dataset.date === daySelect.value);
+      if (selected) selectCell(selected);
+    };
     renderHeatmapDayDetail(data);
     if (focus) {
       target.focus({ preventScroll: true });
@@ -883,6 +903,14 @@ function heatmapWeeks(cells) {
   })).sort((a, b) => a.index - b.index);
 }
 
+function compactWeekLabel(first, last) {
+  const start = new Date(`${first}T12:00:00Z`), end = new Date(`${last}T12:00:00Z`);
+  const format = date => date.toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric", timeZone:"UTC"});
+  if (first === last) return format(start);
+  const left = start.getUTCMonth() === end.getUTCMonth() ? start.getUTCDate() : start.toLocaleDateString("en-GB", {day:"numeric", month:"short", timeZone:"UTC"});
+  return `${left}–${format(end)}`;
+}
+
 function renderHeatmapWeekControl(weeks, panel, cellsByDate = new Map()) {
   const control = document.getElementById("heatmapWeekControl");
   const select = document.getElementById("heatmapWeekSelect");
@@ -896,10 +924,7 @@ function renderHeatmapWeekControl(weeks, panel, cellsByDate = new Map()) {
       const first = week.days[0];
       const last = week.days[week.days.length - 1];
       option.value = String(week.index);
-      option.textContent =
-        first === last
-          ? first.date_label || first.date
-          : `${first.date_label || first.date}–${last.date_label || last.date}`;
+      option.textContent = compactWeekLabel(first.date, last.date);
       return option;
     })
   );
@@ -1111,24 +1136,9 @@ function heatmapSvg(panel) {
     })
     .join("");
 
-  const bands = colors
-    .map((color, index) => {
-      const x = legendX + index * legendBandWidth;
-      return `<rect class="level-heatmap-legend-band" x="${x}" y="${legendY}" width="${legendBandWidth}" height="${legendBandHeight}" fill="${color}"></rect>`;
-    })
-    .join("");
-
-  const preferred = [30, 90, 150, 210, 270, 330, 390, 450];
-  const labels = preferred
-    .filter((value) => edges.includes(value))
-    .map((value) => {
-      const index = edges.indexOf(value);
-      const x = legendX + index * legendBandWidth;
-      const label =
-        value === edges[edges.length - 1] ? `>${value}` : String(value);
-      return `<g><line class="level-heatmap-grid-outline" x1="${x}" y1="${legendY + legendBandHeight + 4}" x2="${x}" y2="${legendY + legendBandHeight + 10}"></line><text class="level-heatmap-tick" x="${x}" y="${legendTickY}" text-anchor="middle">${label}</text></g>`;
-    })
-    .join("");
+  const bands = colors.map(color => `<span style="background:${escapeHtml(color)}"></span>`).join("");
+  const labels = [30, 90, 150, 210, 270, 330, 390, 450].filter(value => edges.includes(value))
+    .map(value => `<span>${value === edges.at(-1) ? ">" : ""}${value}</span>`).join("");
 
   return `
     <svg class="level-heatmap-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMinYMin meet"  role="group" aria-label="${escapeHtml(panel.title || "River-level heatmap")}">
@@ -1140,12 +1150,12 @@ function heatmapSvg(panel) {
       ${monthMarkup}
       <text class="level-heatmap-axis-label" x="${gridX + gridWidth / 2}" y="${axisY}" text-anchor="middle">${escapeHtml(panel.x_axis_label || "Week of year")}</text>
     </svg>
-    <svg class="heatmap-legend" viewBox="70 215 750 95" role="img" aria-label="Colour scale: percentage of observatory average; grey with a diagonal line means no data">
-      <text class="level-heatmap-legend-title" x="${legendX}" y="${legendTitleY}">${escapeHtml(legend.label || "% of average")}</text>
-      ${bands}
-      ${labels}
-      <rect x="98" y="287" width="14" height="14" fill="#68747d"/><path d="M98 301L112 287" stroke="#c0ccd5"/><text class="level-heatmap-tick" x="120" y="298">No data</text>
-    </svg>`;
+    <div class="heatmap-legend" aria-label="Colour scale: percentage of observatory average">
+      <p>${escapeHtml(legend.label || "% of average")}</p>
+      <div class="heatmap-legend-bands" aria-hidden="true">${bands}</div>
+      <div class="heatmap-legend-labels">${labels}</div>
+      <p class="heatmap-legend-missing"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect width="14" height="14" fill="#68747d"/><path d="M0 14L14 0" stroke="#c0ccd5"/></svg>No data</p>
+    </div>`;
 }
 
 function layoutHeatmap(mount) {
@@ -1153,22 +1163,27 @@ function layoutHeatmap(mount) {
   const responsive = window.matchMedia("(max-width: 639px)");
   function layout() {
     const mobile = responsive.matches;
-    svg.setAttribute("viewBox", mobile ? "0 0 390 730" : "0 0 1180 210");
+    svg.setAttribute("viewBox", mobile ? "0 0 350 730" : "0 0 1180 210");
     svg.classList.toggle("level-heatmap-svg--mobile", mobile);
     svg.querySelectorAll(".level-heatmap-cell").forEach(cell => {
       const week = Number(cell.dataset.weekIndex), day = Number(cell.dataset.weekdayIndex);
-      cell.setAttribute("x", 98 + (mobile ? week % 14 : week) * 20);
+      cell.setAttribute("x", (mobile ? 62 : 98) + (mobile ? week % 14 : week) * 20);
       cell.setAttribute("y", 14 + day * 20 + (mobile ? Math.floor(week / 14) * 180 : 0));
     });
     svg.querySelectorAll(".level-heatmap-month").forEach(label => {
       const original = Number(label.dataset.originalX || label.getAttribute("x"));
       label.dataset.originalX = original;
       const week = Math.round((original - 107) / 20);
-      label.setAttribute("x", mobile ? 107 + (week % 14) * 20 : original);
+      label.setAttribute("x", mobile ? 71 + (week % 14) * 20 : original);
       label.setAttribute("y", mobile ? 178 + Math.floor(week / 14) * 180 : 178);
     });
     svg.querySelectorAll(".mobile-weekday").forEach(node => node.remove());
-    if (mobile) for (let block=1; block<4; block++) svg.querySelectorAll(".level-heatmap-axis").forEach(label => {
+    svg.querySelectorAll(".level-heatmap-axis").forEach(label => {
+      label.dataset.fullLabel ||= label.textContent;
+      label.textContent = mobile ? label.dataset.fullLabel.slice(0, 3) : label.dataset.fullLabel;
+      label.setAttribute("x", mobile ? 52 : 84);
+    });
+    if (mobile) for (let block=1; block<4; block++) svg.querySelectorAll(".level-heatmap-axis:not(.mobile-weekday)").forEach(label => {
       const clone = label.cloneNode(true); clone.classList.add("mobile-weekday");
       clone.setAttribute("y", Number(label.getAttribute("y")) + block * 180); svg.append(clone);
     });
@@ -1177,7 +1192,7 @@ function layoutHeatmap(mount) {
   function updateWeekOutline() {
     const outline = svg.querySelector("#heatmapWeekOutline");
     const week = Number(selectedHeatmapWeekIndex) || 0;
-    outline.setAttribute("x", 95 + (responsive.matches ? week % 14 : week) * 20);
+    outline.setAttribute("x", (responsive.matches ? 59 : 95) + (responsive.matches ? week % 14 : week) * 20);
     outline.setAttribute("y", 11 + (responsive.matches ? Math.floor(week / 14) * 180 : 0));
   }
   mount.updateWeekOutline = updateWeekOutline;
@@ -1714,7 +1729,7 @@ function readAloudText(section) {
       return;
     }
     if (!(node instanceof Element) || node.hidden ||
-        node.matches('button, select, svg, canvas, script, #levelHeatmapDayDetail, [aria-hidden="true"]') ||
+        node.matches('button, select, svg, canvas, script, #levelHeatmapDayDetail, #heatmapDayControl, .heatmap-legend, [aria-hidden="true"]') ||
         getComputedStyle(node).display === "none") return;
     node.childNodes.forEach(visit);
   }

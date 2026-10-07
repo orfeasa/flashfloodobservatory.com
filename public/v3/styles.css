@@ -1351,3 +1351,43 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
   .summary-card:nth-child(2n) { border-right: 1px solid var(--line); }
   .summary-card:nth-child(3), .summary-card:nth-child(5) { border-right: 0; }
 }
+
+/* Mobile inspection: constrain intrinsic widths instead of clipping content. */
+.briefing__grid > *, .section-heading > *, .footer-main > *, .heatmap-copy > *,
+.heatmap-controls > *, .official-alert > *, .partner-strip > * { min-width: 0; }
+.heatmap-controls { align-items: end; }
+.heatmap-controls > div { flex: 1 1 13rem; max-width: 100%; }
+.heatmap-controls select { width: 100%; min-width: 0; max-width: 100%; font-size: 1rem; }
+.heatmap-day-control { display: grid; gap: .5rem; }
+.heatmap-day-control label { color: var(--ink); font-size: var(--text-xs); font-weight: 700; }
+.heatmap-day-control select { min-height: 2.75rem; padding: .55rem .75rem; border: 1px solid var(--line-strong); border-radius: var(--radius-control); color: var(--ink); background: var(--surface); }
+.partner-strip img { width: auto; max-width: 100%; height: auto; max-height: 3.25rem; }
+.partner-link, .partner-badge { min-width: 0; }
+.heatmap-legend { padding: .5rem; font-size: .8rem; color: var(--muted); }
+.heatmap-legend p { margin: .35rem 0; }
+.heatmap-legend-bands { display: flex; height: 1rem; border: 1px solid var(--line-strong); }
+.heatmap-legend-bands span { flex: 1; }
+.heatmap-legend-labels { display: flex; justify-content: space-between; gap: 0; font-size: .75rem; font-variant-numeric: tabular-nums; }
+.heatmap-legend-missing { display: flex; align-items: center; gap: .4rem; }
+@media (max-width: 39.999rem) {
+  .summary-value, .summary-card--current .summary-value { font-size: clamp(1.4rem, 6.6vw, 1.8rem); white-space: nowrap; }
+  .summary-card { padding: .85rem; min-height: 0; }
+  .summary-card--current { grid-template-columns: 1fr auto; align-items: center; }
+  .summary-card--current .summary-note { grid-column: 1 / -1; }
+  .data-panel { padding: 1rem; gap: .85rem; }
+  .data-panel-head { padding-right: 2.25rem; }
+  .data-panel-head > div { min-width: 0; }
+  .data-panel-copy { min-height: 0; }
+  .section-shell, .context-section { padding-block: 2rem; }
+  .section-heading--context { padding-right: 2rem; }
+  .heatmap-copy { padding-right: 0; }
+  .heatmap-copy > div:first-child { padding-right: 2.25rem; }
+  .heatmap-controls { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .heatmap-mount { padding-inline: 0; }
+  .level-heatmap-svg text { font-size: 16px; }
+  .heatmap-legend { padding-inline: 0; }
+  .heatmap-day-detail dl { grid-template-columns: minmax(0, 1fr); }
+  .partner-link, .partner-badge { padding: .75rem; min-height: 5rem; }
+  .official-alert { padding: 1rem; gap: 1.25rem; }
+  .official-alert-meta a, .footer-contact-value { overflow-wrap: anywhere; }
+}
