@@ -19,12 +19,10 @@ Rules for future changes:
 - Supported `official_alert.state` values are `none`, `flood_alert`, `flood_warning`, `severe_flood_warning`, `warning_no_longer_in_force`, and `unavailable`.
 - `panels.rainfall` should reflect Environment Agency station `49149` when the sidecar has data.
 - Keep the rainfall panel visible whenever the payload includes rainfall panel copy, even if `panels.rainfall.points` is empty; successful no-rain windows should render a zero-valued chart, while feed outages should show the rainfall empty-state message instead of hiding the panel.
-- The current public site shape is 5 summary cards, 3 notes, 1 official alert section below the notes, a plain single-row partner logo strip, a top operational chart row, a second analysis row, and a full-width historical heatmap panel beneath it.
 - Keep the shared `24 hours` / `5 days` chart toggle above the two graphs, not duplicated inside individual panels.
 - Keep chart copy payload-driven: rainfall, river-level, and Event Analysis panels can swap description text by window, and Event Analysis plus the historical scatter and heatmap can also render payload-provided footer text below the chart.
 - Keep the 24-hour river-level summary cards aligned with the visible chart by treating the cleaned depth series as the source of truth for both, using a trailing 24-hour window ending at the latest observation.
 - Keep rainfall and depth charts locked to the same exported window from `reporting_windows` so their x-axes match exactly in both modes.
-- Keep `analysis_panels.response` payload-driven. When `response.points` are present, render a real river-flow line against rainfall bars, keep only the yellow panel heading visible, and label the right axis as `Flow Rate`; otherwise show the payload-provided placeholder message.
 - Treat `analysis_panels.historical_range` as the only source for the deployment-to-date peak-vs-range scatter chart, with completed-day daily water depth range on the x-axis and completed-day maximum daily water depth on the y-axis.
 - Coerce historical scatter `x` and `y` values to numbers before plotting and derive the linear axis extents from the plotted point set so high-event outliers remain visible.
 - Treat `analysis_panels.level_heatmap` as the only source for the historical river-level heatmap, including its average label, calendar cells, and legend values.
@@ -32,8 +30,6 @@ Rules for future changes:
 - Render one payload-provided hydrological year at a time, from 1 October through 30 September, and retain earlier years through the heatmap selector.
 - Keep the observed rainfall and Event Analysis rainfall axes automatic, but never allow their upper bound to fall below 1 mm.
 - The fifth summary card should reflect the all-time max 24h range record from the payload, not a client-side recomputation.
-- Keep `public/v2/` as an isolated redesign prototype. It may read `public/data/site_payload.json` and shared public brand assets, but it must not change the production homepage contract, payload destination, publisher configuration, or scheduled workflow.
-- Do not redirect the root site to `/v2/` or promote the prototype to production without explicit approval.
 
 Operational intent:
 
@@ -42,4 +38,6 @@ Operational intent:
 - the public website should consume only the curated payload and static assets
 - do not assume the operational Windows machine can auto-update files outside its checked-out sidecar repo
 
-- `public/v3/` is the professor-review revision combining V1 styling and V2 usability. Keep V1 and the original `public/v2/` intact for comparison. V3 reads the same curated payload and shares brand/audio assets; production promotion still requires explicit approval.
+
+- The approved V3 dashboard is now the production homepage at `/`. Do not recreate versioned prototypes without a new request. Git history is the archive.
+- Retain compact statistics, equal-width chart pairs, full-year heatmap, grouped narration and system-default light/dark appearance.

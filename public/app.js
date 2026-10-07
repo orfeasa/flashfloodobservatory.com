@@ -2,122 +2,169 @@ const payloadPath = "data/site_payload.json";
 const fallbackWindowOption = { id: "24h", label: "24 hours" };
 
 const chartPalette = {
-  cyan: "#77e8ff",
-  cyanFill: "rgba(119, 232, 255, 0.12)",
-  blue: "#46a7ff",
-  blueFill: "rgba(70, 167, 255, 0.18)",
-  green: "#57d18b",
-  amber: "#f7de5e",
-  red: "#ff7b79",
-  grid: "rgba(119, 232, 255, 0.08)",
-  text: "#f4f8fb",
+  river: "#77e8ff",
+  riverFill: "rgba(119, 232, 255, 0.26)",
+  rain: "#46a7ff",
+  rainFill: "rgba(40, 112, 200, 0.65)",
+  moss: "#57d18b",
+  ink: "#f4f8fb",
   muted: "#9db0be",
+  grid: "rgba(121, 221, 255, 0.14)",
+  paper: "#ffffff",
 };
 
-let rainfallChart;
-let depthChart;
-let responseChart;
-let historicalRangeChart;
-let displayTimeZone = "UTC";
 let dashboardPayload;
 let timeWindowState;
 let selectedTimeWindowId = fallbackWindowOption.id;
 let selectedHydrologicalYearId;
+let selectedHeatmapWeekIndex;
+let selectedHeatmapDate;
+let rainfallChart;
+let depthChart;
+let responseChart;
+let historicalRangeChart;
+let scatterZoomed = false;
+let displayTimeZone = "UTC";
+
+const darkChartPalette = {...chartPalette};
+function setupTheme() {
+  const root = document.documentElement;
+  const toggle = document.getElementById("themeToggle");
+  const reset = document.getElementById("themeSystem");
+  const system = window.matchMedia("(prefers-color-scheme: dark)");
+  let preference = root.dataset.themePreference || "system";
+  if (!["system", "light", "dark"].includes(preference)) preference = "system";
+  function apply() {
+    const theme = preference === "system" ? (system.matches ? "dark" : "light") : preference;
+    root.dataset.theme = theme;
+    root.dataset.themePreference = preference;
+    toggle.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
+    toggle.title = toggle.getAttribute("aria-label");
+    reset.hidden = preference === "system";
+    document.querySelector('meta[name="theme-color"]').content = theme === "light" ? "#f2f6f8" : "#070e16";
+    Object.assign(chartPalette, theme === "light" ? {
+      river:"#087c96", riverFill:"rgba(8,124,150,0.20)", rain:"#2457a7", rainFill:"rgba(36,87,167,0.72)",
+      moss:"#217744", ink:"#172f40", muted:"#4c6475", grid:"rgba(53,83,104,0.18)", paper:"#ffffff"
+    } : darkChartPalette);
+    if (dashboardPayload) { renderDashboardPanels(); renderAnalysisPanels(); }
+  }
+  function choose(value) {
+    preference = value;
+    try { if (preference === "system") localStorage.removeItem("ffo-v3-theme"); else localStorage.setItem("ffo-v3-theme", preference); } catch (_) {}
+    apply();
+  };
+  toggle.onclick = () => choose(root.dataset.theme === "dark" ? "light" : "dark");
+  reset.onclick = () => choose("system");
+  system.addEventListener("change", () => { if (preference === "system") apply(); });
+  apply();
+}
 
 async function main() {
+  setupTheme();
   try {
     const response = await fetch(payloadPath, { cache: "no-store" });
     if (!response.ok) {
-      throw new Error(`Failed to load ${payloadPath}: ${response.status}`);
+      throw new Error(`The public data feed returned ${response.status}.`);
     }
 
-    const payload = await response.json();
-    dashboardPayload = payload;
-    timeWindowState = buildTimeWindowState(payload, payload.panels || {});
+    dashboardPayload = await response.json();
+    timeWindowState = buildTimeWindowState(
+      dashboardPayload,
+      dashboardPayload.panels || {}
+    );
     selectedTimeWindowId = timeWindowState.defaultId;
 
-    applyHero(payload.site || {}, payload.status || {});
-    renderOfficialAlert(payload.official_alert || {});
-    renderSummaryMetrics(payload.summary_metrics || []);
+    applyHero(dashboardPayload.site || {}, dashboardPayload.status || {});
+    renderOfficialAlert(dashboardPayload.official_alert || {});
+    renderSummaryMetrics(dashboardPayload.summary_metrics || []);
     renderTimeWindowSwitcher(timeWindowState);
     renderDashboardPanels();
     renderAnalysisPanels();
-    renderNotes(payload.notes || []);
-    renderFooter(payload.footer || {});
+    renderNotes(dashboardPayload.notes || []);
+    renderFooter(dashboardPayload.footer || {});
     setupReadAloud();
+    restoreAnchorAfterRender();
   } catch (error) {
     console.error(error);
     applyErrorState(error);
   }
 }
 
+function restoreAnchorAfterRender() {
+  const anchorId = window.location.hash.slice(1);
+  if (!anchorId) {
+    return;
+  }
+  const target = document.getElementById(anchorId);
+  if (!target) {
+    return;
+  }
+  const restore = () => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
+    });
+  };
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(restore);
+  } else {
+    restore();
+  }
+}
+
 function applyHero(site, status) {
-  text("heroEyebrow", site.eyebrow || "Flash Flood Observatory");
   text("siteNameLine", site.name || "Flash Flood Observatory");
   text("siteLocationLine", site.location || "");
+  text("headerIdentity", [site.name || "Flash Flood Observatory", site.location].filter(Boolean).join(", "));
+  renderLocatorMap(site);
   text("heroStrapline", site.strapline || "Public dashboard");
 
-  const locationLine = document.getElementById("siteLocationLine");
-  locationLine.hidden = !site.location;
+  document.getElementById("siteLocationLine").hidden = !site.location;
 
-  const titleBits = [site.name, site.location].filter(Boolean);
-  document.title = titleBits.length ? titleBits.join(" | ") : "Flash Flood Observatory";
-
-  const siteMark = document.getElementById("siteMark");
-  if (site.logo?.src) {
-    siteMark.src = site.logo.src;
-  }
-  if (site.logo?.alt) {
-    siteMark.alt = site.logo.alt;
-  }
 
   displayTimeZone = site.timezone || "UTC";
+  const titleBits = [site.name, site.location].filter(Boolean);
+  document.title = titleBits.join(" — ");
+
+  const mark = document.getElementById("siteMark");
+  if (site.logo?.src) {
+    mark.src = publicAssetPath(site.logo.src === "assets/brand/site-mark.png" ? "assets/brand/site-mark-small.webp" : site.logo.src);
+  }
+  if (site.logo?.alt) {
+    mark.alt = site.logo.alt;
+  }
 
   const badges = [
     {
       label: "Last updated",
-      value: status.published_at ? formatDate(status.published_at) : "Not yet published",
+      value: status.published_at
+        ? formatDate(status.published_at)
+        : "Not yet published",
     },
     {
       label: "Timezone",
       value: site.timezone || "UTC",
     },
   ];
-
-  const heroMeta = document.getElementById("heroMeta");
-  heroMeta.replaceChildren(...badges.map(renderMetaChip));
+  document
+    .getElementById("heroMeta")
+    .replaceChildren(...badges.map(renderMetaChip));
 }
 
-function renderOfficialAlert(alert) {
-  const banner = document.getElementById("officialAlert");
-  if (!alert || (!alert.state && !alert.label)) {
-    banner.hidden = true;
-    banner.className = "official-alert";
-    return;
-  }
-
-  const state = typeof alert.state === "string" ? alert.state : "unavailable";
-  banner.hidden = false;
-  banner.className = `official-alert official-alert--${state.replaceAll("_", "-")}`;
-
-  text("officialAlertEyebrow", alert.eyebrow || "Official Environment Agency Flood Alerts and Warnings");
-  text("officialAlertTitle", alert.label || "Official Environment Agency flood alerts and warnings unavailable");
-  text("officialAlertMessage", alert.message || alert.disclaimer || "");
-  text(
-    "officialAlertUpdated",
-    alert.updated_at ? `Updated ${formatDate(alert.updated_at)}` : ""
-  );
-
-  const sourceLink = document.getElementById("officialAlertSource");
-  if (alert.source_url) {
-    sourceLink.hidden = false;
-    sourceLink.href = alert.source_url;
-    sourceLink.textContent = alert.source_name || "View official flood status";
-  } else {
-    sourceLink.hidden = true;
-    sourceLink.removeAttribute("href");
-    sourceLink.textContent = "";
-  }
+// Public place coordinates, not sensor/acquisition locations. Add confirmed locations here.
+const observatoryLocations = {
+  "Boscastle, UK": {label:"Boscastle", latitude:50.6869, longitude:-4.6928},
+};
+function renderLocatorMap(site) {
+  const location = observatoryLocations[site.location];
+  const map = document.getElementById("observatoryMap");
+  if (!map) return;
+  map.hidden = !location;
+  if (!location) return; // Never reuse the Boscastle marker for an unknown observatory.
+  const x = 20 + (location.longitude + 11) * 12;
+  const y = 10 + (61 - location.latitude) * 21;
+  document.getElementById("mapMarker").setAttribute("transform", `translate(${x} ${y})`);
+  text("mapLabel", location.label);
+  text("mapTitle", `${location.label} in the United Kingdom`);
 }
 
 function renderMetaChip(item) {
@@ -135,23 +182,74 @@ function renderMetaChip(item) {
   return wrapper;
 }
 
+function renderOfficialAlert(alert) {
+  const banner = document.getElementById("officialAlert");
+  if (!alert || (!alert.state && !alert.label)) {
+    banner.hidden = true;
+    return;
+  }
+
+  const state =
+    typeof alert.state === "string" ? alert.state : "unavailable";
+  banner.hidden = false;
+  banner.className = `official-alert content-frame official-alert--${state.replaceAll("_", "-")}`;
+
+  text(
+    "officialAlertEyebrow",
+    alert.eyebrow || "Official Environment Agency status"
+  );
+  text(
+    "officialAlertTitle",
+    alert.label || "Official flood status is temporarily unavailable."
+  );
+  text(
+    "officialAlertMessage",
+    alert.message || alert.disclaimer || ""
+  );
+  text(
+    "officialAlertUpdated",
+    alert.updated_at ? `Updated ${formatDate(alert.updated_at)}` : ""
+  );
+
+  const source = document.getElementById("officialAlertSource");
+  if (alert.source_url) {
+    source.hidden = false;
+    source.href = alert.source_url;
+    source.textContent =
+      alert.source_name || "View the official flood status";
+  } else {
+    source.hidden = true;
+    source.removeAttribute("href");
+    source.textContent = "";
+  }
+}
+
 function renderSummaryMetrics(metrics) {
   const strip = document.getElementById("summaryStrip");
-  const cards = metrics.length ? metrics.map(renderSummaryCard) : [renderSummaryCard({
-    label: "Public feed",
-    value: null,
-    note: "No published metrics are available yet."
-  })];
-  strip.style.setProperty("--summary-columns", String(Math.min(cards.length || 1, 5)));
-  strip.replaceChildren(...cards);
+  const safeMetrics = metrics.length
+    ? metrics
+    : [
+        {
+          label: "Public feed",
+          value: null,
+          note: "No published metrics are available yet.",
+        },
+      ];
+
+  strip.replaceChildren(...safeMetrics.map(renderSummaryCard));
+
+
 }
 
 function renderSummaryCard(metric) {
   const card = document.createElement("article");
   card.className = "summary-card";
+  if (metric.label === "Current River Level") {
+    card.classList.add("summary-card--current");
+  }
 
   const label = document.createElement("p");
-  label.className = "panel-label";
+  label.className = "section-label";
   label.textContent = metric.label || "Metric";
 
   const value = document.createElement("p");
@@ -167,28 +265,29 @@ function renderSummaryCard(metric) {
 }
 
 function formatMetricValue(metric) {
-  if (metric.value === null || metric.value === undefined || metric.value === "") {
+  if (
+    !metric ||
+    metric.value === null ||
+    metric.value === undefined ||
+    metric.value === ""
+  ) {
     return "Awaiting data";
   }
 
-  const decimals = Number.isFinite(metric.decimals) ? metric.decimals : 0;
   const numeric = Number(metric.value);
-  if (Number.isNaN(numeric)) {
+  if (!Number.isFinite(numeric)) {
     return String(metric.value);
   }
 
-  const unit = metric.unit ? ` ${metric.unit}` : "";
+  const decimals = Number.isFinite(metric.decimals) ? metric.decimals : 0;
   const sign = metric.signed && numeric > 0 ? "+" : "";
+  const unit = metric.unit ? ` ${metric.unit}` : "";
   return `${sign}${numeric.toFixed(decimals)}${unit}`;
 }
 
 function renderTimeWindowSwitcher(state) {
   const switcher = document.getElementById("windowSwitcher");
   const controls = document.getElementById("windowSwitcherControls");
-
-  if (!switcher || !controls) {
-    return;
-  }
 
   if (!state.options.length || state.options.length === 1) {
     switcher.hidden = true;
@@ -197,294 +296,329 @@ function renderTimeWindowSwitcher(state) {
   }
 
   switcher.hidden = false;
-  controls.replaceChildren(...state.options.map(renderTimeWindowButton));
+  controls.replaceChildren(
+    ...state.options.map((option) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "window-button";
+      button.dataset.windowId = option.id;
+      button.textContent = option.label;
+      button.addEventListener("click", () => {
+        if (selectedTimeWindowId === option.id) {
+          return;
+        }
+        selectedTimeWindowId = option.id;
+        updateTimeWindowButtons();
+        renderDashboardPanels();
+        renderAnalysisPanels();
+      });
+      return button;
+    })
+  );
   updateTimeWindowButtons();
 }
 
-function renderTimeWindowButton(option) {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = "window-button";
-  button.dataset.windowId = option.id;
-  button.textContent = option.label;
-  button.addEventListener("click", () => {
-    if (selectedTimeWindowId === option.id) {
-      return;
-    }
-    selectedTimeWindowId = option.id;
-    updateTimeWindowButtons();
-    renderDashboardPanels();
-    renderAnalysisPanels();
-  });
-  return button;
-}
-
 function updateTimeWindowButtons() {
-  const buttons = document.querySelectorAll(".window-button");
-  buttons.forEach((button) => {
-    const isActive = button.dataset.windowId === selectedTimeWindowId;
-    button.classList.toggle("is-active", isActive);
-    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  document.querySelectorAll(".window-button").forEach((button) => {
+    const active = button.dataset.windowId === selectedTimeWindowId;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
   });
 }
 
 function renderDashboardPanels() {
   const panels = dashboardPayload?.panels || {};
   const reportingWindow = timeWindowState.windows[selectedTimeWindowId];
-  const rainfallPanel = buildPanelForWindow(panels.rainfall || {}, selectedTimeWindowId, reportingWindow);
-  const depthPanel = buildPanelForWindow(panels.depth || {}, selectedTimeWindowId, reportingWindow);
+  const rainfall = panelForWindow(
+    panels.rainfall || {},
+    selectedTimeWindowId,
+    reportingWindow
+  );
+  const depth = panelForWindow(
+    panels.depth || {},
+    selectedTimeWindowId,
+    reportingWindow
+  );
 
-  applyPanelVisibility(rainfallPanel, depthPanel);
-  renderPanelCopy("rainfall", rainfallPanel);
-  renderPanelCopy("depth", depthPanel);
+  renderPanelCopy("rainfall", rainfall);
+  renderPanelCopy("depth", depth);
   renderContextChip("rainfallContextChip", currentWindowLabel());
   renderContextChip("depthContextChip", currentWindowLabel());
-  renderRainfallChart(rainfallPanel, reportingWindow);
-  renderDepthChart(depthPanel, reportingWindow);
+  togglePanel(
+    "rainfallPanel",
+    Boolean(
+      rainfall.points?.length ||
+        rainfall.title ||
+        rainfall.description ||
+        rainfall.empty_message
+    )
+  );
+  togglePanel("depthPanel", Boolean(depth.points?.length));
+  renderRainfallChart(rainfall, reportingWindow);
+  renderDepthChart(depth, reportingWindow);
 }
 
 function renderAnalysisPanels() {
   const panels = dashboardPayload?.panels || {};
-  const analysisPanels = dashboardPayload?.analysis_panels || {};
+  const analysis = dashboardPayload?.analysis_panels || {};
   const reportingWindow = timeWindowState.windows[selectedTimeWindowId];
-  const rainfallPanel = buildPanelForWindow(panels.rainfall || {}, selectedTimeWindowId, reportingWindow);
-  const depthPanel = buildPanelForWindow(panels.depth || {}, selectedTimeWindowId, reportingWindow);
-  const responsePanel = buildPanelForWindow(analysisPanels.response || {}, selectedTimeWindowId, reportingWindow);
-  const historicalRangePanel = analysisPanels.historical_range || {};
-  const levelHeatmapPanel = analysisPanels.level_heatmap || {};
-
-  renderPanelCopy("response", responsePanel);
-  renderPanelCopy("historicalRange", historicalRangePanel);
-  renderContextChip("responseContextChip", currentWindowLabel());
-  applyAnalysisVisibility(responsePanel, historicalRangePanel);
-  renderResponseChart(responsePanel, rainfallPanel, reportingWindow);
-  renderHistoricalRangeChart(historicalRangePanel);
-  renderLevelHeatmap(levelHeatmapPanel);
-}
-
-function buildPanelForWindow(panel, windowId, reportingWindow) {
-  return {
-    ...panel,
-    description: panel.descriptions?.[windowId] || panel.description || "",
-    footer_description: panel.footer_descriptions?.[windowId] || panel.footer_description || "",
-    points: filterPointsForWindow(panel.points || [], reportingWindow),
-  };
-}
-
-function filterPointsForWindow(points, reportingWindow) {
-  if (!reportingWindow) {
-    return points;
-  }
-
-  return points.filter((point) => {
-    const timestamp = toEpochMs(point.timestamp);
-    return Number.isFinite(timestamp) && timestamp >= reportingWindow.start && timestamp <= reportingWindow.end;
-  });
-}
-
-function setOptionalText(elementId, value) {
-  const element = document.getElementById(elementId);
-  if (!element) {
-    return;
-  }
-
-  const content = value || "";
-  element.textContent = content;
-  element.hidden = !content;
-}
-
-function renderPanelCopy(prefix, panel) {
-  setOptionalText(`${prefix}Eyebrow`, panel.eyebrow || "");
-  setOptionalText(`${prefix}Title`, panel.title || "");
-  setOptionalText(`${prefix}Subtitle`, panel.subtitle || "");
-  setOptionalText(`${prefix}Description`, panel.description || "");
-  setOptionalText(`${prefix}FooterDescription`, panel.footer_description || "");
-}
-
-function renderContextChip(elementId, value) {
-  const element = document.getElementById(elementId);
-  if (!element) {
-    return;
-  }
-
-  element.textContent = value || "";
-  element.hidden = !value;
-}
-
-function currentWindowLabel() {
-  const option = timeWindowState?.options?.find((item) => item.id === selectedTimeWindowId);
-  return option?.label || fallbackWindowOption.label;
-}
-
-function applyPanelVisibility(rainfallPanel, depthPanel) {
-  const rainfallPoints = rainfallPanel.points || [];
-  const depthPoints = depthPanel.points || [];
-  const rainfallVisible = Boolean(
-    rainfallPoints.length
-    || rainfallPanel.title
-    || rainfallPanel.subtitle
-    || rainfallPanel.description
-    || rainfallPanel.empty_message
-    || rainfallPanel.eyebrow
+  const rainfall = panelForWindow(
+    panels.rainfall || {},
+    selectedTimeWindowId,
+    reportingWindow
   );
-  const depthVisible = depthPoints.length > 0;
+  const response = panelForWindow(
+    analysis.response || {},
+    selectedTimeWindowId,
+    reportingWindow
+  );
+  const historical = analysis.historical_range || {};
+  const heatmap = analysis.level_heatmap || {};
 
-  togglePanel("rainfallPanel", rainfallVisible);
-  togglePanel("depthPanel", depthVisible);
+  renderPanelCopy("response", response);
+  renderPanelCopy("historicalRange", historical);
+  renderContextChip("responseContextChip", currentWindowLabel());
 
-  const visiblePanelCount = [rainfallVisible, depthVisible].filter(Boolean).length;
-  const dashboardGrid = document.getElementById("dashboardGrid");
-  dashboardGrid.classList.toggle("dashboard-grid--single", visiblePanelCount <= 1);
-
-  if (!rainfallPoints.length) {
-    showEmptyChart("rainfall", rainfallPanel.empty_message || "Rainfall data is temporarily unavailable.");
-  }
-}
-
-function applyAnalysisVisibility(responsePanel, historicalRangePanel) {
-  const responsePlaceholder = responsePanel.mode === "placeholder";
-  const responseVisible = responsePlaceholder
-    ? Boolean(responsePanel.title || responsePanel.subtitle || responsePanel.description || responsePanel.empty_message || responsePanel.eyebrow)
-    : (responsePanel.points || []).length > 0;
-  const historicalVisible = (historicalRangePanel.points || []).length > 0;
+  const responseVisible =
+    response.mode === "placeholder"
+      ? Boolean(
+          response.title ||
+            response.subtitle ||
+            response.description ||
+            response.empty_message
+        )
+      : Boolean(response.points?.length);
+  const historicalVisible = Boolean(historical.points?.length);
 
   togglePanel("responsePanel", responseVisible);
   togglePanel("historicalRangePanel", historicalVisible);
+  document.getElementById("analysisGrid").hidden =
+    !responseVisible && !historicalVisible;
 
-  const visiblePanelCount = [responseVisible, historicalVisible].filter(Boolean).length;
-  const analysisGrid = document.getElementById("analysisGrid");
-  analysisGrid.hidden = visiblePanelCount === 0;
-  analysisGrid.classList.toggle("analysis-grid--single", visiblePanelCount <= 1);
-
-  if (!responseVisible || responsePlaceholder) {
-    showEmptyChart("response", responsePanel.empty_message || "River flow event analysis will appear here once the rating curve has been generated.");
-  }
-  if (!historicalVisible) {
-    showEmptyChart("historicalRange", historicalRangePanel.empty_message || "Historical range data is not available yet.");
-  }
+  renderResponseChart(response, rainfall, reportingWindow);
+  renderHistoricalRangeChart(historical);
+  renderLevelHeatmap(heatmap);
 }
 
-function buildRainfallDataset(points, label, yAxisID = "y") {
+function panelForWindow(panel, windowId, reportingWindow) {
   return {
-    type: "bar",
-    label,
-    data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
-    parsing: false,
-    yAxisID,
-    borderRadius: 6,
-    backgroundColor: chartPalette.blueFill,
-    borderColor: chartPalette.blue,
-    borderWidth: 1.4,
-    barThickness: "flex",
-    maxBarThickness: 34,
-    inflateAmount: 0,
+    ...panel,
+    description: panel.descriptions?.[windowId] || panel.description || "",
+    footer_description:
+      panel.footer_descriptions?.[windowId] ||
+      panel.footer_description ||
+      "",
+    points: filterPoints(panel.points || [], reportingWindow),
   };
+}
+
+function filterPoints(points, reportingWindow) {
+  if (!reportingWindow) {
+    return points;
+  }
+  return points.filter((point) => {
+    const timestamp = toEpochMs(point.timestamp);
+    return (
+      Number.isFinite(timestamp) &&
+      timestamp >= reportingWindow.start &&
+      timestamp <= reportingWindow.end
+    );
+  });
+}
+
+function renderPanelCopy(prefix, panel) {
+  if (prefix === "response" || prefix === "historicalRange") {
+    optionalText(`${prefix}Title`, panel.subtitle || panel.title);
+    optionalText(`${prefix}Subtitle`, "");
+    optionalText(`${prefix}Description`, panel.description);
+    optionalText(`${prefix}FooterDescription`, panel.footer_description);
+    return;
+  }
+  optionalText(`${prefix}Eyebrow`, panel.eyebrow);
+  optionalText(`${prefix}Title`, panel.title);
+  optionalText(`${prefix}Subtitle`, panel.subtitle);
+  optionalText(`${prefix}Description`, panel.description);
+  optionalText(`${prefix}FooterDescription`, panel.footer_description);
+}
+
+function optionalText(id, value) {
+  const node = document.getElementById(id);
+  if (!node) {
+    return;
+  }
+  node.textContent = value || "";
+  node.hidden = !value;
+}
+
+function renderContextChip(id, value) {
+  const node = document.getElementById(id);
+  if (!node) {
+    return;
+  }
+  node.textContent = value || "";
+  node.hidden = !value;
+}
+
+function currentWindowLabel() {
+  return (
+    timeWindowState.options.find(
+      (option) => option.id === selectedTimeWindowId
+    )?.label || fallbackWindowOption.label
+  );
 }
 
 function renderRainfallChart(panel, reportingWindow) {
   const points = panel.points || [];
   if (!points.length) {
     rainfallChart?.destroy();
-    showEmptyChart("rainfall", panel.empty_message || "Rainfall data is temporarily unavailable.");
+    showEmptyChart(
+      "rainfall",
+      panel.empty_message || "Rainfall data is temporarily unavailable."
+    );
     return;
   }
 
   hideEmptyChart("rainfall");
   rainfallChart?.destroy();
   rainfallChart = new Chart(document.getElementById("rainfallChart"), {
+    plugins: [observationFrame],
     type: "bar",
     data: {
-      datasets: [buildRainfallDataset(points, panel.y_axis_label || "Rainfall")],
+      datasets: [
+        rainfallDataset(
+          points,
+          panel.y_axis_label || "Rainfall (mm)"
+        ),
+      ],
     },
-    options: chartOptions(reportingWindow, panel.y_axis_label || "Rainfall", 1),
+    options: standardChartOptions(
+      reportingWindow,
+      panel.y_axis_label || "Rainfall (mm)",
+      1
+    ),
   });
+}
+
+function rainfallDataset(points, label, axis = "y") {
+  return {
+    type: "bar",
+    label,
+    data: points.map((point) => ({
+      x: toEpochMs(point.timestamp),
+      y: Number(point.value),
+    })),
+    parsing: false,
+    yAxisID: axis,
+    backgroundColor: chartPalette.rainFill,
+    borderColor: chartPalette.rain,
+    borderWidth: 1.2,
+    borderRadius: 2,
+    barThickness: "flex",
+    maxBarThickness: 30,
+    inflateAmount: 0,
+  };
 }
 
 function renderDepthChart(panel, reportingWindow) {
   const points = panel.points || [];
   if (!points.length) {
-    showEmptyChart("depth", panel.empty_message || "No depth data has been published yet.");
     depthChart?.destroy();
+    showEmptyChart(
+      "depth",
+      panel.empty_message || "No river-level data has been published yet."
+    );
     return;
   }
 
   hideEmptyChart("depth");
   depthChart?.destroy();
   depthChart = new Chart(document.getElementById("depthChart"), {
+    plugins: [observationFrame],
     type: "line",
     data: {
       datasets: [
         {
-          label: panel.y_axis_label || "Depth",
-          data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
+          label: panel.y_axis_label || "Water depth (m)",
+          data: points.map((point) => ({
+            x: toEpochMs(point.timestamp),
+            y: Number(point.value),
+          })),
           parsing: false,
-          borderColor: chartPalette.cyan,
-          backgroundColor: chartPalette.cyanFill,
-          borderWidth: 2.5,
+          borderColor: chartPalette.river,
+          backgroundColor: chartPalette.riverFill,
+          borderWidth: 2.4,
           fill: true,
-          tension: 0.28,
+          tension: 0.22,
           pointRadius: 0,
         },
       ],
     },
-    options: chartOptions(reportingWindow, panel.y_axis_label || "Depth", positiveAxisFloor(panel.minimum_axis_max) || 0.173),
+    options: standardChartOptions(
+      reportingWindow,
+      panel.y_axis_label || "Water depth (m)",
+      positiveAxisFloor(panel.minimum_axis_max) || 0.173
+    ),
   });
 }
 
 function renderResponseChart(panel, rainfallPanel, reportingWindow) {
   if (panel.mode === "placeholder") {
     responseChart?.destroy();
-    showEmptyChart("response", panel.empty_message || "River flow event analysis will appear here once the rating curve has been generated.");
+    showEmptyChart(
+      "response",
+      panel.empty_message ||
+        "Event analysis will appear after a rating curve is available."
+    );
     return;
   }
 
-  const rainfallPoints = rainfallPanel.points || [];
   const flowPoints = panel.points || [];
   if (!flowPoints.length) {
     responseChart?.destroy();
-    showEmptyChart("response", panel.empty_message || "River flow event analysis is temporarily unavailable.");
+    showEmptyChart(
+      "response",
+      panel.empty_message || "Event analysis is temporarily unavailable."
+    );
     return;
   }
 
   hideEmptyChart("response");
   responseChart?.destroy();
+  const rainfallPoints = rainfallPanel.points || [];
   const hasRainfall = rainfallPoints.length > 0;
   const datasets = [];
 
   if (hasRainfall) {
     datasets.push(
-      buildRainfallDataset(
+      rainfallDataset(
         rainfallPoints,
-        panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
+        panel.rainfall_y_axis_label || "Rainfall (mm)",
         "yRain"
       )
     );
   }
 
-  datasets.push(
-    {
-      type: "line",
-      label: panel.y_axis_label || "Flow Rate",
-      data: flowPoints.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
-      parsing: false,
-      yAxisID: "yFlow",
-      borderColor: chartPalette.cyan,
-      backgroundColor: chartPalette.cyanFill,
-      borderWidth: 2.2,
-      tension: 0.28,
-      pointRadius: 0,
-      fill: false,
-    }
-  );
+  datasets.push({
+    type: "line",
+    label: panel.y_axis_label || "Flow rate (m³/s)",
+    data: flowPoints.map((point) => ({
+      x: toEpochMs(point.timestamp),
+      y: Number(point.value),
+    })),
+    parsing: false,
+    yAxisID: "yFlow",
+    borderColor: chartPalette.river,
+    borderWidth: 2.3,
+    pointRadius: 0,
+    tension: 0.22,
+  });
 
   responseChart = new Chart(document.getElementById("responseChart"), {
-    data: {
-      datasets,
-    },
+    data: { datasets },
     options: responseChartOptions(
       reportingWindow,
-      panel.rainfall_y_axis_label || rainfallPanel.y_axis_label || "Rainfall (mm)",
-      panel.y_axis_label || "Flow Rate",
+      panel.rainfall_y_axis_label || "Rainfall (mm)",
+      panel.y_axis_label || "Flow rate (m³/s)",
       hasRainfall,
       positiveAxisFloor(panel.minimum_axis_max)
     ),
@@ -492,435 +626,633 @@ function renderResponseChart(panel, rainfallPanel, reportingWindow) {
 }
 
 function renderHistoricalRangeChart(panel) {
-  const points = panel.points || [];
-  const scatterPoints = points
+  const points = (panel.points || [])
     .map((point) => ({
       x: Number(point.x),
       y: Number(point.y),
       date: point.date,
-      timestamp: toEpochMs(point.timestamp),
     }))
     .filter((point) => Number.isFinite(point.x) && Number.isFinite(point.y));
 
   if (!points.length) {
-    showEmptyChart("historicalRange", panel.empty_message || "Historical range data is not available yet.");
     historicalRangeChart?.destroy();
+    showEmptyChart(
+      "historicalRange",
+      panel.empty_message || "Historical context is not available yet."
+    );
     return;
   }
 
-  const scatterMode = scatterPoints.length > 0;
-
   hideEmptyChart("historicalRange");
+  const zoom = document.getElementById("scatterZoom");
+  zoom.setAttribute("aria-pressed", String(scatterZoomed));
+  zoom.textContent = scatterZoomed ? "Show all days" : "Zoom into typical days";
+  const outside = points.filter(point => point.x > 0.2 || point.y > 0.5).length;
+  document.getElementById("scatterViewStatus").textContent = scatterZoomed
+    ? `Zoom: range 0–0.2 m, peak 0–0.5 m. ${outside} ${outside === 1 ? "day" : "days"} outside this view.`
+    : `All ${points.length} days shown, including extreme events.`;
+  zoom.onclick = () => { scatterZoomed = !scatterZoomed; renderHistoricalRangeChart(panel); };
+
   historicalRangeChart?.destroy();
-  historicalRangeChart = new Chart(document.getElementById("historicalRangeChart"), scatterMode
-    ? {
-        type: "scatter",
-        data: {
-          datasets: [
-            {
-              label: panel.subtitle || panel.y_axis_label || "Daily Range and Peak Levels",
-              data: scatterPoints,
-              parsing: false,
-              pointBackgroundColor: chartPalette.green,
-              pointBorderColor: "rgba(9, 19, 31, 0.92)",
-              pointBorderWidth: 1,
-              pointRadius: 4,
-              pointHoverRadius: 5,
-            },
-          ],
-        },
-        options: historicalScatterOptions(
-          scatterPoints,
-          panel.x_axis_label || "Daily Water Depth Range (m)",
-          panel.y_axis_label || "Maximum Daily Water Depth (m)"
-        ),
-      }
-    : {
-        type: "line",
-        data: {
-          datasets: [
-            {
-              label: panel.y_axis_label || "Maximum Daily Water Depth (m)",
-              data: points.map((point) => ({ x: toEpochMs(point.timestamp), y: point.value })),
-              parsing: false,
-              borderColor: chartPalette.green,
-              backgroundColor: "rgba(87, 209, 139, 0.12)",
-              borderWidth: 2.2,
-              fill: true,
-              tension: 0.25,
-              pointRadius: 2.5,
-              pointHoverRadius: 4,
-            },
-          ],
-        },
-        options: historicalTimeSeriesOptions(points, panel.y_axis_label || "Maximum Daily Water Depth (m)"),
-      });
+  historicalRangeChart = new Chart(
+    document.getElementById("historicalRangeChart"),
+    {
+      type: "scatter",
+      data: {
+        datasets: [
+          {
+            label:
+              panel.subtitle || "Daily range and peak levels",
+            data: points,
+            parsing: false,
+            pointBackgroundColor: `${chartPalette.moss}99`,
+            pointBorderWidth: 0,
+            pointRadius: 2.5,
+            pointHitRadius: 10,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: chartPalette.moss,
+            pointHoverBorderColor: chartPalette.ink,
+            pointHoverBorderWidth: 1.5,
+          },
+        ],
+      },
+      options: scatterOptions(
+        points,
+        panel.x_axis_label || "Daily water-depth range (m)",
+        panel.y_axis_label || "Maximum daily water depth (m)"
+      ),
+    }
+  );
 }
 
 function renderLevelHeatmap(panel) {
   const wrapper = document.getElementById("levelHeatmapPanel");
-  const description = document.getElementById("levelHeatmapDescription");
-  const footerDescription = document.getElementById("levelHeatmapFooterDescription");
-  const average = document.getElementById("levelHeatmapAverage");
-  const mount = document.getElementById("levelHeatmapMount");
-  const empty = document.getElementById("levelHeatmapEmpty");
-  const yearState = buildHydrologicalYearState(panel);
-  const selectedYear = yearState.years.find((year) => year.id === selectedHydrologicalYearId)
-    || yearState.years.find((year) => year.id === yearState.defaultId)
-    || yearState.years[0];
+  const yearState = hydrologicalYearState(panel);
+  const selectedYear =
+    yearState.years.find(
+      (year) => year.id === selectedHydrologicalYearId
+    ) ||
+    yearState.years.find((year) => year.id === yearState.defaultId) ||
+    yearState.years[0];
   const selectedPanel = selectedYear
-    ? { ...panel, cells: selectedYear.cells, month_ticks: selectedYear.month_ticks }
+    ? {
+        ...panel,
+        cells: selectedYear.cells,
+        month_ticks: selectedYear.month_ticks,
+      }
     : panel;
-  const cells = Array.isArray(selectedPanel?.cells) ? selectedPanel.cells : [];
-  const hasPanel = Boolean(panel?.title || panel?.eyebrow || panel?.empty_message || cells.length);
+  const cells = Array.isArray(selectedPanel?.cells)
+    ? selectedPanel.cells
+    : [];
+  const hasPanel = Boolean(
+    panel?.title || panel?.eyebrow || panel?.empty_message || cells.length
+  );
 
   wrapper.hidden = !hasPanel;
   renderHydrologicalYearControl(yearState, selectedYear);
   if (!hasPanel) {
-    mount.innerHTML = "";
-    mount.hidden = true;
-    empty.hidden = true;
     return;
   }
 
-  text("levelHeatmapEyebrow", panel.eyebrow || "River Levels");
-  text("levelHeatmapTitle", panel.title || "% of Flash Flood Observatory Average");
-  description.textContent = panel.description || "";
-  footerDescription.textContent = panel.footer_description || "";
-  footerDescription.hidden = !panel.footer_description;
-  average.textContent = panel.average_label || "";
-  average.hidden = !panel.average_label;
+  optionalText(
+    "levelHeatmapEyebrow",
+    panel.eyebrow || "River-level history"
+  );
+  optionalText(
+    "levelHeatmapTitle",
+    panel.title || "% of Flash Flood Observatory average"
+  );
+  optionalText("levelHeatmapDescription", panel.description);
+  optionalText(
+    "levelHeatmapFooterDescription",
+    panel.footer_description
+  );
+  optionalText("levelHeatmapAverage", panel.average_label);
 
+  const mount = document.getElementById("levelHeatmapMount");
+  const empty = document.getElementById("levelHeatmapEmpty");
   if (!cells.length) {
     mount.innerHTML = "";
     mount.hidden = true;
+    renderHeatmapWeekControl([], selectedPanel);
+    document.getElementById("levelHeatmapDayDetail").hidden = true;
+    document.getElementById("heatmapDayControl").hidden = true;
     empty.hidden = false;
-    empty.textContent = panel.empty_message || "Daily maximum river-level heatmap data will appear here after the historical record is built.";
+    empty.textContent =
+      panel.empty_message ||
+      "Historical heatmap data will appear after the record is built.";
     return;
   }
 
   mount.hidden = false;
   empty.hidden = true;
-  mount.setAttribute("aria-label", panel.title || "River-level difference heatmap");
-  mount.innerHTML = buildLevelHeatmapSvg(selectedPanel);
+  mount.innerHTML = heatmapSvg(selectedPanel);
+  layoutHeatmap(mount);
+  setupHeatmapInteraction(selectedPanel);
 }
 
-function buildHydrologicalYearState(panel) {
-  const explicitYears = Array.isArray(panel?.hydrological_years)
-    ? panel.hydrological_years.filter((year) => year?.id && Array.isArray(year.cells))
+function completeWaterYear(year) {
+  const start = Date.parse(`${year.start_date}T00:00:00Z`);
+  const end = Date.parse(`${year.end_date}T00:00:00Z`);
+  if (!Number.isFinite(start) || !Number.isFinite(end) || end < start || end - start > 366 * 86400000) return year;
+  const offset = (new Date(start).getUTCDay() + 6) % 7;
+  const original = new Map(year.cells.map(cell => [cell.date, cell]));
+  const latest = year.cells.map(cell => cell.date).sort().at(-1);
+  const cells = [], month_ticks = [];
+  for (let day = start, index = 0; day <= end; day += 86400000, index++) {
+    const date = new Date(day), iso = date.toISOString().slice(0, 10);
+    const week_index = Math.floor((index + offset) / 7);
+    if (date.getUTCDate() === 1) month_ticks.push({week_index, label: date.toLocaleDateString("en-GB", {month:"short", timeZone:"UTC"})});
+    // Future days reserve space but do not claim missing observations.
+    cells.push({date:iso, date_label:formatIsoDateLabel(iso), max_level_m:null, percent_of_average:null,
+      difference_from_average_m:null, ...original.get(iso), future: iso > latest,
+      week_index, weekday_index:(index + offset) % 7});
+  }
+  return {...year, cells, month_ticks};
+}
+
+function hydrologicalYearState(panel) {
+  const explicit = Array.isArray(panel?.hydrological_years)
+    ? panel.hydrological_years.filter(
+        (year) => year?.id && Array.isArray(year.cells)
+      )
     : [];
-  const years = explicitYears.length
-    ? explicitYears
-    : (Array.isArray(panel?.cells) && panel.cells.length
-      ? [{
-          id: "all",
-          label: "All available data",
-          period_label: "",
-          cells: panel.cells,
-          month_ticks: panel.month_ticks || [],
-        }]
-      : []);
-  const requestedDefault = panel?.default_hydrological_year;
-  const defaultId = years.some((year) => year.id === requestedDefault)
-    ? requestedDefault
+  const years = explicit.length
+    ? explicit.map(completeWaterYear)
+    : Array.isArray(panel?.cells) && panel.cells.length
+      ? [
+          {
+            id: "all",
+            label: "All available data",
+            period_label: "",
+            cells: panel.cells,
+            month_ticks: panel.month_ticks || [],
+          },
+        ]
+      : [];
+  const defaultId = years.some(
+    (year) => year.id === panel?.default_hydrological_year
+  )
+    ? panel.default_hydrological_year
     : years[years.length - 1]?.id;
 
-  if (!years.some((year) => year.id === selectedHydrologicalYearId)) {
+  if (
+    !years.some((year) => year.id === selectedHydrologicalYearId)
+  ) {
     selectedHydrologicalYearId = defaultId;
   }
-
   return { years, defaultId };
 }
 
 function renderHydrologicalYearControl(state, selectedYear) {
   const control = document.getElementById("heatmapPeriodControl");
   const select = document.getElementById("heatmapPeriodSelect");
-  const periodLabel = document.getElementById("heatmapPeriodLabel");
-  if (!control || !select || !periodLabel) {
-    return;
-  }
+
 
   control.hidden = !state.years.length;
   if (!state.years.length) {
     select.replaceChildren();
-    periodLabel.textContent = "";
+
     return;
   }
 
-  select.replaceChildren(...state.years.map((year) => {
-    const option = document.createElement("option");
-    option.value = year.id;
-    option.textContent = year.label || year.id;
-    return option;
-  }));
+  select.replaceChildren(
+    ...state.years.map((year) => {
+      const option = document.createElement("option");
+      option.value = year.id;
+      const date = value => new Date(`${value}T12:00:00Z`).toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
+      option.textContent = `${date(year.start_date)}–${date(year.end_date)}`;
+      return option;
+    })
+  );
   select.value = selectedYear?.id || state.defaultId || "";
   select.disabled = state.years.length <= 1;
-  periodLabel.textContent = selectedYear?.period_label || "";
+
   select.onchange = () => {
     selectedHydrologicalYearId = select.value;
-    renderLevelHeatmap(dashboardPayload?.analysis_panels?.level_heatmap || {});
+    selectedHeatmapWeekIndex = undefined;
+    selectedHeatmapDate = undefined;
+    renderLevelHeatmap(
+      dashboardPayload?.analysis_panels?.level_heatmap || {}
+    );
   };
 }
 
-function buildLevelHeatmapSvg(panel) {
-  const cells = (panel.cells || []).filter(
-    (cell) => Number.isFinite(Number(cell.week_index)) && Number.isFinite(Number(cell.weekday_index))
+function setupHeatmapInteraction(panel) {
+  const mount = document.getElementById("levelHeatmapMount");
+  const cells = [...mount.querySelectorAll(".level-heatmap-cell")];
+  const days = (panel.cells || []).filter(day => day.date && !day.future);
+  const byDate = new Map(days.map(day => [day.date, day]));
+  const weeks = heatmapWeeks(days);
+  const weekSelect = document.getElementById("heatmapWeekSelect");
+  const daySelect = document.getElementById("heatmapDaySelect");
+  renderHeatmapWeekControl(weeks, panel);
+  document.getElementById("heatmapDayControl").hidden = !days.length;
+  if (!byDate.has(selectedHeatmapDate)) selectedHeatmapDate = undefined;
+  if (!weeks.some(week => week.index === selectedHeatmapWeekIndex)) selectedHeatmapWeekIndex = undefined;
+
+  const update = () => {
+    weekSelect.value = selectedHeatmapWeekIndex === undefined ? "" : String(selectedHeatmapWeekIndex);
+    const options = days.filter(day => selectedHeatmapWeekIndex === undefined || Number(day.week_index) === selectedHeatmapWeekIndex);
+    daySelect.replaceChildren(new Option("No day selected", ""), ...options.map(day => new Option(day.date_label || day.date, day.date)));
+    daySelect.value = selectedHeatmapDate || "";
+    cells.forEach((cell, index) => {
+      const selected = cell.dataset.date === selectedHeatmapDate;
+      cell.classList.toggle("level-heatmap-cell--selected", selected);
+      cell.classList.toggle("level-heatmap-cell--week", Number(cell.dataset.weekIndex) === selectedHeatmapWeekIndex);
+      cell.setAttribute("aria-pressed", String(selected));
+      cell.setAttribute("tabindex", selected || (!selectedHeatmapDate && index === 0) ? "0" : "-1");
+    });
+    const outline = document.getElementById("heatmapWeekOutline");
+    if (selectedHeatmapWeekIndex === undefined) outline.setAttribute("hidden", "");
+    else {
+      outline.setAttribute("x", String(98 + selectedHeatmapWeekIndex * 20 - 3));
+      outline.removeAttribute("hidden");
+    }
+    mount.updateWeekOutline?.();
+    const day = byDate.get(selectedHeatmapDate);
+    if (day) renderHeatmapDayDetail(day);
+    else document.getElementById("levelHeatmapDayDetail").hidden = true;
+  };
+  const selectCell = cell => {
+    const day = byDate.get(cell.dataset.date);
+    if (!day) return;
+    selectedHeatmapDate = day.date;
+    selectedHeatmapWeekIndex = Number(day.week_index);
+    update();
+  };
+  weekSelect.onchange = () => {
+    selectedHeatmapWeekIndex = weekSelect.value === "" ? undefined : Number(weekSelect.value);
+    selectedHeatmapDate = undefined;
+    update();
+  };
+  daySelect.onchange = () => {
+    selectedHeatmapDate = daySelect.value || undefined;
+    if (selectedHeatmapDate) selectedHeatmapWeekIndex = Number(byDate.get(selectedHeatmapDate).week_index);
+    update();
+  };
+  cells.forEach((cell, index) => {
+    // Native SVG titles retain hover readings without changing the selection.
+    cell.addEventListener("click", () => selectCell(cell));
+    cell.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault(); selectCell(cell); return;
+      }
+      const movement = {ArrowLeft:-7, ArrowRight:7, ArrowUp:-1, ArrowDown:1, Home:-index, End:cells.length-index-1}[event.key];
+      if (!Number.isFinite(movement)) return;
+      event.preventDefault();
+      const target = cells[index + movement];
+      if (target) { selectCell(target); target.focus({preventScroll:true}); }
+    });
+  });
+  update();
+}
+
+function heatmapWeeks(cells) {
+  const groups = new Map();
+  cells.forEach((cell) => {
+    const week = Number(cell.week_index);
+    if (!Number.isFinite(week)) {
+      return;
+    }
+    if (!groups.has(week)) {
+      groups.set(week, []);
+    }
+    groups.get(week).push(cell);
+  });
+  return Array.from(groups, ([index, days]) => ({
+    index,
+    days: days.sort((a, b) => String(a.date).localeCompare(String(b.date))),
+  })).sort((a, b) => a.index - b.index);
+}
+
+function compactWeekLabel(first, last) {
+  const start = new Date(`${first}T12:00:00Z`), end = new Date(`${last}T12:00:00Z`);
+  const format = date => date.toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric", timeZone:"UTC"});
+  if (first === last) return format(start);
+  const left = start.getUTCMonth() === end.getUTCMonth() ? start.getUTCDate() : start.toLocaleDateString("en-GB", {day:"numeric", month:"short", timeZone:"UTC"});
+  return `${left}–${format(end)}`;
+}
+
+function renderHeatmapWeekControl(weeks, panel) {
+  document.getElementById("heatmapWeekControl").hidden = !weeks.length;
+  document.getElementById("heatmapWeekLabel").textContent = panel?.x_axis_label || "Week of Year";
+  document.getElementById("heatmapWeekSelect").replaceChildren(
+    new Option("All weeks", ""),
+    ...weeks.map(week => new Option(compactWeekLabel(week.days[0].date, week.days.at(-1).date), String(week.index)))
   );
+}
+
+function renderHeatmapDayDetail(cell) {
+  const detail = document.getElementById("levelHeatmapDayDetail");
+  const level = heatmapNumber(cell.max_level_m);
+  const percent = heatmapNumber(cell.percent_of_average);
+  const difference = heatmapNumber(cell.difference_from_average_m);
+  const metrics = [
+    {
+      label: "Maximum level",
+      value: Number.isFinite(level)
+        ? `${level.toFixed(3)} m`
+        : "No data",
+    },
+    {
+      label: "% of observatory average",
+      value: Number.isFinite(percent) ? `${percent.toFixed(1)}%` : "—",
+    },
+    {
+      label: "Difference from average",
+      value: Number.isFinite(difference)
+        ? `${signed(difference, 3)} m`
+        : "—",
+    },
+  ];
+  const table = document.createElement("table");
+  const caption = document.createElement("caption");
+  caption.textContent = `Selected day: ${cell.date_label || cell.date}`;
+  const body = document.createElement("tbody");
+  for (const metric of metrics) {
+    const row = document.createElement("tr"), label = document.createElement("th"), value = document.createElement("td");
+    label.scope = "row"; label.textContent = metric.label; value.textContent = metric.value;
+    row.append(label, value); body.append(row);
+  }
+  table.append(caption, body);
+  detail.replaceChildren(table);
+  detail.hidden = false;
+}
+
+function scrollHeatmapCellIntoView(cell, mount) {
+  const cellBounds = cell.getBoundingClientRect();
+  const mountBounds = mount.getBoundingClientRect();
+  const left =
+    mount.scrollLeft +
+    cellBounds.left -
+    mountBounds.left -
+    mount.clientWidth / 2 +
+    cellBounds.width / 2;
+  mount.scrollTo({
+    left: Math.max(0, left),
+    behavior: prefersReducedMotion() ? "auto" : "smooth",
+  });
+}
+
+function cssEscape(value) {
+  return window.CSS?.escape
+    ? window.CSS.escape(String(value))
+    : String(value).replaceAll('"', '\\"');
+}
+
+function heatmapSvg(panel) {
+  const cells = (panel.cells || [])
+    .filter(
+      (cell) =>
+        Number.isFinite(Number(cell.week_index)) &&
+        Number.isFinite(Number(cell.weekday_index))
+    )
+    .sort((a, b) =>
+      String(a.date || "").localeCompare(String(b.date || ""))
+    );
   if (!cells.length) {
     return "";
   }
 
-  const weekdayLabels = Array.isArray(panel.weekday_labels) && panel.weekday_labels.length
-    ? panel.weekday_labels
-    : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  const monthTicks = Array.isArray(panel.month_ticks) ? panel.month_ticks : [];
+  const weekdays =
+    Array.isArray(panel.weekday_labels) && panel.weekday_labels.length
+      ? panel.weekday_labels
+      : [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ];
+  const ticks = Array.isArray(panel.month_ticks)
+    ? panel.month_ticks
+    : [];
   const legend = panel.legend || {};
-  const legendEdges = Array.isArray(legend.tick_values) && legend.tick_values.length
-    ? legend.tick_values.map((value) => Number(value)).filter((value) => Number.isFinite(value))
-    : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410, 430, 450];
-  const defaultBandColors = [
-    "#6B3A09",
-    "#8B5618",
-    "#B9823A",
-    "#F4F5F1",
-    "#EEF3FF",
-    "#E4ECFF",
-    "#D9E4FF",
-    "#CDD9FF",
-    "#BFCFFF",
-    "#B0C3FF",
-    "#A0B6FF",
-    "#8FA6FF",
-    "#7A92F5",
-    "#647BEA",
-    "#4C65DE",
-    "#3550D2",
-    "#5147C8",
-    "#6C4DCD",
-    "#8757D8",
-    "#A26BE6",
+  const edges =
+    Array.isArray(legend.tick_values) && legend.tick_values.length
+      ? legend.tick_values
+          .map(Number)
+          .filter((value) => Number.isFinite(value))
+      : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410, 430, 450];
+  const fallbackColors = [
+    "#6B3A09", "#8B5618", "#B9823A", "#F4F5F1", "#EEF3FF",
+    "#E4ECFF", "#D9E4FF", "#CDD9FF", "#BFCFFF", "#B0C3FF",
+    "#A0B6FF", "#8FA6FF", "#7A92F5", "#647BEA", "#4C65DE",
+    "#3550D2", "#5147C8", "#6C4DCD", "#8757D8", "#A26BE6",
     "#BC82F2",
   ];
-  const legendBandColors = Array.isArray(legend.band_colors) && legend.band_colors.length === Math.max(legendEdges.length - 1, 0)
-    ? legend.band_colors
-    : defaultBandColors;
-  // Reserve a full hydrological year even when only its first week has data.
-  const maxWeekIndex = Math.max(52, ...cells.map((cell) => Number(cell.week_index)));
-  const cellSize = 18;
-  const cellGap = 2;
-  const step = cellSize + cellGap;
-  const gridWidth = (maxWeekIndex + 1) * step - cellGap;
-  const gridHeight = 7 * step - cellGap;
+  const colors =
+    Array.isArray(legend.band_colors) &&
+    legend.band_colors.length === edges.length - 1
+      ? legend.band_colors
+      : fallbackColors;
+
+  const maxWeek = 52;
+  const size = 16;
+  const gap = 4;
+  const step = size + gap;
+  const gridWidth = (maxWeek + 1) * step - gap;
+  const gridHeight = 7 * step - gap;
   const gridX = 98;
   const gridY = 14;
-  const legendWidth = 30;
-  const legendX = gridX + gridWidth + 44;
-  const legendY = gridY;
-  const legendHeight = gridHeight;
-  const bandHeight = legendHeight / legendBandColors.length;
-  const monthLabelY = gridY + gridHeight + 26;
-  const axisLabelY = monthLabelY + 26;
-  const svgWidth = legendX + legendWidth + 130;
-  const svgHeight = axisLabelY + 24;
-  const legendTitleX = legendX + legendWidth + 56;
-  const legendTitleY = legendY + legendHeight / 2;
-  const xAxisLabel = panel.x_axis_label || "Week of Year";
+  const monthY = gridY + 138 + 26;
+  const axisY = monthY + 26;
+  const legendX = gridX;
+  const legendBandWidth = 32;
+  const legendBandHeight = 16;
+  const legendWidth = legendBandWidth * colors.length;
+  const legendTitleY = axisY + 32;
+  const legendY = legendTitleY + 12;
+  const legendTickY = legendY + legendBandHeight + 18;
+  const width = Math.max(
+    gridX + gridWidth + 24,
+    legendX + legendWidth + 36
+  );
+  const height = legendTickY + 18;
 
-  const gridOutline = `<rect class="level-heatmap-grid-outline" x="${gridX - 1}" y="${gridY - 1}" width="${gridWidth + 2}" height="${gridHeight + 2}" rx="10" fill="none"></rect>`;
+  const cellMarkup = cells
+    .map((cell) => {
+      if (cell.future) return "";
+      const weekIndex = Number(cell.week_index);
+      const weekdayIndex = Number(cell.weekday_index);
+      const x = gridX + weekIndex * step;
+      const y = gridY + weekdayIndex * step;
+      const percent = heatmapNumber(cell.percent_of_average);
+      const level = heatmapNumber(cell.max_level_m);
+      const difference = heatmapNumber(cell.difference_from_average_m);
+      const fill = Number.isFinite(percent)
+        ? heatmapColor(percent, edges, colors)
+        : "url(#heatmap-no-data)";
+      const missing = Number.isFinite(percent)
+        ? ""
+        : " level-heatmap-cell--missing";
+      const tooltip = [
+        cell.date_label || cell.date || "",
+        Number.isFinite(level)
+          ? `Maximum level: ${level.toFixed(3)} m`
+          : "No data",
+        Number.isFinite(percent)
+          ? `${percent.toFixed(1)}% of observatory average`
+          : "",
+        Number.isFinite(difference)
+          ? `Difference from average: ${signed(difference, 3)} m`
+          : "",
+      ]
+        .filter(Boolean)
+        .join("\n");
+      return `<rect class="level-heatmap-cell${missing}" x="${x}" y="${y}" width="${size}" height="${size}" rx="2" fill="${fill}" role="button" aria-label="${escapeHtml(tooltip)}" aria-pressed="false" tabindex="-1" data-date="${escapeHtml(cell.date || "")}" data-week-index="${weekIndex}" data-weekday-index="${weekdayIndex}"><title>${escapeHtml(tooltip)}</title></rect>`;
+    })
+    .join("");
 
-  const rects = cells.map((cell) => {
-    const x = gridX + Number(cell.week_index) * step;
-    const y = gridY + Number(cell.weekday_index) * step;
-    const percent = heatmapNumber(cell.percent_of_average);
-    const percentDifference = heatmapNumber(cell.percent_difference_from_average);
-    const percentOfAverage = Number.isFinite(percent)
-      ? percent
-      : (Number.isFinite(percentDifference) ? percentDifference + 100 : NaN);
-    const maxLevel = heatmapNumber(cell.max_level_m);
-    const fallbackMeanLevel = heatmapNumber(cell.mean_level_m);
-    const plottedLevel = Number.isFinite(maxLevel) ? maxLevel : fallbackMeanLevel;
-    const plottedLabel = Number.isFinite(maxLevel) ? "Maximum level" : "Mean level";
-    const missingLabel = "No data";
-    const difference = heatmapNumber(cell.difference_from_average_m);
-    const hasData = Number.isFinite(plottedLevel) && Number.isFinite(percentOfAverage);
-    const fill = hasData
-      ? heatmapColor(percentOfAverage, { edges: legendEdges, colors: legendBandColors })
-      : "url(#level-heatmap-no-data)";
-    const extraClass = hasData ? "" : " level-heatmap-cell--missing";
-    const tooltip = [
-      cell.date_label || cell.date || "",
-      Number.isFinite(plottedLevel) ? `${plottedLabel}: ${plottedLevel.toFixed(3)} m` : missingLabel,
-      Number.isFinite(percentOfAverage) ? `${percentOfAverage.toFixed(1)}% of observatory average` : "",
-      Number.isFinite(difference) ? `Difference from average: ${formatSignedValue(difference, 3)} m` : "",
-    ].filter(Boolean).join("\n");
-    return `<rect class="level-heatmap-cell${extraClass}" x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="3" fill="${fill}"><title>${escapeHtml(tooltip)}</title></rect>`;
-  }).join("");
+  const weekdayMarkup = weekdays
+    .map((label, index) => {
+      const y = gridY + index * step + size / 2 + 4;
+      return `<text class="level-heatmap-axis" x="${gridX - 14}" y="${y}" text-anchor="end">${escapeHtml(label)}</text>`;
+    })
+    .join("");
 
-  const yLabels = weekdayLabels.map((label, index) => {
-    const y = gridY + index * step + cellSize / 2 + 4;
-    return `<text class="level-heatmap-axis" x="${gridX - 14}" y="${y}" text-anchor="end">${escapeHtml(label)}</text>`;
-  }).join("");
+  const monthMarkup = ticks
+    .map((tick) => {
+      const week = Number(tick.week_index);
+      if (!Number.isFinite(week)) {
+        return "";
+      }
+      const x = gridX + week * step + size / 2;
+      return `<text class="level-heatmap-month" x="${x}" y="${monthY}" text-anchor="middle">${escapeHtml(tick.label || "")}</text>`;
+    })
+    .join("");
 
-  const monthLabels = monthTicks.map((tick) => {
-    const weekIndex = Number(tick.week_index);
-    if (!Number.isFinite(weekIndex)) {
-      return "";
-    }
-    const x = gridX + weekIndex * step + cellSize / 2;
-    return `<text class="level-heatmap-month" x="${x}" y="${monthLabelY}" text-anchor="middle">${escapeHtml(tick.label || "")}</text>`;
-  }).join("");
-
-  const legendBands = legendBandColors.map((color, index) => {
-    const y = legendY + (legendBandColors.length - index - 1) * bandHeight;
-    return `<rect class="level-heatmap-legend-band" x="${legendX}" y="${y}" width="${legendWidth}" height="${bandHeight}" fill="${color}"></rect>`;
-  }).join("");
-
-  const maxLegendEdge = legendEdges.length ? legendEdges[legendEdges.length - 1] : null;
-  const legendTicks = selectHeatmapLegendLabelValues(legendEdges).reverse().map((value) => {
-    const edgeIndex = legendEdges.indexOf(value);
-    const y = legendY + (legendEdges.length - edgeIndex - 1) * bandHeight;
-    const label = Number.isFinite(maxLegendEdge) && value === maxLegendEdge
-      ? `>${Math.round(value)}`
-      : String(Math.round(value));
-    return `<g><line class="level-heatmap-grid-outline" x1="${legendX + legendWidth + 6}" y1="${y}" x2="${legendX + legendWidth + 14}" y2="${y}"></line><text class="level-heatmap-tick" x="${legendX + legendWidth + 20}" y="${y + 4}">${escapeHtml(label)}</text></g>`;
-  }).join("");
+  const bands = colors.map(color => `<span style="background:${escapeHtml(color)}"></span>`).join("");
+  const labels = [30, 90, 150, 210, 270, 330, 390, 450].filter(value => edges.includes(value))
+    .map(value => `<span>${value === edges.at(-1) ? ">" : ""}${value}</span>`).join("");
 
   return `
-    <svg class="level-heatmap-svg" viewBox="0 0 ${svgWidth} ${svgHeight}" preserveAspectRatio="xMinYMin meet" style="min-width:${svgWidth}px" role="img" aria-label="${escapeHtml(panel.title || "River-level difference heatmap")}">
-      <defs>
-        <pattern id="level-heatmap-no-data" width="1" height="1" patternUnits="objectBoundingBox" viewBox="0 0 18 18">
-          <rect width="18" height="18" fill="#59636b"></rect>
-          <path d="M3 15L15 3" stroke="#c4ccd1" stroke-width="1.5"></path>
-        </pattern>
-      </defs>
-      ${gridOutline}
-      ${rects}
-      ${yLabels}
-      ${monthLabels}
-      <text class="level-heatmap-axis-label" x="${gridX + gridWidth / 2}" y="${axisLabelY}" text-anchor="middle">${escapeHtml(xAxisLabel)}</text>
-      ${legendBands}
-      ${legendTicks}
-      <rect x="${legendX}" y="${monthLabelY - 14}" width="18" height="18" rx="3" fill="url(#level-heatmap-no-data)"></rect>
-      <text class="level-heatmap-axis" x="${legendX + 26}" y="${monthLabelY}">No data</text>
-      <text class="level-heatmap-legend-title" x="${legendTitleX}" y="${legendTitleY}" text-anchor="middle" transform="rotate(90 ${legendTitleX} ${legendTitleY})">${escapeHtml(legend.label || "% of Average")}</text>
-    </svg>`;
+    <svg class="level-heatmap-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMinYMin meet"  role="group" aria-label="${escapeHtml(panel.title || "River-level heatmap")}">
+      <defs><pattern id="heatmap-no-data" width="1" height="1" patternContentUnits="objectBoundingBox"><rect width="1" height="1" fill="#68747d"/><path d="M0 1L1 0" stroke="#c0ccd5" stroke-width="0.0714286"/></pattern></defs>
+      <rect id="heatmapWeekOutline" x="0" y="${gridY - 3}" width="${step + 4}" height="${gridHeight + 6}" rx="3" fill="none" stroke="#f7de5e" stroke-width="2" pointer-events="none" hidden></rect>
+      <rect class="level-heatmap-grid-outline" x="${gridX - 1}" y="${gridY - 1}" width="${gridWidth + 2}" height="${gridHeight + 2}" fill="none"></rect>
+      ${cellMarkup}
+      ${weekdayMarkup}
+      ${monthMarkup}
+      <text class="level-heatmap-axis-label" x="${gridX + gridWidth / 2}" y="${axisY}" text-anchor="middle">${escapeHtml(panel.x_axis_label || "Week of year")}</text>
+    </svg>
+    <div class="heatmap-legend" aria-label="Colour scale: percentage of observatory average">
+      <p>${escapeHtml(legend.label || "% of average")}</p>
+      <div class="heatmap-legend-bands" aria-hidden="true">${bands}</div>
+      <div class="heatmap-legend-labels">${labels}</div>
+      <p class="heatmap-legend-missing"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect width="14" height="14" fill="#68747d"/><path d="M0 14L14 0" stroke="#c0ccd5"/></svg>No data</p>
+    </div>`;
 }
 
-function heatmapNumber(value) {
-  return value === null || value === undefined || (typeof value === "string" && value.trim() === "")
-    ? NaN
-    : Number(value);
-}
-
-function selectHeatmapLegendLabelValues(edges) {
-  if (!Array.isArray(edges) || !edges.length) {
-    return [];
+function layoutHeatmap(mount) {
+  const svg = mount.querySelector("svg");
+  const responsive = window.matchMedia("(max-width: 639px)");
+  function layout() {
+    const mobile = responsive.matches;
+    svg.setAttribute("viewBox", mobile ? "0 0 350 730" : "0 0 1180 210");
+    svg.classList.toggle("level-heatmap-svg--mobile", mobile);
+    svg.querySelectorAll(".level-heatmap-cell").forEach(cell => {
+      const week = Number(cell.dataset.weekIndex), day = Number(cell.dataset.weekdayIndex);
+      cell.setAttribute("x", (mobile ? 62 : 98) + (mobile ? week % 14 : week) * 20);
+      cell.setAttribute("y", 14 + day * 20 + (mobile ? Math.floor(week / 14) * 180 : 0));
+    });
+    svg.querySelectorAll(".level-heatmap-month").forEach(label => {
+      const original = Number(label.dataset.originalX || label.getAttribute("x"));
+      label.dataset.originalX = original;
+      const week = Math.round((original - 107) / 20);
+      label.setAttribute("x", mobile ? 71 + (week % 14) * 20 : original);
+      label.setAttribute("y", mobile ? 178 + Math.floor(week / 14) * 180 : 178);
+    });
+    svg.querySelectorAll(".mobile-weekday").forEach(node => node.remove());
+    svg.querySelectorAll(".level-heatmap-axis").forEach(label => {
+      label.dataset.fullLabel ||= label.textContent;
+      label.textContent = mobile ? label.dataset.fullLabel.slice(0, 3) : label.dataset.fullLabel;
+      label.setAttribute("x", mobile ? 52 : 84);
+    });
+    if (mobile) for (let block=1; block<4; block++) svg.querySelectorAll(".level-heatmap-axis:not(.mobile-weekday)").forEach(label => {
+      const clone = label.cloneNode(true); clone.classList.add("mobile-weekday");
+      clone.setAttribute("y", Number(label.getAttribute("y")) + block * 180); svg.append(clone);
+    });
+    updateWeekOutline();
   }
-
-  const preferred = [30, 90, 150, 210, 270, 330, 390, 450];
-  const selected = preferred.filter((value) => edges.includes(value));
-  return selected.length ? selected : edges;
+  function updateWeekOutline() {
+    const outline = svg.querySelector("#heatmapWeekOutline");
+    const week = Number(selectedHeatmapWeekIndex) || 0;
+    outline.setAttribute("x", (responsive.matches ? 59 : 95) + (responsive.matches ? week % 14 : week) * 20);
+    outline.setAttribute("y", 11 + (responsive.matches ? Math.floor(week / 14) * 180 : 0));
+  }
+  mount.updateWeekOutline = updateWeekOutline;
+  // Avoid accumulating listeners when changing hydrological year.
+  mount.cleanupLayout?.();
+  responsive.addEventListener("change", layout);
+  mount.cleanupLayout = () => responsive.removeEventListener("change", layout);
+  layout();
 }
 
-
-function heatmapColor(percentValue, legendScale) {
-  const edges = Array.isArray(legendScale?.edges) ? legendScale.edges : [30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410, 430, 450];
-  const colors = Array.isArray(legendScale?.colors) ? legendScale.colors : [
-    "#6B3A09",
-    "#8B5618",
-    "#B9823A",
-    "#F4F5F1",
-    "#EEF3FF",
-    "#E4ECFF",
-    "#D9E4FF",
-    "#CDD9FF",
-    "#BFCFFF",
-    "#B0C3FF",
-    "#A0B6FF",
-    "#8FA6FF",
-    "#7A92F5",
-    "#647BEA",
-    "#4C65DE",
-    "#3550D2",
-    "#5147C8",
-    "#6C4DCD",
-    "#8757D8",
-    "#A26BE6",
-    "#BC82F2",
-  ];
-  if (!edges.length || !colors.length) {
-    return "#F4F5F1";
-  }
-  if (percentValue <= edges[0]) {
+function heatmapColor(value, edges, colors) {
+  if (value <= edges[0]) {
     return colors[0];
   }
   for (let index = 0; index < colors.length; index += 1) {
-    const upperEdge = edges[index + 1];
-    if (!Number.isFinite(upperEdge) || percentValue <= upperEdge) {
+    const upper = edges[index + 1];
+    if (!Number.isFinite(upper) || value <= upper) {
       return colors[index];
     }
   }
   return colors[colors.length - 1];
 }
 
-function formatSignedValue(value, decimals = 0) {
-  const numeric = Number(value);
-  if (!Number.isFinite(numeric)) {
-    return "";
-  }
-  const sign = numeric > 0 ? "+" : "";
-  return `${sign}${numeric.toFixed(decimals)}`;
-}
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-}
-
 function renderNotes(notes) {
   const grid = document.getElementById("notesGrid");
-  const cards = notes.length ? notes.map(renderNoteCard) : [renderNoteCard({
-    label: "Public dashboard",
-    text: "Curated public notes will appear here when available."
-  })];
-  grid.replaceChildren(...cards);
-}
+  const safeNotes = notes.length
+    ? notes
+    : [
+        {
+          label: "Observatory context",
+          text: "Project context will appear when it is available in the public feed.",
+        },
+      ];
+  grid.replaceChildren(
+    ...safeNotes.map((note) => {
+      const card = document.createElement("article");
+      card.className = "note-panel";
 
-function renderNoteCard(note) {
-  const card = document.createElement("article");
-  card.className = "note-panel";
+      const label = document.createElement("p");
+      label.className = "section-label";
+      label.textContent = note.label || "Note";
 
-  const label = document.createElement("p");
-  label.className = "panel-label";
-  label.textContent = note.label || "Note";
+      const body = document.createElement("p");
+      body.textContent = note.text || "";
 
-  const body = document.createElement("p");
-  body.textContent = note.text || "";
-
-  card.append(label, body);
-  return card;
+      card.append(label, body);
+      return card;
+    })
+  );
 }
 
 function renderFooter(footer) {
-  text("footerTitle", footer.title || "Observatory Partners");
-  const footerText = document.getElementById("footerText");
-  footerText.textContent = footer.text || "";
-  footerText.hidden = !footer.text;
+  text("footerTitle", footer.title || "Observatory partners");
+  optionalText("footerText", footer.text);
 
   const contact = footer.contact || {};
+  const contactItems = Array.isArray(contact.items)
+    ? contact.items
+    : [];
   const contactSection = document.getElementById("footerContact");
-  const contactItems = Array.isArray(contact.items) ? contact.items : [];
   contactSection.hidden = !contact.title && !contactItems.length;
   text("footerContactTitle", contact.title || "Contact");
-  const contactList = document.getElementById("footerContactList");
-  contactList.replaceChildren(...contactItems.map(renderContactItem));
+  document
+    .getElementById("footerContactList")
+    .replaceChildren(...contactItems.map(renderContactItem));
 
-  const strip = document.getElementById("partnerStrip");
-  strip.replaceChildren(...(footer.partners || []).map(renderPartner));
+  document
+    .getElementById("partnerStrip")
+    .replaceChildren(
+      ...(footer.partners || []).map(renderPartner)
+    );
 }
 
 function renderContactItem(item) {
@@ -931,7 +1263,9 @@ function renderContactItem(item) {
   label.className = "footer-contact-label";
   label.textContent = `${item.label}:`;
 
-  const value = item.href ? document.createElement("a") : document.createElement("span");
+  const value = item.href
+    ? document.createElement("a")
+    : document.createElement("span");
   value.className = "footer-contact-value";
   value.textContent = item.value || "";
   if (item.href) {
@@ -947,27 +1281,349 @@ function renderContactItem(item) {
 }
 
 function renderPartner(partner) {
-  const image = document.createElement("img");
-  image.src = partner.logo;
-  image.alt = partner.name || "Partner logo";
-
-  const wrapperTag = partner.href ? "a" : "div";
-  const wrapper = document.createElement(wrapperTag);
+  const wrapper = document.createElement(partner.href ? "a" : "div");
   wrapper.className = partner.href ? "partner-link" : "partner-badge";
-
   if (partner.href) {
     wrapper.href = partner.href;
     wrapper.target = "_blank";
     wrapper.rel = "noreferrer";
   }
 
+  const image = document.createElement("img");
+  image.src = publicAssetPath(partner.logo);
+  image.alt = partner.name || "Partner logo";
   wrapper.append(image);
   return wrapper;
 }
 
-function togglePanel(panelId, isVisible) {
-  const panel = document.getElementById(panelId);
-  panel.hidden = !isVisible;
+function sixHourTicks(window) {
+  const ticks = [];
+  for (let value = window.start; value < window.end; value += 6 * 3600000) ticks.push(value);
+  ticks.push(window.end);
+  return ticks;
+}
+
+const observationFrame = {
+  id: "observationFrame",
+  afterLayout(chart) {
+    // DOM-visible geometry supports checking alignment at real browser sizes.
+    chart.canvas.dataset.plotBounds = JSON.stringify({left:chart.chartArea.left, right:chart.chartArea.right, width:chart.chartArea.width});
+    chart.canvas.dataset.timeTicks = JSON.stringify(chart.scales.x.ticks.map(tick => tick.value));
+  },
+  afterDraw(chart) {
+    if (chart.canvas.id !== "rainfallChart") return;
+    const {ctx, chartArea:{left,right,top,bottom}} = chart;
+    ctx.save(); ctx.strokeStyle = chartPalette.grid; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (const edge of [left, right]) {
+      // Existing tick gridlines already supply boundaries in the 24-hour view.
+      if (chart.scales.x.ticks.some(tick => Math.abs(chart.scales.x.getPixelForValue(tick.value) - edge) < 1)) continue;
+      ctx.moveTo(edge, top); ctx.lineTo(edge, bottom);
+    }
+    ctx.stroke(); ctx.restore();
+  },
+};
+
+function standardChartOptions(reportingWindow, yTitle, suggestedMax = null) {
+  const durationHours =
+    (reportingWindow.end - reportingWindow.start) / 3_600_000;
+  return {
+    maintainAspectRatio: false,
+    layout: {padding: {right:12}, autoPadding:false},
+    animation: prefersReducedMotion() ? false : { duration: 280 },
+    interaction: { intersect: false, mode: "nearest" },
+    plugins: chartPlugins(),
+    scales: {
+      x: timeScale(reportingWindow, durationHours > 30 ? 8 : 6),
+      y: {
+        afterFit(axis) { axis.width = 66; },
+        border: { display: false },
+        beginAtZero: true,
+        ...(Number.isFinite(suggestedMax) ? { suggestedMax } : {}),
+        grid: { color: chartPalette.grid },
+        ticks: { color: chartPalette.muted },
+        title: {
+          display: true,
+          text: yTitle,
+          color: chartPalette.ink,
+          font: { weight: "600" },
+        },
+      },
+    },
+  };
+}
+
+function responseChartOptions(
+  reportingWindow,
+  rainfallTitle,
+  flowTitle,
+  hasRainfall,
+  minimumAxisMax = null
+) {
+  const durationHours =
+    (reportingWindow.end - reportingWindow.start) / 3_600_000;
+  return {
+    maintainAspectRatio: false,
+    animation: prefersReducedMotion() ? false : { duration: 280 },
+    interaction: { intersect: false, mode: "nearest" },
+    plugins: chartPlugins(),
+    scales: {
+      x: timeScale(reportingWindow, durationHours > 30 ? 8 : 6),
+      yFlow: {
+        ...(minimumAxisMax !== null ? { suggestedMax: minimumAxisMax } : {}),
+        type: "linear",
+        position: hasRainfall ? "right" : "left",
+        beginAtZero: true,
+        grid: hasRainfall
+          ? { drawOnChartArea: false }
+          : { color: chartPalette.grid },
+        ticks: { color: chartPalette.muted },
+        title: {
+          display: true,
+          text: flowTitle,
+          color: chartPalette.ink,
+          font: { weight: "600" },
+        },
+      },
+      ...(hasRainfall
+        ? {
+            yRain: {
+              type: "linear",
+              position: "left",
+              beginAtZero: true,
+              suggestedMax: 1,
+              grid: { color: chartPalette.grid },
+              ticks: { color: chartPalette.muted },
+              title: {
+                display: true,
+                text: rainfallTitle,
+                color: chartPalette.ink,
+                font: { weight: "600" },
+              },
+            },
+          }
+        : {}),
+    },
+  };
+}
+
+function scatterOptions(points, xTitle, yTitle) {
+  const maxX = Math.max(...points.map((point) => point.x), 0);
+  const maxY = Math.max(...points.map((point) => point.y), 0);
+  return {
+    maintainAspectRatio: false,
+    interaction: {mode:"nearest", intersect:true},
+    animation: prefersReducedMotion() ? false : { duration: 280 },
+    plugins: {
+      ...chartPlugins(),
+      tooltip: {
+        ...chartPlugins().tooltip,
+        callbacks: {
+          title(items) {
+            return formatIsoDateLabel(items?.[0]?.raw?.date);
+          },
+          label(context) {
+            return [
+              `Daily range: ${Number(context.raw?.x).toFixed(3)} m`,
+              `Maximum depth: ${Number(context.raw?.y).toFixed(3)} m`,
+            ];
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        min: 0,
+        max: scatterZoomed ? 0.2 : maxX + Math.max(maxX * 0.08, 0.01),
+        grid: { color: chartPalette.grid },
+        ticks: { color: chartPalette.muted },
+        title: {
+          display: true,
+          text: xTitle,
+          color: chartPalette.ink,
+          font: { weight: "600" },
+        },
+      },
+      y: {
+        beginAtZero: true,
+        min: 0,
+        max: scatterZoomed ? 0.5 : maxY + Math.max(maxY * 0.08, 0.05),
+        grid: { color: chartPalette.grid },
+        ticks: { color: chartPalette.muted },
+        title: {
+          display: true,
+          text: yTitle,
+          color: chartPalette.ink,
+          font: { weight: "600" },
+        },
+      },
+    },
+  };
+}
+
+function chartPlugins() {
+  return {
+    legend: {
+      labels: {
+        color: chartPalette.ink,
+        boxWidth: 14,
+        boxHeight: 8,
+        font: { family: "IBM Plex Sans", weight: "600" },
+      },
+    },
+    tooltip: {
+      backgroundColor: "#071a33",
+      titleColor: "#ffffff",
+      bodyColor: "#dce8f8",
+      borderColor: "#6f8aab",
+      borderWidth: 1,
+      padding: 12,
+      callbacks: {
+        title(items) {
+          const value = items?.[0]?.parsed?.x;
+          return Number.isFinite(value) ? formatTooltipTime(value) : "";
+        },
+        label(context) {
+          const axis = context.dataset.yAxisID;
+          const rain = context.dataset.type === "bar" || axis === "yRain";
+          const name = axis === "yFlow" ? "Flow rate" : rain ? "Rainfall" : "Water depth";
+          const unit = axis === "yFlow" ? "m³/s" : rain ? "mm" : "m";
+          return `${name}: ${Number(context.parsed.y).toFixed(rain ? 2 : 3)} ${unit}`;
+        },
+      },
+    },
+  };
+}
+
+function timeScale(reportingWindow, maxTicksLimit) {
+  const dayWindow = reportingWindow.end - reportingWindow.start <= 25 * 3600000;
+  return {
+    type: "linear", min: reportingWindow.start, max: reportingWindow.end, offset: false,
+    afterBuildTicks(axis) {
+      if (dayWindow) {
+        axis.ticks = sixHourTicks(reportingWindow).map(value => ({value}));
+        const rotation = axis.chart?.width < 400 ? 45 : 0;
+        axis.options.ticks.minRotation = rotation;
+        axis.options.ticks.maxRotation = rotation;
+      }
+    },
+    grid: { color: chartPalette.grid, offset:false },
+    border: {display:true, color:chartPalette.grid},
+    ticks: {
+      color: chartPalette.muted, autoSkip: !dayWindow, maxTicksLimit,
+      align: "inner", minRotation:0, maxRotation:0, font:{size:12},
+      callback(value) {
+        return dayWindow ? new Intl.DateTimeFormat("en-GB", {hour:"2-digit", minute:"2-digit", hour12:false, timeZone:displayTimeZone}).format(new Date(Number(value))) : formatAxisTick(Number(value));
+      },
+    },
+    title: {display:true, text: dayWindow ? `Time (${displayTimeZone})` : "Date & Time", color:chartPalette.ink, font:{weight:"600"}},
+  };
+}
+
+function buildTimeWindowState(payload, panels) {
+  const windows = buildReportingWindows(
+    payload.reporting_windows || {},
+    payload.reporting_window || {}
+  );
+  const requested =
+    Array.isArray(payload.time_windows) && payload.time_windows.length
+      ? payload.time_windows
+      : [fallbackWindowOption];
+  const options = requested.filter((option) => windows[option.id]);
+  const fallback = fallbackReportingWindow(panels);
+
+  if (!options.length) {
+    windows[fallbackWindowOption.id] = fallback;
+    return {
+      options: [fallbackWindowOption],
+      windows,
+      defaultId: fallbackWindowOption.id,
+    };
+  }
+
+  const defaultId = options.some(
+    (option) => option.id === payload.default_time_window
+  )
+    ? payload.default_time_window
+    : options[0].id;
+  return { options, windows, defaultId };
+}
+
+function buildReportingWindows(explicit, legacy) {
+  const windows = {};
+  Object.entries(explicit).forEach(([id, window]) => {
+    const parsed = parseReportingWindow(window);
+    if (parsed) {
+      windows[id] = parsed;
+    }
+  });
+  if (!windows[fallbackWindowOption.id]) {
+    const parsed = parseReportingWindow(legacy);
+    if (parsed) {
+      windows[fallbackWindowOption.id] = parsed;
+    }
+  }
+  return windows;
+}
+
+function parseReportingWindow(window) {
+  const start = toEpochMs(window.start_timestamp);
+  const end = toEpochMs(window.end_timestamp);
+  return Number.isFinite(start) &&
+    Number.isFinite(end) &&
+    start < end
+    ? { start, end }
+    : null;
+}
+
+function fallbackReportingWindow(panels) {
+  const timestamps = [
+    ...(panels.rainfall?.points || []).map((point) =>
+      toEpochMs(point.timestamp)
+    ),
+    ...(panels.depth?.points || []).map((point) =>
+      toEpochMs(point.timestamp)
+    ),
+  ].filter(Number.isFinite);
+  if (!timestamps.length) {
+    const now = Date.now();
+    return { start: now - 86_400_000, end: now };
+  }
+  return {
+    start: Math.min(...timestamps),
+    end: Math.max(...timestamps),
+  };
+}
+
+function applyErrorState(error) {
+  text("heroEyebrow", "Flash Flood Observatory");
+  text("siteNameLine", "Public dashboard");
+  text("siteLocationLine", "");
+  document.getElementById("siteLocationLine").hidden = true;
+  text("heroStrapline", "The public payload could not be loaded.");
+  text("currentReadingValue", "Unavailable");
+  text(
+    "currentReadingNote",
+    "Refresh this page or open the current dashboard."
+  );
+  document.getElementById("windowSwitcher").hidden = true;
+  document.getElementById("officialAlert").hidden = true;
+  document.getElementById("analysisGrid").hidden = true;
+  document.getElementById("levelHeatmapPanel").hidden = true;
+
+  document
+    .getElementById("heroMeta")
+    .replaceChildren(
+      renderMetaChip({ label: "Feed", value: "Unavailable" }),
+      renderMetaChip({
+        label: "Detail",
+        value: error.message || "The request failed.",
+      })
+    );
+  renderSummaryMetrics([]);
+  renderNotes([]);
+  renderFooter({});
 }
 
 function showEmptyChart(prefix, message) {
@@ -979,414 +1635,26 @@ function showEmptyChart(prefix, message) {
 }
 
 function hideEmptyChart(prefix) {
-  const canvas = document.getElementById(`${prefix}Chart`);
-  const empty = document.getElementById(`${prefix}Empty`);
-  canvas.hidden = false;
-  empty.hidden = true;
+  document.getElementById(`${prefix}Chart`).hidden = false;
+  document.getElementById(`${prefix}Empty`).hidden = true;
 }
 
-function chartOptions(reportingWindow, yTitle, suggestedMax = null) {
-  const durationHours = (reportingWindow.end - reportingWindow.start) / (60 * 60 * 1000);
-  const maxTicksLimit = durationHours > 30 ? 8 : 6;
-
-  return {
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        labels: {
-          color: chartPalette.text,
-        },
-      },
-      tooltip: {
-        backgroundColor: "rgba(5, 10, 16, 0.96)",
-        borderColor: "rgba(119, 232, 255, 0.22)",
-        borderWidth: 1,
-        titleColor: chartPalette.text,
-        bodyColor: chartPalette.muted,
-        callbacks: {
-          title(items) {
-            const xValue = items?.[0]?.parsed?.x;
-            return Number.isFinite(xValue) ? formatTooltipTime(xValue) : "";
-          },
-        },
-      },
-    },
-    scales: {
-      x: {
-        type: "linear",
-        min: reportingWindow.start,
-        max: reportingWindow.end,
-        offset: false,
-        grid: {
-          color: chartPalette.grid,
-        },
-        ticks: {
-          color: chartPalette.muted,
-          autoSkip: true,
-          maxTicksLimit,
-          callback(value) {
-            return formatAxisTick(Number(value));
-          },
-        },
-        title: {
-          display: true,
-          text: "Date & Time",
-          color: chartPalette.text,
-        },
-      },
-      y: {
-        beginAtZero: true,
-        ...(Number.isFinite(suggestedMax) ? { suggestedMax } : {}),
-        grid: {
-          color: chartPalette.grid,
-        },
-        ticks: {
-          color: chartPalette.muted,
-        },
-        title: {
-          display: true,
-          text: yTitle,
-          color: chartPalette.text,
-        },
-      },
-    },
-  };
+function togglePanel(id, visible) {
+  document.getElementById(id).hidden = !visible;
 }
 
-function formatIsoDateLabel(value) {
-  if (!value) {
+function publicAssetPath(path) {
+  if (!path) {
     return "";
   }
-  const [year, month, day] = String(value).split("-");
-  return year && month && day ? `${day}/${month}/${year}` : String(value);
-}
-
-function responseChartOptions(reportingWindow, rainfallTitle, flowTitle, hasRainfall = true, minimumAxisMax = null) {
-  const durationHours = (reportingWindow.end - reportingWindow.start) / (60 * 60 * 1000);
-  const maxTicksLimit = durationHours > 30 ? 8 : 6;
-
-  return {
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        labels: {
-          color: chartPalette.text,
-        },
-      },
-      tooltip: {
-        backgroundColor: "rgba(5, 10, 16, 0.96)",
-        borderColor: "rgba(119, 232, 255, 0.22)",
-        borderWidth: 1,
-        titleColor: chartPalette.text,
-        bodyColor: chartPalette.muted,
-        callbacks: {
-          title(items) {
-            const xValue = items?.[0]?.parsed?.x;
-            return Number.isFinite(xValue) ? formatTooltipTime(xValue) : "";
-          },
-        },
-      },
-    },
-    scales: {
-      x: {
-        type: "linear",
-        min: reportingWindow.start,
-        max: reportingWindow.end,
-        offset: false,
-        grid: {
-          color: chartPalette.grid,
-        },
-        ticks: {
-          color: chartPalette.muted,
-          autoSkip: true,
-          maxTicksLimit,
-          callback(value) {
-            return formatAxisTick(Number(value));
-          },
-        },
-        title: {
-          display: true,
-          text: "Date & Time",
-          color: chartPalette.text,
-        },
-      },
-      yFlow: {
-        ...(minimumAxisMax !== null ? { suggestedMax: minimumAxisMax } : {}),
-        type: "linear",
-        position: hasRainfall ? "right" : "left",
-        beginAtZero: true,
-        grid: hasRainfall
-          ? { drawOnChartArea: false }
-          : { color: chartPalette.grid },
-        ticks: {
-          color: chartPalette.muted,
-        },
-        title: {
-          display: true,
-          text: flowTitle,
-          color: chartPalette.text,
-        },
-      },
-      ...(hasRainfall ? {
-        yRain: {
-          type: "linear",
-          position: "left",
-          beginAtZero: true,
-          suggestedMax: 1,
-          grid: {
-            color: chartPalette.grid,
-          },
-          ticks: {
-            color: chartPalette.muted,
-          },
-          title: {
-            display: true,
-            text: rainfallTitle,
-            color: chartPalette.text,
-          },
-        },
-      } : {}),
-    },
-  };
-}
-
-function historicalTimeSeriesOptions(points, yTitle) {
-  const timestamps = points.map((point) => toEpochMs(point.timestamp)).filter((value) => Number.isFinite(value));
-  const fallbackEnd = Date.now();
-  const min = timestamps.length ? Math.min(...timestamps) : fallbackEnd - 30 * 24 * 60 * 60 * 1000;
-  const max = timestamps.length ? Math.max(...timestamps) : fallbackEnd;
-
-  return {
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        labels: {
-          color: chartPalette.text,
-        },
-      },
-      tooltip: {
-        backgroundColor: "rgba(5, 10, 16, 0.96)",
-        borderColor: "rgba(119, 232, 255, 0.22)",
-        borderWidth: 1,
-        titleColor: chartPalette.text,
-        bodyColor: chartPalette.muted,
-        callbacks: {
-          title(items) {
-            const xValue = items?.[0]?.parsed?.x;
-            return Number.isFinite(xValue) ? formatTooltipDate(xValue) : "";
-          },
-        },
-      },
-    },
-    scales: {
-      x: {
-        type: "linear",
-        min,
-        max,
-        grid: {
-          color: chartPalette.grid,
-        },
-        ticks: {
-          color: chartPalette.muted,
-          autoSkip: true,
-          maxTicksLimit: 8,
-          callback(value) {
-            return formatAxisDateTick(Number(value));
-          },
-        },
-        title: {
-          display: true,
-          text: "Date",
-          color: chartPalette.text,
-        },
-      },
-      y: {
-        beginAtZero: true,
-        grid: {
-          color: chartPalette.grid,
-        },
-        ticks: {
-          color: chartPalette.muted,
-        },
-        title: {
-          display: true,
-          text: yTitle,
-          color: chartPalette.text,
-        },
-      },
-    },
-  };
-}
-
-function historicalScatterOptions(points, xTitle, yTitle) {
-  const xValues = points.map((point) => point.x).filter((value) => Number.isFinite(value));
-  const yValues = points.map((point) => point.y).filter((value) => Number.isFinite(value));
-  const maxX = xValues.length ? Math.max(...xValues) : 0;
-  const maxY = yValues.length ? Math.max(...yValues) : 0;
-  const xPadding = maxX > 0 ? Math.max(maxX * 0.08, 0.01) : 0.01;
-  const yPadding = maxY > 0 ? Math.max(maxY * 0.08, 0.05) : 0.05;
-
-  return {
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        labels: {
-          color: chartPalette.text,
-        },
-      },
-      tooltip: {
-        backgroundColor: "rgba(5, 10, 16, 0.96)",
-        borderColor: "rgba(119, 232, 255, 0.22)",
-        borderWidth: 1,
-        titleColor: chartPalette.text,
-        bodyColor: chartPalette.muted,
-        callbacks: {
-          title(items) {
-            return formatIsoDateLabel(items?.[0]?.raw?.date);
-          },
-          label(context) {
-            const raw = context.raw || {};
-            return [
-              `Daily water depth range: ${Number(raw.x).toFixed(3)} m`,
-              `Maximum daily water depth: ${Number(raw.y).toFixed(3)} m`,
-            ];
-          },
-        },
-      },
-    },
-    scales: {
-      x: {
-        type: "linear",
-        beginAtZero: true,
-        min: 0,
-        max: maxX + xPadding,
-        grid: {
-          color: chartPalette.grid,
-        },
-        ticks: {
-          color: chartPalette.muted,
-        },
-        title: {
-          display: true,
-          text: xTitle,
-          color: chartPalette.text,
-        },
-      },
-      y: {
-        beginAtZero: true,
-        min: 0,
-        max: maxY + yPadding,
-        grid: {
-          color: chartPalette.grid,
-        },
-        ticks: {
-          color: chartPalette.muted,
-        },
-        title: {
-          display: true,
-          text: yTitle,
-          color: chartPalette.text,
-        },
-      },
-    },
-  };
-}
-
-function applyErrorState(error) {
-  text("heroEyebrow", "Flash Flood Observatory");
-  text("siteNameLine", "Public dashboard");
-  text("siteLocationLine", "");
-  document.getElementById("siteLocationLine").hidden = true;
-  text("heroStrapline", "The public payload could not be loaded.");
-  document.getElementById("officialAlert").hidden = true;
-  document.getElementById("windowSwitcher").hidden = true;
-  document.getElementById("analysisGrid").hidden = true;
-  document.getElementById("levelHeatmapPanel").hidden = true;
-
-  const heroMeta = document.getElementById("heroMeta");
-  heroMeta.replaceChildren(
-    renderMetaChip({ label: "Last updated", value: "Unavailable" }),
-    renderMetaChip({ label: "Detail", value: error.message })
-  );
-
-  renderSummaryMetrics([]);
-  renderNotes([]);
-  renderFooter({});
-}
-
-function buildTimeWindowState(payload, panels) {
-  const windows = buildReportingWindows(payload.reporting_windows || {}, payload.reporting_window || {}, panels);
-  const requestedOptions = Array.isArray(payload.time_windows) && payload.time_windows.length
-    ? payload.time_windows
-    : [fallbackWindowOption];
-  const options = requestedOptions.filter((option) => windows[option.id]);
-  const fallbackWindow = buildFallbackReportingWindow(panels);
-
-  if (!options.length) {
-    windows[fallbackWindowOption.id] = fallbackWindow;
-    return {
-      options: [fallbackWindowOption],
-      windows,
-      defaultId: fallbackWindowOption.id,
-    };
+  if (
+    /^(?:[a-z]+:)?\/\//i.test(path) ||
+    path.startsWith("/") ||
+    path.startsWith("data:")
+  ) {
+    return path;
   }
-
-  const requestedDefault = payload.default_time_window;
-  const defaultId = options.some((option) => option.id === requestedDefault)
-    ? requestedDefault
-    : options[0].id;
-
-  return {
-    options,
-    windows,
-    defaultId,
-  };
-}
-
-function buildReportingWindows(explicitWindows, legacyWindow, panels) {
-  const windows = {};
-
-  Object.entries(explicitWindows || {}).forEach(([id, window]) => {
-    const parsed = parseReportingWindow(window);
-    if (parsed) {
-      windows[id] = parsed;
-    }
-  });
-
-  if (!windows[fallbackWindowOption.id]) {
-    const parsedLegacy = parseReportingWindow(legacyWindow);
-    if (parsedLegacy) {
-      windows[fallbackWindowOption.id] = parsedLegacy;
-    }
-  }
-
-  return windows;
-}
-
-function parseReportingWindow(reportingWindow) {
-  const explicitStart = toEpochMs(reportingWindow.start_timestamp);
-  const explicitEnd = toEpochMs(reportingWindow.end_timestamp);
-  if (Number.isFinite(explicitStart) && Number.isFinite(explicitEnd) && explicitStart < explicitEnd) {
-    return { start: explicitStart, end: explicitEnd };
-  }
-  return null;
-}
-
-function buildFallbackReportingWindow(panels) {
-  const timestamps = [
-    ...(panels.rainfall?.points || []).map((point) => toEpochMs(point.timestamp)),
-    ...(panels.depth?.points || []).map((point) => toEpochMs(point.timestamp)),
-  ].filter((value) => Number.isFinite(value));
-
-  if (!timestamps.length) {
-    const now = Date.now();
-    return { start: now - 24 * 60 * 60 * 1000, end: now };
-  }
-
-  return {
-    start: Math.min(...timestamps),
-    end: Math.max(...timestamps),
-  };
+  return `${path.replace(/^\.\//, "")}`;
 }
 
 function toEpochMs(timestamp) {
@@ -1402,10 +1670,6 @@ function text(id, value) {
 }
 
 function formatAxisTick(timestampMs) {
-  if (!Number.isFinite(timestampMs)) {
-    return "";
-  }
-
   const date = new Date(timestampMs);
   return [
     new Intl.DateTimeFormat("en-GB", {
@@ -1422,52 +1686,56 @@ function formatAxisTick(timestampMs) {
   ];
 }
 
-function formatAxisDateTick(timestampMs) {
-  if (!Number.isFinite(timestampMs)) {
-    return "";
-  }
-
+function formatTooltipTime(timestampMs) {
   return new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
     month: "short",
     day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
     timeZone: displayTimeZone,
+    timeZoneName: "short",
   }).format(new Date(timestampMs));
 }
 
-function formatTooltipTime(timestampMs) {
-  const date = new Date(timestampMs);
-  return new Intl.DateTimeFormat("en-GB", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: displayTimeZone,
-    timeZoneName: "short",
-  }).format(date);
-}
-
-function formatTooltipDate(timestampMs) {
-  const date = new Date(timestampMs);
-  return new Intl.DateTimeFormat("en-GB", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    timeZone: displayTimeZone,
-  }).format(date);
-}
-
 function formatDate(timestamp) {
-  const date = new Date(timestamp);
-  return new Intl.DateTimeFormat("en-GB", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: displayTimeZone,
-    timeZoneName: "short",
-  }).format(date);
+  return formatTooltipTime(toEpochMs(timestamp));
+}
+
+function formatIsoDateLabel(value) {
+  if (!value) {
+    return "";
+  }
+  const [year, month, day] = String(value).split("-");
+  return year && month && day ? `${day}/${month}/${year}` : String(value);
+}
+
+function signed(value, decimals = 0) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) {
+    return "";
+  }
+  return `${numeric > 0 ? "+" : ""}${numeric.toFixed(decimals)}`;
+}
+
+function heatmapNumber(value) {
+  if (value === null || value === undefined || value === "") {
+    return Number.NaN;
+  }
+  return Number(value);
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function prefersReducedMotion() {
+  return window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 }
 
 function positiveAxisFloor(value) {
@@ -1483,11 +1751,12 @@ function readAloudText(section) {
       return;
     }
     if (!(node instanceof Element) || node.hidden ||
-        node.matches('button, select, svg, canvas, script, [aria-hidden="true"]') ||
+        node.matches('.scatter-controls, button, select, svg, canvas, script, #levelHeatmapDayDetail, #heatmapDayControl, .heatmap-legend, [aria-hidden="true"]') ||
         getComputedStyle(node).display === "none") return;
     node.childNodes.forEach(visit);
   }
   visit(section);
+  if (section.id === "levelHeatmapPanel") parts.push(document.getElementById("heatmapPeriodSelect").selectedOptions[0]?.textContent || "");
   const explanations = {
     rainfallPanel: "The blue bars represent rainfall totals in millimetres.",
     depthPanel: "The light blue line represents water depth in metres.",
@@ -1496,7 +1765,8 @@ function readAloudText(section) {
     levelHeatmapPanel: "Each coloured square represents a completed day's maximum water depth as a percentage of the overall average since deployment, across all water years. Brown squares represent lower values, pale squares values around the average, and progressively blue and purple squares higher values. The top of the colour scale includes values above 450 percent of the average. A grey square with a diagonal line means no data. Blank space to the right is reserved for the rest of the water year.",
   };
   if (explanations[section.id]) parts.push(explanations[section.id]);
-  return parts.join(". ").replace(/m³\/s/g, "cubic metres per second")
+  return parts.join(". ").replace(/(white|blue|purple|brown)\s*\(?[⬜🟦🟪🟫]\)?/gu, "$1 square")
+    .replace(/\b(\d+)h\b/gi, "$1 hours").replace(/m³\/s/g, "cubic metres per second")
     .replace(/\bmm\b/g, "millimetres").replace(/\bm\b/g, "metres")
     .replace(/%/g, " percent")
     .replace(/⬜/g, "white square").replace(/🟦/g, "blue square")
@@ -1506,7 +1776,7 @@ function readAloudText(section) {
 }
 
 // Bump when the voice, model or synthesis settings change; old audio must not match.
-var readAloudAudioVersion = "cori-medium-20261006-v1";
+var readAloudAudioVersion = "alba-medium-20261007-v2";
 
 async function readAloudAudioPath(content) {
   const bytes = new TextEncoder().encode(readAloudAudioVersion + "\n" + content);
@@ -1539,11 +1809,11 @@ function setupReadAloud() {
     activeButton = null;
     status.textContent = "";
   }
-  document.querySelectorAll('.hero-copy, .summary-card, .panel-chart, .panel-heatmap, .note-panel, .official-alert, .footer-copy, .footer-contact').forEach((section) => {
-    const heading = [...section.querySelectorAll('h1, h2, .panel-subtitle, .footer-title')]
+  document.querySelectorAll('#top .briefing__grid, #readings, .data-panel, .heatmap-panel, #context').forEach((section) => {
+    const heading = [...section.querySelectorAll('h1, h2, h3, .panel-subtitle')]
       .find((item) => item.textContent.trim() && !item.hidden && getComputedStyle(item).display !== "none")
       || section.querySelector(".panel-label");
-    const label = heading?.textContent.trim() || "this section";
+    const label = heading?.textContent.trim() || section.getAttribute("aria-label") || "Introduction";
     const button = document.createElement("button");
     button.type = "button";
     button.className = "read-aloud-button";
@@ -1551,9 +1821,10 @@ function setupReadAloud() {
     button.setAttribute("aria-label", button.dataset.readLabel);
     button.setAttribute("aria-pressed", "false");
     button.title = button.dataset.readLabel;
-    button.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h4l10-5v14L8 14H4zM8 14l2 6h3l-2-5M21 9v6"/></svg>';
+    button.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3zM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/></svg>';
     section.classList.add("read-aloud-section");
-    section.prepend(button);
+    if (section.id === "readings") section.querySelector(".summary-heading").append(button);
+    else section.prepend(button);
     button.addEventListener("click", async () => {
       const wasActive = activeButton === button;
       stop();
@@ -1577,7 +1848,7 @@ function setupReadAloud() {
         player.onerror = failed;
         await player.play();
         if (token === generation) {
-          status.textContent = `Reading ${label} in British English. Press the same megaphone to stop.`;
+          status.textContent = `Reading ${label} in British English. Press the same speaker to stop.`;
         }
       } catch (error) {
         console.warn("Read-aloud playback failed:", error.name);
@@ -1589,5 +1860,6 @@ function setupReadAloud() {
   document.getElementById("heatmapPeriodSelect")?.addEventListener("change", stop);
   window.addEventListener("pagehide", stop);
 }
+
 
 main();

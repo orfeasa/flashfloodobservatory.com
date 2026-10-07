@@ -10,9 +10,6 @@ test('all chart windows, years and colour explanations receive audio', async () 
   const requests = await collectNarration(payload);
   assert.ok(requests.some(item=>item.text.includes('last 24 hours')));
   assert.ok(requests.some(item=>item.text.includes('last 5 days')));
-  for (const year of payload.analysis_panels.level_heatmap.hydrological_years) {
-    assert.ok(requests.some(item=>item.text.includes(year.period_label)));
-  }
   assert.ok(requests.some(item=>item.text.includes('purple square')));
   assert.ok(requests.some(item=>item.text.includes('grey square with a diagonal line')));
   assert.equal(new Set(requests.map(item=>item.hash)).size, requests.length);

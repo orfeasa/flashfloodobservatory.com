@@ -17,7 +17,6 @@ Everything at the repository root is for maintenance only and should not be trea
 - [`public/assets/brand`](public/assets/brand) contains static branding and partner imagery
 - [`public/404.html`](public/404.html) is the public not-found page
 - [`public/CNAME`](public/CNAME) keeps the custom domain with the site artifact
-- [`public/v2`](public/v2) is an isolated redesign prototype that reads the same public payload without replacing the production homepage
 
 ## Single payload rule
 
@@ -27,36 +26,15 @@ The public site is driven by one file only:
 
 All summary cards, charts, official alert content, notes, and footer partner entries should be inferred from that payload.
 
-## Redesign prototype
+## Production dashboard — 7 October 2026
 
-The parallel redesign is available at `/v2/`.
+The approved V3 dashboard now lives at `/`. V1 has been replaced and the `/v2/` and `/v3/` routes and assets removed. Git history is the archive. The curated payload destination and Windows publisher are unchanged.
 
-It is intentionally isolated:
+The dashboard retains the compact introduction/statistics, equal-width chart pairs, expandable scientific axes, full hydrological years, selectable heatmap details, eight grouped speakers and Alba narration. The scatter uses translucent green points and an optional typical-day zoom without changing measurements.
 
-- the production homepage remains `public/index.html`
-- the publisher continues to update only `public/data/site_payload.json`
-- `/v2/` reads that same payload using `../data/site_payload.json`
-- no redirect or workflow change points public traffic at the prototype
-- the prototype can be reviewed and revised independently before any explicit production cutover
+The top-right sun/moon button switches to the named destination theme. The first visit follows the system; manual choices persist, and the footer’s “Use system setting” action restores automatic changes. The existing `ffo-v3-theme` storage key is retained so reviewer preferences survive promotion. Both themes redraw charts without losing selections.
 
-### Professor review revision — 7 October 2026
-
-The `/v3/` review now combines the production dark palette (cyan location and water depth, blue rainfall, yellow uppercase category labels) with V2 section bands and compact typography. The production homepage remains unchanged.
-
-- Persistent section navigation and a separate observatory row identify Boscastle and two unconfirmed Cornwall locations. The latter are unavailable labels, not working data tabs; only Boscastle has a payload.
-- One main title, an optimized 480px WebP logo (about 29 KB versus the 1.4 MB source), update/timezone metadata and a continuous statistics strip form the first desktop view.
-- Both chart pairs use equal columns and stack at full width on narrow screens. Depth retains V1's 0.173 m minimum upper bound; flow retains its payload-provided minimum upper bound when supplied. Neither caps high events. Tooltips explicitly identify date/time, measurement, value and units.
-- The heatmap derives calendar positions from the supplied water-year dates. October 2025 and other absent completed days are grey with a diagonal mark. Future dates remain blank. The annual dimensions and month labels remain consistent. Phones use four consecutive blocks of up to fourteen weeks, retaining the complete year without horizontal scrolling. A yellow outline encloses the selected week; the scale and selected-day detail sit below the calendar.
-- Eight unboxed speaker controls cover introduction, the entire statistics strip, each of four graphs, heatmap, and all context columns. Narration expands units and 24h and removes repeated colour names. The existing British English audio build collects both homepage and V3 clips; day hover does not invalidate narration. Audio generation is still optional to publishing.
-- The context heading is “Why is this catchment being observed?” Official EA status remains separate, with green reserved for the no-alert state and distinct warning/unavailable states.
-
-Design choices for this review: use the existing recognizable blue logo with the cyan Boscastle location treatment. Do not invent location-specific identities before the two new locations are confirmed. The second review adds a compact UK map, with the logo alongside the title, description and metadata in the centre, and the map on the right. The static coastline asset is derived from public-domain [Natural Earth 1:50m countries](https://www.naturalearthdata.com/about/terms-of-use/). Confirmed location labels and approximate town coordinates are configured in `observatoryLocations`; unknown sites hide the marker instead of inventing a location.
-
-Mobile inspection fixes: controls and partner logos are constrained to their containers, statistics keep values and units together, calendar weekday labels use readable abbreviations, and the colour scale uses responsive HTML instead of shrinking SVG text. A day selector complements the week selector for touch access.
-
-The second review also adds the River level summary heading, one EVENT ANALYSIS heading, green scatter points, aligned full-width heatmap controls, cleaner calendar cells, larger supporting text and a right-aligned contact block. Observation charts use identical fixed plotting margins and, in the 24-hour view, ticks every six elapsed hours from the exported start plus the exact end (the current payload window spans 23 hours 59 minutes). Rainfall has explicit left/right plot boundaries.
-
-Validation: `npm test` includes 13 calendar, selection, scale, tooltip, narration, shared tick/margin and locator-map regressions. `npm run audio:text` prepares clips for both variants; `python scripts/build_audio.py` builds them with the dependencies in `scripts/requirements-audio.txt`. Preview from `public/` and open `/v3/`. This revision is not a production cutover.
+Run `npm test` and `npm run audio:text`; preview the `public/` directory at `/`.
 
 ## Current public behaviour
 
@@ -352,8 +330,6 @@ Summary and event-analysis labels now match Live observations in cyan capitals; 
 
 V3 now trials the British female Piper Alba medium voice at its default pace. `Flash` receives an explicit TRAP-vowel phoneme override during synthesis; visible text and narration hashes still use the correctly spelled word. The voice version is part of each narration request and cache key, so V1 continues using Cori with unchanged files. Both models are pinned to the existing source revision; credits and dataset licence are in `public/assets/audio-credits.txt`. Preference and naturalness still need human listening feedback. The build refuses unknown voice versions and regenerates only changed clips.
 
-### V3 colour themes
+### Appearance and scatter controls
 
-The header Theme control offers System (the default), Light and Dark. An inline bootstrap resolves the saved V3-only preference before styles paint. Explicit choices are stored locally; selecting System removes the override and follows live OS colour-scheme changes. Storage failures do not block rendering. Theme changes redraw all four charts with contrasting ink/data colours while preserving the chosen time window and heatmap year/week/day. The scientific heatmap scale stays identical across themes. Light mode uses cool paper surfaces, deep teal wayfinding and ochre category accents; dark mode retains the established palette. V1 and V2 are unchanged.
-
-V3 historical scatter uses 2.5px translucent green points with no resting outline, enlarged hit targets and a highlighted active point. Its optional typical-days zoom uses explicitly labelled 0–0.2 m range / 0–0.5 m peak bounds and reports the number of days outside the viewport. Every measurement remains in the dataset at its exact coordinates; Show all days restores outliers. Theme changes preserve the zoom.
+See the production dashboard section above for theme behaviour. Typical-day scatter zoom uses range 0–0.2 m and peak 0–0.5 m and discloses the number of days outside the view. The full range remains the default.

@@ -2,199 +2,261 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#03070b">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-18D1E52WF3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-18D1E52WF3');
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#071a33">
     <meta
       name="description"
-      content="Public dashboard for real-time flash flood monitoring on the River Valency in Boscastle, UK."
+      content="Public dashboard for the Flash Flood Observatory on the River Valency in Boscastle."
     >
-    <link rel="canonical" href="https://flashfloodobservatory.com/">
-    <meta property="og:locale" content="en_GB">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Flash Flood Observatory">
-    <meta property="og:title" content="Flash Flood Observatory | Real-time flood monitoring in Boscastle, UK">
-    <meta
-      property="og:description"
-      content="Live public dashboard for rainfall, river levels, official flood-warning context, and event analysis on the River Valency."
+    <title>Flash Flood Observatory — Boscastle, UK</title>
+    <script>
+      // Resolve before styles paint; unavailable storage must not block rendering.
+      (() => {
+        let preference = "system";
+        try { preference = localStorage.getItem("ffo-v3-theme") || "system"; } catch (_) {}
+        if (!["system", "light", "dark"].includes(preference)) preference = "system";
+        document.documentElement.dataset.themePreference = preference;
+        document.documentElement.dataset.theme = preference === "system"
+          ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : preference;
+      })();
+    </script>
+    <link rel="icon" href="assets/brand/site-mark-small.webp" type="image/webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
     >
-    <meta property="og:url" content="https://flashfloodobservatory.com/">
-    <meta property="og:image" content="https://flashfloodobservatory.com/assets/brand/social-card.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta
-      property="og:image:alt"
-      content="Flash Flood Observatory social card with the observatory name, Boscastle, UK, and the site mark."
-    >
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Flash Flood Observatory | Real-time flood monitoring in Boscastle, UK">
-    <meta
-      name="twitter:description"
-      content="Live public dashboard for rainfall, river levels, official flood-warning context, and event analysis on the River Valency."
-    >
-    <meta name="twitter:image" content="https://flashfloodobservatory.com/assets/brand/social-card.png">
-    <meta
-      name="twitter:image:alt"
-      content="Flash Flood Observatory social card with the observatory name, Boscastle, UK, and the site mark."
-    >
-    <title>Flash Flood Observatory | Real-time flood monitoring in Boscastle, UK</title>
-    <link rel="icon" href="assets/brand/site-mark.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20261007h">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
-    <script src="app.js" defer></script>
+    <script src="app.js?v=20261007h" defer></script>
   </head>
   <body>
-    <div class="site-shell">
-      <header class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow" id="heroEyebrow">Flash Flood Observatory</p>
-          <h1 class="hero-title">
-            <span id="siteNameLine">Flash Flood Observatory</span>
-            <span id="siteLocationLine">Boscastle, UK</span>
-          </h1>
-          <p class="lede" id="heroStrapline">
-            Real-time monitoring of extreme floods.
-          </p>
-          <div class="hero-meta" id="heroMeta"></div>
+    <a class="skip-link" href="#mainContent">Skip to observations</a>
+
+    <header class="site-header">
+      <div class="masthead">
+        <a class="identity" id="headerIdentity" href="#top">Flash Flood Observatory, Boscastle, UK</a>
+
+        <nav class="section-nav" aria-label="Dashboard sections">
+          <a href="#observations">Observations</a>
+          <a href="#analysis">Analysis</a>
+          <a href="#context">Context</a>
+        </nav>
+        <div class="theme-control">
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+            <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+            <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg>
+          </button>
         </div>
-        <div class="hero-mark">
-          <div class="mark-frame">
-            <img
-              id="siteMark"
-              src="assets/brand/site-mark.png"
-              alt="Flash Flood Observatory site mark"
-              class="site-mark"
-            >
+      </div>
+      <nav class="observatory-nav content-frame" aria-label="Observatories">
+        <a href="#top" aria-current="page">Boscastle <span>River Valency</span></a>
+        <span aria-disabled="true">Cornwall Location 2 <small>Coming soon</small></span>
+        <span aria-disabled="true">Cornwall Location 3 <small>Coming soon</small></span>
+      </nav>
+    </header>
+
+    <main id="mainContent">
+      <section class="briefing" id="top" aria-labelledby="leadTitle">
+        <div class="content-frame briefing__grid">
+          <div class="briefing__title">
+            <img id="siteMark" class="briefing-logo" src="assets/brand/site-mark-small.webp" width="120" height="120" fetchpriority="high" alt="Flash Flood Observatory site mark">
+            <h1 class="briefing-site-title" id="leadTitle">
+              <span id="siteNameLine">Flash Flood Observatory</span>
+              <span class="sr-only"> — </span><span id="siteLocationLine">Boscastle, UK</span>
+            </h1>
           </div>
+          <div class="briefing__detail">
+            <p class="briefing__lede" id="heroStrapline">
+              Real-time monitoring of extreme floods.
+            </p>
+            <div class="lead-meta" id="heroMeta"></div>
+          </div>
+          <aside class="observatory-map" id="observatoryMap" aria-label="Observatory location">
+            <svg viewBox="0 0 220 270" role="img" aria-labelledby="mapTitle">
+              <title id="mapTitle">Boscastle in the United Kingdom</title>
+              <image href="assets/brand/uk-locator.svg" width="220" height="270"/>
+              <g id="mapMarker"><circle r="4" fill="#91e3f2" stroke="#03070b" stroke-width="1.5"/><path d="M-4 -3l-16 -16h-54" fill="none" stroke="#91e3f2"/><text id="mapLabel" x="-74" y="-24" fill="#91e3f2" font-size="13" font-weight="700">Boscastle</text></g>
+            </svg>
+          </aside>
         </div>
-      </header>
-
-      <p id="readAloudStatus" class="read-aloud-status" role="status" aria-live="polite"></p>
-
-      <section class="summary-strip" aria-label="Key figures" id="summaryStrip"></section>
-
-      <section class="window-switcher" id="windowSwitcher" hidden>
-        <div class="window-switcher-copy">
-          <p class="panel-label">Displayed Time Window</p>
-          <p class="panel-copy window-switcher-note">Applies to Rainfall, River Levels, and Event Analysis</p>
-        </div>
-        <div class="window-switcher-controls" id="windowSwitcherControls" aria-label="Displayed chart time window"></div>
       </section>
 
-      <main class="dashboard-grid" id="dashboardGrid">
-        <section class="panel panel-chart" id="rainfallPanel">
-          <div class="panel-head">
-            <p class="panel-label" id="rainfallEyebrow">Rainfall</p>
-            <h2 id="rainfallTitle">Observed Rainfall</h2>
-            <p class="panel-context-chip" id="rainfallContextChip"></p>
-            <p class="panel-copy" id="rainfallDescription"></p>
-          </div>
-          <div class="chart-frame">
-            <canvas id="rainfallChart" aria-label="Rainfall hydrograph"></canvas>
-            <div class="panel-empty" id="rainfallEmpty" hidden></div>
-          </div>
-        </section>
-
-        <section class="panel panel-chart" id="depthPanel">
-          <div class="panel-head">
-            <p class="panel-label" id="depthEyebrow">River Levels</p>
-            <h2 id="depthTitle">Observed Water Depth</h2>
-            <p class="panel-context-chip" id="depthContextChip"></p>
-            <p class="panel-copy" id="depthDescription"></p>
-          </div>
-          <div class="chart-frame">
-            <canvas id="depthChart" aria-label="Hydrograph depth"></canvas>
-            <div class="panel-empty" id="depthEmpty" hidden></div>
-          </div>
-        </section>
-      </main>
-
-      <section class="analysis-grid" id="analysisGrid" aria-label="Analysis charts">
-        <section class="panel panel-chart" id="responsePanel">
-          <div class="panel-head">
-            <p class="panel-label" id="responseEyebrow">Event Analysis</p>
-            <h2 id="responseTitle">Event Analysis</h2>
-            <p class="panel-subtitle" id="responseSubtitle">River Hydrograph and Precipitation Hyetograph</p>
-            <p class="panel-context-chip" id="responseContextChip"></p>
-            <p class="panel-copy" id="responseDescription"></p>
-          </div>
-          <div class="chart-frame">
-            <canvas id="responseChart" aria-label="River flow and rainfall event analysis"></canvas>
-            <div class="panel-empty" id="responseEmpty" hidden></div>
-          </div>
-          <p class="panel-copy panel-footer-copy" id="responseFooterDescription"></p>
-        </section>
-
-        <section class="panel panel-chart" id="historicalRangePanel">
-          <div class="panel-head">
-            <p class="panel-label" id="historicalRangeEyebrow">Event Analysis</p>
-            <h2 id="historicalRangeTitle"></h2>
-            <p class="panel-subtitle" id="historicalRangeSubtitle"></p>
-            <p class="panel-copy" id="historicalRangeDescription"></p>
-          </div>
-          <div class="chart-frame">
-            <canvas id="historicalRangeChart" aria-label="Historical 24h river level range"></canvas>
-            <div class="panel-empty" id="historicalRangeEmpty" hidden></div>
-          </div>
-          <p class="panel-copy panel-footer-copy" id="historicalRangeFooterDescription"></p>
-        </section>
+      <section class="readings content-frame" id="readings" aria-label="River statistics">
+        <div class="summary-heading"><div><p class="section-label">River level summary</p><h2>Levels and ranges at the observatory</h2></div></div>
+        <div class="metric-ledger" aria-label="Key river figures" id="summaryStrip"></div>
       </section>
 
-      <section class="panel panel-heatmap" id="levelHeatmapPanel" hidden>
-        <div class="panel-head panel-head--heatmap">
-          <p class="panel-label" id="levelHeatmapEyebrow">River Levels</p>
-          <h2 id="levelHeatmapTitle">% of Flash Flood Observatory Average</h2>
-          <p class="panel-copy" id="levelHeatmapDescription"></p>
-          <p class="heatmap-average" id="levelHeatmapAverage"></p>
-          <div class="heatmap-period-control" id="heatmapPeriodControl" hidden>
-            <label for="heatmapPeriodSelect">Hydrological year</label>
-            <select id="heatmapPeriodSelect"></select>
-            <span id="heatmapPeriodLabel"></span>
+      <section class="section-shell content-frame" id="observations" aria-labelledby="observationsTitle">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">Live observations</p>
+            <h2 id="observationsTitle">Rainfall and river level</h2>
+          </div>
+
+          <div class="window-switcher" id="windowSwitcher" hidden>
+            <div class="window-switcher__copy">
+              <p class="control-label">Displayed Time Window</p>
+              <p>Applies to Rainfall, River Levels, and Event Analysis.</p>
+            </div>
+            <div class="window-switcher-controls" id="windowSwitcherControls" aria-label="Displayed chart time window"></div>
           </div>
         </div>
-        <div class="heatmap-frame">
-          <div class="heatmap-mount" id="levelHeatmapMount" aria-label="River-level average heatmap"></div>
-          <div class="panel-empty" id="levelHeatmapEmpty" hidden></div>
+
+        <div class="observation-grid" id="dashboardGrid">
+          <article class="data-panel data-panel--rainfall" id="rainfallPanel">
+            <div class="data-panel-head">
+              <div>
+                <p class="panel-signal panel-signal--rain" id="rainfallEyebrow">Rainfall</p>
+                <h3 id="rainfallTitle">Observed rainfall</h3>
+              </div>
+              <p class="context-chip" id="rainfallContextChip"></p>
+            </div>
+            <p class="data-panel-copy" id="rainfallDescription"></p>
+            <div class="chart-frame">
+              <canvas id="rainfallChart" aria-label="Observed rainfall chart"></canvas>
+              <div class="panel-empty" id="rainfallEmpty" hidden></div>
+            </div>
+          </article>
+
+          <article class="data-panel data-panel--depth" id="depthPanel">
+            <div class="data-panel-head">
+              <div>
+                <p class="panel-signal panel-signal--river" id="depthEyebrow">River levels</p>
+                <h3 id="depthTitle">Observed water depth</h3>
+              </div>
+              <p class="context-chip" id="depthContextChip"></p>
+            </div>
+            <p class="data-panel-copy" id="depthDescription"></p>
+            <div class="chart-frame">
+              <canvas id="depthChart" aria-label="Observed water depth chart"></canvas>
+              <div class="panel-empty" id="depthEmpty" hidden></div>
+            </div>
+          </article>
         </div>
-        <p class="panel-copy panel-footer-copy" id="levelHeatmapFooterDescription"></p>
       </section>
 
-      <section class="notes-grid" aria-label="Dashboard notes" id="notesGrid"></section>
+      <section class="analysis-section" id="analysis" aria-labelledby="analysisTitle">
+        <div class="content-frame">
+          <div class="section-heading section-heading--analysis">
+            <div>
+              <h2 class="section-label" id="analysisTitle">EVENT ANALYSIS</h2>
+            </div>
+          </div>
 
-      <section class="official-alert official-alert--none" id="officialAlert" hidden>
-        <div class="official-alert-copy">
-          <p class="panel-label" id="officialAlertEyebrow">Official Environment Agency Flood Alerts and Warnings</p>
-          <p class="official-alert-title" id="officialAlertTitle">There are no flood warnings or alerts in this area.</p>
-          <p class="panel-copy official-alert-message" id="officialAlertMessage"></p>
+          <div class="analysis-grid" id="analysisGrid">
+            <article class="data-panel data-panel--response" id="responsePanel">
+              <div class="data-panel-head">
+                <div>
+                  <h3 id="responseTitle">River response</h3>
+                  <p class="panel-subtitle" id="responseSubtitle"></p>
+                </div>
+                <p class="context-chip" id="responseContextChip"></p>
+              </div>
+              <p class="data-panel-copy" id="responseDescription"></p>
+              <div class="chart-frame">
+                <canvas id="responseChart" aria-label="River flow and rainfall event analysis"></canvas>
+                <div class="panel-empty" id="responseEmpty" hidden></div>
+              </div>
+              <p class="panel-footer-copy" id="responseFooterDescription"></p>
+            </article>
+
+            <article class="data-panel data-panel--historical" id="historicalRangePanel">
+              <div class="data-panel-head">
+                <div>
+                  <h3 id="historicalRangeTitle">Daily range and peak levels</h3>
+                  <p class="panel-subtitle" id="historicalRangeSubtitle"></p>
+                </div>
+              </div>
+              <div class="scatter-copy"><p class="data-panel-copy" id="historicalRangeDescription"></p>
+                <div class="scatter-controls">
+                  <button type="button" id="scatterZoom" aria-pressed="false" aria-controls="historicalRangeChart">Zoom into typical days</button>
+                  <p id="scatterViewStatus" aria-live="polite"></p>
+                </div>
+              </div>
+              <div class="chart-frame">
+                <canvas id="historicalRangeChart" aria-label="Historical daily range and peak-level scatter chart"></canvas>
+                <div class="panel-empty" id="historicalRangeEmpty" hidden></div>
+              </div>
+              <p class="panel-footer-copy" id="historicalRangeFooterDescription"></p>
+            </article>
+          </div>
+
+          <article class="heatmap-panel" id="levelHeatmapPanel" hidden>
+            <div class="heatmap-copy">
+              <div>
+                <p class="panel-signal panel-signal--history" id="levelHeatmapEyebrow">River-level history</p>
+                <h3 id="levelHeatmapTitle">% of Flash Flood Observatory average</h3>
+              </div>
+              <p id="levelHeatmapDescription"></p>
+              <p class="heatmap-average" id="levelHeatmapAverage"></p>
+              <div class="heatmap-controls">
+                <div class="heatmap-period-control" id="heatmapPeriodControl" hidden>
+                  <label for="heatmapPeriodSelect">Hydrological year</label>
+                  <select id="heatmapPeriodSelect"></select>
+
+                </div>
+                <div class="heatmap-week-control" id="heatmapWeekControl" hidden>
+                  <label for="heatmapWeekSelect" id="heatmapWeekLabel">Week of Year</label>
+                  <select id="heatmapWeekSelect"></select>
+                </div>
+                <div class="heatmap-day-control" id="heatmapDayControl" hidden>
+                  <label for="heatmapDaySelect">Day in selected week</label>
+                  <select id="heatmapDaySelect"></select>
+                </div>
+              </div>
+            </div>
+            <div class="heatmap-day-detail" id="levelHeatmapDayDetail" aria-live="polite" aria-atomic="true" hidden></div>
+            <div class="heatmap-frame">
+              <div class="heatmap-mount" id="levelHeatmapMount" aria-label="Historical river-level heatmap"></div>
+
+              <div class="panel-empty" id="levelHeatmapEmpty" hidden></div>
+            </div>
+            <p class="panel-footer-copy" id="levelHeatmapFooterDescription"></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="context-section content-frame" id="context" aria-labelledby="contextTitle">
+        <div class="section-heading section-heading--context">
+          <div>
+            <p class="section-label">About the observatory</p>
+            <h2 id="contextTitle">Why is this catchment being observed?</h2>
+          </div>
+        </div>
+        <div class="notes-grid" aria-label="Observatory context" id="notesGrid"></div>
+      </section>
+
+      <section class="official-alert official-alert--none content-frame" id="officialAlert" hidden>
+        <div class="official-alert__copy">
+          <p class="panel-signal" id="officialAlertEyebrow">Official Environment Agency Flood Alerts and Warnings</p>
+          <h2 id="officialAlertTitle">There are no flood warnings or alerts.</h2>
+          <p id="officialAlertMessage"></p>
         </div>
         <div class="official-alert-meta">
           <p id="officialAlertUpdated"></p>
           <a id="officialAlertSource" href="#" target="_blank" rel="noreferrer"></a>
         </div>
       </section>
+    <p id="readAloudStatus" class="sr-only" role="status" aria-live="polite"></p>
+    </main>
 
-      <footer class="footer">
+    <footer class="site-footer">
+      <div class="content-frame site-footer__inner">
         <div class="footer-main">
-          <div class="footer-copy">
-            <p class="footer-title" id="footerTitle">Observatory Partners</p>
+          <div>
+            <h2 id="footerTitle">Observatory partners</h2>
             <p id="footerText"></p>
           </div>
           <div class="footer-contact" id="footerContact" hidden>
-            <p class="footer-title" id="footerContactTitle">Contact</p>
+            <p class="control-label" id="footerContactTitle">Contact</p>
             <div class="footer-contact-list" id="footerContactList"></div>
           </div>
         </div>
         <div class="partner-strip" aria-label="Partner logos" id="partnerStrip"></div>
-      </footer>
-    </div>
+      </div>
+              <button id="themeSystem" class="theme-system" type="button" hidden>Use system setting</button>
+    </footer>
   </body>
 </html>

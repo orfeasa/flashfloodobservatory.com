@@ -76,7 +76,7 @@ async function collectNarration(payload, variant = '') {
 if (require.main === module) {
   (async () => {
     const payload = JSON.parse(await fs.readFile(path.join(root, 'public/data/site_payload.json'), 'utf8'));
-    const all = [...await collectNarration(payload), ...await collectNarration(payload, 'v3')];
+    const all = await collectNarration(payload);
     const requests = [...new Map(all.map(item => [item.hash, item])).values()];
     await fs.mkdir(path.join(root, '.cache'), {recursive:true});
     await fs.writeFile(path.join(root, '.cache/narration.json'), JSON.stringify(requests, null, 2));

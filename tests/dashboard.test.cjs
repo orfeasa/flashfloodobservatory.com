@@ -3,8 +3,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const {renderNarrationDocument, collectNarration} = require('../scripts/collect-narration.cjs');
 const payload = JSON.parse(fs.readFileSync('public/data/site_payload.json', 'utf8'));
-test('v3 whole water years distinguish missing, zero and future days', async () => {
- const dom = await renderNarrationDocument(payload, 'v3');
+test('dashboard whole water years distinguish missing, zero and future days', async () => {
+ const dom = await renderNarrationDocument(payload);
  try {
   const w=dom.window;
   const y=w.completeWaterYear({start_date:'2025-10-01',end_date:'2026-09-30',cells:[{date:'2025-11-06',max_level_m:0,percent_of_average:0}]});
@@ -18,8 +18,8 @@ test('v3 whole water years distinguish missing, zero and future days', async () 
   assert.equal(w.document.querySelector('.level-heatmap-svg').getAttribute('viewBox'),'0 0 1180 210');
  } finally {dom.window.close();}
 });
-test('v3 axes retain expandable floors and tooltips distinguish measurements', async()=>{
- const dom=await renderNarrationDocument(payload,'v3');
+test('dashboard axes retain expandable floors and tooltips distinguish measurements', async()=>{
+ const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window;
   const depth=w.standardChartOptions({start:0,end:100},'Depth',.173).scales.y;
@@ -31,8 +31,8 @@ test('v3 axes retain expandable floors and tooltips distinguish measurements', a
   assert.equal(label({dataset:{},parsed:{y:.12}}),'Water depth: 0.120 m');
  } finally {dom.window.close();}
 });
-test('v3 eight grouped speakers expand units, remove repeated colours and have generated clip requests',async()=>{
- const dom=await renderNarrationDocument(payload,'v3');
+test('dashboard eight grouped speakers expand units, remove repeated colours and have generated clip requests',async()=>{
+ const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window;
   assert.equal(w.document.querySelectorAll('.read-aloud-button').length,8);
@@ -43,15 +43,15 @@ test('v3 eight grouped speakers expand units, remove repeated colours and have g
   assert.doesNotMatch(heat,/brown\s*\(?brown|purple\s*\(?purple/); assert.ok(heat.includes('brown square'));
   const context=w.readAloudText(w.document.getElementById('context'));
   assert.ok(context.includes('Why Boscastle')); assert.ok(context.includes('How it is observed')); assert.ok(context.includes('Impact'));
-  const requests=await collectNarration(payload,'v3');
+  const requests=await collectNarration(payload);
   assert.ok(requests.some(r=>r.text.includes('last 5 days'))); assert.ok(requests.some(r=>r.text.includes('1 October 2025')));
   w.document.querySelector('#depthPanel .read-aloud-button').click(); await new Promise(r=>setTimeout(r,30));
-  assert.match(dom.audio.getAttribute('src'),/^\.\.\/assets\/audio\/[a-f0-9]{64}\.mp3$/);
+  assert.match(dom.audio.getAttribute('src'),/^assets\/audio\/[a-f0-9]{64}\.mp3$/);
   assert.ok(requests.some(r=>dom.audio.src.includes(r.hash)));
  } finally {dom.window.close();}
 });
-test('v3 day selector follows week/year changes without changing narration', async()=>{
- const dom=await renderNarrationDocument(payload,'v3');
+test('dashboard day selector follows week/year changes without changing narration', async()=>{
+ const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window, d=w.document;
   w.matchMedia = () => ({matches:true, addEventListener(){}, removeEventListener(){}});
@@ -71,8 +71,8 @@ test('v3 day selector follows week/year changes without changing narration', asy
   assert.ok([...day.options].every(o=>!o.value || o.value.startsWith('2026-')));
  } finally {dom.window.close();}
 });
-test('v3 six-hour ticks preserve real bounds and identical observation plot margins',async()=>{
- const dom=await renderNarrationDocument(payload,'v3');
+test('dashboard six-hour ticks preserve real bounds and identical observation plot margins',async()=>{
+ const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window, start=Date.parse('2026-10-24T15:43:00Z');
   const range={start,end:start+24*3600000-60000};
@@ -90,8 +90,8 @@ test('v3 six-hour ticks preserve real bounds and identical observation plot marg
   fiveDay.afterBuildTicks(axis);assert.equal(axis.ticks[0].value,123);
  }finally{dom.window.close();}
 });
-test('v3 map follows confirmed site config and summary speaker belongs to its heading',async()=>{
- const dom=await renderNarrationDocument(payload,'v3');
+test('dashboard map follows confirmed site config and summary speaker belongs to its heading',async()=>{
+ const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window,d=w.document;
   assert.equal(d.querySelectorAll('.summary-heading .read-aloud-button').length,1);
@@ -104,8 +104,8 @@ test('v3 map follows confirmed site config and summary speaker belongs to its he
  }finally{dom.window.close();}
 });
 
-test('v3 heatmap starts clear and supports clearing day, week and year without hover selection',async()=>{
- const dom=await renderNarrationDocument(payload,'v3');
+test('dashboard heatmap starts clear and supports clearing day, week and year without hover selection',async()=>{
+ const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window,d=w.document,week=d.getElementById('heatmapWeekSelect'),day=d.getElementById('heatmapDaySelect'),detail=d.getElementById('levelHeatmapDayDetail');
   assert.equal(week.value,'');assert.equal(day.value,'');assert.equal(detail.hidden,true);
@@ -121,8 +121,8 @@ test('v3 heatmap starts clear and supports clearing day, week and year without h
  }finally{dom.window.close();}
 });
 
-test('v3 theme follows system, persists overrides and preserves scientific selection',async()=>{
- const dom=await renderNarrationDocument(payload,'v3');
+test('dashboard theme follows system, persists overrides and preserves scientific selection',async()=>{
+ const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window,d=w.document; let listener;
   const media={matches:true,addEventListener(type,fn){listener=fn;}};
@@ -130,23 +130,23 @@ test('v3 theme follows system, persists overrides and preserves scientific selec
   d.documentElement.dataset.themePreference='system';w.setupTheme();
   assert.equal(d.documentElement.dataset.theme,'dark');
   media.matches=false;listener();assert.equal(d.documentElement.dataset.theme,'light');
-  const select=d.getElementById('themeSelect');
+  const toggle=d.getElementById('themeToggle');
   const cell=d.querySelector('.level-heatmap-cell');cell.dispatchEvent(new w.Event('click'));const date=d.getElementById('heatmapDaySelect').value;
-  select.value='dark';select.dispatchEvent(new w.Event('change'));
+  toggle.click(); assert.equal(toggle.getAttribute('aria-label'),'Switch to light mode');
   assert.equal(w.localStorage.getItem('ffo-v3-theme'),'dark');
   assert.equal(d.getElementById('heatmapDaySelect').value,date);
   media.matches=false;listener();assert.equal(d.documentElement.dataset.theme,'dark');
-  select.value='system';select.dispatchEvent(new w.Event('change'));
+  d.getElementById('themeSystem').click(); assert.equal(d.getElementById('themeSystem').hidden,true);
   assert.equal(w.localStorage.getItem('ffo-v3-theme'),null);assert.equal(d.documentElement.dataset.theme,'light');
   assert.equal(w.chartPlugins().legend.labels.color,'#172f40');
-  const boot=fs.readFileSync('public/v3/index.html','utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
+  const boot=fs.readFileSync('public/index.html','utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
   w.localStorage.setItem('ffo-v3-theme','dark');w.eval(boot);assert.equal(d.documentElement.dataset.theme,'dark');
   w.localStorage.setItem('ffo-v3-theme','invalid');w.eval(boot);assert.equal(d.documentElement.dataset.themePreference,'system');
  }finally{dom.window.close();}
 });
 
-test('v3 scatter zoom preserves measurements, discloses excluded days and restores outliers',async()=>{
- const dom=await renderNarrationDocument(payload,'v3');
+test('dashboard scatter zoom preserves measurements, discloses excluded days and restores outliers',async()=>{
+ const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window,d=w.document;let config;
   w.Chart=class{constructor(canvas,c){config=c;}destroy(){}};
