@@ -6,7 +6,7 @@ const chartPalette = {
   riverFill: "rgba(119, 232, 255, 0.26)",
   rain: "#46a7ff",
   rainFill: "rgba(40, 112, 200, 0.65)",
-  moss: "#f7de5e",
+  moss: "#57d18b",
   ink: "#f4f8fb",
   muted: "#9db0be",
   grid: "rgba(121, 221, 255, 0.14)",
@@ -79,6 +79,8 @@ function restoreAnchorAfterRender() {
 function applyHero(site, status) {
   text("siteNameLine", site.name || "Flash Flood Observatory");
   text("siteLocationLine", site.location || "");
+  text("headerIdentity", [site.name || "Flash Flood Observatory", site.location].filter(Boolean).join(", "));
+  renderLocatorMap(site);
   text("heroStrapline", site.strapline || "Public dashboard");
 
   document.getElementById("siteLocationLine").hidden = !site.location;
@@ -111,6 +113,23 @@ function applyHero(site, status) {
   document
     .getElementById("heroMeta")
     .replaceChildren(...badges.map(renderMetaChip));
+}
+
+// Public place coordinates, not sensor/acquisition locations. Add confirmed locations here.
+const observatoryLocations = {
+  "Boscastle, UK": {label:"Boscastle", latitude:50.6869, longitude:-4.6928},
+};
+function renderLocatorMap(site) {
+  const location = observatoryLocations[site.location];
+  const map = document.getElementById("observatoryMap");
+  if (!map) return;
+  map.hidden = !location;
+  if (!location) return; // Never reuse the Boscastle marker for an unknown observatory.
+  const x = 20 + (location.longitude + 11) * 12;
+  const y = 10 + (61 - location.latitude) * 21;
+  document.getElementById("mapMarker").setAttribute("transform", `translate(${x} ${y})`);
+  text("mapLabel", location.label);
+  text("mapTitle", `${location.label} in the United Kingdom`);
 }
 
 function renderMetaChip(item) {
@@ -373,6 +392,13 @@ function filterPoints(points, reportingWindow) {
 }
 
 function renderPanelCopy(prefix, panel) {
+  if (prefix === "response" || prefix === "historicalRange") {
+    optionalText(`${prefix}Title`, panel.subtitle || panel.title);
+    optionalText(`${prefix}Subtitle`, "");
+    optionalText(`${prefix}Description`, panel.description);
+    optionalText(`${prefix}FooterDescription`, panel.footer_description);
+    return;
+  }
   optionalText(`${prefix}Eyebrow`, panel.eyebrow);
   optionalText(`${prefix}Title`, panel.title);
   optionalText(`${prefix}Subtitle`, panel.subtitle);
@@ -420,6 +446,7 @@ function renderRainfallChart(panel, reportingWindow) {
   hideEmptyChart("rainfall");
   rainfallChart?.destroy();
   rainfallChart = new Chart(document.getElementById("rainfallChart"), {
+    plugins: [observationFrame],
     type: "bar",
     data: {
       datasets: [
@@ -471,6 +498,7 @@ function renderDepthChart(panel, reportingWindow) {
   hideEmptyChart("depth");
   depthChart?.destroy();
   depthChart = new Chart(document.getElementById("depthChart"), {
+    plugins: [observationFrame],
     type: "line",
     data: {
       datasets: [
@@ -1062,14 +1090,14 @@ function heatmapSvg(panel) {
       : fallbackColors;
 
   const maxWeek = 52;
-  const size = 18;
-  const gap = 2;
+  const size = 16;
+  const gap = 4;
   const step = size + gap;
   const gridWidth = (maxWeek + 1) * step - gap;
   const gridHeight = 7 * step - gap;
   const gridX = 98;
   const gridY = 14;
-  const monthY = gridY + gridHeight + 26;
+  const monthY = gridY + 138 + 26;
   const axisY = monthY + 26;
   const legendX = gridX;
   const legendBandWidth = 32;
@@ -1307,17 +1335,42 @@ function renderPartner(partner) {
   return wrapper;
 }
 
+function sixHourTicks(window) {
+  const ticks = [];
+  for (let value = window.start; value < window.end; value += 6 * 3600000) ticks.push(value);
+  ticks.push(window.end);
+  return ticks;
+}
+
+const observationFrame = {
+  id: "observationFrame",
+  afterLayout(chart) {
+    // DOM-visible geometry supports checking alignment at real browser sizes.
+    chart.canvas.dataset.plotBounds = JSON.stringify({left:chart.chartArea.left, right:chart.chartArea.right, width:chart.chartArea.width});
+    chart.canvas.dataset.timeTicks = JSON.stringify(chart.scales.x.ticks.map(tick => tick.value));
+  },
+  afterDraw(chart) {
+    if (chart.canvas.id !== "rainfallChart") return;
+    const {ctx, chartArea:{left,right,top,bottom}} = chart;
+    ctx.save(); ctx.strokeStyle = "#688392"; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(left,top); ctx.lineTo(left,bottom);
+    ctx.moveTo(right,top); ctx.lineTo(right,bottom); ctx.stroke(); ctx.restore();
+  },
+};
+
 function standardChartOptions(reportingWindow, yTitle, suggestedMax = null) {
   const durationHours =
     (reportingWindow.end - reportingWindow.start) / 3_600_000;
   return {
     maintainAspectRatio: false,
+    layout: {padding: {right:12}, autoPadding:false},
     animation: prefersReducedMotion() ? false : { duration: 280 },
     interaction: { intersect: false, mode: "nearest" },
     plugins: chartPlugins(),
     scales: {
       x: timeScale(reportingWindow, durationHours > 30 ? 8 : 6),
       y: {
+        afterFit(axis) { axis.width = 66; },
         beginAtZero: true,
         ...(Number.isFinite(suggestedMax) ? { suggestedMax } : {}),
         grid: { color: chartPalette.grid },
@@ -1476,26 +1529,27 @@ function chartPlugins() {
 }
 
 function timeScale(reportingWindow, maxTicksLimit) {
+  const dayWindow = reportingWindow.end - reportingWindow.start <= 25 * 3600000;
   return {
-    type: "linear",
-    min: reportingWindow.start,
-    max: reportingWindow.end,
-    offset: false,
-    grid: { color: chartPalette.grid },
+    type: "linear", min: reportingWindow.start, max: reportingWindow.end, offset: false,
+    afterBuildTicks(axis) {
+      if (dayWindow) {
+        axis.ticks = sixHourTicks(reportingWindow).map(value => ({value}));
+        const rotation = axis.chart?.width < 400 ? 45 : 0;
+        axis.options.ticks.minRotation = rotation;
+        axis.options.ticks.maxRotation = rotation;
+      }
+    },
+    grid: { color: chartPalette.grid, offset:false },
+    border: {display:true, color:chartPalette.grid},
     ticks: {
-      color: chartPalette.muted,
-      autoSkip: true,
-      maxTicksLimit,
+      color: chartPalette.muted, autoSkip: !dayWindow, maxTicksLimit,
+      align: "inner", minRotation:0, maxRotation:0, font:{size:12},
       callback(value) {
-        return formatAxisTick(Number(value));
+        return dayWindow ? new Intl.DateTimeFormat("en-GB", {hour:"2-digit", minute:"2-digit", hour12:false, timeZone:displayTimeZone}).format(new Date(Number(value))) : formatAxisTick(Number(value));
       },
     },
-    title: {
-      display: true,
-      text: "Date & Time",
-      color: chartPalette.ink,
-      font: { weight: "600" },
-    },
+    title: {display:true, text: dayWindow ? `Time (${displayTimeZone})` : "Date & Time", color:chartPalette.ink, font:{weight:"600"}},
   };
 }
 
@@ -1800,7 +1854,8 @@ function setupReadAloud() {
     button.title = button.dataset.readLabel;
     button.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3zM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/></svg>';
     section.classList.add("read-aloud-section");
-    section.prepend(button);
+    if (section.id === "readings") section.querySelector(".summary-heading").append(button);
+    else section.prepend(button);
     button.addEventListener("click", async () => {
       const wasActive = activeButton === button;
       stop();

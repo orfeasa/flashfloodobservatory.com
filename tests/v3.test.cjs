@@ -70,3 +70,35 @@ test('v3 day selector follows week/year changes without changing narration', asy
   assert.ok([...day.options].every(o=>o.value.startsWith('2026-')));
  } finally {dom.window.close();}
 });
+test('v3 six-hour ticks preserve real bounds and identical observation plot margins',async()=>{
+ const dom=await renderNarrationDocument(payload,'v3');
+ try {
+  const w=dom.window, start=Date.parse('2026-10-24T15:43:00Z');
+  const range={start,end:start+24*3600000-60000};
+  const rain=w.standardChartOptions(range,'Rainfall',1), depth=w.standardChartOptions(range,'Depth',.173);
+  for (const config of [rain,depth]) {
+   const axis={ticks:[],chart:{width:320},options:{ticks:{}}};config.scales.x.afterBuildTicks(axis);
+   assert.equal(axis.options.ticks.minRotation,45);
+   assert.deepEqual(Array.from(axis.ticks,t=>t.value),[start,start+6*3600000,start+12*3600000,start+18*3600000,range.end]);
+   assert.equal(config.scales.x.grid.offset,false);
+   assert.equal(config.scales.x.ticks.autoSkip,false);
+   const y={width:30};config.scales.y.afterFit(y);assert.equal(y.width,66);
+  }
+  assert.equal(rain.layout.padding.right,depth.layout.padding.right);
+  const fiveDay=w.timeScale({start,end:start+5*86400000},8), axis={ticks:[{value:123}]};
+  fiveDay.afterBuildTicks(axis);assert.equal(axis.ticks[0].value,123);
+ }finally{dom.window.close();}
+});
+test('v3 map follows confirmed site config and summary speaker belongs to its heading',async()=>{
+ const dom=await renderNarrationDocument(payload,'v3');
+ try {
+  const w=dom.window,d=w.document;
+  assert.equal(d.querySelectorAll('.summary-heading .read-aloud-button').length,1);
+  assert.match(d.getElementById('mapMarker').getAttribute('transform'),/translate\(/);
+  assert.equal(d.getElementById('mapLabel').textContent,'Boscastle');
+  w.renderLocatorMap({location:'Unconfirmed location'});assert.equal(d.getElementById('observatoryMap').hidden,true);
+  w.renderLocatorMap({location:'Boscastle, UK'});assert.equal(d.getElementById('observatoryMap').hidden,false);
+  assert.equal(d.getElementById('analysisTitle').textContent,'EVENT ANALYSIS');
+  assert.equal(d.querySelectorAll('#responseEyebrow, #historicalRangeEyebrow').length,0);
+ }finally{dom.window.close();}
+});

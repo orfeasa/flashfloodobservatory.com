@@ -17,16 +17,16 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="styles.css?v=20261007b">
+    <link rel="stylesheet" href="styles.css?v=20261007c">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
-    <script src="app.js?v=20261007b" defer></script>
+    <script src="app.js?v=20261007c" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#mainContent">Skip to observations</a>
 
     <header class="site-header">
       <div class="masthead">
-        <a class="identity" href="#top" aria-label="Selected observatory: Boscastle">Boscastle <span>Observatory</span></a>
+        <a class="identity" id="headerIdentity" href="#top">Flash Flood Observatory, Boscastle, UK</a>
 
         <nav class="section-nav" aria-label="Dashboard sections">
           <a href="#observations">Observations</a>
@@ -36,8 +36,8 @@
       </div>
       <nav class="observatory-nav content-frame" aria-label="Observatories">
         <a href="#top" aria-current="page">Boscastle <span>River Valency</span></a>
-        <span aria-disabled="true">Cornwall observatory 2 <small>Location to be confirmed</small></span>
-        <span aria-disabled="true">Cornwall observatory 3 <small>Location to be confirmed</small></span>
+        <span aria-disabled="true">Cornwall Location 2 <small>Coming soon</small></span>
+        <span aria-disabled="true">Cornwall Location 3 <small>Coming soon</small></span>
       </nav>
     </header>
 
@@ -45,6 +45,7 @@
       <section class="briefing" id="top" aria-labelledby="leadTitle">
         <div class="content-frame briefing__grid">
           <div class="briefing__title">
+            <img id="siteMark" class="briefing-logo" src="../assets/brand/site-mark-small.webp" width="120" height="120" fetchpriority="high" alt="Flash Flood Observatory site mark">
             <h1 class="briefing-site-title" id="leadTitle">
               <span id="siteNameLine">Flash Flood Observatory</span>
               <span class="sr-only"> — </span><span id="siteLocationLine">Boscastle, UK</span>
@@ -56,14 +57,18 @@
             </p>
             <div class="lead-meta" id="heroMeta"></div>
           </div>
-          <aside class="observatory-brand" aria-label="Observatory identity">
-            <img id="siteMark" src="../assets/brand/site-mark-small.webp" width="240" height="240" fetchpriority="high" alt="Flash Flood Observatory site mark">
-            <p>River Valency · Cornwall</p>
+          <aside class="observatory-map" id="observatoryMap" aria-label="Observatory location">
+            <svg viewBox="0 0 220 270" role="img" aria-labelledby="mapTitle">
+              <title id="mapTitle">Boscastle in the United Kingdom</title>
+              <image href="../assets/brand/uk-locator.svg" width="220" height="270"/>
+              <g id="mapMarker"><circle r="4" fill="#91e3f2" stroke="#03070b" stroke-width="1.5"/><path d="M-4 -3l-16 -16h-54" fill="none" stroke="#91e3f2"/><text id="mapLabel" x="-74" y="-24" fill="#91e3f2" font-size="13" font-weight="700">Boscastle</text></g>
+            </svg>
           </aside>
         </div>
       </section>
 
       <section class="readings content-frame" id="readings" aria-label="River statistics">
+        <div class="summary-heading"><h2>River level summary</h2></div>
         <div class="metric-ledger" aria-label="Key river figures" id="summaryStrip"></div>
       </section>
 
@@ -72,7 +77,6 @@
           <div>
             <p class="section-label">Live observations</p>
             <h2 id="observationsTitle">Rainfall and river level</h2>
-            <p>Both charts use the same exported time window, keeping rainfall and river response directly comparable.</p>
           </div>
 
           <div class="window-switcher" id="windowSwitcher" hidden>
@@ -121,9 +125,7 @@
         <div class="content-frame">
           <div class="section-heading section-heading--analysis">
             <div>
-              <p class="section-label">Scientific analysis</p>
-              <h2 id="analysisTitle">From an event to the long record</h2>
-              <p>Provisional flow estimates and completed-day records help place current conditions in context.</p>
+              <h2 id="analysisTitle">EVENT ANALYSIS</h2>
             </div>
           </div>
 
@@ -131,7 +133,6 @@
             <article class="data-panel data-panel--response" id="responsePanel">
               <div class="data-panel-head">
                 <div>
-                  <p class="panel-signal panel-signal--event" id="responseEyebrow">Event analysis</p>
                   <h3 id="responseTitle">River response</h3>
                   <p class="panel-subtitle" id="responseSubtitle"></p>
                 </div>
@@ -148,7 +149,6 @@
             <article class="data-panel data-panel--historical" id="historicalRangePanel">
               <div class="data-panel-head">
                 <div>
-                  <p class="panel-signal panel-signal--history" id="historicalRangeEyebrow">Historical context</p>
                   <h3 id="historicalRangeTitle">Daily range and peak levels</h3>
                   <p class="panel-subtitle" id="historicalRangeSubtitle"></p>
                 </div>
@@ -224,7 +224,6 @@
       <div class="content-frame site-footer__inner">
         <div class="footer-main">
           <div>
-            <p class="footer-label">Research collaboration</p>
             <h2 id="footerTitle">Observatory partners</h2>
             <p id="footerText"></p>
           </div>

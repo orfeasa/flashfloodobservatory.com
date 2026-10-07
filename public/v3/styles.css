@@ -1391,3 +1391,82 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
   .official-alert { padding: 1rem; gap: 1.25rem; }
   .official-alert-meta a, .footer-contact-value { overflow-wrap: anywhere; }
 }
+/* Second professor review: compact introduction, consistent data alignment. */
+:root { --text-body: 1.05rem; --text-sm: 1rem; --text-xs: .85rem; }
+.identity { font-size: 1rem; line-height: 1.3; }
+.briefing__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr) 10rem; gap: 1.5rem; padding-block: 1.5rem; }
+.briefing__title { display: grid; grid-template-columns: 1fr; gap: .6rem; }
+.briefing-logo { width: 6.5rem; height: 6.5rem; object-fit: contain; }
+.briefing-site-title { font-size: 2.25rem; }
+.briefing__lede { font-size: 1rem; line-height: 1.5; }
+.observatory-map { width: 10rem; justify-self: end; }
+.observatory-map svg { width: 100%; height: auto; }
+.readings { padding-block: 1rem 2rem; }
+.summary-heading { display: flex; justify-content: space-between; align-items: center; min-height: 44px; margin-bottom: .5rem; }
+.summary-heading h2 { font-size: 1.1rem; letter-spacing: 0; }
+.summary-heading .read-aloud-button { position: static; flex: 0 0 44px; }
+.summary-card .section-label { font-size: .8rem; }
+.summary-note { font-size: .85rem; line-height: 1.4; }
+.summary-card, .summary-card:nth-child(2n), .summary-card:nth-child(3n) { min-height: 0; }
+#analysisTitle { color: #f7de5e; font-size: 1.1rem; letter-spacing: .025em; }
+.data-panel-copy { font-size: 1rem; }
+.panel-footer-copy { font-size: .9rem; }
+.context-chip { font-size: .8rem; }
+.observatory-nav > * { font-size: .9rem; }
+.observatory-nav a span, .observatory-nav small { font-size: .8rem; }
+.heatmap-copy { padding-right: 0; }
+.heatmap-copy > div:first-child { padding-right: 2.5rem; }
+.heatmap-copy > p, .heatmap-panel > .panel-footer-copy { max-width: none; font-size: 1rem; }
+.heatmap-controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 1.25rem; }
+.heatmap-controls > div { width: 100%; max-width: none; }
+.heatmap-controls label { min-height: 1.5rem; font-size: .9rem; }
+.heatmap-controls select { min-height: 48px; }
+.level-heatmap-cell, .level-heatmap-cell--week { stroke: none; }
+.level-heatmap-cell--selected, .level-heatmap-cell:hover, .level-heatmap-cell:focus { stroke: #f7de5e; stroke-width: 2; }
+.level-heatmap-grid-outline { stroke: none; }
+.footer-main { grid-template-columns: minmax(0, 1fr) auto; }
+.footer-contact { justify-self: end; text-align: right; }
+#footerContactTitle { font-size: 1.1rem; }
+.footer-contact-list { font-size: 1.05rem; }
+@media (min-width: 62rem) {
+  .observation-grid .data-panel { grid-template-rows: subgrid; grid-row: span 3; }
+  .analysis-grid .data-panel { grid-template-rows: subgrid; grid-row: span 4; }
+}
+@media (min-width: 40rem) and (max-width: 61.999rem) {
+  .briefing__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) 8rem; gap: 1rem; }
+  .briefing__detail { grid-column: auto; }
+  .briefing-site-title { font-size: 1.8rem; }
+  .observatory-map { width: 8rem; }
+}
+@media (max-width: 39.999rem) {
+  .identity { max-width: 100%; font-size: .95rem; }
+  .briefing__grid { grid-template-columns: minmax(0, 1fr) 6rem; gap: 1rem; }
+  .briefing__title { grid-column: 1; }
+  .briefing-logo { width: 4.5rem; height: 4.5rem; }
+  .briefing-site-title { font-size: 1.65rem; }
+  .observatory-map { width: 6rem; grid-column: 2; grid-row: 1; align-self: center; }
+  .briefing__detail { grid-column: 1 / -1; grid-row: 2; }
+  .summary-card .section-label { font-size: .75rem; }
+  .summary-card--current { grid-template-columns: minmax(0,1fr) auto; }
+  .observatory-nav { gap: .6rem; }
+  .observatory-nav > * { font-size: .8rem; }
+  .observatory-nav a span, .observatory-nav small { font-size: .75rem; }
+  .heatmap-controls { grid-template-columns: minmax(0,1fr); }
+  .footer-main { grid-template-columns: minmax(0,1fr); }
+  .footer-contact { max-width: 100%; }
+  .chart-frame, .chart-frame canvas { min-height: 18rem; }
+}
+
+/* Reference image: logo alongside the title on desktop. */
+@media (min-width: 62rem) {
+  .briefing__grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.4fr) 11rem; }
+  .briefing__title { grid-template-columns: 7rem minmax(0, 1fr); align-items: center; gap: 1rem; }
+  .briefing-logo { width: 7rem; height: 7rem; }
+  .briefing-site-title { font-size: clamp(1.6rem, 2.5vw, 2.25rem); }
+  .observatory-map { width: 11rem; }
+}
+
+@media (max-width: 39.999rem) {
+  .section-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; overflow: visible; }
+  .section-nav a { padding-inline: .3rem; font-size: .9rem; }
+}
