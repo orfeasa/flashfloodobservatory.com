@@ -70,7 +70,9 @@ function setupTheme() {
     if (event.key === "Escape" && !menu.hidden) { closeMenu(true); }
   });
   document.querySelector(".theme-control").addEventListener("focusout", event => {
-    if (!event.currentTarget.contains(event.relatedTarget)) closeMenu();
+    // Label clicks may temporarily move focus to the document before the
+    // associated radio receives its click. Do not hide that click target.
+    if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) closeMenu();
   });
   system.addEventListener("change", () => { if (preference === "system") apply(); });
   apply();

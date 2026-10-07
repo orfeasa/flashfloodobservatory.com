@@ -161,3 +161,21 @@ test('dashboard scatter retains all measurements and full event extents',async()
   assert.equal(d.getElementById('scatterZoom'),null);
  }finally{dom.window.close();}
 });
+
+
+test('theme label click survives transient focus loss before radio activation',async()=>{
+ const dom=await renderNarrationDocument(payload);
+ try {
+  const w=dom.window,d=w.document;
+  d.getElementById('themeToggle').click();
+  const current=d.querySelector('input[name=theme]:checked');
+  current.dispatchEvent(new w.FocusEvent('focusout',{bubbles:true,relatedTarget:null}));
+  assert.equal(d.getElementById('themeMenu').hidden,false);
+  d.querySelector('input[value=dark]').parentElement.click();
+  assert.equal(d.documentElement.dataset.theme,'dark');
+  d.querySelector('input[value=light]').parentElement.click();
+  assert.equal(d.documentElement.dataset.theme,'light');
+  current.dispatchEvent(new w.FocusEvent('focusout',{bubbles:true,relatedTarget:d.getElementById('headerIdentity')}));
+  assert.equal(d.getElementById('themeMenu').hidden,true);
+ }finally{dom.window.close();}
+});
