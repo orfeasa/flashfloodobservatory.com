@@ -132,14 +132,17 @@ test('dashboard theme follows system, persists overrides and preserves scientifi
   media.matches=false;listener();assert.equal(d.documentElement.dataset.theme,'light');
   const toggle=d.getElementById('themeToggle');
   const cell=d.querySelector('.level-heatmap-cell');cell.dispatchEvent(new w.Event('click'));const date=d.getElementById('heatmapDaySelect').value;
-  toggle.click(); assert.equal(toggle.getAttribute('aria-label'),'Switch to light mode');
+  toggle.click(); assert.equal(toggle.getAttribute('aria-expanded'),'true');
+  const dark=d.querySelector('input[value=dark]');dark.checked=true;dark.dispatchEvent(new w.Event('change'));
+  d.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape'}));assert.equal(d.getElementById('themeMenu').hidden,true);
   assert.equal(w.localStorage.getItem('ffo-v3-theme'),'dark');
   assert.equal(d.getElementById('heatmapDaySelect').value,date);
   media.matches=false;listener();assert.equal(d.documentElement.dataset.theme,'dark');
-  d.getElementById('themeSystem').click(); assert.equal(d.getElementById('themeSystem').hidden,true);
+  const systemChoice=d.querySelector('input[value=system]');systemChoice.checked=true;systemChoice.dispatchEvent(new w.Event('change'));
+  assert.equal(d.querySelector('footer #themeSystem'),null);
   assert.equal(w.localStorage.getItem('ffo-v3-theme'),null);assert.equal(d.documentElement.dataset.theme,'light');
   assert.equal(w.chartPlugins().legend.labels.color,'#172f40');
-  const boot=fs.readFileSync('public/index.html','utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
+  const boot=fs.readFileSync('public/index.html','utf8').match(/<script>\s*(\/\/ Resolve[\s\S]*?)<\/script>/)[1];
   w.localStorage.setItem('ffo-v3-theme','dark');w.eval(boot);assert.equal(d.documentElement.dataset.theme,'dark');
   w.localStorage.setItem('ffo-v3-theme','invalid');w.eval(boot);assert.equal(d.documentElement.dataset.themePreference,'system');
  }finally{dom.window.close();}

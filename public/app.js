@@ -29,7 +29,8 @@ const darkChartPalette = {...chartPalette};
 function setupTheme() {
   const root = document.documentElement;
   const toggle = document.getElementById("themeToggle");
-  const reset = document.getElementById("themeSystem");
+  const menu = document.getElementById("themeMenu");
+  const choices = [...menu.querySelectorAll('input[name="theme"]')];
   const system = window.matchMedia("(prefers-color-scheme: dark)");
   let preference = root.dataset.themePreference || "system";
   if (!["system", "light", "dark"].includes(preference)) preference = "system";
@@ -37,9 +38,8 @@ function setupTheme() {
     const theme = preference === "system" ? (system.matches ? "dark" : "light") : preference;
     root.dataset.theme = theme;
     root.dataset.themePreference = preference;
-    toggle.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
-    toggle.title = toggle.getAttribute("aria-label");
-    reset.hidden = preference === "system";
+    toggle.title = `Colour theme: ${preference}`;
+    choices.forEach(choice => { choice.checked = choice.value === preference; });
     document.querySelector('meta[name="theme-color"]').content = theme === "light" ? "#f2f6f8" : "#070e16";
     Object.assign(chartPalette, theme === "light" ? {
       river:"#087c96", riverFill:"rgba(8,124,150,0.20)", rain:"#2457a7", rainFill:"rgba(36,87,167,0.72)",
@@ -52,8 +52,26 @@ function setupTheme() {
     try { if (preference === "system") localStorage.removeItem("ffo-v3-theme"); else localStorage.setItem("ffo-v3-theme", preference); } catch (_) {}
     apply();
   };
-  toggle.onclick = () => choose(root.dataset.theme === "dark" ? "light" : "dark");
-  reset.onclick = () => choose("system");
+  function closeMenu(restoreFocus = false) {
+    menu.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
+    if (restoreFocus) toggle.focus();
+  }
+  toggle.onclick = () => {
+    menu.hidden = !menu.hidden;
+    toggle.setAttribute("aria-expanded", String(!menu.hidden));
+    if (!menu.hidden) choices.find(choice => choice.checked)?.focus();
+  };
+  choices.forEach(choice => { choice.onchange = () => choose(choice.value); });
+  document.addEventListener("click", event => {
+    if (!event.target.closest(".theme-control")) closeMenu();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !menu.hidden) { closeMenu(true); }
+  });
+  document.querySelector(".theme-control").addEventListener("focusout", event => {
+    if (!event.currentTarget.contains(event.relatedTarget)) closeMenu();
+  });
   system.addEventListener("change", () => { if (preference === "system") apply(); });
   apply();
 }
