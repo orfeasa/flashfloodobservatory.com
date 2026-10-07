@@ -23,6 +23,7 @@ let rainfallChart;
 let depthChart;
 let responseChart;
 let historicalRangeChart;
+let scatterZoomed = false;
 let displayTimeZone = "UTC";
 
 const darkChartPalette = {...chartPalette};
@@ -638,6 +639,15 @@ function renderHistoricalRangeChart(panel) {
   }
 
   hideEmptyChart("historicalRange");
+  const zoom = document.getElementById("scatterZoom");
+  zoom.setAttribute("aria-pressed", String(scatterZoomed));
+  zoom.textContent = scatterZoomed ? "Show all days" : "Zoom into typical days";
+  const outside = points.filter(point => point.x > 0.2 || point.y > 0.5).length;
+  document.getElementById("scatterViewStatus").textContent = scatterZoomed
+    ? `Zoom: range 0–0.2 m, peak 0–0.5 m. ${outside} ${outside === 1 ? "day" : "days"} outside this view.`
+    : `All ${points.length} days shown, including extreme events.`;
+  zoom.onclick = () => { scatterZoomed = !scatterZoomed; renderHistoricalRangeChart(panel); };
+
   historicalRangeChart?.destroy();
   historicalRangeChart = new Chart(
     document.getElementById("historicalRangeChart"),
@@ -650,11 +660,14 @@ function renderHistoricalRangeChart(panel) {
               panel.subtitle || "Daily range and peak levels",
             data: points,
             parsing: false,
-            pointBackgroundColor: chartPalette.moss,
-            pointBorderColor: chartPalette.paper,
-            pointBorderWidth: 1,
-            pointRadius: 4,
+            pointBackgroundColor: `${chartPalette.moss}99`,
+            pointBorderWidth: 0,
+            pointRadius: 2.5,
+            pointHitRadius: 10,
             pointHoverRadius: 5,
+            pointHoverBackgroundColor: chartPalette.moss,
+            pointHoverBorderColor: chartPalette.ink,
+            pointHoverBorderWidth: 1.5,
           },
         ],
       },
@@ -1394,6 +1407,7 @@ function scatterOptions(points, xTitle, yTitle) {
   const maxY = Math.max(...points.map((point) => point.y), 0);
   return {
     maintainAspectRatio: false,
+    interaction: {mode:"nearest", intersect:true},
     animation: prefersReducedMotion() ? false : { duration: 280 },
     plugins: {
       ...chartPlugins(),
@@ -1416,7 +1430,7 @@ function scatterOptions(points, xTitle, yTitle) {
       x: {
         beginAtZero: true,
         min: 0,
-        max: maxX + Math.max(maxX * 0.08, 0.01),
+        max: scatterZoomed ? 0.2 : maxX + Math.max(maxX * 0.08, 0.01),
         grid: { color: chartPalette.grid },
         ticks: { color: chartPalette.muted },
         title: {
@@ -1429,7 +1443,7 @@ function scatterOptions(points, xTitle, yTitle) {
       y: {
         beginAtZero: true,
         min: 0,
-        max: maxY + Math.max(maxY * 0.08, 0.05),
+        max: scatterZoomed ? 0.5 : maxY + Math.max(maxY * 0.08, 0.05),
         grid: { color: chartPalette.grid },
         ticks: { color: chartPalette.muted },
         title: {
@@ -1732,7 +1746,7 @@ function readAloudText(section) {
       return;
     }
     if (!(node instanceof Element) || node.hidden ||
-        node.matches('button, select, svg, canvas, script, #levelHeatmapDayDetail, #heatmapDayControl, .heatmap-legend, [aria-hidden="true"]') ||
+        node.matches('.scatter-controls, button, select, svg, canvas, script, #levelHeatmapDayDetail, #heatmapDayControl, .heatmap-legend, [aria-hidden="true"]') ||
         getComputedStyle(node).display === "none") return;
     node.childNodes.forEach(visit);
   }

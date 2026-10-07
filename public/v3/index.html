@@ -28,9 +28,9 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="styles.css?v=20261007f">
+    <link rel="stylesheet" href="styles.css?v=20261007g">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
-    <script src="app.js?v=20261007f" defer></script>
+    <script src="app.js?v=20261007g" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#mainContent">Skip to observations</a>
@@ -169,7 +169,12 @@
                   <p class="panel-subtitle" id="historicalRangeSubtitle"></p>
                 </div>
               </div>
-              <p class="data-panel-copy" id="historicalRangeDescription"></p>
+              <div class="scatter-copy"><p class="data-panel-copy" id="historicalRangeDescription"></p>
+                <div class="scatter-controls">
+                  <button type="button" id="scatterZoom" aria-pressed="false" aria-controls="historicalRangeChart">Zoom into typical days</button>
+                  <p id="scatterViewStatus" aria-live="polite"></p>
+                </div>
+              </div>
               <div class="chart-frame">
                 <canvas id="historicalRangeChart" aria-label="Historical daily range and peak-level scatter chart"></canvas>
                 <div class="panel-empty" id="historicalRangeEmpty" hidden></div>

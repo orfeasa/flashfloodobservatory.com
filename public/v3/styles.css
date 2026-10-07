@@ -1561,3 +1561,10 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
 :root[data-theme="light"] .footer-contact-label { color: var(--muted); }
 :root[data-theme="light"] .footer-contact .control-label { color: var(--cyan); }
 :root[data-theme="light"] #mapLabel { paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+
+.scatter-copy { display: grid; align-content: start; gap: .65rem; }
+.scatter-copy .data-panel-copy { margin: 0; }
+.scatter-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; }
+.scatter-controls button { min-height: 44px; padding: .45rem .7rem; border: 1px solid var(--line-strong); border-radius: var(--radius-control); background: var(--surface); color: var(--cyan); font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; }
+.scatter-controls button:hover, .scatter-controls button[aria-pressed="true"] { background: var(--selected-surface); }
+.scatter-controls p { margin: 0; color: var(--muted); font-size: .85rem; line-height: 1.4; }
