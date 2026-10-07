@@ -23,7 +23,6 @@ let rainfallChart;
 let depthChart;
 let responseChart;
 let historicalRangeChart;
-let scatterZoomed = false;
 let displayTimeZone = "UTC";
 
 const darkChartPalette = {...chartPalette};
@@ -644,15 +643,6 @@ function renderHistoricalRangeChart(panel) {
   }
 
   hideEmptyChart("historicalRange");
-  const zoom = document.getElementById("scatterZoom");
-  zoom.setAttribute("aria-pressed", String(scatterZoomed));
-  zoom.textContent = scatterZoomed ? "Show all days" : "Zoom into typical days";
-  const outside = points.filter(point => point.x > 0.2 || point.y > 0.5).length;
-  document.getElementById("scatterViewStatus").textContent = scatterZoomed
-    ? `Zoom: range 0–0.2 m, peak 0–0.5 m. ${outside} ${outside === 1 ? "day" : "days"} outside this view.`
-    : `All ${points.length} days shown, including extreme events.`;
-  zoom.onclick = () => { scatterZoomed = !scatterZoomed; renderHistoricalRangeChart(panel); };
-
   historicalRangeChart?.destroy();
   historicalRangeChart = new Chart(
     document.getElementById("historicalRangeChart"),
@@ -1435,7 +1425,7 @@ function scatterOptions(points, xTitle, yTitle) {
       x: {
         beginAtZero: true,
         min: 0,
-        max: scatterZoomed ? 0.2 : maxX + Math.max(maxX * 0.08, 0.01),
+        max: maxX + Math.max(maxX * 0.08, 0.01),
         grid: { color: chartPalette.grid },
         ticks: { color: chartPalette.muted },
         title: {
@@ -1448,7 +1438,7 @@ function scatterOptions(points, xTitle, yTitle) {
       y: {
         beginAtZero: true,
         min: 0,
-        max: scatterZoomed ? 0.5 : maxY + Math.max(maxY * 0.08, 0.05),
+        max: maxY + Math.max(maxY * 0.08, 0.05),
         grid: { color: chartPalette.grid },
         ticks: { color: chartPalette.muted },
         title: {
@@ -1751,7 +1741,7 @@ function readAloudText(section) {
       return;
     }
     if (!(node instanceof Element) || node.hidden ||
-        node.matches('.scatter-controls, button, select, svg, canvas, script, #levelHeatmapDayDetail, #heatmapDayControl, .heatmap-legend, [aria-hidden="true"]') ||
+        node.matches('button, select, svg, canvas, script, #levelHeatmapDayDetail, #heatmapDayControl, .heatmap-legend, [aria-hidden="true"]') ||
         getComputedStyle(node).display === "none") return;
     node.childNodes.forEach(visit);
   }

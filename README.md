@@ -30,7 +30,7 @@ All summary cards, charts, official alert content, notes, and footer partner ent
 
 The approved V3 dashboard now lives at `/`. V1 has been replaced and the `/v2/` and `/v3/` routes and assets removed. Git history is the archive. The curated payload destination and Windows publisher are unchanged.
 
-The dashboard retains the compact introduction/statistics, equal-width chart pairs, expandable scientific axes, full hydrological years, selectable heatmap details, eight grouped speakers and Alba narration. The scatter uses translucent green points and an optional typical-day zoom without changing measurements.
+The dashboard retains the compact introduction/statistics, equal-width chart pairs, expandable scientific axes, full hydrological years, selectable heatmap details, eight grouped speakers and Alba narration. The scatter uses translucent green points and always shows the full range of measurements.
 
 The top-right sun/moon button switches to the named destination theme. The first visit follows the system; manual choices persist, and the footer’s “Use system setting” action restores automatic changes. The existing `ffo-v3-theme` storage key is retained so reviewer preferences survive promotion. Both themes redraw charts without losing selections.
 
@@ -332,4 +332,4 @@ The production dashboard uses the British female Piper Alba medium voice at its 
 
 ### Appearance and scatter controls
 
-See the production dashboard section above for theme behaviour. Typical-day scatter zoom uses range 0–0.2 m and peak 0–0.5 m and discloses the number of days outside the view. The full range remains the default.
+See the production dashboard section above for theme behaviour. The scatter always shows all days with expandable axes, preserving the upward-right trend and extreme events. There is no typical-day zoom.

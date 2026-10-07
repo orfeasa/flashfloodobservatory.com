@@ -145,21 +145,16 @@ test('dashboard theme follows system, persists overrides and preserves scientifi
  }finally{dom.window.close();}
 });
 
-test('dashboard scatter zoom preserves measurements, discloses excluded days and restores outliers',async()=>{
+test('dashboard scatter retains all measurements and full event extents',async()=>{
  const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window,d=w.document;let config;
   w.Chart=class{constructor(canvas,c){config=c;}destroy(){}};
   const panel={points:[{x:.05,y:.1,date:'2026-01-01'},{x:.6,y:1.1,date:'2026-01-02'}]};
   w.renderHistoricalRangeChart(panel);
-  const original=JSON.stringify(config.data.datasets[0].data);
-  assert.ok(config.options.scales.x.max>.6);assert.equal(config.data.datasets[0].pointBorderWidth,0);
-  const narration=w.readAloudText(d.getElementById('historicalRangePanel'));
-  d.getElementById('scatterZoom').click();
-  assert.equal(config.options.scales.x.max,.2);assert.equal(config.options.scales.y.max,.5);
-  assert.equal(JSON.stringify(config.data.datasets[0].data),original);
-  assert.match(d.getElementById('scatterViewStatus').textContent,/1 day outside/);
-  assert.equal(w.readAloudText(d.getElementById('historicalRangePanel')),narration);
-  d.getElementById('scatterZoom').click();assert.ok(config.options.scales.y.max>1.1);
+  assert.equal(JSON.stringify(config.data.datasets[0].data),JSON.stringify(panel.points));
+  assert.ok(config.options.scales.x.max>.6);assert.ok(config.options.scales.y.max>1.1);
+  assert.equal(config.data.datasets[0].pointBorderWidth,0);
+  assert.equal(d.getElementById('scatterZoom'),null);
  }finally{dom.window.close();}
 });
