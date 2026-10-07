@@ -132,15 +132,15 @@ test('dashboard theme follows system, persists overrides and preserves scientifi
   media.matches=false;listener();assert.equal(d.documentElement.dataset.theme,'light');
   const toggle=d.getElementById('themeToggle');
   const cell=d.querySelector('.level-heatmap-cell');cell.dispatchEvent(new w.Event('click'));const date=d.getElementById('heatmapDaySelect').value;
-  toggle.click(); assert.equal(toggle.getAttribute('aria-expanded'),'true');
-  const dark=d.querySelector('input[value=dark]');dark.checked=true;dark.dispatchEvent(new w.Event('change'));
-  d.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape'}));assert.equal(d.getElementById('themeMenu').hidden,true);
+  toggle.click(); assert.equal(toggle.getAttribute('aria-label'),'Switch to light mode');
   assert.equal(w.localStorage.getItem('ffo-v3-theme'),'dark');
   assert.equal(d.getElementById('heatmapDaySelect').value,date);
   media.matches=false;listener();assert.equal(d.documentElement.dataset.theme,'dark');
-  const systemChoice=d.querySelector('input[value=system]');systemChoice.checked=true;systemChoice.dispatchEvent(new w.Event('change'));
-  assert.equal(d.querySelector('footer #themeSystem'),null);
-  assert.equal(w.localStorage.getItem('ffo-v3-theme'),null);assert.equal(d.documentElement.dataset.theme,'light');
+  toggle.click();assert.equal(d.documentElement.dataset.theme,'light');
+  assert.equal(w.localStorage.getItem('ffo-v3-theme'),'light');
+  assert.equal(toggle.getAttribute('aria-label'),'Switch to dark mode');
+  assert.equal(d.getElementById('themeMenu'),null);
+  assert.equal(d.getElementById('themeSystem'),null);
   assert.equal(w.chartPlugins().legend.labels.color,'#172f40');
   const boot=fs.readFileSync('public/index.html','utf8').match(/<script>\s*(\/\/ Resolve[\s\S]*?)<\/script>/)[1];
   w.localStorage.setItem('ffo-v3-theme','dark');w.eval(boot);assert.equal(d.documentElement.dataset.theme,'dark');
@@ -159,23 +159,5 @@ test('dashboard scatter retains all measurements and full event extents',async()
   assert.ok(config.options.scales.x.max>.6);assert.ok(config.options.scales.y.max>1.1);
   assert.equal(config.data.datasets[0].pointBorderWidth,0);
   assert.equal(d.getElementById('scatterZoom'),null);
- }finally{dom.window.close();}
-});
-
-
-test('theme label click survives transient focus loss before radio activation',async()=>{
- const dom=await renderNarrationDocument(payload);
- try {
-  const w=dom.window,d=w.document;
-  d.getElementById('themeToggle').click();
-  const current=d.querySelector('input[name=theme]:checked');
-  current.dispatchEvent(new w.FocusEvent('focusout',{bubbles:true,relatedTarget:null}));
-  assert.equal(d.getElementById('themeMenu').hidden,false);
-  d.querySelector('input[value=dark]').parentElement.click();
-  assert.equal(d.documentElement.dataset.theme,'dark');
-  d.querySelector('input[value=light]').parentElement.click();
-  assert.equal(d.documentElement.dataset.theme,'light');
-  current.dispatchEvent(new w.FocusEvent('focusout',{bubbles:true,relatedTarget:d.getElementById('headerIdentity')}));
-  assert.equal(d.getElementById('themeMenu').hidden,true);
  }finally{dom.window.close();}
 });

@@ -32,7 +32,7 @@ The approved V3 dashboard now lives at `/`. V1 has been replaced and the `/v2/` 
 
 The dashboard retains the compact introduction/statistics, equal-width chart pairs, expandable scientific axes, full hydrological years, selectable heatmap details, eight grouped speakers and Alba narration. The scatter uses translucent green points and always shows the full range of measurements.
 
-The top-right sun/moon button opens an accessible Light, Dark and System radio chooser. The first visit follows the system; manual choices persist. Escape, clicking outside or moving focus outside closes the chooser. There is no appearance control in the footer. The existing `ffo-v3-theme` storage key is retained so reviewer preferences survive promotion. Both themes redraw charts without losing selections.
+The first visit follows the system appearance. The top-right sun/moon button switches directly between light and dark with each click and remembers the manual choice. There is no menu or footer appearance control. The existing `ffo-v3-theme` storage key is retained so reviewer preferences survive promotion. Both themes redraw charts without losing selections.
 
 Run `npm test` and `npm run audio:text`; preview the `public/` directory at `/`.
 

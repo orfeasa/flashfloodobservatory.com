@@ -29,8 +29,6 @@ const darkChartPalette = {...chartPalette};
 function setupTheme() {
   const root = document.documentElement;
   const toggle = document.getElementById("themeToggle");
-  const menu = document.getElementById("themeMenu");
-  const choices = [...menu.querySelectorAll('input[name="theme"]')];
   const system = window.matchMedia("(prefers-color-scheme: dark)");
   let preference = root.dataset.themePreference || "system";
   if (!["system", "light", "dark"].includes(preference)) preference = "system";
@@ -38,8 +36,8 @@ function setupTheme() {
     const theme = preference === "system" ? (system.matches ? "dark" : "light") : preference;
     root.dataset.theme = theme;
     root.dataset.themePreference = preference;
-    toggle.title = `Colour theme: ${preference}`;
-    choices.forEach(choice => { choice.checked = choice.value === preference; });
+    toggle.title = `Switch to ${theme === "dark" ? "light" : "dark"} mode`;
+    toggle.setAttribute("aria-label", toggle.title);
     document.querySelector('meta[name="theme-color"]').content = theme === "light" ? "#f2f6f8" : "#070e16";
     Object.assign(chartPalette, theme === "light" ? {
       river:"#087c96", riverFill:"rgba(8,124,150,0.20)", rain:"#2457a7", rainFill:"rgba(36,87,167,0.72)",
@@ -52,28 +50,7 @@ function setupTheme() {
     try { if (preference === "system") localStorage.removeItem("ffo-v3-theme"); else localStorage.setItem("ffo-v3-theme", preference); } catch (_) {}
     apply();
   };
-  function closeMenu(restoreFocus = false) {
-    menu.hidden = true;
-    toggle.setAttribute("aria-expanded", "false");
-    if (restoreFocus) toggle.focus();
-  }
-  toggle.onclick = () => {
-    menu.hidden = !menu.hidden;
-    toggle.setAttribute("aria-expanded", String(!menu.hidden));
-    if (!menu.hidden) choices.find(choice => choice.checked)?.focus();
-  };
-  choices.forEach(choice => { choice.onchange = () => choose(choice.value); });
-  document.addEventListener("click", event => {
-    if (!event.target.closest(".theme-control")) closeMenu();
-  });
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && !menu.hidden) { closeMenu(true); }
-  });
-  document.querySelector(".theme-control").addEventListener("focusout", event => {
-    // Label clicks may temporarily move focus to the document before the
-    // associated radio receives its click. Do not hide that click target.
-    if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) closeMenu();
-  });
+  toggle.onclick = () => choose(root.dataset.theme === "dark" ? "light" : "dark");
   system.addEventListener("change", () => { if (preference === "system") apply(); });
   apply();
 }

@@ -35,9 +35,9 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="styles.css?v=20261007k">
+    <link rel="stylesheet" href="styles.css?v=20261007l">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
-    <script src="app.js?v=20261007k" defer></script>
+    <script src="app.js?v=20261007l" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#mainContent">Skip to observations</a>
@@ -52,17 +52,10 @@
           <a href="#context">Context</a>
         </nav>
         <div class="theme-control">
-          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Choose colour theme" title="Choose colour theme" aria-expanded="false" aria-controls="themeMenu">
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
             <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
             <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg>
           </button>
-          <div id="themeMenu" class="theme-menu" hidden>
-            <fieldset><legend>Colour theme</legend>
-              <label><input type="radio" name="theme" value="light">Light</label>
-              <label><input type="radio" name="theme" value="dark">Dark</label>
-              <label><input type="radio" name="theme" value="system" checked>System</label>
-            </fieldset>
-          </div>
         </div>
       </div>
       <nav class="observatory-nav content-frame" aria-label="Observatories">
