@@ -79,6 +79,7 @@ async function main() {
     renderNotes(dashboardPayload.notes || []);
     renderFooter(dashboardPayload.footer || {});
     setupReadAloud();
+    document.fonts?.ready.then(() => { renderDashboardPanels(); renderAnalysisPanels(); });
     restoreAnchorAfterRender();
   } catch (error) {
     console.error(error);
@@ -207,6 +208,7 @@ function renderOfficialAlert(alert) {
     alert.updated_at ? `Updated ${formatDate(alert.updated_at)}` : ""
   );
 
+  document.getElementById("officialAlertSymbol").innerHTML = floodStatusSymbol(state);
   const source = document.getElementById("officialAlertSource");
   if (alert.source_url) {
     source.hidden = false;
@@ -218,6 +220,14 @@ function renderOfficialAlert(alert) {
     source.removeAttribute("href");
     source.textContent = "";
   }
+}
+
+function floodStatusSymbol(state) {
+  const known = ["none", "flood_alert", "flood_warning", "severe_flood_warning"].includes(state);
+  if (!known) return '<svg viewBox="0 0 100 90" aria-hidden="true"><circle cx="50" cy="45" r="32" fill="none" stroke="currentColor" stroke-width="4"/><path d="M50 38v25M50 25v3" stroke="currentColor" stroke-width="5"/></svg>';
+  const color = state === "none" ? "#36933d" : state === "flood_alert" ? "#dc800d" : "#ce202b";
+  const water = state !== "none" ? '<path d="M24 66q6 -6 12 0t12 0t12 0t12 0t8 0M24 74q6 -6 12 0t12 0t12 0t12 0t8 0" fill="none" stroke="#438ba4" stroke-width="3"/>' : '';
+  return `<svg viewBox="0 0 100 90" aria-hidden="true"><path d="M50 7L94 83H6Z" fill="#fff" stroke="${color}" stroke-width="4" stroke-linejoin="round"/><path d="M32 48l18 -17 18 17v20H55V54H45v14H32Z" fill="${state === 'severe_flood_warning' ? color : '#252525'}"/>${water}</svg>`;
 }
 
 function renderSummaryMetrics(metrics) {
@@ -423,6 +433,8 @@ function filterPoints(points, reportingWindow) {
 }
 
 function renderPanelCopy(prefix, panel) {
+  panel = {...panel, description: finishSentence(panel.description),
+    footer_description: finishSentence((panel.footer_description || "").replace(/\brain\b/g, "rainfall"))};
   if (prefix === "response" || prefix === "historicalRange") {
     optionalText(`${prefix}Title`, panel.subtitle || panel.title);
     optionalText(`${prefix}Subtitle`, "");
@@ -436,6 +448,8 @@ function renderPanelCopy(prefix, panel) {
   optionalText(`${prefix}Description`, panel.description);
   optionalText(`${prefix}FooterDescription`, panel.footer_description);
 }
+
+function finishSentence(value) { return value ? String(value).trim().replace(/[.!?]?$/, match => match || ".") : ""; }
 
 function optionalText(id, value) {
   const node = document.getElementById(id);
@@ -649,11 +663,12 @@ function renderHistoricalRangeChart(panel) {
         datasets: [
           {
             label:
-              panel.subtitle || "Daily range and peak levels",
+              `${panel.subtitle || "Daily Range and Peak Levels"} (m)`,
             data: points,
             parsing: false,
             pointBackgroundColor: `${chartPalette.moss}99`,
-            pointBorderWidth: 0,
+            pointBorderColor: document.documentElement.dataset.theme === "light" ? "#195d35" : "#38965f",
+            pointBorderWidth: 0.8,
             pointRadius: 2.5,
             pointHitRadius: 10,
             pointHoverRadius: 5,
@@ -707,12 +722,12 @@ function renderLevelHeatmap(panel) {
   );
   optionalText(
     "levelHeatmapTitle",
-    panel.title || "% of Flash Flood Observatory average"
+    "Daily maximum water level (% of average)"
   );
   optionalText("levelHeatmapDescription", panel.description);
   optionalText(
     "levelHeatmapFooterDescription",
-    panel.footer_description
+    heatmapFooter(panel)
   );
   optionalText("levelHeatmapAverage", panel.average_label);
 
@@ -1117,7 +1132,7 @@ function heatmapSvg(panel) {
     .map(value => `<span>${value === edges.at(-1) ? ">" : ""}${value}</span>`).join("");
 
   return `
-    <svg class="level-heatmap-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMinYMin meet"  role="group" aria-label="${escapeHtml(panel.title || "River-level heatmap")}">
+    <div class="heatmap-calendar-scroll" role="region" aria-label="Annual water-level calendar, scroll horizontally to explore the full year" tabindex="0"><svg class="level-heatmap-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMinYMin meet"  role="group" aria-label="${escapeHtml("Daily maximum water level (% of average)")}">
       <defs><pattern id="heatmap-no-data" width="1" height="1" patternContentUnits="objectBoundingBox"><rect width="1" height="1" fill="#68747d"/><path d="M0 1L1 0" stroke="#c0ccd5" stroke-width="0.0714286"/></pattern></defs>
       <rect id="heatmapWeekOutline" x="0" y="${gridY - 3}" width="${step + 4}" height="${gridHeight + 6}" rx="3" fill="none" stroke="#f7de5e" stroke-width="2" pointer-events="none" hidden></rect>
       <rect class="level-heatmap-grid-outline" x="${gridX - 1}" y="${gridY - 1}" width="${gridWidth + 2}" height="${gridHeight + 2}" fill="none"></rect>
@@ -1126,6 +1141,7 @@ function heatmapSvg(panel) {
       ${monthMarkup}
       <text class="level-heatmap-axis-label" x="${gridX + gridWidth / 2}" y="${axisY}" text-anchor="middle">${escapeHtml(panel.x_axis_label || "Week of year")}</text>
     </svg>
+    </div><p class="heatmap-scroll-hint">Scroll across to explore October–September.</p>
     <div class="heatmap-legend" aria-label="Colour scale: percentage of observatory average">
       <p>${escapeHtml(legend.label || "% of average")}</p>
       <div class="heatmap-legend-bands" aria-hidden="true">${bands}</div>
@@ -1136,47 +1152,13 @@ function heatmapSvg(panel) {
 
 function layoutHeatmap(mount) {
   const svg = mount.querySelector("svg");
-  const responsive = window.matchMedia("(max-width: 639px)");
-  function layout() {
-    const mobile = responsive.matches;
-    svg.setAttribute("viewBox", mobile ? "0 0 350 730" : "0 0 1180 210");
-    svg.classList.toggle("level-heatmap-svg--mobile", mobile);
-    svg.querySelectorAll(".level-heatmap-cell").forEach(cell => {
-      const week = Number(cell.dataset.weekIndex), day = Number(cell.dataset.weekdayIndex);
-      cell.setAttribute("x", (mobile ? 62 : 98) + (mobile ? week % 14 : week) * 20);
-      cell.setAttribute("y", 14 + day * 20 + (mobile ? Math.floor(week / 14) * 180 : 0));
-    });
-    svg.querySelectorAll(".level-heatmap-month").forEach(label => {
-      const original = Number(label.dataset.originalX || label.getAttribute("x"));
-      label.dataset.originalX = original;
-      const week = Math.round((original - 107) / 20);
-      label.setAttribute("x", mobile ? 71 + (week % 14) * 20 : original);
-      label.setAttribute("y", mobile ? 178 + Math.floor(week / 14) * 180 : 178);
-    });
-    svg.querySelectorAll(".mobile-weekday").forEach(node => node.remove());
-    svg.querySelectorAll(".level-heatmap-axis").forEach(label => {
-      label.dataset.fullLabel ||= label.textContent;
-      label.textContent = mobile ? label.dataset.fullLabel.slice(0, 3) : label.dataset.fullLabel;
-      label.setAttribute("x", mobile ? 52 : 84);
-    });
-    if (mobile) for (let block=1; block<4; block++) svg.querySelectorAll(".level-heatmap-axis:not(.mobile-weekday)").forEach(label => {
-      const clone = label.cloneNode(true); clone.classList.add("mobile-weekday");
-      clone.setAttribute("y", Number(label.getAttribute("y")) + block * 180); svg.append(clone);
-    });
-    updateWeekOutline();
-  }
-  function updateWeekOutline() {
+  svg.setAttribute("viewBox", "0 0 1180 210");
+  mount.updateWeekOutline = () => {
     const outline = svg.querySelector("#heatmapWeekOutline");
-    const week = Number(selectedHeatmapWeekIndex) || 0;
-    outline.setAttribute("x", (responsive.matches ? 59 : 95) + (responsive.matches ? week % 14 : week) * 20);
-    outline.setAttribute("y", 11 + (responsive.matches ? Math.floor(week / 14) * 180 : 0));
-  }
-  mount.updateWeekOutline = updateWeekOutline;
-  // Avoid accumulating listeners when changing hydrological year.
-  mount.cleanupLayout?.();
-  responsive.addEventListener("change", layout);
-  mount.cleanupLayout = () => responsive.removeEventListener("change", layout);
-  layout();
+    outline.setAttribute("x", 95 + (Number(selectedHeatmapWeekIndex) || 0) * 20);
+    outline.setAttribute("y", 11);
+  };
+  mount.updateWeekOutline();
 }
 
 function heatmapColor(value, edges, colors) {
@@ -1316,6 +1298,7 @@ function standardChartOptions(reportingWindow, yTitle, suggestedMax = null) {
     (reportingWindow.end - reportingWindow.start) / 3_600_000;
   return {
     maintainAspectRatio: false,
+    devicePixelRatio: Math.max(2, window.devicePixelRatio || 1),
     layout: {padding: {right:12}, autoPadding:false},
     animation: prefersReducedMotion() ? false : { duration: 280 },
     interaction: { intersect: false, mode: "nearest" },
@@ -1351,6 +1334,7 @@ function responseChartOptions(
     (reportingWindow.end - reportingWindow.start) / 3_600_000;
   return {
     maintainAspectRatio: false,
+    devicePixelRatio: Math.max(2, window.devicePixelRatio || 1),
     animation: prefersReducedMotion() ? false : { duration: 280 },
     interaction: { intersect: false, mode: "nearest" },
     plugins: chartPlugins(),
@@ -1399,6 +1383,7 @@ function scatterOptions(points, xTitle, yTitle) {
   const maxY = Math.max(...points.map((point) => point.y), 0);
   return {
     maintainAspectRatio: false,
+    devicePixelRatio: Math.max(2, window.devicePixelRatio || 1),
     interaction: {mode:"nearest", intersect:true},
     animation: prefersReducedMotion() ? false : { duration: 280 },
     plugins: {
@@ -1456,7 +1441,7 @@ function chartPlugins() {
         color: chartPalette.ink,
         boxWidth: 14,
         boxHeight: 8,
-        font: { family: "IBM Plex Sans", weight: "600" },
+        font: { family: "IBM Plex Sans", weight: "600", size: 13 },
       },
     },
     tooltip: {
@@ -1730,7 +1715,47 @@ function positiveAxisFloor(value) {
   return Number.isFinite(number) && number > 0 ? number : null;
 }
 
+function ordinal(day) {
+  const n = Number(day), last = n % 100;
+  return `${n}${last >= 11 && last <= 13 ? "th" : ({1:"st",2:"nd",3:"rd"}[n % 10] || "th")}`;
+}
+function spokenDate(iso) {
+  const date = new Date(`${iso}T12:00:00Z`);
+  return `${ordinal(date.getUTCDate())} of ${date.toLocaleDateString("en-GB", {month:"long", timeZone:"UTC"})} ${date.getUTCFullYear()}`;
+}
+function spokenTimestamp(value) {
+  const parts = new Intl.DateTimeFormat("en-GB", {timeZone:displayTimeZone, day:"numeric", month:"long", year:"numeric", hour:"2-digit", minute:"2-digit", hourCycle:"h23", timeZoneName:"long"}).formatToParts(new Date(value));
+  const get = type => parts.find(part => part.type === type)?.value || "";
+  return `${ordinal(get("day"))} of ${get("month")} ${get("year")} at ${get("hour")}:${get("minute")} ${get("timeZoneName")}`;
+}
+function introductionSpeech() {
+  const site = dashboardPayload.site || {}, status = dashboardPayload.status || {};
+  const description = (site.strapline || "").replace("The Flash Flood Observatory is", "The Flash Flood Observatory, is").replace("River Valency in", "River Valency, in").replace("TU Delft and funded", "TU Delft, and funded");
+  return `${site.name || "Flash Flood Observatory"}. ${site.location || ""}. ${description} ${status.published_at ? `Last updated on ${spokenTimestamp(status.published_at)}.` : "Last update not available."} Timezone, ${(site.timezone || "UTC").replaceAll("/", ", ")}.`;
+}
+function heatmapFooter(panel) {
+  const average = heatmapNumber(panel.average_level_m);
+  if (!Number.isFinite(average)) return panel.footer_description || "";
+  const shown = average.toFixed(3);
+  return (panel.footer_description || "")
+    .replace(/0\.30 × [\d.]+ m = [\d.]+ m/g, `0.30 × ${shown} m = ${(Number(shown)*.3).toFixed(4)} m`)
+    .replace(/4\.50 × [\d.]+ m = >?[\d.]+ m/g, `4.50 × ${shown} m = ${(Number(shown)*4.5).toFixed(4)} m`);
+}
+function heatmapSpeech() {
+  const panel = dashboardPayload.analysis_panels?.level_heatmap || {};
+  const average = heatmapNumber(panel.average_level_m);
+  const available = Number.isFinite(average);
+  const value = available ? average.toFixed(3) : "not yet available";
+  const examples = available ? `A value such as 30 percent means the river reached 30 percent of the average water depth. 0.3 times ${value} metres equals ${(Number(value) * .3).toFixed(4)} metres, and is represented with a brown square. The highest band, above 450 percent, represents days above 450 percent of the average water depth. 4.5 times ${value} metres equals ${(Number(value) * 4.5).toFixed(4)} metres, and is represented with a purple square.` : "The numerical examples are not available until an average has been published.";
+  return `River Levels. Daily maximum water level, shown as a percentage of the average water depth. This heatmap shows the maximum daily water depth as a percentage of the average water depth, recorded since the Flash Flood Observatory deployment, in ${panel.deployment_label || "the deployment period"} (currently ${available ? `equal to ${value} metres` : value}). Each cell represents a specific day of the week and month within the selected hydrological year, which is defined from the 1st of October to the 30th of September, allowing patterns in river behaviour to be compared without the heatmap growing indefinitely. The colours indicate how each day's maximum level compares to the average: days close to the average appear as white squares, wetter-than-average days appear as blue squares or purple squares, and drier-than-average days appear as brown squares. This makes it easy to identify periods of typical flow, sustained dry spells, and clusters of high-water days associated with storm events or rapid catchment response. ${examples} Each coloured square represents a completed day's maximum water depth as a percentage of the overall average since deployment, across all water years. A grey square with a diagonal line means no data. Blank space to the right is reserved for the rest of the water year.`;
+}
+
 function readAloudText(section) {
+  if (section.id === "observatoryPartners") return "Observatory partners. University of Greenwich. University of Bath. Delft University of Technology. The Royal Society.";
+  if (section.matches("#top .briefing__grid")) return introductionSpeech();
+  if (section.id === "levelHeatmapPanel") return heatmapSpeech();
+  if (section.id === "officialAlert") return [dashboardPayload.official_alert.eyebrow, dashboardPayload.official_alert.label, dashboardPayload.official_alert.message,
+    dashboardPayload.official_alert.updated_at ? `Updated on ${spokenTimestamp(dashboardPayload.official_alert.updated_at)}.` : "", `Official source: ${dashboardPayload.official_alert.source_name || "Environment Agency"}.`].filter(Boolean).join(" ");
   const parts = [];
   function visit(node) {
     if (node.nodeType === Node.TEXT_NODE) {
@@ -1752,14 +1777,22 @@ function readAloudText(section) {
     levelHeatmapPanel: "Each coloured square represents a completed day's maximum water depth as a percentage of the overall average since deployment, across all water years. Brown squares represent lower values, pale squares values around the average, and progressively blue and purple squares higher values. The top of the colour scale includes values above 450 percent of the average. A grey square with a diagonal line means no data. Blank space to the right is reserved for the rest of the water year.",
   };
   if (explanations[section.id]) parts.push(explanations[section.id]);
-  return parts.join(". ").replace(/(white|blue|purple|brown)\s*\(?[⬜🟦🟪🟫]\)?/gu, "$1 square")
+  return parts.join(". ")
+    .replace(/\(max to min\)/gi, "maximum to minimum")
+    .replace(/\(bottom left\)/gi, "shown at the bottom left")
+    .replace(/\(top right\)/gi, "shown at the top right")
+    .replace(/\(Environment Agency station (\d+), 15-min in millimetres\)/g, "from Environment Agency station $1 measured every 15 minutes in millimetres")
+    .replace(/\(volume per time, m³\/s\)/g, "a measure of volume per time measured in cubic metres per second")
+    .replace(/\b(millimetres|metres)\s*\((?:mm|m)\)/g, "$1")
+    .replace(/\b(\d{2})\/(\d{2})\/(\d{4})\b/g, (_, day, month, year) => spokenDate(`${year}-${month}-${day}`))
+    .replace(/(white|blue|purple|brown)\s*\(?[⬜🟦🟪🟫]\)?/gu, "$1 square")
     .replace(/\b(\d+)h\b/gi, "$1 hours").replace(/m³\/s/g, "cubic metres per second")
     .replace(/\bmm\b/g, "millimetres").replace(/\bm\b/g, "metres")
     .replace(/%/g, " percent")
     .replace(/⬜/g, "white square").replace(/🟦/g, "blue square")
     .replace(/🟪/g, "purple square").replace(/🟫/g, "brown square")
     .replace(/>/g, " greater than ").replace(/×/g, " times ")
-    .replace(/\s+/g, " ").trim();
+    .replace(/\.\s*\./g, ".").replace(/\s+/g, " ").trim();
 }
 
 // Bump when the voice, model or synthesis settings change; old audio must not match.
@@ -1796,7 +1829,7 @@ function setupReadAloud() {
     activeButton = null;
     status.textContent = "";
   }
-  document.querySelectorAll('#top .briefing__grid, #readings, .data-panel, .heatmap-panel, #context').forEach((section) => {
+  document.querySelectorAll('#top .briefing__grid, #readings, .data-panel, .heatmap-panel, #context, #officialAlert, #observatoryPartners').forEach((section) => {
     const heading = [...section.querySelectorAll('h1, h2, h3, .panel-subtitle')]
       .find((item) => item.textContent.trim() && !item.hidden && getComputedStyle(item).display !== "none")
       || section.querySelector(".panel-label");
@@ -1811,6 +1844,7 @@ function setupReadAloud() {
     button.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3zM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/></svg>';
     section.classList.add("read-aloud-section");
     if (section.id === "readings") section.querySelector(".summary-heading").append(button);
+    else if (section.id === "observatoryPartners") section.querySelector(".partners-heading").append(button);
     else section.prepend(button);
     button.addEventListener("click", async () => {
       const wasActive = activeButton === button;

@@ -1,0 +1,61 @@
+Narration review — 8 October 2026
+Snapshot values change with the published data.
+
+Read aloud: Flash Flood Observatory
+               — Boscastle, UK
+
+Flash Flood Observatory. Boscastle, UK. This dashboard monitors flash floods in real time, capturing data on their speed and intensity. The Flash Flood Observatory, is currently monitoring the River Valency, in Boscastle, UK. Developed by researchers from the Universities of Greenwich, Bath, and TU Delft, and funded by the Royal Society, it aims to improve early warning systems and flood mitigation. Last updated on 8th of October 2026 at 18:18 British Summer Time. Timezone, Europe, London.
+
+---
+
+Read aloud: Levels and ranges at the observatory
+
+River level summary. Levels and ranges at the observatory. Current River Level. 0.045 metres. Current water depth at the Flash Flood Observatory. Maximum 24 hours River Level. 0.087 metres. Highest recorded water depth in the last 24 hours at the Flash Flood Observatory. Minimum 24 hours River Level. 0.045 metres. Lowest recorded water depth in the last 24 hours at the Flash Flood Observatory. Current 24 hours River Level Range. 0.042 metres. Water depth range recorded in the last 24 hours maximum to minimum at the Flash Flood Observatory. Maximum Recorded 24 hours River Level Range. 0.827 metres. Recorded at the Flash Flood Observatory on 24th of January 2026
+
+---
+
+Read aloud: Observed Rainfall
+
+Observed Rainfall. 24 hours. Rainfall measured every 15 minutes over the last 24 hours, plotted in millimetres on the left and Date & Time along the bottom at Environment Agency station 49149. The blue bars represent rainfall totals in millimetres.
+
+---
+
+Read aloud: Observed Water Depth
+
+Observed Water Depth. 24 hours. River water depth over the last 24 hours, shown in metres on the left and Date & Time along the bottom at the Flash Flood Observatory. The light blue line represents water depth in metres.
+
+---
+
+Read aloud: River Hydrograph and Precipitation Hyetograph
+
+River Hydrograph and Precipitation Hyetograph. 24 hours. River flow and rainfall over the last 24 hours, shown together on one chart. Rainfall totals from Environment Agency station 49149 measured every 15 minutes in millimetres are plotted on the left, while river flow rate a measure of volume per time measured in cubic metres per second is calculated and plotted on the right. Date & Time are shown along the bottom. This allows correlation between rainfall and the change of river level. It also helps show the response time of the river to rainfall and the speed at which the volume of water rises. The light blue line represents calculated river flow in cubic metres per second. Blue bars, when available, represent rainfall in millimetres. The two measurements use separate vertical axes.
+
+---
+
+Read aloud: Daily Range and Peak Levels
+
+Daily Range and Peak Levels. This plot shows the relationship between daily water depth range maximum to minimum and the corresponding daily maximum water depth since the Flash Flood Observatory began operating. A clear upward trend is visible: days with larger water depth ranges also reach higher maximum water depths. Most days cluster at low values shown at the bottom left, reflecting stable, non-event conditions, while a small number of events form a separate group shown at the top right with both high ranges and high maximum depths. This pattern supports the classification of Boscastle as a flashy catchment where steep slopes and slow-draining geology cause rapid response even from small, localised events. Each plotted point represents one completed day. The horizontal axis shows its water depth range and the vertical axis shows its maximum water depth, both in metres.
+
+---
+
+Read aloud: Daily maximum water level (% of average)
+
+River Levels. Daily maximum water level, shown as a percentage of the average water depth. This heatmap shows the maximum daily water depth as a percentage of the average water depth, recorded since the Flash Flood Observatory deployment, in November 2025 (currently equal to 0.172 metres). Each cell represents a specific day of the week and month within the selected hydrological year, which is defined from the 1st of October to the 30th of September, allowing patterns in river behaviour to be compared without the heatmap growing indefinitely. The colours indicate how each day's maximum level compares to the average: days close to the average appear as white squares, wetter-than-average days appear as blue squares or purple squares, and drier-than-average days appear as brown squares. This makes it easy to identify periods of typical flow, sustained dry spells, and clusters of high-water days associated with storm events or rapid catchment response. A value such as 30 percent means the river reached 30 percent of the average water depth. 0.3 times 0.172 metres equals 0.0516 metres, and is represented with a brown square. The highest band, above 450 percent, represents days above 450 percent of the average water depth. 4.5 times 0.172 metres equals 0.7740 metres, and is represented with a purple square. Each coloured square represents a completed day's maximum water depth as a percentage of the overall average since deployment, across all water years. A grey square with a diagonal line means no data. Blank space to the right is reserved for the rest of the water year.
+
+---
+
+Read aloud: Why is this catchment being observed?
+
+About the observatory. Why is this catchment being observed?. Why Boscastle. Flash floods are increasing with climate change. Boscastle is a flashy catchment. Steep slopes and slow draining geology cause rapid response, even from small, localised events. How it is observed. We use innovative remote-sensing techniques (LiDAR, ultrasonic altimeter, camera) to monitor flash floods in real time, capturing accurate data on their speed and intensity. Impact. Enhance early warning systems and flood mitigation strategies to better protect communities from flash floods. While the case study focuses on Boscastle, UK, the methodology is applicable to other locations.
+
+---
+
+Read aloud: There are no flood warnings or alerts.
+
+Official Environment Agency Flood Alerts and Warnings There are no flood warnings or alerts. No Environment Agency flood warnings or alerts are currently active in Boscastle, Cornwall. Updated on 8th of October 2026 at 18:18 British Summer Time. Official source: Environment Agency / GOV.UK Check for flooding.
+
+---
+
+Read aloud: Observatory Partners
+
+Observatory partners. University of Greenwich. University of Bath. Delft University of Technology. The Royal Society.

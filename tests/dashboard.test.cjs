@@ -31,11 +31,11 @@ test('dashboard axes retain expandable floors and tooltips distinguish measureme
   assert.equal(label({dataset:{},parsed:{y:.12}}),'Water depth: 0.120 m');
  } finally {dom.window.close();}
 });
-test('dashboard eight grouped speakers expand units, remove repeated colours and have generated clip requests',async()=>{
+test('dashboard ten grouped speakers expand units, remove repeated colours and have generated clip requests',async()=>{
  const dom=await renderNarrationDocument(payload);
  try {
   const w=dom.window;
-  assert.equal(w.document.querySelectorAll('.read-aloud-button').length,8);
+  assert.equal(w.document.querySelectorAll('.read-aloud-button').length,10);
   assert.equal(w.readAloudAudioVersion,'alba-medium-20261007-v2');
   const stats=w.readAloudText(w.document.getElementById('readings'));
   assert.ok(stats.includes('24 hours')); assert.ok(stats.includes('metres')); assert.doesNotMatch(stats,/\b24h\b/);
@@ -44,7 +44,7 @@ test('dashboard eight grouped speakers expand units, remove repeated colours and
   const context=w.readAloudText(w.document.getElementById('context'));
   assert.ok(context.includes('Why Boscastle')); assert.ok(context.includes('How it is observed')); assert.ok(context.includes('Impact'));
   const requests=await collectNarration(payload);
-  assert.ok(requests.some(r=>r.text.includes('last 5 days'))); assert.ok(requests.some(r=>r.text.includes('1 October 2025')));
+  assert.ok(requests.some(r=>r.text.includes('last 5 days'))); assert.ok(requests.some(r=>r.text.includes('1st of October')));
   w.document.querySelector('#depthPanel .read-aloud-button').click(); await new Promise(r=>setTimeout(r,30));
   assert.match(dom.audio.getAttribute('src'),/^assets\/audio\/[a-f0-9]{64}\.mp3$/);
   assert.ok(requests.some(r=>dom.audio.src.includes(r.hash)));
@@ -56,7 +56,7 @@ test('dashboard day selector follows week/year changes without changing narratio
   const w=dom.window, d=w.document;
   w.matchMedia = () => ({matches:true, addEventListener(){}, removeEventListener(){}});
   w.layoutHeatmap(d.getElementById('levelHeatmapMount'));
-  assert.equal(d.querySelectorAll('.level-heatmap-axis').length,28);
+  assert.equal(d.querySelectorAll('.level-heatmap-axis').length,7);
   assert.equal(w.compactWeekLabel('2025-12-29','2026-01-04'),'29 Dec–4 Jan 2026');
   const year=d.getElementById('heatmapPeriodSelect');
   year.value='2025-26'; year.dispatchEvent(new w.Event('change'));
@@ -157,7 +157,36 @@ test('dashboard scatter retains all measurements and full event extents',async()
   w.renderHistoricalRangeChart(panel);
   assert.equal(JSON.stringify(config.data.datasets[0].data),JSON.stringify(panel.points));
   assert.ok(config.options.scales.x.max>.6);assert.ok(config.options.scales.y.max>1.1);
-  assert.equal(config.data.datasets[0].pointBorderWidth,0);
+  assert.equal(config.data.datasets[0].pointBorderWidth,0.8);
   assert.equal(d.getElementById('scatterZoom'),null);
+ }finally{dom.window.close();}
+});
+
+
+test('review narration uses spoken dates, avoids repeated units and covers alert and partners',async()=>{
+ const fixture=structuredClone(payload);fixture.analysis_panels.level_heatmap.average_level_m=.172;
+ const dom=await renderNarrationDocument(fixture);
+ try {
+  const w=dom.window,d=w.document;
+  assert.equal(w.spokenDate('2026-01-24'),'24th of January 2026');
+  assert.match(w.spokenTimestamp('2026-10-08T10:33:00Z'),/8th of October 2026 at 11:33 British Summer Time/);
+  assert.match(w.spokenTimestamp('2026-01-24T11:33:00Z'),/Greenwich Mean Time/);
+  const intro=d.querySelector('#top .briefing__grid');
+  const before=w.readAloudText(intro);d.getElementById('heroMeta').style.display='none';
+  assert.equal(w.readAloudText(intro),before);assert.match(before,/Timezone, Europe, London/);
+  assert.match(w.readAloudText(d.getElementById('readings')),/maximum to minimum/);
+  for (const id of ['rainfallPanel','depthPanel']) assert.doesNotMatch(w.readAloudText(d.getElementById(id)),/(metres|millimetres) \((metres|millimetres)\)/);
+  assert.match(w.readAloudText(d.getElementById('responsePanel')),/measured every 15 minutes/);
+  assert.match(w.readAloudText(d.getElementById('officialAlert')),/Environment Agency/);
+  assert.equal(w.readAloudText(d.getElementById('observatoryPartners')),'Observatory partners. University of Greenwich. University of Bath. Delft University of Technology. The Royal Society.');
+  const heat=w.readAloudText(d.getElementById('levelHeatmapPanel'));
+  assert.doesNotMatch(heat,/Week of Year|Day in selected|All weeks/);
+  assert.match(heat,/0.3 times 0.172 metres equals 0.0516 metres/);
+  assert.match(heat,/4.5 times 0.172 metres equals 0.7740 metres/);
+  assert.match(w.floodStatusSymbol('flood_warning'),/#ce202b/);
+  assert.doesNotMatch(w.floodStatusSymbol('unavailable'),/#36933d/);
+  assert.equal(w.standardChartOptions({start:0,end:100},'Depth').devicePixelRatio,2);
+  assert.match(d.getElementById('rainfallDescription').textContent,/\.$/);
+  assert.match(d.getElementById('depthDescription').textContent,/\.$/);
  }finally{dom.window.close();}
 });

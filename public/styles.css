@@ -1570,3 +1570,20 @@ h3, .data-panel-head h3[hidden] + .panel-subtitle { font-size: 1.25rem; }
 .theme-toggle svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .theme-sun, :root[data-theme="dark"] .theme-moon { display: none; }
 :root[data-theme="dark"] .theme-sun { display: block; }
+
+/* October review: consistent chart copy and a continuous annual calendar. */
+.data-panel-copy, .panel-footer-copy { font-size: 1rem; line-height: 1.55; }
+.analysis-subtitle { margin: .5rem 0 0; color: var(--ink); font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 600; }
+.heatmap-calendar-scroll { max-width: 100%; overflow-x: auto; padding: .5rem; border-radius: var(--radius-control); background: #172733; }
+.heatmap-calendar-scroll .level-heatmap-svg { display: block; width: 100%; min-width: 900px; }
+.heatmap-calendar-scroll .level-heatmap-axis, .heatmap-calendar-scroll .level-heatmap-month, .heatmap-calendar-scroll .level-heatmap-axis-label { fill: #d6e4ec; }
+.heatmap-scroll-hint { display: none; }
+.flood-status-symbol { width: 92px; margin-left: auto; color: var(--muted); }
+.flood-status-symbol svg { display: block; width: 100%; }
+#officialAlert.read-aloud-section, #observatoryPartners.read-aloud-section { position: relative; }
+#officialAlert.read-aloud-section { padding-top: 3rem; }
+.partners-heading { position: relative; padding-right: 3rem; }
+.partners-heading > .read-aloud-button { top: 0; right: 0; }
+@media(max-width: 959px) {
+  .heatmap-scroll-hint { display: block; margin: .35rem 0; color: var(--muted); font-size: .85rem; }
+}

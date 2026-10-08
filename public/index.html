@@ -35,9 +35,9 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="styles.css?v=20261007l">
+    <link rel="stylesheet" href="styles.css?v=20261008a">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
-    <script src="app.js?v=20261007l" defer></script>
+    <script src="app.js?v=20261008a" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#mainContent">Skip to observations</a>
@@ -150,6 +150,7 @@
           <div class="section-heading section-heading--analysis">
             <div>
               <h2 class="section-label" id="analysisTitle">EVENT ANALYSIS</h2>
+              <p class="analysis-subtitle">River hydrograph, daily range and heatmap of maximum daily water depth</p>
             </div>
           </div>
 
@@ -238,6 +239,7 @@
           <p id="officialAlertMessage"></p>
         </div>
         <div class="official-alert-meta">
+          <div id="officialAlertSymbol" class="flood-status-symbol" aria-hidden="true"></div>
           <p id="officialAlertUpdated"></p>
           <a id="officialAlertSource" href="#" target="_blank" rel="noreferrer"></a>
         </div>
@@ -246,9 +248,9 @@
     </main>
 
     <footer class="site-footer">
-      <div class="content-frame site-footer__inner">
+      <div class="content-frame site-footer__inner" id="observatoryPartners">
         <div class="footer-main">
-          <div>
+          <div class="partners-heading">
             <h2 id="footerTitle">Observatory partners</h2>
             <p id="footerText"></p>
           </div>

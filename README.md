@@ -30,7 +30,7 @@ All summary cards, charts, official alert content, notes, and footer partner ent
 
 The approved V3 dashboard now lives at `/`. V1 has been replaced and the `/v2/` and `/v3/` routes and assets removed. Git history is the archive. The curated payload destination and Windows publisher are unchanged.
 
-The dashboard retains the compact introduction/statistics, equal-width chart pairs, expandable scientific axes, full hydrological years, selectable heatmap details, eight grouped speakers and Alba narration. The scatter uses translucent green points and always shows the full range of measurements.
+The dashboard retains the compact introduction/statistics, equal-width chart pairs, expandable scientific axes, full hydrological years, selectable heatmap details, ten grouped speakers and Alba narration. The scatter uses translucent green points and always shows the full range of measurements.
 
 The first visit follows the system appearance. The top-right sun/moon button switches directly between light and dark with each click and remembers the manual choice. There is no menu or footer appearance control. The existing `ffo-v3-theme` storage key is retained so reviewer preferences survive promotion. Both themes redraw charts without losing selections.
 
@@ -333,3 +333,14 @@ The production dashboard uses the British female Piper Alba medium voice at its 
 ### Appearance and scatter controls
 
 See the production dashboard section above for theme behaviour. The scatter always shows all days with expandable axes, preserving the upward-right trend and extreme events. There is no typical-day zoom.
+
+
+## Professor review — 8 October 2026
+
+Chart descriptions and explanatory footers use 16px text. Charts redraw once the webfont is ready, without delaying the data, and render at a minimum pixel ratio of 2; legends remain canvas text, not image assets. Scatter points keep all days and gain a darker green outline and a metres legend. Event Analysis has the requested subtitle.
+
+The heatmap has one continuous annual calendar on all devices, with an independently scrollable viewport on phones and a dark neutral backing in both themes. Full hydrological-year coverage, missing/future distinctions, hover readings and selectors remain. The visible title is “Daily maximum water level (% of average)”.
+
+Ten speakers include official flood status and the exact requested partner names. Introduction, flood status and heatmap use explicit speech-specific text; dates, timezone names, deployment month and average remain payload-derived. Spoken and displayed arithmetic examples use the displayed three-decimal average so the example equation agrees. This does not change the producer's cell percentages or scientific average. The heatmap does not narrate selector labels. Full narration is exported in `docs/2026-10-08-narration-review.txt` for editorial review.
+
+The flood illustration is an authored vector symbol keyed to the official payload state, based on the supplied visual reference. Unknown/unavailable and warning-no-longer-in-force states use a neutral information symbol rather than a green no-warning image. The text and official source link remain authoritative.
