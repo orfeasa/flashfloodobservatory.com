@@ -7,7 +7,7 @@ import hashlib
 import io
 import json
 import re
-import shutil
+from audio_retention import publish_clips
 import urllib.request
 import wave
 
@@ -83,17 +83,10 @@ def build():
         generated += 1
         print(f"Generated clip {generated}", flush=True)
 
-    # Only publish a complete set. Cache contains earlier clips; output does not.
-    OUTPUT.mkdir(parents=True, exist_ok=True)
+    # Current clips plus 48 hours of previous clips support already-open pages.
     wanted = {f'{request["hash"]}.mp3' for request in requests}
-    for filename in wanted:
-        shutil.copyfile(clip_cache / filename, OUTPUT / filename)
-    # Keep the cache bounded as observation values change throughout the day.
-    for directory in (OUTPUT, clip_cache):
-        for old in directory.glob("*.mp3"):
-            if old.name not in wanted:
-                old.unlink()
-    print(f"Audio ready: {len(wanted)} clips, {generated} generated, {len(wanted) - generated} reused.")
+    retained = publish_clips(clip_cache, OUTPUT, wanted)
+    print(f"Audio ready: {len(wanted)} clips, {generated} generated, {len(wanted) - generated} reused; {retained} total retained.")
 
 
 if __name__ == "__main__":

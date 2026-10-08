@@ -319,7 +319,7 @@ npm test
 python3 -m http.server 8769 --bind 127.0.0.1 --directory public
 ```
 
-Only `public/assets/audio/*.mp3` is served; models and synthesis dependencies remain under `.cache/`. Generated audio is ignored by Git and recreated for the Pages artifact. The build caches unchanged clips and the model separately, regenerates changed text, and copies only the current complete clip set into the public artifact. Bump `readAloudAudioVersion` in `public/app.js` and `VERSION` in `scripts/build_audio.py` together when synthesis changes.
+Only `public/assets/audio/*.mp3` is served; models and synthesis dependencies remain under `.cache/`. Generated audio is ignored by Git and recreated for the Pages artifact. The build caches unchanged clips and the model separately, regenerates changed text, and copies the current complete clip set and recordings used in the previous 48 hours into the public artifact. Bump `readAloudAudioVersion` in `public/app.js` and `VERSION` in `scripts/build_audio.py` together when synthesis changes.
 
 Audio generation has a five-minute limit and is optional to publishing: if it fails, the latest observations still deploy, with a CI warning and a clear playback-unavailable message. Never retain a stale scientific payload just to preserve audio. Browsers still need ordinary audio playback support and an internet connection to load clips. Audible voice quality should be reviewed using the local preview before publication.
 
@@ -344,3 +344,5 @@ The heatmap has one continuous annual calendar on all devices, with an independe
 Ten speakers include official flood status and the exact requested partner names. Introduction, flood status and heatmap use explicit speech-specific text; dates, timezone names, deployment month and average remain payload-derived. Spoken and displayed arithmetic examples use the displayed three-decimal average so the example equation agrees. This does not change the producer's cell percentages or scientific average. The heatmap does not narrate selector labels. Full narration is exported in `docs/2026-10-08-narration-review.txt` for editorial review.
 
 The flood illustration is an authored vector symbol keyed to the official payload state, based on the supplied visual reference. Unknown/unavailable and warning-no-longer-in-force states use a neutral information symbol rather than a green no-warning image. The text and official source link remain authoritative.
+
+Narration retention: the publisher retains clips for 48 hours after their last use, including across frontend releases. This prevents scheduled data updates from immediately breaking playback on an already-open dashboard. `npm test` covers retention, reuse and expiry.

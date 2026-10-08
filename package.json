@@ -2,7 +2,7 @@
   "name": "flash-flood-observatory-site",
   "private": true,
   "scripts": {
-    "test": "node --test tests/*.test.cjs",
+    "test": "node --test tests/*.test.cjs && python3 -m unittest discover -s tests -p '*_test.py'",
     "audio:text": "node scripts/collect-narration.cjs",
     "audio:build": "node scripts/collect-narration.cjs && python scripts/build_audio.py"
   },

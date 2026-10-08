@@ -47,6 +47,7 @@ jobs:
           key: narration-v1-${{ hashFiles('public/app.js', 'scripts/build_audio.py') }}-${{ github.run_id }}
           restore-keys: |
             narration-v1-${{ hashFiles('public/app.js', 'scripts/build_audio.py') }}-
+            narration-v1-
 
       - name: Generate British English narration
         id: narration
